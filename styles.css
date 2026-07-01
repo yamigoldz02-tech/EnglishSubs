@@ -2291,19 +2291,19 @@ body.light-theme .premium-search-box {
 
 /* Custom scale for flashcard when modal is wide */
 #trainingModalCard.dict-wide .flashcard-container {
-  max-width: 580px;
-  height: 280px;
+  max-width: 620px;
+  height: 300px;
 }
 
 /* Custom scale for flashcard when modal is tall but not wide */
 #trainingModalCard.dict-tall:not(.dict-wide) .flashcard-container {
-  height: 260px;
+  height: 300px;
 }
 
 /* Custom scale when both wide and tall */
 #trainingModalCard.dict-wide.dict-tall .flashcard-container {
-  max-width: 580px;
-  height: 320px;
+  max-width: 620px;
+  height: 340px;
 }
 
 /* Active state for expand buttons */
@@ -4078,8 +4078,8 @@ body.gray-theme {
 
 .flashcard-container {
   width: 100%;
-  max-width: 340px;
-  height: 220px;
+  max-width: 440px;
+  height: 260px;
   perspective: 1200px;
   cursor: pointer;
   margin: 0 auto;
@@ -4111,14 +4111,15 @@ body.gray-theme {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   box-shadow: var(--flashcard-shadow);
   transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
 }
 
 .flashcard-front {
@@ -4130,7 +4131,6 @@ body.gray-theme {
   background: var(--flashcard-back-bg);
   border: var(--flashcard-back-border);
   transform: rotateY(180deg);
-  overflow-y: auto;
 }
 
 /* Hide all scrollbars in flashcards for a clean, premium look */

@@ -3231,22 +3231,42 @@ function setTrainerCardWord(word) {
   const parentContainer = document.getElementById('cardWordContainer');
   if (!parentContainer) return;
   
-  const textLen = word.length;
-  if (textLen > 100) {
-    parentContainer.style.fontSize = '0.85rem';
-    parentContainer.style.lineHeight = '1.3';
-  } else if (textLen > 50) {
-    parentContainer.style.fontSize = '1.0rem';
-    parentContainer.style.lineHeight = '1.3';
+  const textLen = word ? word.length : 0;
+  if (textLen > 80) {
+    parentContainer.style.fontSize = '0.95rem';
+    parentContainer.style.lineHeight = '1.35';
+  } else if (textLen > 45) {
+    parentContainer.style.fontSize = '1.15rem';
+    parentContainer.style.lineHeight = '1.35';
   } else if (textLen > 25) {
-    parentContainer.style.fontSize = '1.2rem';
-    parentContainer.style.lineHeight = '1.3';
+    parentContainer.style.fontSize = '1.4rem';
+    parentContainer.style.lineHeight = '1.35';
   } else if (textLen > 15) {
-    parentContainer.style.fontSize = '1.45rem';
+    parentContainer.style.fontSize = '1.65rem';
     parentContainer.style.lineHeight = '1.3';
   } else {
     parentContainer.style.fontSize = '2rem';
     parentContainer.style.lineHeight = '';
+  }
+}
+
+function setTrainerCardBackText(text) {
+  const transEl = document.getElementById('cardTranslation');
+  if (!transEl) return;
+  transEl.textContent = text;
+  const textLen = text ? text.length : 0;
+  if (textLen > 80) {
+    transEl.style.fontSize = '0.9rem';
+    transEl.style.lineHeight = '1.35';
+  } else if (textLen > 45) {
+    transEl.style.fontSize = '1.05rem';
+    transEl.style.lineHeight = '1.35';
+  } else if (textLen > 25) {
+    transEl.style.fontSize = '1.2rem';
+    transEl.style.lineHeight = '1.35';
+  } else {
+    transEl.style.fontSize = '1.3rem';
+    transEl.style.lineHeight = '';
   }
 }
 
@@ -3645,10 +3665,8 @@ function renderTrainerCard(wordObj) {
     // Reverse: Russian on Front, English on Back
     setTrainerCardWord(wordObj.translation);
     if (cardWordEl) cardWordEl.classList.add('russian-font');
-    if (transEl) {
-      transEl.textContent = wordObj.word;
-      transEl.classList.remove('russian-font');
-    }
+    setTrainerCardBackText(wordObj.word);
+    if (transEl) transEl.classList.remove('russian-font');
     if (frontLabelEl) frontLabelEl.textContent = 'ПЕРЕВОД (НА РУССКОМ)';
     if (backLabelEl) backLabelEl.textContent = 'СЛОВО НА АНГЛИЙСКОМ';
 
@@ -3694,10 +3712,8 @@ function renderTrainerCard(wordObj) {
     const frontText = (wordObj.definition && wordObj.definition.trim()) || (wordObj.context ? 'Контекст: ' + wordObj.context : wordObj.translation);
     setTrainerCardWord(frontText);
     if (cardWordEl) cardWordEl.classList.add('russian-font');
-    if (transEl) {
-      transEl.textContent = wordObj.word;
-      transEl.classList.remove('russian-font');
-    }
+    setTrainerCardBackText(wordObj.word);
+    if (transEl) transEl.classList.remove('russian-font');
     if (frontLabelEl) frontLabelEl.textContent = 'ЗНАЧЕНИЕ / ТОЛКОВАНИЕ';
     if (backLabelEl) backLabelEl.textContent = 'СЛОВО НА АНГЛИЙСКОМ';
 
@@ -3732,10 +3748,8 @@ function renderTrainerCard(wordObj) {
     setTrainerCardWord(wordObj.word);
     if (cardWordEl) cardWordEl.classList.remove('russian-font');
     const backText = (wordObj.definition && wordObj.definition.trim()) || (wordObj.context ? 'Контекст: ' + wordObj.context : wordObj.translation);
-    if (transEl) {
-      transEl.textContent = backText;
-      transEl.classList.add('russian-font');
-    }
+    setTrainerCardBackText(backText);
+    if (transEl) transEl.classList.add('russian-font');
     if (frontLabelEl) frontLabelEl.textContent = 'СЛОВО НА АНГЛИЙСКОМ';
     if (backLabelEl) backLabelEl.textContent = 'ЗНАЧЕНИЕ / ТОЛКОВАНИЕ';
 
@@ -3769,10 +3783,8 @@ function renderTrainerCard(wordObj) {
     // Direct: English on Front, Russian on Back
     setTrainerCardWord(wordObj.word);
     if (cardWordEl) cardWordEl.classList.remove('russian-font');
-    if (transEl) {
-      transEl.textContent = wordObj.translation;
-      transEl.classList.add('russian-font');
-    }
+    setTrainerCardBackText(wordObj.translation);
+    if (transEl) transEl.classList.add('russian-font');
     if (frontLabelEl) frontLabelEl.textContent = 'СЛОВО НА АНГЛИЙСКОМ';
     if (backLabelEl) backLabelEl.textContent = 'ПЕРЕВОД';
 

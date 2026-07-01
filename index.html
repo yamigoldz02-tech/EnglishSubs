@@ -903,9 +903,9 @@
             
             <!-- Front Side -->
             <div class="flashcard-front">
-              <div id="cardFrontLabel" style="font-size: 0.65rem; letter-spacing: 1px; color: var(--accent-spotify); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase;">СЛОВО НА АНГЛИЙСКОМ</div>
-              <div id="cardWordContainer" style="font-size: 2rem; font-weight: 800; color: var(--text-main); text-shadow: 0 0 12px rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%;">
-                <span id="cardWord">word</span>
+              <div id="cardFrontLabel" style="flex-shrink: 0; font-size: 0.65rem; letter-spacing: 1px; color: var(--accent-spotify); font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">СЛОВО НА АНГЛИЙСКОМ</div>
+              <div id="cardWordContainer" style="flex: 1 1 auto; min-height: 0; max-height: calc(100% - 50px); overflow-y: auto; font-size: 2rem; font-weight: 800; color: var(--text-main); text-shadow: 0 0 12px rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%; padding: 4px 0; box-sizing: border-box;">
+                <span id="cardWord" style="text-align: center;">word</span>
                 <button id="cardSpeakBtn" title="Прослушать слово" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--text-main); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                   🔊
                 </button>
@@ -916,27 +916,29 @@
                   ✏️
                 </button>
               </div>
-              <div style="margin-top: 1rem; font-size: 0.7rem; color: var(--text-sub); display: flex; align-items: center; gap: 4px;">
+              <div style="flex-shrink: 0; margin-top: 4px; font-size: 0.7rem; color: var(--text-sub); display: flex; align-items: center; gap: 4px;">
                 <span>🔄 Кликните, чтобы перевернуть</span>
               </div>
             </div>
 
             <!-- Back Side -->
             <div class="flashcard-back">
-              <div id="cardBackLabel" style="font-size: 0.65rem; letter-spacing: 1px; color: var(--text-sub); font-weight: 700; margin-bottom: 0.25rem; text-transform: uppercase;">ПЕРЕВОД</div>
-              <div style="display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; margin-bottom: 0.5rem;">
-                <span id="cardTranslation" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-spotify);">перевод</span>
-                <button id="cardSpeakBtnBack" title="Прослушать слово" style="display: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--text-main); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                  🔊
-                </button>
-                <button id="cardPracticeBtnBack" title="Практика в диалоге" style="display: none; background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                  💬
-                </button>
-                <button id="cardEditBtnBack" title="Редактировать слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                  ✏️
-                </button>
+              <div id="cardBackLabel" style="flex-shrink: 0; font-size: 0.65rem; letter-spacing: 1px; color: var(--text-sub); font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">ПЕРЕВОД</div>
+              <div style="flex: 1 1 auto; min-height: 0; max-height: calc(100% - 24px); overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 8px; padding: 4px 0; box-sizing: border-box;">
+                <div style="display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%;">
+                  <span id="cardTranslation" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-spotify); text-align: center;">перевод</span>
+                  <button id="cardSpeakBtnBack" title="Прослушать слово" style="display: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--text-main); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    🔊
+                  </button>
+                  <button id="cardPracticeBtnBack" title="Практика в диалоге" style="display: none; background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    💬
+                  </button>
+                  <button id="cardEditBtnBack" title="Редактировать слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    ✏️
+                  </button>
+                </div>
+                <div id="cardContext" style="font-size: 0.75rem; color: var(--text-sub); line-height: 1.4; text-align: center; width: 100%; box-sizing: border-box; opacity: 0.9;">Контекст слова...</div>
               </div>
-              <div id="cardContext" style="font-size: 0.75rem; color: var(--text-sub); line-height: 1.4; text-align: center; max-height: 150px; overflow-y: auto; padding: 0 10px; opacity: 0.9; width: 100%; box-sizing: border-box;">Контекст слова...</div>
             </div>
 
           </div>
