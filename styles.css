@@ -2258,7 +2258,7 @@ body.light-theme .premium-search-box {
 #trainingModalCard {
   min-height: 480px;
   max-height: 72vh !important;
-  height: auto !important;
+  height: 68vh !important;
   overflow: hidden;
   transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
