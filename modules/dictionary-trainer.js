@@ -3233,20 +3233,20 @@ function setTrainerCardWord(word) {
   
   const textLen = word ? word.length : 0;
   if (textLen > 80) {
-    parentContainer.style.fontSize = '0.95rem';
-    parentContainer.style.lineHeight = '1.35';
-  } else if (textLen > 45) {
-    parentContainer.style.fontSize = '1.15rem';
-    parentContainer.style.lineHeight = '1.35';
-  } else if (textLen > 25) {
-    parentContainer.style.fontSize = '1.4rem';
-    parentContainer.style.lineHeight = '1.35';
-  } else if (textLen > 15) {
-    parentContainer.style.fontSize = '1.65rem';
+    parentContainer.style.fontSize = '0.8rem';
+    parentContainer.style.lineHeight = '1.3';
+  } else if (textLen > 50) {
+    parentContainer.style.fontSize = '0.92rem';
+    parentContainer.style.lineHeight = '1.3';
+  } else if (textLen > 30) {
+    parentContainer.style.fontSize = '1.05rem';
+    parentContainer.style.lineHeight = '1.3';
+  } else if (textLen > 18) {
+    parentContainer.style.fontSize = '1.25rem';
     parentContainer.style.lineHeight = '1.3';
   } else {
-    parentContainer.style.fontSize = '2rem';
-    parentContainer.style.lineHeight = '';
+    parentContainer.style.fontSize = '1.85rem';
+    parentContainer.style.lineHeight = '1.2';
   }
 }
 
@@ -3256,17 +3256,20 @@ function setTrainerCardBackText(text) {
   transEl.textContent = text;
   const textLen = text ? text.length : 0;
   if (textLen > 80) {
-    transEl.style.fontSize = '0.9rem';
-    transEl.style.lineHeight = '1.35';
-  } else if (textLen > 45) {
+    transEl.style.fontSize = '0.8rem';
+    transEl.style.lineHeight = '1.3';
+  } else if (textLen > 50) {
+    transEl.style.fontSize = '0.92rem';
+    transEl.style.lineHeight = '1.3';
+  } else if (textLen > 30) {
     transEl.style.fontSize = '1.05rem';
-    transEl.style.lineHeight = '1.35';
-  } else if (textLen > 25) {
+    transEl.style.lineHeight = '1.3';
+  } else if (textLen > 18) {
     transEl.style.fontSize = '1.2rem';
-    transEl.style.lineHeight = '1.35';
+    transEl.style.lineHeight = '1.3';
   } else {
-    transEl.style.fontSize = '1.3rem';
-    transEl.style.lineHeight = '';
+    transEl.style.fontSize = '1.35rem';
+    transEl.style.lineHeight = '1.2';
   }
 }
 

@@ -2291,19 +2291,19 @@ body.light-theme .premium-search-box {
 
 /* Custom scale for flashcard when modal is wide */
 #trainingModalCard.dict-wide .flashcard-container {
-  max-width: 620px;
-  height: 300px;
+  max-width: 580px;
+  height: 280px;
 }
 
 /* Custom scale for flashcard when modal is tall but not wide */
 #trainingModalCard.dict-tall:not(.dict-wide) .flashcard-container {
-  height: 300px;
+  height: 260px;
 }
 
 /* Custom scale when both wide and tall */
 #trainingModalCard.dict-wide.dict-tall .flashcard-container {
-  max-width: 620px;
-  height: 340px;
+  max-width: 580px;
+  height: 320px;
 }
 
 /* Active state for expand buttons */
@@ -4078,8 +4078,8 @@ body.gray-theme {
 
 .flashcard-container {
   width: 100%;
-  max-width: 440px;
-  height: 260px;
+  max-width: 340px;
+  height: 220px;
   perspective: 1200px;
   cursor: pointer;
   margin: 0 auto;
