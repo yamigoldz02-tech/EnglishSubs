@@ -353,6 +353,10 @@ body {
 /* Selector Styled Dropdown */
 .song-selector-container {
   position: relative;
+  flex: 1 1 auto;
+  min-width: 180px;
+  max-width: 380px;
+  margin: 0 12px;
 }
 
 .song-select {
@@ -1436,7 +1440,7 @@ body.gray-theme .word-pill:hover {
 /* Autocomplete Search Component Styling */
 .autocomplete-wrapper {
   position: relative;
-  width: 380px;
+  width: 100%;
   max-width: 100%;
 }
 
@@ -5268,6 +5272,22 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
 /* ==========================================================================
    RESTORED RECENT PC STYLES
    ========================================================================== */
+/* Glassmorphic Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-glass);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 16px;
+}
+
 .filters-toggle-btn {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -5350,6 +5370,32 @@ body.light-theme .dict-word-row:hover {
 /* ==========================================================================
    RESTORED VIDEO COURSE MOBILE TABS
    ========================================================================== */
+@media (max-width: 1200px) {
+  .navbar {
+    flex-wrap: wrap !important;
+    padding: 0.6rem 1rem !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+    height: auto !important;
+  }
+  .nav-brand {
+    order: 1 !important;
+  }
+  .navbar .nav-controls {
+    order: 2 !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+  }
+  .song-selector-container {
+    order: 3 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 6px 0 2px 0 !important;
+  }
+}
+
 @media (max-width: 768px) {
   .mobile-course-tabs {
     display: flex !important;
