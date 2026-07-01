@@ -2291,19 +2291,19 @@ body.light-theme .premium-search-box {
 
 /* Custom scale for flashcard when modal is wide */
 #trainingModalCard.dict-wide .flashcard-container {
-  max-width: 580px;
-  height: 280px;
+  max-width: 360px;
+  height: 230px;
 }
 
 /* Custom scale for flashcard when modal is tall but not wide */
 #trainingModalCard.dict-tall:not(.dict-wide) .flashcard-container {
-  height: 260px;
+  height: 240px;
 }
 
 /* Custom scale when both wide and tall */
 #trainingModalCard.dict-wide.dict-tall .flashcard-container {
-  max-width: 580px;
-  height: 320px;
+  max-width: 360px;
+  height: 250px;
 }
 
 /* Active state for expand buttons */
@@ -5086,8 +5086,8 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   /* 3D Flashcard Responsive Sizing */
   .flashcard-container {
     height: 200px !important;
-    margin: 10px 0 !important;
-    max-width: 100% !important;
+    margin: 10px auto !important;
+    max-width: 340px !important;
   }
   
   .card-face {
