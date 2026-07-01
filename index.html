@@ -1521,6 +1521,70 @@
           </div>
         </div>
 
+        <!-- Detailed Statistics Grid -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>📊</span> Аналитика и статистика обучения:
+          </h4>
+          <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+            
+            <div style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.15); border-radius: 12px; flex-shrink: 0;">📚</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">Словарный запас</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #60a5fa;" id="modalStatWordsTotal">0</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">всего сохранено слов</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(251, 191, 36, 0.06); border: 1px solid rgba(251, 191, 36, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(251, 191, 36, 0.15); border-radius: 12px; flex-shrink: 0;">⭐</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">Мастерство (Ур. 5)</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #fbbf24;" id="modalStatWordsMastered">0</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">уверенно в памяти</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(168, 85, 247, 0.15); border-radius: 12px; flex-shrink: 0;">🔥</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">На изучении</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #c084fc;" id="modalStatWordsLearning">0</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">уровни Leitner 1–4</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(239, 68, 68, 0.15); border-radius: 12px; flex-shrink: 0;">⏰</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">Ждут повторения</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #f87171;" id="modalStatWordsDue">0</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">готовы к тренировке</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(52, 211, 153, 0.06); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(52, 211, 153, 0.15); border-radius: 12px; flex-shrink: 0;">🎬</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">Курс English Galaxy</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #34d399;" id="modalStatVideosWatched">0 / 50</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">уроков пройдено</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(236, 72, 153, 0.06); border: 1px solid rgba(236, 72, 153, 0.2); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; transition: transform 0.2s;">
+              <div style="font-size: 2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(236, 72, 153, 0.15); border-radius: 12px; flex-shrink: 0;">🎵</div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-sub); font-weight: 600; text-transform: uppercase;">Медиатека</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #f472b6;" id="modalStatSongsCount">0</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub);">песен и клипов в базе</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <!-- How to earn XP List -->
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin: 0;">🎯 Как зарабатывать опыт (XP):</h4>

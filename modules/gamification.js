@@ -213,6 +213,39 @@ function openGamificationModal() {
         rankBar.style.width = `${percent}%`;
     }
 
+    // Вычисляем и отображаем подробную статистику обучения
+    const dict = (typeof personalDictionary !== 'undefined' && Array.isArray(personalDictionary)) ? personalDictionary : [];
+    const totalWords = dict.length;
+    const masteredWords = dict.filter(w => (w.level && w.level >= 5) || (w.interval && w.interval >= 30)).length;
+    const learningWords = dict.filter(w => w.level && w.level > 0 && w.level < 5).length;
+    const now = Date.now();
+    const dueWords = dict.filter(w => !w.nextReview || w.nextReview <= now).length;
+
+    let watchedCount = 0;
+    try {
+        const savedWatched = localStorage.getItem('galaxy_watched_videos');
+        if (savedWatched) watchedCount = JSON.parse(savedWatched).length || 0;
+    } catch(e) {}
+
+    let songsCount = 0;
+    if (typeof songsData !== 'undefined' && songsData) {
+        songsCount = Object.keys(songsData).length;
+    }
+
+    const statTotalEl = document.getElementById('modalStatWordsTotal');
+    const statMasteredEl = document.getElementById('modalStatWordsMastered');
+    const statLearningEl = document.getElementById('modalStatWordsLearning');
+    const statDueEl = document.getElementById('modalStatWordsDue');
+    const statVideosEl = document.getElementById('modalStatVideosWatched');
+    const statSongsEl = document.getElementById('modalStatSongsCount');
+
+    if (statTotalEl) statTotalEl.textContent = totalWords;
+    if (statMasteredEl) statMasteredEl.textContent = masteredWords;
+    if (statLearningEl) statLearningEl.textContent = learningWords;
+    if (statDueEl) statDueEl.textContent = dueWords;
+    if (statVideosEl) statVideosEl.textContent = `${watchedCount} / 50 (${Math.round((watchedCount / 50) * 100)}%)`;
+    if (statSongsEl) statSongsEl.textContent = songsCount;
+
     if (typeof openModalEl === 'function') {
         openModalEl(modal);
     } else {
