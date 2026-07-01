@@ -8,7 +8,8 @@ This document is the authoritative navigation and architecture map for AI assist
 **AI Lyric-Trainer** is a modern, interactive English learning web application that combines music, video subtitles, spaced-repetition vocabulary training, shadowing dictation, and structured grammar/video lessons (English Galaxy).
 
 - **Technology Stack:** Pure Vanilla JavaScript (ES6+), HTML5, and Vanilla CSS. No external bundlers (Webpack/Vite) or CSS frameworks (Tailwind/Bootstrap) are used.
-- **Offline & Protocol Compatibility:** Fully supports offline execution via the `file://` protocol. All network requests (Firebase, Gemini API, YouTube iframe, Spotify PKCE) degrade gracefully without throwing uncaught exceptions when offline.
+- **Mobile Runtime (Capacitor):** The mobile application (iOS/Android) is built as a hybrid native app wrapped with **Ionic Capacitor**. It executes inside a native WebView. Mobile back-button navigation and hardware events are handled via `app-back-button.js` and responsive mobile viewports (`mobile-compact.css`).
+- **Offline & Protocol Compatibility:** Fully supports offline execution via `file://`, `capacitor://`, and `http://localhost` protocols. All network requests (Firebase, Gemini API, YouTube iframe, Spotify PKCE) degrade gracefully without throwing uncaught exceptions when offline.
 
 ---
 
