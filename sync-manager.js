@@ -111,6 +111,34 @@ function getSyncUser() {
     return null;
 }
 
+let lastNoticeTime = 0;
+function showSyncNotice(msg, isError = false) {
+    if (isError) {
+        const now = Date.now();
+        if (now - lastNoticeTime < 30000) return; // Debounce error toasts to once per 30 seconds
+        lastNoticeTime = now;
+    }
+    console[isError ? 'warn' : 'log']('[SyncManager Notice]', msg);
+    
+    try {
+        let container = document.getElementById('syncToastContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'syncToastContainer';
+            container.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;';
+            document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.style.cssText = `background: ${isError ? 'rgba(239, 68, 68, 0.95)' : 'rgba(29, 185, 84, 0.95)'}; color: #fff; font-size: 0.8rem; font-weight: 600; padding: 10px 16px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); pointer-events: auto; transition: opacity 0.5s ease; font-family: sans-serif;`;
+        toast.textContent = msg;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    } catch (e) { /* ignore DOM errors */ }
+}
+
 // Schedule cloud write with debounce
 function scheduleCloudSync() {
     const user = getSyncUser();
@@ -153,7 +181,7 @@ async function pushLocalToCloud() {
         console.log('[SyncManager] Cloud backup successfully completed at:', timestamp);
     } catch (e) {
         console.error('[SyncManager] Failed to back up data to Cloud:', e);
-        alert('Ошибка при отправке данных в облако: ' + e.message);
+        showSyncNotice('Синхронизация оффлайн или ошибка облака: ' + (e.message || e), true);
     }
 }
 
@@ -365,7 +393,7 @@ async function pullCloudToLocal(user) {
         }
     } catch (e) {
         console.error('[SyncManager] Sync pulling failed:', e);
-        alert('Ошибка при получении данных из облака: ' + e.message);
+        showSyncNotice('Не удалось получить данные из облака: ' + (e.message || e), true);
     }
 }
 

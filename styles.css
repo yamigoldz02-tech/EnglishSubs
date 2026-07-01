@@ -5251,3 +5251,479 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   from { transform: scale(1) translateY(0); opacity: 1; }
   to { transform: scale(0.9) translateY(20px); opacity: 0; }
 }
+
+
+/* ==========================================================================
+   RESTORED RECENT PC STYLES
+   ========================================================================== */
+.filters-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.filters-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+body.light-theme .filters-toggle-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-main);
+}
+body.light-theme .filters-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+/* ==========================================================================
+   RESTORED MISSING UI COMPONENTS (Selects, Lists, etc.)
+   ========================================================================== */
+.premium-select-filter {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: var(--text-main) !important;
+  border-radius: 8px !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.premium-select-filter option {
+  background: #1e1e1e !important;
+  color: #fff !important;
+}
+
+.premium-micro-select {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--text-main) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+.premium-micro-select option {
+  background: #1e1e1e !important;
+  color: #fff !important;
+}
+
+body.light-theme .premium-select-filter, body.light-theme .premium-micro-select {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-main) !important;
+}
+body.light-theme .premium-select-filter option, body.light-theme .premium-micro-select option {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+.dict-word-row {
+  border-radius: 8px !important;
+  transition: background 0.2s !important;
+}
+.dict-word-row:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+body.light-theme .dict-word-row:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ==========================================================================
+   RESTORED VIDEO COURSE MOBILE TABS
+   ========================================================================== */
+@media (max-width: 768px) {
+  .mobile-course-tabs {
+    display: flex !important;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border-glass);
+    gap: 8px;
+  }
+  .course-tab-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-sub);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .course-tab-btn.active {
+    background: rgba(167, 139, 250, 0.15);
+    border-color: rgba(167, 139, 250, 0.3);
+    color: #a78bfa;
+  }
+  
+  /* Tab Switching Logic */
+  .video-course-modal-card.active-tab-lessons .lessons-sidebar {
+    display: flex !important;
+  }
+  .video-course-modal-card.active-tab-lessons .active-video-details {
+    display: none !important;
+  }
+  
+  .video-course-modal-card.active-tab-notes .lessons-sidebar {
+    display: none !important;
+  }
+  .video-course-modal-card.active-tab-notes .active-video-details {
+    display: block !important;
+  }
+}
+
+/* ==========================================================================
+   RESTORED LEFT RESIZE HANDLE
+   ========================================================================== */
+.floating-resize-handle.left-handle {
+  left: 0;
+  cursor: ew-resize;
+}
+
+/* ==========================================================================
+   RESTORED COLLAPSIBLE FILTERS
+   ========================================================================== */
+.dict-filters-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dict-filters-collapse.expanded {
+  max-height: 800px;
+}
+
+.filters-toggle-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.filters-toggle-btn:active {
+  transform: scale(0.97);
+}
+.filters-toggle-btn .toggle-arrow {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+.filters-toggle-btn.active .toggle-arrow {
+  transform: rotate(-180deg);
+}
+body.light-theme .filters-toggle-btn {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   RESTORED DICTIONARY SCROLL TO TOP BUTTON
+   ========================================================================== */
+#dictScrollTopBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+#dictScrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#dictScrollTopBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+#dictScrollTopBtn:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   RESTORED TRAINING SETTINGS COLLAPSE
+   ========================================================================== */
+.training-settings-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.training-settings-collapse.expanded {
+  max-height: 500px;
+}
+
+/* ==========================================================================
+   RESTORED HEATMAP COLLAPSE
+   ========================================================================== */
+.dict-heatmap-container {
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s ease, opacity 0.3s ease;
+  max-height: 200px; /* enough to show heatmap */
+  opacity: 1;
+}
+.dict-heatmap-container.collapsed {
+  max-height: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  opacity: 0;
+}
+
+/* Hide mobile bottom nav on PC */
+@media (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   RESTORED FLOATING VIDEO PLAYER CSS
+   ========================================================================== */
+.video-modal-minimized {
+  z-index: 10500 !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+.video-modal-minimized .video-course-modal-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+}
+.video-modal-minimized .modal-header,
+.video-modal-minimized .video-course-progress-panel,
+.video-modal-minimized .lessons-sidebar,
+.video-modal-minimized .player-header-row,
+.video-modal-minimized .active-video-details,
+.video-modal-minimized .video-course-controls,
+.video-modal-minimized .mobile-course-tabs {
+  display: none !important;
+}
+.video-modal-minimized .video-course-body {
+  border: none !important;
+  background: transparent !important;
+}
+.video-modal-minimized .player-container-pane {
+  pointer-events: auto;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 350px;
+  padding: 0 !important;
+  background: var(--bg-surface, #121216);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  z-index: 100000;
+  overflow: visible !important;
+  cursor: grab;
+  transition: width 0.2s, height 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.video-modal-minimized .player-container-pane.floating-dragged {
+  transition: none !important;
+  cursor: grabbing !important;
+  bottom: auto !important;
+  right: auto !important;
+}
+.video-modal-minimized .video-player-wrapper {
+  border-radius: 0 0 12px 12px !important;
+  border: none !important;
+}
+
+.floating-video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-glass);
+  border-radius: 12px 12px 0 0;
+  user-select: none;
+}
+.floating-video-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.floating-video-controls {
+  display: flex;
+  gap: 8px;
+}
+.floating-video-controls button {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.floating-video-controls button:hover {
+  color: var(--text-main);
+}
+
+.floating-resize-handle {
+  position: absolute;
+  width: 15px;
+  height: 100%;
+  top: 0;
+  cursor: ew-resize;
+  z-index: 100001;
+}
+.floating-resize-handle.left-handle {
+  left: -7px;
+}
+.floating-resize-handle.right-handle {
+  right: -7px;
+}
+
+/* ==========================================================================
+   RESTORED SPOTIFY NOW PLAYING WIDGET
+   ========================================================================== */
+.spotify-now-playing {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(20, 20, 20, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom left;
+  max-width: 320px;
+}
+
+.spotify-np-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.spotify-np-album {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.spotify-np-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.spotify-np-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent-spotify);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.spotify-np-track {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.spotify-np-artist {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-np-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+  padding-left: 8px;
+}
+
+.spotify-np-bars span {
+  display: block;
+  width: 3px;
+  background-color: var(--accent-spotify);
+  border-radius: 3px;
+  animation: spotify-bars 1.2s ease-in-out infinite;
+}
+
+.spotify-np-bars span:nth-child(1) { height: 12px; animation-delay: 0.0s; }
+.spotify-np-bars span:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+.spotify-np-bars span:nth-child(3) { height: 16px; animation-delay: 0.6s; }
+.spotify-np-bars span:nth-child(4) { height: 24px; animation-delay: 0.9s; }
+
+@keyframes spotify-bars {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+/* Light Theme overrides for Spotify Widget */
+body.light-theme .spotify-now-playing {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
