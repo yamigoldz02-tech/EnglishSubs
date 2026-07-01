@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: SHADOWING_DICTATION_ENGINE
  * @file modules/shadowing-dictation.js
  * @description Extracted Audio Dictation (Shadowing Mode) Engine & Utilities.
  */

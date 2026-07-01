@@ -4,22 +4,22 @@
  * ============================================================================
  * TABLE OF CONTENTS (TOC FOR AI & DEVELOPER NAVIGATION):
  * 
- * 00. [Lines ~0001-0174]: Word Editing Modal Helper (openEditWordModal)
- * 01. [Lines ~0175-0629]: Global Modal Helpers & Animation Controllers
- * 02. [Lines ~0630-2138]: Core Application Logic, Player & Subtitles Engine
- * 03. [Lines ~2139-2176]: Speech Synthesis & Auxiliary Functions
- * 04. [Lines ~2177-3290]: Event Listeners & Theme Optimizations
- * 05. [Lines ~3291-7906]: Personal Dictionary & 3D Flashcard Leitner Trainer
- * 06. [Lines ~7907-End ]: Mobile Back Button Support for Modals
+ * 00. [Lines ~0001-0174]: Word Editing Modal Helper [@AI-SECTION: WORD_EDITING_MODAL]
+ * 01. [Lines ~0175-0629]: Global Modal Helpers & Animation Controllers [@AI-SECTION: GLOBAL_MODALS_ANIMATIONS]
+ * 02. [Lines ~0630-2138]: Core Application Logic, Player & Subtitles Engine [@AI-SECTION: CORE_PLAYER_ENGINE]
+ * 03. [Lines ~2139-2176]: Speech Synthesis & Auxiliary Functions [@AI-SECTION: SPEECH_SYNTHESIS]
+ * 04. [Lines ~2177-3290]: Event Listeners & Theme Optimizations [@AI-SECTION: EVENT_LISTENERS_THEMES]
+ * 05. [Lines ~3291-7906]: Personal Dictionary & 3D Flashcard Leitner Trainer [@AI-SECTION: DICTIONARY_LEITNER_TRAINER]
+ * 06. [Lines ~7907-End ]: Mobile Back Button Support for Modals [@AI-SECTION: MOBILE_BACK_BUTTON_MODALS]
  * 
  * EXTERNAL MODULES (In modules/ directory, linked in index.html):
- * - [types.js]: JSDoc @typedef data structure definitions
- * - [gemini-ai.js]: Live AI Integration (Google Gemini 1.5 Flash API)
- * - [shadowing-dictation.js]: Audio Dictation (Shadowing Mode) Engine
- * - [spotify-controller.js]: Spotify Now Playing & Auto-Pause PKCE integration
- * - [grammar-rules.js]: Interactive Grammar Rules Handbook
- * - [notebook-module.js]: Global & Per-Lesson Video Notes Controller
- * - [galaxy-course.js]: YouTube Video Course Tracker (English Galaxy A0)
+ * - [types.js]: JSDoc @typedef definitions [@AI-SECTION: TYPES_JSDOC]
+ * - [gemini-ai.js]: Live AI Integration [@AI-SECTION: GEMINI_AI_ENGINE]
+ * - [shadowing-dictation.js]: Audio Dictation Engine [@AI-SECTION: SHADOWING_DICTATION_ENGINE]
+ * - [spotify-controller.js]: Spotify Now Playing & Auto-Pause [@AI-SECTION: SPOTIFY_PKCE_CONTROLLER]
+ * - [grammar-rules.js]: Interactive Grammar Rules Handbook [@AI-SECTION: GRAMMAR_RULES_ENGINE]
+ * - [notebook-module.js]: Global Notes Controller [@AI-SECTION: NOTEBOOK_NOTES_CONTROLLER]
+ * - [galaxy-course.js]: YouTube Video Course Tracker [@AI-SECTION: GALAXY_VIDEO_COURSE]
  * ============================================================================
  */
 function openEditWordModal(w, onSaveSuccess) {
@@ -2140,6 +2140,7 @@ function bindLyricClicks() {
 
 /* ==========================================================================
    4. Speech Synthesis & Auxiliary Functions
+// @AI-SECTION: SPEECH_SYNTHESIS
    ========================================================================== */
 
 function speakText(text) {
@@ -2178,6 +2179,7 @@ function speakText(text) {
 
 /* ==========================================================================
    5. Event Listeners & Theme Optimizations
+// @AI-SECTION: EVENT_LISTENERS_THEMES
    ========================================================================== */
 
 function setupEventListeners() {
@@ -3292,6 +3294,7 @@ function initCustomChat() {
 
 // ==========================================================================
 // 5. Personal Dictionary & 3D Flashcard word trainer
+// @AI-SECTION: DICTIONARY_LEITNER_TRAINER
 // ==========================================================================
 
 let activeDictTab = 'personal'; // 'personal' or 'essential'
@@ -7907,6 +7910,7 @@ function getFilteredDictionaryWords() {
 }
 
 // --- Mobile Back Button Support for Modals ---
+// @AI-SECTION: MOBILE_BACK_BUTTON_MODALS
 (function initModalHistoryAPI() {
   document.addEventListener('DOMContentLoaded', () => {
     // Disable in Capacitor/Cordova app to avoid history conflicts with main app router

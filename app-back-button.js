@@ -1,3 +1,7 @@
+/**
+ * @AI-SECTION: CAPACITOR_BACK_BUTTON_HANDLER
+ */
+
 // Mobile back button handler for Capacitor/Cordova
 
 (function() {

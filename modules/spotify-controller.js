@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: SPOTIFY_PKCE_CONTROLLER
  * @file modules/spotify-controller.js
  * @description Extracted Spotify Auto-Pause & Now Playing Widget integration.
  */

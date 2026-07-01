@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: GALAXY_VIDEO_COURSE
  * @file modules/galaxy-course.js
  * @description Extracted YouTube Video Course Tracker Module (English Galaxy, A0).
  */

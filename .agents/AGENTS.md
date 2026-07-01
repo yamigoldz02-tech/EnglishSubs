@@ -64,3 +64,10 @@ When modifying this codebase, AI assistants MUST strictly adhere to the followin
 4. **DOM Element Null-Checking:** Always check if a DOM element exists before attaching event listeners or updating `.innerHTML`/`.textContent` (e.g., `const btn = document.getElementById(...); if (btn) { ... }` or use optional chaining `btn?.addEventListener(...)`).
 5. **Respect CSS Variables:** Use pre-defined CSS design tokens from `:root` in `styles.css` (e.g., `var(--accent-spotify)`, `var(--text-main)`, `var(--bg-card)`). Avoid hardcoded hex colors unless designing a standalone branded widget.
 6. **CRITICAL ENCODING RULE (Cyrillic Protection):** Never use PowerShell `Set-Content`, `Out-File`, `echo`, or `>` / `>>` redirection without explicitly specifying `-Encoding utf8`. In Windows environments, these terminal commands default to Windows-1251 (ANSI) or CP866, which destroys Cyrillic characters (producing mojibake like `???` or `\uFFFD`). For automated file modifications or text manipulation involving Russian text, AI assistants MUST use Node.js scripts with explicit UTF-8 encoding (`fs.readFileSync(file, 'utf8')` / `fs.writeFileSync(file, content, 'utf8')`).
+7. **Automated Self-Verification (MANDATORY):** After making ANY code modifications or adding new features, AI assistants MUST execute the automated verification suite from the project root:
+   ```bash
+   node verify.js
+   ```
+   Never complete a turn or finalize a task if `node verify.js` reports syntax errors, mojibake encoding corruption, or broken HTML references.
+8. **Semantic AI Anchors (@AI-SECTION):** The project uses semantic anchors across all modules and scripts (e.g., `@AI-SECTION: GEMINI_AI_ENGINE`, `@AI-SECTION: DICTIONARY_LEITNER_TRAINER`). Use `grep "@AI-SECTION:"` or `Select-String -Pattern "@AI-SECTION:"` to instantly locate architectural components and section boundaries across the repository.
+

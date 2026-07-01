@@ -1,3 +1,7 @@
+/**
+ * @AI-SECTION: SYNC_MANAGER_FIREBASE
+ */
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
 import { 
     getAuth, 

@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: TYPES_JSDOC
  * @file modules/types.js
  * @description Centralized JSDoc type definitions for AI Lyric-Trainer.
  * Inclusion of this script in HTML or importing via IDE provides autocompletion

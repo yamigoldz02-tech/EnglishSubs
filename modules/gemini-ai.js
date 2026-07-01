@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: GEMINI_AI_ENGINE
  * @file modules/gemini-ai.js
  * @description Extracted Live AI Integration (Google Gemini 1.5 Flash API & Dynamic Sidebar).
  */

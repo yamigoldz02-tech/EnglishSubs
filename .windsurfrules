@@ -1,0 +1,22 @@
+# AI LYRIC-TRAINER: WINDSURF AI GUIDELINES (.windsurfrules)
+
+You are working on **AI Lyric-Trainer**, an interactive English learning web application built with Vanilla JS, HTML5, and CSS.
+
+## 1. Authoritative Architecture Map
+Always consult `.agents/AGENTS.md` first before scanning large source code files or making architectural changes.
+- The project runs offline (`file://`, `http://localhost`) and inside an Ionic Capacitor native mobile WebView (`capacitor://`).
+- Never introduce bundlers (Webpack/Vite/Tailwind) or frameworks (React/Vue/jQuery). Use pure Vanilla JS and CSS.
+
+## 2. Automated Self-Verification (MANDATORY)
+After making ANY code modifications or adding new features, you MUST run the automated verification suite to check syntax, UTF-8 encoding, and HTML reference integrity:
+```bash
+node verify.js
+```
+Never complete a task if `node verify.js` reports errors!
+
+## 3. Cyrillic & UTF-8 Encoding Protection
+- Never use PowerShell `Set-Content`, `Out-File`, `echo`, or `>` / `>>` redirection without explicitly specifying `-Encoding utf8`. In Windows environments, standard redirection defaults to Windows-1251 (ANSI), destroying Cyrillic text.
+- For automated file modifications or text manipulation involving Russian text, ALWAYS use Node.js scripts with explicit UTF-8 encoding (`fs.readFileSync(..., 'utf8')` / `fs.writeFileSync(..., 'utf8')`).
+
+## 4. Semantic AI Navigation Anchors (@AI-SECTION)
+Use semantic anchors in search queries (`grep "@AI-SECTION:"`) to quickly locate architectural components across `app.js` and `modules/`.

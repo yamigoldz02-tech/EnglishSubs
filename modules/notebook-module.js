@@ -1,4 +1,5 @@
 /**
+ * @AI-SECTION: NOTEBOOK_NOTES_CONTROLLER
  * @file modules/notebook-module.js
  * @description Extracted Notebook Module (Global & Per-Lesson Video Notes).
  */
