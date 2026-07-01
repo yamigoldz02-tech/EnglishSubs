@@ -5853,44 +5853,45 @@ body.light-theme .spotify-now-playing {
   padding: 0.6rem 1rem 0.6rem 2.5rem !important;
 }
 
-/* Force single-row layout on desktop screens (>1200px) so buttons NEVER wrap to a second crooked line */
+/* Force single-row layout on desktop screens (>1200px) with balanced centered search bar and no giant voids */
 @media (min-width: 1201px) {
   .navbar {
     display: flex !important;
     flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     align-items: center !important;
-    gap: 14px !important;
-    padding: 0.6rem 1.2rem !important;
+    gap: 20px !important;
+    padding: 0.6rem 1.5rem !important;
     height: 60px !important;
   }
 
   .nav-brand {
-    flex-shrink: 0 !important;
+    flex: 0 0 auto !important;
     font-size: 1.2rem !important;
   }
 
   .song-selector-container {
     flex: 1 1 auto !important;
-    min-width: 150px !important;
-    max-width: 320px !important;
-    margin: 0 !important;
+    min-width: 200px !important;
+    max-width: 480px !important;
+    margin: 0 auto !important;
   }
 
   .nav-controls {
-    margin-left: auto !important;
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
     display: flex !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 8px !important;
   }
 
   .nav-controls > div,
   .nav-controls > button {
     flex-shrink: 0 !important;
-    padding: 0 10px !important;
+    padding: 0 12px !important;
     height: 36px !important;
-    font-size: 0.78rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
