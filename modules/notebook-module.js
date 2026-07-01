@@ -623,8 +623,8 @@ function initNotebook() {
 
   const createFolderBtn = document.getElementById('notebookCreateFolderBtn');
   if (createFolderBtn) {
-    createFolderBtn.addEventListener('click', () => {
-      const name = prompt('Введите название новой папки:');
+    createFolderBtn.addEventListener('click', async () => {
+      const name = await (window.showCustomPrompt ? window.showCustomPrompt('📁 Новая папка блокнота', 'Введите название новой папки:', 'Например: Заметки по грамматике') : prompt('Введите название новой папки:'));
       if (name && name.trim()) {
         const newFolder = {
           id: 'folder_' + Date.now(),
@@ -634,6 +634,7 @@ function initNotebook() {
         customNoteFolders.push(newFolder);
         saveCustomNoteFolders();
         renderCustomFolders();
+        if (window.showToast) window.showToast(`Папка «${name.trim()}» успешно создана!`, "success");
       }
     });
   }

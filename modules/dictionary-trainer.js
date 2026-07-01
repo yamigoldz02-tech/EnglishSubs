@@ -2534,23 +2534,26 @@ function setupDictionaryUI() {
   // Create custom word category / playlist folder
   const addCatBtn = document.getElementById('addCustomCategoryBtn');
   if (addCatBtn) {
-    addCatBtn.addEventListener('click', () => {
-      const name = prompt("Введите название новой папки для слов:");
+    addCatBtn.addEventListener('click', async () => {
+      const name = await (window.showCustomPrompt ? window.showCustomPrompt("📁 Новая папка", "Введите название новой папки для слов:", "Например: Глаголы движения") : prompt("Введите название новой папки для слов:"));
       if (name === null) return; // Cancelled
       const cleanName = name.trim();
       if (!cleanName) {
-        alert("Название папки не может быть пустым!");
+        if (window.showToast) window.showToast("Название папки не может быть пустым!", "error");
+        else alert("Название папки не может быть пустым!");
         return;
       }
       if (cleanName.length > 25) {
-        alert("Название папки слишком длинное (максимум 25 символов)!");
+        if (window.showToast) window.showToast("Название папки слишком длинное (максимум 25 символов)!", "error");
+        else alert("Название папки слишком длинное (максимум 25 символов)!");
         return;
       }
       
       // Case-insensitive duplicate check
       const exists = personalCategories.some(c => c.toLowerCase() === cleanName.toLowerCase());
       if (exists) {
-        alert("Папка с таким названием уже существует!");
+        if (window.showToast) window.showToast("Папка с таким названием уже существует!", "error");
+        else alert("Папка с таким названием уже существует!");
         return;
       }
       
@@ -2565,29 +2568,33 @@ function setupDictionaryUI() {
         categoryFilter.value = cleanName;
         categoryFilter.dispatchEvent(new Event('change'));
       }
+      if (window.showToast) window.showToast(`Папка «${cleanName}» успешно создана!`, "success");
     });
   }
 
   // Create custom word category / tag
   const addCustomCatBtn = document.getElementById('addCustomCustomCategoryBtn');
   if (addCustomCatBtn) {
-    addCustomCatBtn.addEventListener('click', () => {
-      const name = prompt("Введите название новой категории для слов/фраз:");
+    addCustomCatBtn.addEventListener('click', async () => {
+      const name = await (window.showCustomPrompt ? window.showCustomPrompt("🏷️ Новая категория", "Введите название новой категории для слов/фраз:", "Например: Идиомы") : prompt("Введите название новой категории для слов/фраз:"));
       if (name === null) return; // Cancelled
       const cleanName = name.trim();
       if (!cleanName) {
-        alert("Название категории не может быть пустым!");
+        if (window.showToast) window.showToast("Название категории не может быть пустым!", "error");
+        else alert("Название категории не может быть пустым!");
         return;
       }
       if (cleanName.length > 25) {
-        alert("Название категории слишком длинное (максимум 25 символов)!");
+        if (window.showToast) window.showToast("Название категории слишком длинное (максимум 25 символов)!", "error");
+        else alert("Название категории слишком длинное (максимум 25 символов)!");
         return;
       }
       
       // Case-insensitive duplicate check
       const exists = personalCustomCategories.some(c => c.toLowerCase() === cleanName.toLowerCase());
       if (exists || cleanName.toLowerCase() === 'без категории' || cleanName.toLowerCase() === 'все категории') {
-        alert("Категория с таким названием уже существует или зарезервирована!");
+        if (window.showToast) window.showToast("Категория с таким названием уже существует или зарезервирована!", "error");
+        else alert("Категория с таким названием уже существует или зарезервирована!");
         return;
       }
       
@@ -2602,6 +2609,7 @@ function setupDictionaryUI() {
         customCategoryFilter.value = cleanName;
         customCategoryFilter.dispatchEvent(new Event('change'));
       }
+      if (window.showToast) window.showToast(`Категория «${cleanName}» успешно создана!`, "success");
     });
   }
 
