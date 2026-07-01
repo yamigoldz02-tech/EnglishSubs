@@ -217,6 +217,8 @@ function openEditWordModal(w, onSaveSuccess) {
  */
 function openModalEl(el) {
   if (!el) return;
+  document.documentElement.classList.add('modal-open');
+  document.body.classList.add('modal-open');
   el.classList.remove('modal-animate-out');
   el.style.display = 'flex';
   el.classList.remove('modal-animate-in');
@@ -236,6 +238,13 @@ function closeModalEl(el) {
     if (el.classList.contains('modal-animate-out')) {
       el.style.display = 'none';
       el.classList.remove('modal-animate-out');
+      const anyOpen = Array.from(document.querySelectorAll('.modal-overlay')).some(
+        m => m !== el && m.style.display && m.style.display !== 'none'
+      );
+      if (!anyOpen) {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }
     }
   }, 200);
 }

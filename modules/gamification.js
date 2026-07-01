@@ -218,6 +218,8 @@ function openGamificationModal() {
     } else {
         modal.style.display = 'flex';
     }
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
 }
 
 /**
@@ -226,6 +228,8 @@ function openGamificationModal() {
 function closeGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
     if (typeof closeModalEl === 'function') {
         closeModalEl(modal);
     } else {
