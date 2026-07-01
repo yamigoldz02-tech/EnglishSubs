@@ -5843,19 +5843,6 @@ body.light-theme .spotify-now-playing {
 /* ==========================================================================
    12. NAVBAR ALIGNMENT & GAMIFICATION MODAL STYLES
    ========================================================================== */
-/* Align navbar cleanly without huge gaps */
-.navbar {
-  justify-content: flex-start !important;
-  gap: 20px !important;
-}
-
-.song-selector-container {
-  flex: 1 1 380px !important;
-  min-width: 240px !important;
-  max-width: 500px !important;
-  margin: 0 !important;
-}
-
 /* Remove legacy dropdown arrow from older design */
 .song-selector-container::after {
   display: none !important;
@@ -5866,10 +5853,44 @@ body.light-theme .spotify-now-playing {
   padding: 0.6rem 1rem 0.6rem 2.5rem !important;
 }
 
-.nav-controls {
-  margin-left: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  flex-wrap: wrap !important;
+/* Force single-row layout on desktop screens (>1200px) so buttons NEVER wrap to a second crooked line */
+@media (min-width: 1201px) {
+  .navbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 0.6rem 1.2rem !important;
+    height: 60px !important;
+  }
+
+  .nav-brand {
+    flex-shrink: 0 !important;
+    font-size: 1.2rem !important;
+  }
+
+  .song-selector-container {
+    flex: 1 1 auto !important;
+    min-width: 150px !important;
+    max-width: 320px !important;
+    margin: 0 !important;
+  }
+
+  .nav-controls {
+    margin-left: auto !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .nav-controls > div,
+  .nav-controls > button {
+    flex-shrink: 0 !important;
+    padding: 0 10px !important;
+    height: 36px !important;
+    font-size: 0.78rem !important;
+  }
 }
+
