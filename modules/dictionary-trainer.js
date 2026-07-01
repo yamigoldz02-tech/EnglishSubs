@@ -4376,6 +4376,16 @@ function handleWordReview(rating) {
 
     // 3. Leitner level increment & schedule forward
     item.level = Math.min(8, currentLevel + 1);
+    
+    // --- GAMIFICATION XP LOGIC ---
+    if (window.awardXP) {
+      if (item.level === 5 && currentLevel < 5) {
+        window.awardXP(50, 'mastery', document.querySelector('.dict-training-controls'));
+      } else {
+        window.awardXP(2, 'correct', document.querySelector('.dict-training-controls'));
+      }
+    }
+    
     const days = intervals[item.level];
     const nextDate = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
     nextDate.setHours(0, 0, 0, 0); // Align to midnight precision

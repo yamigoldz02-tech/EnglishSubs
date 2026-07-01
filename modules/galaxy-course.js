@@ -582,6 +582,12 @@ function toggleWatchedStatus(videoId) {
       recordActivity(10);
       showCourseToast('🎉 Урок пройден! Вам начислено +10 очков активности.');
     }
+    
+    // --- GAMIFICATION XP LOGIC ---
+    if (window.awardXP) {
+      window.awardXP(100, 'video_watched', document.getElementById('galaxyVideoPlayerContainer') || document.querySelector('.galaxy-video-container'));
+    }
+    // -----------------------------
   }
 
   // Save to storage

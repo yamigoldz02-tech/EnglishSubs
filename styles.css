@@ -5785,3 +5785,56 @@ body.light-theme .spotify-now-playing {
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
+
+/* ==========================================================================
+   11. GAMIFICATION (XP & STREAKS) STYLING
+   ========================================================================== */
+.xp-float-animation {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100000;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #fbbf24;
+  text-shadow: 0 4px 12px rgba(245, 158, 11, 0.4), 0 0 20px rgba(245, 158, 11, 0.2);
+  animation: xpFloatUp 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.xp-float-animation .xp-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.xp-bonus-animation {
+  font-size: 1.8rem;
+  color: #34d399;
+  text-shadow: 0 4px 16px rgba(52, 211, 153, 0.6), 0 0 24px rgba(52, 211, 153, 0.3);
+}
+
+@keyframes xpFloatUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px) scale(0.5);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.2);
+  }
+  30% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -60px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100px) scale(0.9);
+  }
+}

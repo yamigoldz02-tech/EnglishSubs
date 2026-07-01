@@ -55,6 +55,12 @@
       </div>
 
       <div class="nav-controls">
+        <!-- Gamification Progress Badge -->
+        <div id="userProgressBadge" title="Ударный режим и Опыт" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none;">
+          <span style="color: #f97316;">🔥 <span id="streakCountUI">0</span></span>
+          <span style="color: #3b82f6;">✨ <span id="xpCountUI">0</span> XP</span>
+        </div>
+
         <!-- Premium Personal Dictionary Modal Trigger Button -->
         <button id="openDictionaryBtn" aria-label="Мой словарь" title="Мой словарь" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(29, 185, 84, 0.1); border: 1px solid rgba(29, 185, 84, 0.2); color: var(--accent-spotify); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(29,185,84,0.1);">
           <span>📚 Словарь (<span id="savedWordsCount">0</span>)</span>
@@ -1547,6 +1553,7 @@
   <script src="modules/grammar-rules.js"></script>
   <script src="modules/notebook-module.js"></script>
   <script src="modules/galaxy-course.js"></script>
+  <script src="modules/gamification.js"></script>
   <script src="app.js?v=2.5.4"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
