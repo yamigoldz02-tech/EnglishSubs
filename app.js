@@ -1,3 +1,23 @@
+/**
+ * ============================================================================
+ * AI LYRIC-TRAINER - MAIN CORE CONTROLLER (app.js)
+ * ============================================================================
+ * TABLE OF CONTENTS (TOC FOR AI & DEVELOPER NAVIGATION):
+ * 
+ * 00. [Lines ~0001-0174]: Word Editing Modal Helper (openEditWordModal)
+ * 01. [Lines ~0175-0629]: Global Modal Helpers & Animation Controllers
+ * 02. [Lines ~0630-2117]: Core Application Logic, Player & Subtitles Engine
+ * 03. [Lines ~2118-3884]: Live AI Integration (Gemini 1.5 Flash API) & Dynamic Sidebar
+ * 04. [Lines ~3885-3922]: Speech Synthesis & Auxiliary Functions
+ * 05. [Lines ~3923-5036]: Event Listeners & Theme Optimizations
+ * 06. [Lines ~5037-9652]: Personal Dictionary & 3D Flashcard Leitner Trainer
+ * 07. [Lines ~9653-9817]: Audio Dictation (Shadowing Mode) Engine & Utilities
+ * 08. [Lines ~9818-10451]: YouTube Video Course Tracker Module (English Galaxy, A0)
+ * 09. [Lines ~10452-11379]: Notebook Module (Global & Per-Lesson Video Notes)
+ * 10. [Lines ~11380-11843]: Grammar Rules Interactive Module
+ * 11. [Lines ~11844-End ]: Spotify Auto-Pause Integration (Authorization Code + PKCE)
+ * ============================================================================
+ */
 
 function openEditWordModal(w, onSaveSuccess) {
   const editModal     = document.getElementById('editWordModal');

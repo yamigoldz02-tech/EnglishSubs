@@ -1,6 +1,19 @@
 /* ==========================================================================
    AI LYRIC-TRAINER — PREMIUM SPOTIFY-INSPIRED CSS STYLE SHEET
    ========================================================================== */
+/**
+ * TABLE OF CONTENTS (TOC FOR AI & DEVELOPER NAVIGATION):
+ * 01. [Lines ~0005-0183]: Imports, Fonts & Root Design System Tokens (:root)
+ * 02. [Lines ~0184-0442]: Reset, Base Styles & General Layout Structure
+ * 03. [Lines ~0443-0951]: Main Workspace (Left Lyrics Column & Right Drawer)
+ * 04. [Lines ~0952-2563]: AI Chat, Welcome Dashboard & Shimmer Skeletons
+ * 05. [Lines ~2564-3241]: Dictionary Highlights & Video Course Lesson Tracker
+ * 06. [Lines ~3242-4014]: Notebook Drawer & Word Card Popup Modal
+ * 07. [Lines ~4015-4447]: 3D Leitner Flashcards & Rules Handbook
+ * 08. [Lines ~4448-4774]: Hotkeys, Confetti Progress & Theme-Aware Overrides
+ * 09. [Lines ~4775-5255]: Mobile Responsive Rules & Modal Animations
+ * 10. [Lines ~5256-End ]: Restored UI Components & Spotify Now Playing Widget
+ */
 
 /* 1. Imports & Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
