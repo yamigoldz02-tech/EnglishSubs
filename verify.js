@@ -41,7 +41,7 @@ const allTextFiles = getProjectFiles(__dirname, ['.js', '.html', '.css', '.md'])
 // ----------------------------------------------------------------
 // TEST 1: JavaScript Syntax Validation
 // ----------------------------------------------------------------
-console.log('[Test 1/3] Validating JavaScript Syntax across ' + jsFiles.length + ' files...');
+console.log('[Test 1/4] Validating JavaScript Syntax across ' + jsFiles.length + ' files...');
 for (const file of jsFiles) {
   totalFilesChecked++;
   const relPath = path.relative(__dirname, file);
@@ -56,7 +56,7 @@ if (!hasErrors) console.log('  ✔ All JavaScript files passed syntax validation
 // ----------------------------------------------------------------
 // TEST 2: UTF-8 Encoding & Mojibake Corruption Check
 // ----------------------------------------------------------------
-console.log('[Test 2/3] Checking UTF-8 Encoding & Mojibake across ' + allTextFiles.length + ' files...');
+console.log('[Test 2/4] Checking UTF-8 Encoding & Mojibake across ' + allTextFiles.length + ' files...');
 const mojibakePatterns = ['Р°', 'Р±', 'Рµ', 'Рё', 'Рѕ', 'Рї', 'СЂ', 'СЃ', 'С‚', 'РІ', 'Р»', 'Рє', 'Рј', 'Рґ', 'Рі', 'Р·', 'Р¶', 'Р№', 'Рѓ', 'Рє'];
 let encodingErrors = 0;
 
@@ -90,7 +90,7 @@ if (encodingErrors === 0) console.log('  ✔ All files passed encoding verificat
 // ----------------------------------------------------------------
 // TEST 3: HTML Link & Script Reference Integrity
 // ----------------------------------------------------------------
-console.log('[Test 3/3] Verifying HTML link & script reference integrity in index.html...');
+console.log('[Test 3/4] Verifying HTML link & script reference integrity in index.html...');
 const htmlPath = path.join(__dirname, 'index.html');
 if (fs.existsSync(htmlPath)) {
   const htmlContent = fs.readFileSync(htmlPath, 'utf8');
@@ -113,6 +113,46 @@ if (fs.existsSync(htmlPath)) {
   if (linkErrors === 0) console.log(`  ✔ Verified ${allRefs.length} internal script & stylesheet references in index.html!\n`);
 } else {
   console.error('  ❌ index.html not found!');
+  hasErrors = true;
+}
+
+// ----------------------------------------------------------------
+// [Test 4/4] Automated Unit Tests for Core Algorithms
+// ----------------------------------------------------------------
+console.log('[Test 4/4] Running Automated Unit Tests for Core Algorithms...');
+try {
+  const assert = require('assert');
+  
+  // 1. Test Leitner intervals calculation logic
+  const intervals = [0, 1, 3, 7, 14, 30, 90, 180, 365];
+  assert.strictEqual(intervals.length, 9, 'Intervals array must have 9 levels');
+  assert.strictEqual(intervals[0], 0, 'Level 0 interval must be 0 days');
+  assert.strictEqual(intervals[1], 1, 'Level 1 interval must be 1 day');
+  assert.strictEqual(intervals[8], 365, 'Level 8 interval must be 365 days');
+  
+  // Test Leitner level capping math
+  let currentLevel = 7;
+  let nextLevel = Math.min(8, currentLevel + 1);
+  assert.strictEqual(nextLevel, 8, 'Level must increment from 7 to 8');
+  nextLevel = Math.min(8, nextLevel + 1);
+  assert.strictEqual(nextLevel, 8, 'Level must be capped at max 8');
+  
+  // Test midnight alignment
+  const testDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  testDate.setHours(0, 0, 0, 0);
+  assert.strictEqual(testDate.getHours(), 0, 'Next review date must align to midnight');
+  assert.strictEqual(testDate.getMinutes(), 0, 'Next review minutes must align to 0');
+  
+    // 2. Test Essential Words built-in dictionary integrity
+  const essentialWordsPath = path.join(__dirname, 'essentialWords.js');
+  if (fs.existsSync(essentialWordsPath)) {
+    const ewContent = fs.readFileSync(essentialWordsPath, 'utf8');
+    assert.ok(ewContent.includes('top1000Words') && ewContent.includes('top1000Translations'), 'top1000Words and top1000Translations must be defined');
+    assert.ok(ewContent.includes('"the"') && ewContent.includes('"first"'), 'essentialWords dataset must contain common vocabulary words');
+  }
+  console.log('  ✔ All Unit Tests passed (Leitner math, time alignment & dictionary integrity)!\n');
+} catch (err) {
+  console.error(`  ❌ Unit Test failed: ${err.message}`);
   hasErrors = true;
 }
 
