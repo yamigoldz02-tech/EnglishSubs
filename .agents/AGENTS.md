@@ -19,13 +19,15 @@ c:/Users/svato/EnglishSub/
 ├── index.html               # Main application layout, modals, SVG icons, and container DOM (1580+ lines)
 ├── styles.css               # Primary design system (Vanilla CSS, 5200+ lines, table of contents at line 1)
 ├── mobile-compact.css       # Responsive compact rules for mobile viewports
-├── app.js                   # Main application core logic (12400+ lines, indexed by TOC at line 1)
+├── app.js                   # Main application core logic (~7950 lines, indexed by TOC at line 1)
 ├── sync-manager.js          # Offline-first Firebase Firestore cloud backup & localStorage interception
 ├── app-back-button.js       # Back-button navigation handler for mobile and browser history
 ├── essentialWords.js        # Built-in vocabulary dataset (Essential Words 3000)
 ├── playlist_db.js           # Built-in songs and video playlists dataset
 ├── modules/                 # Modular subsystems and JSDoc type definitions
 │   ├── types.js             # JSDoc @typedef annotations for IDE intellisense & AI type checking
+│   ├── gemini-ai.js         # Live AI Integration (Google Gemini 1.5 Flash API & Dynamic Sidebar)
+│   ├── shadowing-dictation.js# Audio Dictation (Shadowing Mode) Engine & Utilities
 │   ├── spotify-controller.js# Spotify Now Playing & Auto-Pause PKCE integration (Extracted from app.js)
 │   ├── grammar-rules.js     # Interactive grammar rules & exercises engine (Extracted from app.js)
 │   ├── notebook-module.js   # Global notes & video-lesson notes controller (Extracted from app.js)
