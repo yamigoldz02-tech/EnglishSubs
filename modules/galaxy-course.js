@@ -580,7 +580,7 @@ function toggleWatchedStatus(videoId) {
     // Award 10 activity points in Heatmap!
     if (typeof recordActivity === 'function') {
       recordActivity(10);
-      showCourseToast('🎉 Урок пройден! Вам начислено +10 очков активности.');
+      showCourseToast('🎉 Урок пройден! Вам начислено +100 XP.');
     }
     
     // --- GAMIFICATION XP LOGIC ---
