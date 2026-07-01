@@ -290,7 +290,7 @@ const SpotifyController = {
         return;
       }
       // 401 means token expired — try to refresh
-      if (res.status === 403) { this.clearTokens(); const statusEl = document.getElementById('spotifyStatus'); if(statusEl) statusEl.innerHTML = '<span style="color:#ef4444">������ 403. ���������� Spotify ������.</span>'; return; }
+      if (res.status === 403) { this.clearTokens(); const statusEl = document.getElementById('spotifyStatus'); if(statusEl) statusEl.innerHTML = '<span style="color:#ef4444">Ошибка 403. Авторизация Spotify отклонена.</span>'; return; }
       if (res.status === 401) {
         const refreshed = await this.refreshAccessToken();
         if (refreshed) {

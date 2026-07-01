@@ -1,4 +1,4 @@
-// Обработка кнопки "Назад" на Android для Capacitor (ProgectX Multiverse Hub)
+// Mobile back button handler for Capacitor/Cordova
 
 (function() {
   let lastBackTime = 0;
@@ -21,18 +21,18 @@
       path.includes('/Tir List/') ||
       path.includes('/Tir%20List/');
 
-    // 1. Ищем ЛЮБОЕ открытое модальное окно на странице (любой элемент, растянутый на весь экран, либо с классом modal)
-    // Проверяем элементы, у которых display: flex или block, и которые похожи на модалки
+    // Mobile back button handler for Capacitor/Cordova
+    // Mobile back button handler for Capacitor/Cordova
     const modals = document.querySelectorAll('.modal-overlay, .modal, .lightbox, .sidebar-panel, [id*="Modal"], [id*="modal"]');
     
     let activeModal = null;
     for (let i = 0; i < modals.length; i++) {
       const style = window.getComputedStyle(modals[i]);
       if (style.display !== 'none' && modals[i].style.display !== 'none') {
-         // Проверяем, действительно ли это полноэкранная модалка (обычно они имеют fixed или absolute)
+         // Mobile back button handler for Capacitor/Cordova
          if (style.position === 'fixed' || style.position === 'absolute' || modals[i].classList.contains('modal-overlay')) {
            activeModal = modals[i];
-           // Ищем именно ту, что выше всех (z-index)
+           // Mobile back button handler for Capacitor/Cordova
          }
       }
     }
@@ -44,7 +44,7 @@
         closeBtn.click();
         return;
       } else {
-        // Fallback: безопасное гашение
+        // Mobile back button handler for Capacitor/Cordova
         activeModal.classList.remove('active', 'open', 'is-open');
         activeModal.style.display = 'none';
         
@@ -61,7 +61,7 @@
       }
     }
 
-    // 2. Если нет активных модалок
+    // Mobile back button handler for Capacitor/Cordova
     const isHubHome = (
       path === '/' ||
       path === '' ||
