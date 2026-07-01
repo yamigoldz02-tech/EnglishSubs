@@ -211,6 +211,7 @@ html, body {
 html.modal-open,
 body.modal-open {
   overflow: hidden !important;
+  padding-right: var(--scrollbar-width, 0px) !important;
 }
 
 body {

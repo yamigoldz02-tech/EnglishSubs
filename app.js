@@ -21,7 +21,15 @@
  * - [notebook-module.js]: Global Notes Controller [@AI-SECTION: NOTEBOOK_NOTES_CONTROLLER]
  * - [galaxy-course.js]: YouTube Video Course Tracker [@AI-SECTION: GALAXY_VIDEO_COURSE]
  * ============================================================================
- */function openEditWordModal(w, onSaveSuccess) {
+ */
+
+// Calculate Scrollbar width once and set it as CSS variable to prevent modal shift
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+});
+
+function openEditWordModal(w, onSaveSuccess) {
   const editModal     = document.getElementById('editWordModal');
   const closeEditBtn  = document.getElementById('closeEditWordModalBtn');
   const engInput      = document.getElementById('editWordEngInput');
