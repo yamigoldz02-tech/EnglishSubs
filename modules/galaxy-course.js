@@ -494,10 +494,11 @@ function onPlayerStateChange(event) {
 function playGalaxyVideo(videoId, title, lessonNum) {
   galaxyActiveVideoId = videoId;
 
-  // Render iframe inside player container using YT.Player
   const playerContainer = document.getElementById('activeVideoPlayer');
   if (playerContainer) {
-    playerContainer.innerHTML = '<div id="ytplayer-container" style="width:100%; height:100%;"></div>';
+    const savedTimeInit = localStorage.getItem(`galaxy_video_progress_${videoId}`);
+    const startTimeInit = savedTimeInit ? parseInt(savedTimeInit, 10) : 0;
+    playerContainer.innerHTML = `<iframe id="ytplayer-container" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&rel=0&start=${startTimeInit}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; z-index:2;"></iframe>`;
     
     const setupPlayer = () => {
       const savedTime = localStorage.getItem(`galaxy_video_progress_${videoId}`);
