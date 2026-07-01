@@ -2291,8 +2291,8 @@ body.light-theme .premium-search-box {
 
 /* Custom scale for flashcard when modal is wide */
 #trainingModalCard.dict-wide .flashcard-container {
-  max-width: 360px;
-  height: 230px;
+  max-width: 320px;
+  height: 235px;
 }
 
 /* Custom scale for flashcard when modal is tall but not wide */
@@ -2302,8 +2302,8 @@ body.light-theme .premium-search-box {
 
 /* Custom scale when both wide and tall */
 #trainingModalCard.dict-wide.dict-tall .flashcard-container {
-  max-width: 360px;
-  height: 250px;
+  max-width: 320px;
+  height: 245px;
 }
 
 /* Active state for expand buttons */
@@ -4078,8 +4078,8 @@ body.gray-theme {
 
 .flashcard-container {
   width: 100%;
-  max-width: 340px;
-  height: 220px;
+  max-width: 300px;
+  height: 230px;
   perspective: 1200px;
   cursor: pointer;
   margin: 0 auto;
@@ -5087,7 +5087,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   .flashcard-container {
     height: 200px !important;
     margin: 10px auto !important;
-    max-width: 340px !important;
+    max-width: 290px !important;
   }
   
   .card-face {
