@@ -22,6 +22,21 @@ function initGamification() {
 
     checkAndUpdateStreak();
     updateGamificationUI();
+
+    const badge = document.getElementById('userProgressBadge');
+    if (badge) {
+        badge.addEventListener('click', openGamificationModal);
+    }
+    const closeBtn = document.getElementById('closeGamificationBtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeGamificationModal);
+    }
+    const modal = document.getElementById('gamificationModal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGamificationModal();
+        });
+    }
 }
 
 /**
@@ -151,6 +166,76 @@ function showXPAnimation(amount, reason, sourceElement) {
         }
     }, 1800);
 }
+
+/**
+ * Определяет ранг игрока на основе XP
+ */
+function getRankInfo(xp) {
+    if (xp < 500) return { title: 'Новичок 🌱', min: 0, max: 500 };
+    if (xp < 1500) return { title: 'Искатель 🧭', min: 500, max: 1500 };
+    if (xp < 3000) return { title: 'Ученик 📚', min: 1500, max: 3000 };
+    if (xp < 6000) return { title: 'Знаток 🧠', min: 3000, max: 6000 };
+    if (xp < 10000) return { title: 'Эксперт ⚡', min: 6000, max: 10000 };
+    return { title: 'Мастер 👑', min: 10000, max: 20000 };
+}
+
+/**
+ * Открывает модальное окно достижений и активности
+ */
+function openGamificationModal() {
+    const modal = document.getElementById('gamificationModal');
+    if (!modal) return;
+    
+    // Заполняем показатели
+    const streakEl = document.getElementById('modalStreakDays');
+    const xpEl = document.getElementById('modalTotalXP');
+    if (streakEl) streakEl.textContent = currentStreak;
+    if (xpEl) xpEl.textContent = currentXP;
+
+    // Рассчитываем и отображаем ранг
+    const rank = getRankInfo(currentXP);
+    const rankTitle = document.getElementById('modalRankTitle');
+    const rankCurrent = document.getElementById('modalRankCurrent');
+    const rankNext = document.getElementById('modalRankNext');
+    const rankBar = document.getElementById('modalRankBar');
+
+    if (rankTitle) rankTitle.textContent = rank.title;
+    if (rankCurrent) rankCurrent.textContent = `${currentXP} XP`;
+    if (rankNext) {
+        if (rank.max >= 20000) {
+            rankNext.textContent = 'Максимальный ранг!';
+        } else {
+            rankNext.textContent = `${rank.max - currentXP} XP до следующего ранга`;
+        }
+    }
+    if (rankBar) {
+        const percent = Math.min(100, Math.max(0, ((currentXP - rank.min) / (rank.max - rank.min)) * 100));
+        rankBar.style.width = `${percent}%`;
+    }
+
+    if (typeof openModalEl === 'function') {
+        openModalEl(modal);
+    } else {
+        modal.style.display = 'flex';
+    }
+}
+
+/**
+ * Закрывает модальное окно достижений
+ */
+function closeGamificationModal() {
+    const modal = document.getElementById('gamificationModal');
+    if (!modal) return;
+    if (typeof closeModalEl === 'function') {
+        closeModalEl(modal);
+    } else {
+        modal.style.display = 'none';
+    }
+}
+
+// Экспорт глобальных методов
+window.openGamificationModal = openGamificationModal;
+window.closeGamificationModal = closeGamificationModal;
 
 // Запуск при загрузке документа
 document.addEventListener('DOMContentLoaded', initGamification);

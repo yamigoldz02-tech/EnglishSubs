@@ -5276,7 +5276,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
 /* Glassmorphic Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0.8rem 1.5rem;
   background: var(--bg-navbar);
@@ -5286,7 +5286,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   position: sticky;
   top: 0;
   z-index: 100;
-  gap: 16px;
+  gap: 20px;
 }
 
 .filters-toggle-btn {
@@ -5838,4 +5838,38 @@ body.light-theme .spotify-now-playing {
     opacity: 0;
     transform: translate(-50%, -100px) scale(0.9);
   }
+}
+
+/* ==========================================================================
+   12. NAVBAR ALIGNMENT & GAMIFICATION MODAL STYLES
+   ========================================================================== */
+/* Align navbar cleanly without huge gaps */
+.navbar {
+  justify-content: flex-start !important;
+  gap: 20px !important;
+}
+
+.song-selector-container {
+  flex: 1 1 380px !important;
+  min-width: 240px !important;
+  max-width: 500px !important;
+  margin: 0 !important;
+}
+
+/* Remove legacy dropdown arrow from older design */
+.song-selector-container::after {
+  display: none !important;
+}
+
+/* Widen search input padding so placeholder isn't cut off */
+.search-input-wrapper input {
+  padding: 0.6rem 1rem 0.6rem 2.5rem !important;
+}
+
+.nav-controls {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
 }
