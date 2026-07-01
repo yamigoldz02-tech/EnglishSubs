@@ -289,6 +289,13 @@ body {
   background: var(--accent-spotify);
 }
 
+::-webkit-scrollbar-corner,
+::-webkit-resizer,
+*::-webkit-scrollbar-corner,
+*::-webkit-resizer {
+  background: transparent !important;
+}
+
 /* 4. Layout Structure */
 .app-container {
   display: flex;
