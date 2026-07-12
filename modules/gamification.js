@@ -15,7 +15,7 @@ let lastStudyDate = null;
 /**
  * Инициализация геймификации при загрузке
  */
-function initGamification() {
+export function initGamification() {
     currentXP = parseInt(localStorage.getItem(XP_STORAGE_KEY)) || 0;
     currentStreak = parseInt(localStorage.getItem(STREAK_STORAGE_KEY)) || 0;
     lastStudyDate = localStorage.getItem(LAST_STUDY_DATE_KEY);
@@ -70,7 +70,7 @@ function checkAndUpdateStreak() {
  * @param {string} reason Причина (необязательно)
  * @param {Event|HTMLElement} sourceElement Элемент/событие для привязки всплывающей анимации
  */
-window.awardXP = function(amount, reason = '', sourceElement = null) {
+export function awardXP(amount, reason = '', sourceElement = null) {
     // 1. Обновляем XP
     currentXP += amount;
     localStorage.setItem(XP_STORAGE_KEY, currentXP);
@@ -120,7 +120,7 @@ window.awardXP = function(amount, reason = '', sourceElement = null) {
 /**
  * Обновляет счетчики в интерфейсе
  */
-function updateGamificationUI() {
+export function updateGamificationUI() {
     const xpUI = document.getElementById('xpCountUI');
     const streakUI = document.getElementById('streakCountUI');
 
@@ -131,7 +131,7 @@ function updateGamificationUI() {
 /**
  * Плавающая анимация "+10 XP"
  */
-function showXPAnimation(amount, reason, sourceElement) {
+export function showXPAnimation(amount, reason, sourceElement) {
     const animEl = document.createElement('div');
     animEl.className = 'xp-float-animation';
     animEl.innerHTML = `+${amount} <span class="xp-text">XP</span>`;
@@ -170,7 +170,7 @@ function showXPAnimation(amount, reason, sourceElement) {
 /**
  * Определяет ранг игрока на основе XP
  */
-function getRankInfo(xp) {
+export function getRankInfo(xp) {
     if (xp < 500) return { title: 'Новичок 🌱', min: 0, max: 500 };
     if (xp < 1500) return { title: 'Искатель 🧭', min: 500, max: 1500 };
     if (xp < 3000) return { title: 'Ученик 📚', min: 1500, max: 3000 };
@@ -182,7 +182,7 @@ function getRankInfo(xp) {
 /**
  * Открывает модальное окно достижений и активности
  */
-function openGamificationModal() {
+export function openGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
     
@@ -258,7 +258,7 @@ function openGamificationModal() {
 /**
  * Закрывает модальное окно достижений
  */
-function closeGamificationModal() {
+export function closeGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
     document.documentElement.classList.remove('modal-open');
@@ -270,7 +270,8 @@ function closeGamificationModal() {
     }
 }
 
-// Экспорт глобальных методов
+// Экспорт глобальных методов (Backward Compatibility)
+window.awardXP = awardXP;
 window.openGamificationModal = openGamificationModal;
 window.closeGamificationModal = closeGamificationModal;
 

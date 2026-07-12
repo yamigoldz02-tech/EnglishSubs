@@ -5,8 +5,7 @@
  * Replaces native browser blocking prompt(), confirm(), alert() with premium non-blocking async modals.
  */
 
-(function() {
-  // Inject modal HTML if not already in DOM
+// Inject modal HTML if not already in DOM
   function ensureDialogDOM() {
     let modal = document.getElementById('customDialogModal');
     if (!modal) {
@@ -97,7 +96,7 @@
     }
   }
 
-  window.showCustomPrompt = function(title, message, placeholder = "", defaultValue = "") {
+  export function showCustomPrompt(title, message, placeholder = "", defaultValue = "") {
     return new Promise((resolve) => {
       const { modal, inputEl, cancelBtn, okBtn } = setupDialog(title, message, {
         showInput: true,
@@ -145,7 +144,7 @@
     });
   };
 
-  window.showCustomConfirm = function(title, message, options = {}) {
+  export function showCustomConfirm(title, message, options = {}) {
     return new Promise((resolve) => {
       const { modal, cancelBtn, okBtn } = setupDialog(title, message, {
         showInput: false,
@@ -191,7 +190,7 @@
     });
   };
 
-  window.showCustomAlert = function(title, message, okText = 'Понятно') {
+  export function showCustomAlert(title, message, okText = 'Понятно') {
     return new Promise((resolve) => {
       const { modal, cancelBtn, okBtn } = setupDialog(title, message, {
         showInput: false,
@@ -225,7 +224,7 @@
   };
 
   // Global Toast Helper
-  window.showToast = function(msg, type = 'success') {
+  export function showToast(msg, type = 'success') {
     let container = document.getElementById('globalToastContainer');
     if (!container) {
       container = document.createElement('div');
@@ -253,8 +252,13 @@
 
   // Override native browser alert to use our custom modal
   window.alert = function(msg) {
-    if (window.showCustomAlert) {
-      window.showCustomAlert('✨ Уведомление', String(msg));
+    if (showCustomAlert) {
+      showCustomAlert('✨ Уведомление', String(msg));
     }
   };
-})();
+
+  // Backward compatibility for non-module scripts
+  window.showCustomPrompt = showCustomPrompt;
+  window.showCustomConfirm = showCustomConfirm;
+  window.showCustomAlert = showCustomAlert;
+  window.showToast = showToast;
