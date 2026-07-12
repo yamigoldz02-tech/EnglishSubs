@@ -777,8 +777,12 @@ window._wcpPractice = function(word) {
   }
 };
 
-window._wcpDelete = function(word) {
-  if (!confirm(`Delete «${word}» из словаря?`)) return;
+window._wcpDelete = async function(word) {
+  const confirmed = window.showCustomConfirm
+    ? await window.showCustomConfirm('Удаление слова', `Удалить «${word}» из словаря?`, { isDestructive: true })
+    : confirm(`Delete «${word}» из словаря?`);
+  if (!confirmed) return;
+  
   personalDictionary = personalDictionary.filter(w => w.word.toLowerCase() !== word.toLowerCase());
   saveDictionaryToStorage();
   if (typeof renderDictWordsList === 'function') renderDictWordsList();
@@ -788,8 +792,11 @@ window._wcpDelete = function(word) {
   dismissWordCard();
 };
 
-window._wcpReset = function(word) {
-  if (!confirm(`Обнулить прогресс заучивания для «${word}»?`)) return;
+window._wcpReset = async function(word) {
+  const confirmed = window.showCustomConfirm
+    ? await window.showCustomConfirm('Сброс прогресса', `Обнулить прогресс заучивания для «${word}»?`, { isDestructive: true })
+    : confirm(`Обнулить прогресс заучивания для «${word}»?`);
+  if (!confirmed) return;
   const entry = personalDictionary.find(w => w.word.toLowerCase() === word.toLowerCase());
   if (entry) {
     entry.level = 0;
@@ -4375,9 +4382,12 @@ function renderDictWordsList(filterQuery = "") {
       // Reset progress action button inside detail panel
       const resetBtn = detailEl.querySelector('.row-reset-btn');
       if (resetBtn) {
-        resetBtn.addEventListener('click', (e) => {
+        resetBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
-          if (!confirm(`Вы действительно хотите полностью обнулить прогресс заучивания для «${w.word}»?`)) return;
+          const confirmed = window.showCustomConfirm
+            ? await window.showCustomConfirm('Сброс прогресса', `Вы действительно хотите полностью обнулить прогресс заучивания для «${w.word}»?`, { isDestructive: true })
+            : confirm(`Вы действительно хотите полностью обнулить прогресс заучивания для «${w.word}»?`);
+          if (!confirmed) return;
           w.level = 0;
           w.interval = 0;
           w.nextReview = Date.now();
@@ -4385,15 +4395,23 @@ function renderDictWordsList(filterQuery = "") {
           const searchInput = document.getElementById('dictSearchInput');
           renderDictWordsList(searchInput ? searchInput.value.trim() : "");
           resetFlashcard();
-          alert(`Прогресс заучивания для «${w.word}» успешно обнулен.`);
+          if (window.showToast) {
+            window.showToast(`Прогресс для «${w.word}» обнулен`, 'success');
+          } else {
+            alert(`Прогресс заучивания для «${w.word}» успешно обнулен.`);
+          }
         });
       }
 
       // Delete action button inside detail panel
       const delBtn = detailEl.querySelector('.row-del-btn');
       if (delBtn) {
-        delBtn.addEventListener('click', (e) => {
+        delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
+          const confirmed = window.showCustomConfirm
+            ? await window.showCustomConfirm('Удаление слова', `Удалить «${w.word}» из словаря?`, { isDestructive: true })
+            : confirm(`Удалить «${w.word}» из словаря?`);
+          if (!confirmed) return;
           personalDictionary = personalDictionary.filter(x => x.word.toLowerCase() !== w.word.toLowerCase());
           saveDictionaryToStorage();
           const searchInput = document.getElementById('dictSearchInput');

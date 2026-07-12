@@ -552,13 +552,18 @@ function initNotebook() {
 
   const deleteNoteBtn = document.getElementById('notebookDeleteNoteBtn');
   if (deleteNoteBtn) {
-    deleteNoteBtn.addEventListener('click', () => {
+    deleteNoteBtn.addEventListener('click', async () => {
       if (!currentActiveFolderId || !currentActiveNoteId) return;
       const folder = customNoteFolders.find(f => f.id === currentActiveFolderId);
       if (folder) {
         const note = folder.notes.find(n => n.id === currentActiveNoteId);
         const title = note ? note.title : 'this note';
-        if (confirm(`Are you sure you want to delete ${title}?`)) {
+        
+        const confirmed = window.showCustomConfirm 
+          ? await window.showCustomConfirm('Удаление заметки', `Удалить заметку "${title}"?`, { isDestructive: true })
+          : confirm(`Are you sure you want to delete ${title}?`);
+          
+        if (confirmed) {
           folder.notes = folder.notes.filter(n => n.id !== currentActiveNoteId);
           saveCustomNoteFolders();
           showCustomNotesListView(currentActiveFolderId);
@@ -734,9 +739,13 @@ function initNotebook() {
       if (delBtn) {
         delBtn.addEventListener('mouseenter', () => delBtn.style.color = '#ef4444');
         delBtn.addEventListener('mouseleave', () => delBtn.style.color = 'var(--text-muted)');
-        delBtn.addEventListener('click', (e) => {
+        delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
-          if (confirm(`Are you sure you want to delete the folder "${folder.name}" and all its notes?`)) {
+          const confirmed = window.showCustomConfirm 
+            ? await window.showCustomConfirm('Удаление папки', `Удалить папку "${folder.name}" и все её заметки?`, { isDestructive: true })
+            : confirm(`Are you sure you want to delete the folder "${folder.name}" and all its notes?`);
+            
+          if (confirmed) {
             customNoteFolders = customNoteFolders.filter(f => f.id !== folder.id);
             saveCustomNoteFolders();
             renderCustomFolders();
@@ -849,15 +858,21 @@ function renderNotebookLessonsTab() {
     `;
 
     const delBtn = entry.querySelector('.notebook-lesson-delete-btn');
-    delBtn.addEventListener('click', (e) => {
+    delBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
-      delete galaxyLessonNotes[videoId];
-      saveGalaxyLessonNotes();
-      renderNotebookLessonsTab();
-      renderVideoLessons();
-      if (galaxyActiveVideoId === videoId) {
-        const ta = document.getElementById('activeLessonNoteTextarea');
-        if (ta) ta.value = '';
+      const confirmed = window.showCustomConfirm 
+        ? await window.showCustomConfirm('Удаление заметки', 'Вы уверены, что хотите удалить эту заметку?', { isDestructive: true })
+        : confirm('Вы уверены, что хотите удалить эту заметку?');
+        
+      if (confirmed) {
+        delete galaxyLessonNotes[videoId];
+        saveGalaxyLessonNotes();
+        renderNotebookLessonsTab();
+        renderVideoLessons();
+        if (galaxyActiveVideoId === videoId) {
+          const ta = document.getElementById('activeLessonNoteTextarea');
+          if (ta) ta.value = '';
+        }
       }
     });
 
