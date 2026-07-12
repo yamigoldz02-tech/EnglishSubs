@@ -1474,6 +1474,10 @@ function initCustomChat() {
     });
 
     document.querySelectorAll('.modal-overlay').forEach(modal => {
+      // Exclude the notebook drawer — it is a slide-in panel, not a stacked modal.
+      // Its open/close should NOT push/pop history, otherwise closing it fires a
+      // synthetic Escape that accidentally closes any other open modal (e.g. Grammar, Gamification).
+      if (modal.id === 'notebookModal') return;
       modalObserver.observe(modal, { attributes: true, attributeFilter: ['style'], attributeOldValue: true });
     });
   });
