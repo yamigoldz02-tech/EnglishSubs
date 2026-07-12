@@ -12,7 +12,7 @@
 let activeDictTab = 'personal'; // 'personal' or 'essential'
 let dictTypeFilter = 'all'; // 'all', 'words', or 'phrases'
 let dictSortOption = 'default'; // Sort option for the dictionary
-let personalDictionary = [];
+// personalDictionary is now managed by window.AppStore
 let activeTrainerWordObj = null;
 
 let sessionQueue = [];
