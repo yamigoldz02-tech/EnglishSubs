@@ -66,8 +66,4 @@
  * @property {number} timestamp - Cloud backup creation timestamp.
  */
 
-// Export an empty object to make this a valid ES module if imported, 
-// while remaining compatible with standard browser <script> tags.
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {};
-}
+export default {};

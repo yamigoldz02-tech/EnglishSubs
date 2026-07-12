@@ -140,6 +140,4 @@ if (typeof window !== 'undefined') {
   window.top1000Translations = top1000Translations;
 }
 
-if (typeof module !== 'undefined') {
-  module.exports = top1000Words;
-}
+export { top1000Words, top1000Translations };
