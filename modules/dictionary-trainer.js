@@ -2298,6 +2298,15 @@ function setupDictionaryUI() {
         trainingFolderSelect.value = categoryFilter.value;
       }
     }
+
+    // Defensive self-healing: Ensure close button exists
+    if (!document.getElementById('closeTrainingModalBtn')) {
+      const headerDiv = trainingModal ? trainingModal.querySelector('.modal-header > div:last-child') : null;
+      if (headerDiv) {
+        headerDiv.insertAdjacentHTML('beforeend', '<button class="modal-close-btn" id="closeTrainingModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; flex-shrink: 0; padding: 4px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">✕</button>');
+        document.getElementById('closeTrainingModalBtn').addEventListener('click', closeTrainingModal);
+      }
+    }
     
     // Sync progress bar display state
     if (progressBarContainer) {

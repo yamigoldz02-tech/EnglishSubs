@@ -1815,79 +1815,7 @@
   </div>
 
 
-<!-- TEMPORARY DEBUG: Remove after diagnosing close button bug -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('closeTrainingModalBtn');
-  const modal = document.getElementById('trainingModal');
-  if (!btn || !modal) return;
 
-  let openCount = 0;
-
-  // Watch for attribute/child changes on the button itself
-  const btnObs = new MutationObserver((muts) => {
-    muts.forEach(m => {
-      const cs = getComputedStyle(btn);
-      console.warn('[DEBUG-BTN] mutation:', m.type, m.attributeName, 
-        'display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
-        'w=' + cs.width, 'h=' + cs.height, 'connected=' + btn.isConnected,
-        'text=' + JSON.stringify(btn.textContent));
-    });
-  });
-  btnObs.observe(btn, { attributes: true, childList: true, characterData: true, subtree: true });
-
-  // Watch if button gets removed from its parent
-  const parent = btn.parentElement;
-  if (parent) {
-    new MutationObserver((muts) => {
-      muts.forEach(m => {
-        if (m.removedNodes.length > 0) {
-          const removed = Array.from(m.removedNodes);
-          const btnRemoved = removed.some(n => n === btn || n.contains?.(btn));
-          if (btnRemoved) console.error('[DEBUG] !!! CLOSE BUTTON REMOVED FROM PARENT !!!');
-          console.warn('[DEBUG-PARENT] removed:', removed.map(n => n.id || n.tagName || n.textContent?.slice(0,20)));
-        }
-        if (m.addedNodes.length > 0) {
-          console.warn('[DEBUG-PARENT] added:', Array.from(m.addedNodes).map(n => n.id || n.tagName || n.textContent?.slice(0,20)));
-        }
-      });
-    }).observe(parent, { childList: true });
-  }
-
-  // Watch the modal overlay for open/close
-  new MutationObserver(() => {
-    const isOpen = modal.style.display === 'flex' || modal.style.display === 'block';
-    if (isOpen) {
-      openCount++;
-      const cs = getComputedStyle(btn);
-      console.log('%c[DEBUG] Training modal OPENED (#' + openCount + ')', 'color: lime; font-weight: bold;',
-        '\n  btn display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
-        'w=' + cs.width, 'h=' + cs.height,
-        '\n  btn.isConnected=' + btn.isConnected,
-        '\n  btn.offsetWidth=' + btn.offsetWidth, 'btn.offsetHeight=' + btn.offsetHeight,
-        '\n  btn.textContent=' + JSON.stringify(btn.textContent),
-        '\n  btn in DOM=' + !!document.getElementById('closeTrainingModalBtn'));
-    }
-  }).observe(modal, { attributes: true, attributeFilter: ['style'] });
-
-  // Periodic check
-  setInterval(() => {
-    if (modal.style.display !== 'flex' && modal.style.display !== 'block') return;
-    const el = document.getElementById('closeTrainingModalBtn');
-    if (!el) { console.error('[DEBUG-POLL] BUTTON GONE FROM DOM!'); return; }
-    const cs = getComputedStyle(el);
-    if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0' || 
-        parseFloat(cs.width) < 1 || parseFloat(cs.height) < 1) {
-      console.error('[DEBUG-POLL] BUTTON HIDDEN!', 
-        'display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
-        'w=' + cs.width, 'h=' + cs.height, 'overflow=' + cs.overflow,
-        'clip=' + cs.clip, 'clipPath=' + cs.clipPath);
-    }
-  }, 300);
-
-  console.log('%c[DEBUG] Close button monitor ACTIVE', 'color: cyan; font-size: 14px; font-weight: bold;');
-});
-</script>
 
 </body>
 </html>
