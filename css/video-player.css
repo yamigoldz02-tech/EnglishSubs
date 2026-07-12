@@ -1,0 +1,117 @@
+   RESTORED FLOATING VIDEO PLAYER CSS
+   ========================================================================== */
+.video-modal-minimized {
+  z-index: 10500 !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+.video-modal-minimized .video-course-modal-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+}
+.video-modal-minimized .modal-header,
+.video-modal-minimized .video-course-progress-panel,
+.video-modal-minimized .lessons-sidebar,
+.video-modal-minimized .player-header-row,
+.video-modal-minimized .active-video-details,
+.video-modal-minimized .video-course-controls,
+.video-modal-minimized .mobile-course-tabs {
+  display: none !important;
+}
+.video-modal-minimized .video-course-body {
+  border: none !important;
+  background: transparent !important;
+}
+.video-modal-minimized .player-container-pane {
+  pointer-events: auto !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
+  width: 350px;
+  padding: 0 !important;
+  background: var(--bg-surface, #121216);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  z-index: 100000;
+  overflow: visible !important;
+  cursor: grab;
+  transition: width 0.2s, height 0.2s;
+  display: flex;
+  flex-direction: column;
+  order: unset !important;
+}
+.video-modal-minimized .player-container-pane.floating-dragged {
+  transition: none !important;
+  cursor: grabbing !important;
+  bottom: auto !important;
+  right: auto !important;
+}
+.video-modal-minimized .video-player-wrapper {
+  border-radius: 0 0 12px 12px !important;
+  border: none !important;
+}
+
+.floating-video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-glass);
+  border-radius: 12px 12px 0 0;
+  user-select: none;
+}
+.floating-video-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.floating-video-controls {
+  display: flex;
+  gap: 8px;
+}
+.floating-video-controls button {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.floating-video-controls button:hover {
+  color: var(--text-main);
+}
+
+.floating-resize-handle {
+  position: absolute;
+  width: 15px;
+  height: 100%;
+  top: 0;
+  cursor: ew-resize;
+  z-index: 100001;
+}
+.floating-resize-handle.left-handle {
+  left: -7px;
+}
+.floating-resize-handle.right-handle {
+  right: -7px;
+}
+
+/* ==========================================================================
