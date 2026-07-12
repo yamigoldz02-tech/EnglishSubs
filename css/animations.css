@@ -1,0 +1,22 @@
+/* Modal animations for app.js */
+.modal-animate-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+.modal-animate-in .modal-card {
+  animation: modalScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.modal-animate-out {
+  animation: fadeOut 0.2s ease-in forwards;
+}
+.modal-animate-out .modal-card {
+  animation: modalScaleDown 0.2s ease-in forwards;
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes modalScaleDown {
+  from { transform: scale(1) translateY(0); opacity: 1; }
+  to { transform: scale(0.9) translateY(20px); opacity: 0; }
+}
+
