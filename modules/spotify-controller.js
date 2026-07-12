@@ -32,7 +32,7 @@ const SpotifyController = {
         this.accessToken = accessToken;
         localStorage.setItem('spotifyAccessToken', accessToken);
         if (refreshToken) localStorage.setItem('spotifyRefreshToken', refreshToken);
-        this.showStatus('✅ Подключено. Токен активен.', '#1db954');
+        this.showStatus('✅ Connected. Token active.', '#1db954');
       }
       window.history.replaceState(null, null, window.location.pathname);
     }
@@ -96,9 +96,9 @@ const SpotifyController = {
             this.accessToken = data.access_token;
             localStorage.setItem('spotifyAccessToken', data.access_token);
             if (data.refresh_token) localStorage.setItem('spotifyRefreshToken', data.refresh_token);
-            this.showStatus('✅ Подключено. Токен активен.', '#1db954');
+            this.showStatus('✅ Connected. Token active.', '#1db954');
           } else {
-            this.showStatus('Ошибка: ' + (data.error_description || data.error), '#ef4444');
+            this.showStatus('Error: ' + (data.error_description || data.error), '#ef4444');
           }
         }
       } catch (err) {
@@ -129,13 +129,13 @@ const SpotifyController = {
         if (data.refresh_token) {
           localStorage.setItem('spotifyRefreshToken', data.refresh_token);
         }
-        this.showStatus('✅ Подключено. Токен активен.', '#1db954');
+        this.showStatus('✅ Connected. Token active.', '#1db954');
       } else {
-        this.showStatus('Ошибка авторизации: ' + (data.error_description || data.error), '#ef4444');
+        this.showStatus('Authorization error: ' + (data.error_description || data.error), '#ef4444');
       }
     } catch (err) {
       console.error('Spotify token exchange error:', err);
-      this.showStatus('Ошибка сети при обмене токена.', '#ef4444');
+      this.showStatus('Network error during token exchange.', '#ef4444');
     }
   },
 
@@ -184,7 +184,7 @@ const SpotifyController = {
     if (connectBtn) {
       connectBtn.addEventListener('click', async () => {
         if (!this.clientId) {
-          this.showStatus('Пожалуйста, введите Client ID', '#ef4444');
+          this.showStatus('Please enter Client ID', '#ef4444');
           return;
         }
         // Generate PKCE verifier + challenge
@@ -205,7 +205,7 @@ const SpotifyController = {
     }
 
     if (this.accessToken) {
-      this.showStatus('✅ Подключено. Токен активен.', '#1db954');
+      this.showStatus('✅ Connected. Token active.', '#1db954');
     }
   },
 
@@ -260,8 +260,8 @@ const SpotifyController = {
     toast.innerHTML = `
       <span style="font-size: 1.1rem;">⚠️</span>
       <div style="display:flex;flex-direction:column;gap:1px;">
-        <span style="font-size:0.75rem;font-weight:700;color:#ef4444;">Лимит Spotify API</span>
-        <span style="font-size:0.68rem;color:#9ca3af;">Пауза на ${seconds} сек. Обновление продолжится автоматически.</span>
+        <span style="font-size:0.75rem;font-weight:700;color:#ef4444;">Spotify API Rate Limit</span>
+        <span style="font-size:0.68rem;color:#9ca3af;">Paused for ${seconds}s. Will resume automatically.</span>
       </div>
     `;
     toast.style.display = 'flex';
@@ -291,7 +291,7 @@ const SpotifyController = {
         return;
       }
       // 401 means token expired — try to refresh
-      if (res.status === 403) { this.clearTokens(); const statusEl = document.getElementById('spotifyStatus'); if(statusEl) statusEl.innerHTML = '<span style="color:#ef4444">Ошибка 403. Авторизация Spotify отклонена.</span>'; return; }
+      if (res.status === 403) { this.clearTokens(); const statusEl = document.getElementById('spotifyStatus'); if(statusEl) statusEl.innerHTML = '<span style="color:#ef4444">Error 403. Spotify authorization denied.</span>'; return; }
       if (res.status === 401) {
         const refreshed = await this.refreshAccessToken();
         if (refreshed) {
@@ -306,7 +306,7 @@ const SpotifyController = {
         } else {
           this.accessToken = '';
           localStorage.removeItem('spotifyAccessToken');
-          this.showStatus('Токен истек. Переподключите Spotify.', '#ef4444');
+          this.showStatus('Token expired. Please reconnect Spotify.', '#ef4444');
         }
       }
     } catch (err) {
@@ -366,6 +366,12 @@ const SpotifyController = {
             const data = await res2.json();
             this.updateNowPlayingUI(data);
           }
+        } else {
+          // If refresh fails, clear token and stop polling to avoid 401/400 flood
+          this.accessToken = '';
+          localStorage.removeItem('spotifyAccessToken');
+          this.stopNowPlayingPolling();
+          this.showStatus('Token expired. Please reconnect Spotify.', '#ef4444');
         }
         return;
       }

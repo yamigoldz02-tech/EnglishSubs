@@ -46,7 +46,7 @@ function initAudioDictation(originalText, translation) {
   container.style.flexDirection = 'column';
   
   activeDictationOriginal = originalText;
-  activeDictationTranslation = translation || 'Английская фраза из песни';
+  activeDictationTranslation = translation || 'English phrase from the song';
   
   const inputEl = document.getElementById('dictationInput');
   const checkBtn = document.getElementById('dictationCheckBtn');
@@ -66,7 +66,7 @@ function initAudioDictation(originalText, translation) {
     feedbackEl.innerHTML = '';
   }
   if (hintBtn) {
-    hintBtn.textContent = '💡 Подсказка';
+    hintBtn.textContent = '💡 Hint';
     hintBtn.disabled = false;
   }
 }
@@ -121,7 +121,7 @@ function showArtistSongsModal(artistNameText) {
   if (artistSongs.length === 0) {
     songsListContainer.innerHTML = `
       <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-style: italic;">
-        У этого исполнителя пока нет других загруженных песен в базе данных. Вы можете загрузить песню вручную в поиске!
+        No other songs by this artist are currently loaded. You can load a song manually via the search!
       </div>
     `;
   } else {
@@ -131,7 +131,7 @@ function showArtistSongsModal(artistNameText) {
       card.className = 'artist-song-item';
       
       const titleSpan = `<span style="font-weight: 700; color: var(--text-main); font-size: 0.9rem; display: block;">${song.title}</span>`;
-      const genreSpan = `<span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">${song.genre || 'Музыка'}</span>`;
+      const genreSpan = `<span style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">${song.genre || 'Music'}</span>`;
       const actionArrow = `<span style="color: var(--accent-spotify); font-weight: 800; font-size: 1rem;">→</span>`;
 
       card.innerHTML = `

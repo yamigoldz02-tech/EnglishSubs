@@ -39,12 +39,12 @@ function initNotebook() {
       customNoteFolders = [
         {
           id: 'folder_default',
-          name: '📚 Моя учеба',
+          name: '📚 My Studies',
           notes: [
             {
               id: 'note_default',
-              title: 'Первая заметка',
-              content: 'Здесь вы можете сохранять свои правила, идиомы и любые учебные записи!',
+              title: 'First Note',
+              content: 'Here you can save your rules, idioms, and any study notes!',
               updatedAt: Date.now()
             }
           ]
@@ -166,7 +166,7 @@ function initNotebook() {
     textarea.addEventListener('input', () => {
       updateNotebookWordCount();
       if (statusEl) {
-        statusEl.textContent = '\u270f\ufe0f Сохранение...';
+        statusEl.textContent = '\u270f\ufe0f Saving...';
         statusEl.className = 'notebook-status saving';
       }
       clearTimeout(notebookSaveTimer);
@@ -174,7 +174,7 @@ function initNotebook() {
         try {
           localStorage.setItem('user_notebook_text', textarea.value);
           if (statusEl) {
-            statusEl.textContent = '\u2713 Сохранено';
+            statusEl.textContent = '\u2713 Saved';
             statusEl.className = 'notebook-status';
           }
         } catch (e) { /* ignore */ }
@@ -221,24 +221,38 @@ function initNotebook() {
 
   // Clear button — clears active tab content
   if (clearBtn) {
-    clearBtn.onclick = () => {
+    clearBtn.onclick = async () => {
       const activeTab = document.querySelector('.notebook-tab.active');
       const isLessons = activeTab && activeTab.dataset.tab === 'lessons';
       if (isLessons) {
-        if (!confirm('Удалить все заметки к урокам?')) return;
+        const confirmed = await window.showCustomConfirm(
+          '🗑️ Очистка заметок',
+          'Удалить все заметки к видеоурокам? Это действие нельзя отменить.',
+          { okText: 'Удалить все', cancelText: 'Отмена', isDestructive: true }
+        );
+        if (!confirmed) return;
+        
         galaxyLessonNotes = {};
         localStorage.removeItem('galaxy_lesson_notes');
         renderNotebookLessonsTab();
         renderVideoLessons();
         const ta = document.getElementById('activeLessonNoteTextarea');
         if (ta) ta.value = '';
+        if (window.showToast) window.showToast('Все заметки к видео удалены');
       } else {
         if (!textarea || !textarea.value.trim()) return;
-        if (!confirm('Очистить весь блокнот?')) return;
+        const confirmed = await window.showCustomConfirm(
+          '🗑️ Очистка блокнота',
+          'Очистить весь блокнот? Это действие нельзя отменить.',
+          { okText: 'Очистить', cancelText: 'Отмена', isDestructive: true }
+        );
+        if (!confirmed) return;
+        
         textarea.value = '';
         localStorage.removeItem('user_notebook_text');
         updateNotebookWordCount();
-        if (statusEl) { statusEl.textContent = '\u2713 Очищено'; statusEl.className = 'notebook-status'; }
+        if (statusEl) { statusEl.textContent = '\u2713 Cleared'; statusEl.className = 'notebook-status'; }
+        if (window.showToast) window.showToast('Блокнот очищен');
       }
     };
   }
@@ -273,11 +287,11 @@ function initNotebook() {
 
       // Save immediately
       try { localStorage.setItem('user_notebook_text', textarea.value); } catch(e) {}
-      if (statusEl) { statusEl.textContent = '✓ Сохранено'; statusEl.className = 'notebook-status'; }
+      if (statusEl) { statusEl.textContent = '✓ Saved'; statusEl.className = 'notebook-status'; }
 
       // Visual feedback
       const origHTML = generalTranslitBtn.innerHTML;
-      generalTranslitBtn.innerHTML = '✅ Готово!';
+      generalTranslitBtn.innerHTML = '✅ Done!';
       generalTranslitBtn.style.background = 'rgba(16,185,129,0.2)';
       generalTranslitBtn.style.borderColor = 'rgba(16,185,129,0.5)';
       generalTranslitBtn.style.color = '#6ee7b7';
@@ -405,8 +419,8 @@ function initNotebook() {
       searchResultsListContainer.innerHTML = `
         <div style="text-align: center; padding: 30px 10px; color: var(--text-sub);">
           <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">🔍</span>
-          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">Ничего не найдено</p>
-          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Попробуйте другие слова или проверьте опечатки.</p>
+          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">Nothing found</p>
+          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Try different words or check for typos.</p>
         </div>
       `;
       return;
@@ -429,8 +443,8 @@ function initNotebook() {
         showNoteEditorView(match.folderId, match.note.id);
       });
 
-      const cleanSnippet = match.note.content ? match.note.content.substring(0, 45) + (match.note.content.length > 45 ? '...' : '') : 'Нет текста';
-      const formattedDate = new Date(match.note.updatedAt || Date.now()).toLocaleDateString('ru-RU', {
+      const cleanSnippet = match.note.content ? match.note.content.substring(0, 45) + (match.note.content.length > 45 ? '...' : '') : 'No text';
+      const formattedDate = new Date(match.note.updatedAt || Date.now()).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         hour: '2-digit',
@@ -439,7 +453,7 @@ function initNotebook() {
 
       item.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; width: 100%;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;">${escapeHTML(match.note.title || 'Без названия')}</span>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;">${escapeHTML(match.note.title || 'Untitled')}</span>
           <span style="font-size: 0.65rem; color: #fbbf24; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32%; background: rgba(251,191,36,0.1); padding: 2px 6px; border-radius: 6px; text-align: right;">📁 ${escapeHTML(match.folderName)}</span>
         </div>
         <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(cleanSnippet)}</span>
@@ -475,7 +489,7 @@ function initNotebook() {
     if (folder) {
       const note = folder.notes.find(n => n.id === currentActiveNoteId);
       if (note) {
-        note.title = noteTitleInput ? noteTitleInput.value.trim() || 'Без названия' : 'Без названия';
+        note.title = noteTitleInput ? noteTitleInput.value.trim() || 'Untitled' : 'Untitled';
         note.content = noteContentInput ? noteContentInput.value : '';
         note.updatedAt = Date.now();
         saveCustomNoteFolders();
@@ -488,7 +502,7 @@ function initNotebook() {
   let customNoteSaveTimer = null;
   const triggerCustomNoteSave = () => {
     if (statusEl) {
-      statusEl.textContent = '✏️ Сохранение...';
+      statusEl.textContent = '✏️ Saving...';
       statusEl.className = 'notebook-status saving';
     }
     clearTimeout(customNoteSaveTimer);
@@ -496,7 +510,7 @@ function initNotebook() {
       saveCurrentNote();
       notebookRefs.customNoteSaveTimer = null;
       if (statusEl) {
-        statusEl.textContent = '✓ Сохранено';
+        statusEl.textContent = '✓ Saved';
         statusEl.className = 'notebook-status';
       }
     }, 600);
@@ -543,8 +557,8 @@ function initNotebook() {
       const folder = customNoteFolders.find(f => f.id === currentActiveFolderId);
       if (folder) {
         const note = folder.notes.find(n => n.id === currentActiveNoteId);
-        const title = note ? note.title : 'эту заметку';
-        if (confirm(`Вы уверены, что хотите удалить ${title}?`)) {
+        const title = note ? note.title : 'this note';
+        if (confirm(`Are you sure you want to delete ${title}?`)) {
           folder.notes = folder.notes.filter(n => n.id !== currentActiveNoteId);
           saveCustomNoteFolders();
           showCustomNotesListView(currentActiveFolderId);
@@ -608,7 +622,7 @@ function initNotebook() {
       // Visual feedback on the button
       const origText = notebookTranslitBtn.innerHTML;
       const origBg   = notebookTranslitBtn.style.background;
-      notebookTranslitBtn.innerHTML = '<span style="font-size:0.85rem">✅</span> Готово!';
+      notebookTranslitBtn.innerHTML = '<span style="font-size:0.85rem">✅</span> Done!';
       notebookTranslitBtn.style.background  = 'rgba(16,185,129,0.2)';
       notebookTranslitBtn.style.borderColor = 'rgba(16,185,129,0.5)';
       notebookTranslitBtn.style.color       = '#6ee7b7';
@@ -624,7 +638,7 @@ function initNotebook() {
   const createFolderBtn = document.getElementById('notebookCreateFolderBtn');
   if (createFolderBtn) {
     createFolderBtn.addEventListener('click', async () => {
-      const name = await (window.showCustomPrompt ? window.showCustomPrompt('📁 Новая папка блокнота', 'Введите название новой папки:', 'Например: Заметки по грамматике') : prompt('Введите название новой папки:'));
+      const name = await (window.showCustomPrompt ? window.showCustomPrompt('📁 New Notebook Folder', 'Enter a name for the new folder:', 'e.g. Grammar Notes') : prompt('Enter a name for the new folder:'));
       if (name && name.trim()) {
         const newFolder = {
           id: 'folder_' + Date.now(),
@@ -634,7 +648,7 @@ function initNotebook() {
         customNoteFolders.push(newFolder);
         saveCustomNoteFolders();
         renderCustomFolders();
-        if (window.showToast) window.showToast(`Папка «${name.trim()}» успешно создана!`, "success");
+        if (window.showToast) window.showToast(`Folder "${name.trim()}" created!`, "success");
       }
     });
   }
@@ -647,7 +661,7 @@ function initNotebook() {
       if (folder) {
         const newNote = {
           id: 'note_' + Date.now(),
-          title: 'Новая заметка',
+          title: 'New Note',
           content: '',
           updatedAt: Date.now()
         };
@@ -675,8 +689,8 @@ function initNotebook() {
       container.innerHTML = `
         <div style="text-align: center; padding: 30px 10px; color: var(--text-sub);">
           <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">📁</span>
-          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">У вас пока нет папок</p>
-          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Нажмите «➕ Папка» в правом верхнем углу!</p>
+          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">You have no folders yet</p>
+          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Click "➕ Folder" in the top right!</p>
         </div>
       `;
       return;
@@ -701,7 +715,7 @@ function initNotebook() {
       });
 
       const noteCount = folder.notes ? folder.notes.length : 0;
-      const noteWord = noteCount === 1 ? 'заметка' : (noteCount >= 2 && noteCount <= 4 ? 'заметки' : 'заметок');
+      const noteWord = noteCount === 1 ? 'note' : 'notes';
 
       item.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; max-width: 80%;">
@@ -711,7 +725,7 @@ function initNotebook() {
             <span style="font-size: 0.7rem; color: var(--text-sub);">${noteCount} ${noteWord}</span>
           </div>
         </div>
-        <button class="delete-folder-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; font-size: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="Удалить папку">
+        <button class="delete-folder-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; font-size: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="Delete folder">
           🗑️
         </button>
       `;
@@ -722,7 +736,7 @@ function initNotebook() {
         delBtn.addEventListener('mouseleave', () => delBtn.style.color = 'var(--text-muted)');
         delBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (confirm(`Вы уверены, что хотите удалить папку "${folder.name}" и все её заметки?`)) {
+          if (confirm(`Are you sure you want to delete the folder "${folder.name}" and all its notes?`)) {
             customNoteFolders = customNoteFolders.filter(f => f.id !== folder.id);
             saveCustomNoteFolders();
             renderCustomFolders();
@@ -749,8 +763,8 @@ function initNotebook() {
       container.innerHTML = `
         <div style="text-align: center; padding: 30px 10px; color: var(--text-sub);">
           <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">📝</span>
-          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">В этой папке пока пусто</p>
-          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Нажмите «➕ Заметка» в правом верхнем углу!</p>
+          <p style="font-size: 0.82rem; font-weight: 600; margin: 0;">This folder is empty</p>
+          <p style="font-size: 0.72rem; margin: 4px 0 0 0;">Click "➕ Note" in the top right!</p>
         </div>
       `;
       return;
@@ -773,8 +787,8 @@ function initNotebook() {
         showNoteEditorView(folderId, note.id);
       });
 
-      const cleanSnippet = note.content ? note.content.substring(0, 45) + (note.content.length > 45 ? '...' : '') : 'Нет текста';
-      const formattedDate = new Date(note.updatedAt || Date.now()).toLocaleDateString('ru-RU', {
+      const cleanSnippet = note.content ? note.content.substring(0, 45) + (note.content.length > 45 ? '...' : '') : 'No text';
+      const formattedDate = new Date(note.updatedAt || Date.now()).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         hour: '2-digit',
@@ -782,7 +796,7 @@ function initNotebook() {
       });
 
       item.innerHTML = `
-        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(note.title || 'Без названия')}</span>
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(note.title || 'Untitled')}</span>
         <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(cleanSnippet)}</span>
         <span style="font-size: 0.65rem; color: var(--text-muted); align-self: flex-end; margin-top: 4px;">${formattedDate}</span>
       `;
@@ -798,7 +812,7 @@ function updateNotebookWordCount() {
   const textarea = document.getElementById('notebookTextarea');
   const el = document.getElementById('notebookWordCount');
   if (!el || !textarea) return;
-  el.textContent = `${textarea.value.length} символов`;
+  el.textContent = `${textarea.value.length} characters`;
 }
 
 function renderNotebookLessonsTab() {
@@ -811,8 +825,8 @@ function renderNotebookLessonsTab() {
     container.innerHTML = `
       <div class="notebook-empty-state">
         <span>\ud83d\udcdd</span>
-        <strong>Нет заметок к урокам</strong>
-        <span>Откройте видеокурс, выберите урок и напишите заметку в поле под плеером.</span>
+        <strong>No lesson notes yet</strong>
+        <span>Open the video course, select a lesson, and write a note in the field below the player.</span>
       </div>
     `;
     return;
@@ -827,11 +841,11 @@ function renderNotebookLessonsTab() {
     entry.className = 'notebook-lesson-entry';
     entry.innerHTML = `
       <div class="notebook-lesson-entry-header">
-        <span class="notebook-lesson-badge">${video.num <= 4 ? 'Lesson' : 'Урок'} ${video.num}</span>
+        <span class="notebook-lesson-badge">${video.num <= 4 ? 'Lesson' : 'Lesson'} ${video.num}</span>
         <span class="notebook-lesson-title">${escapeHTML(video.shortTitle)}</span>
-        <button class="notebook-lesson-delete-btn" title="Удалить заметку" data-id="${videoId}">\ud83d\uddd1</button>
+        <button class="notebook-lesson-delete-btn" title="Delete note" data-id="${videoId}">\ud83d\uddd1</button>
       </div>
-      <textarea class="notebook-lesson-note-textarea" data-id="${videoId}" placeholder="Напишите заметку к уроку...">${escapeHTML(noteText)}</textarea>
+      <textarea class="notebook-lesson-note-textarea" data-id="${videoId}" placeholder="Write a note for this lesson...">${escapeHTML(noteText)}</textarea>
     `;
 
     const delBtn = entry.querySelector('.notebook-lesson-delete-btn');
@@ -900,7 +914,7 @@ function initLessonNoteTextarea() {
 
   ta.addEventListener('input', () => {
     if (statusEl) {
-      statusEl.textContent = '\u270f\ufe0f Сохранение...';
+      statusEl.textContent = '\u270f\ufe0f Saving...';
       statusEl.className = 'lesson-note-save-status';
     }
     clearTimeout(lessonNoteSaveTimer);
@@ -915,11 +929,11 @@ function initLessonNoteTextarea() {
       saveGalaxyLessonNotes();
       renderVideoLessons(); // refresh note dots
       if (statusEl) {
-        statusEl.textContent = '\ud83d\udcbe Сохранено';
+        statusEl.textContent = '\ud83d\udcbe Saved';
         statusEl.className = 'lesson-note-save-status saved';
         setTimeout(() => {
           if (statusEl) {
-            statusEl.textContent = '\ud83d\udcbe Автосохранение';
+            statusEl.textContent = '\ud83d\udcbe Auto-save';
             statusEl.className = 'lesson-note-save-status';
           }
         }, 2000);
@@ -931,3 +945,39 @@ function initLessonNoteTextarea() {
 
 // --- ЛОГИКА ДОБАВЛЕНИЯ НОВЫХ ФРАЗ ---
 // (Теперь обработка добавления фраз вынесена в setupDictionaryUI() для корректной интеграции с модальным окном)
+
+/* ==========================================================================
+   Line Numbers for Editors
+   ========================================================================== */
+function setupEditorLineNumbers() {
+    const textareas = document.querySelectorAll('.editor-textarea');
+    textareas.forEach(ta => {
+        const lineNumbersDiv = document.getElementById('lineNumbers_' + ta.id);
+        if (!lineNumbersDiv) return;
+
+        function updateLineNumbers() {
+            const lines = ta.value.split('\n').length;
+            let numbersHtml = '';
+            for (let i = 1; i <= lines; i++) {
+                numbersHtml += i + '<br>';
+            }
+            lineNumbersDiv.innerHTML = numbersHtml;
+        }
+
+        // Sync scrolling
+        ta.addEventListener('scroll', () => {
+            lineNumbersDiv.scrollTop = ta.scrollTop;
+        });
+
+        // Update on input
+        ta.addEventListener('input', updateLineNumbers);
+
+        // Initial update
+        updateLineNumbers();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Small delay to ensure everything is rendered
+    setTimeout(setupEditorLineNumbers, 300);
+});

@@ -45,7 +45,11 @@ const EXCLUDED_KEYS = [
     'song_metadata_cache',
     'last_sync_timestamp',
     'last_sync_payload',
-    'sync_manager_override_uid'
+    'sync_manager_override_uid',
+    'study_session_queue',
+    'study_session_history',
+    'study_session_learned',
+    'study_session_total_count'
 ];
 
 // Project Name resolver
@@ -224,6 +228,9 @@ function mergeIdArrays(localArr, cloudArr) {
 // Keys containing JSON arrays of IDs that must be merged as a UNION (never overwritten)
 const UNION_ARRAY_KEYS = ['galaxy_watched_videos'];
 
+// Keys containing text/notes that must keep the longest version to avoid data loss
+const TEXT_MERGE_KEYS = ['user_notebook_text', 'galaxy_lesson_notes', 'galaxy_custom_note_folders'];
+
 // Smart merge of local and cloud storage payloads (used on first sync)
 function mergePayloads(localPayload, cloudPayload) {
     const merged = { ...localPayload };
@@ -260,6 +267,9 @@ function mergePayloads(localPayload, cloudPayload) {
                 // On parse error keep local value (safer)
                 console.warn(`[SyncManager] Could not merge '${key}', keeping local value:`, e);
             }
+        } else if (TEXT_MERGE_KEYS.includes(key)) {
+            // Keep whichever string is longer to avoid losing typed notes
+            merged[key] = (merged[key] || '').length >= (cloudVal || '').length ? merged[key] : cloudVal;
         } else {
             // For simple keys (like configs/theme preferences), let cloud win by default
             merged[key] = cloudVal;

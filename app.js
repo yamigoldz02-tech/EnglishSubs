@@ -27,6 +27,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
   document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+
+  // Apply Notebook Line Numbers setting on load
+  const hideLineNumbers = localStorage.getItem('galaxy_notebook_line_numbers') === 'false';
+  if (hideLineNumbers) {
+    document.body.classList.add('no-notebook-line-numbers');
+  }
 });
 
 function openEditWordModal(w, onSaveSuccess) {
@@ -143,7 +149,7 @@ function openEditWordModal(w, onSaveSuccess) {
   // ── Close handlers ─────────────────────────────────────────────────
   const doClose = () => {
     closeModalEl(editModal);
-    if (saveBtn) { saveBtn.textContent = '💾 Сохранить изменения'; saveBtn.style.background = 'linear-gradient(135deg, #a78bfa, #7c3aed)'; saveBtn.disabled = false; }
+    if (saveBtn) { saveBtn.textContent = '💾 Save Changes'; saveBtn.style.background = 'linear-gradient(135deg, #a78bfa, #7c3aed)'; saveBtn.disabled = false; }
     if (closeEditBtn) closeEditBtn.onclick = null;
     if (saveBtn) saveBtn.onclick = null;
   };
@@ -170,7 +176,7 @@ function openEditWordModal(w, onSaveSuccess) {
       if (newEng.toLowerCase() !== w.word.toLowerCase()) {
         const isDup = personalDictionary.some(x => x.word.toLowerCase() === newEng.toLowerCase());
         if (isDup) {
-          if (engInput) { flashField(engInput); const orig = engInput.placeholder; engInput.placeholder = `⚠ «${newEng}» уже есть в словаре`; setTimeout(() => { engInput.placeholder = orig; }, 2200); }
+          if (engInput) { flashField(engInput); const orig = engInput.placeholder; engInput.placeholder = `⚠ "${newEng}" is already in the dictionary`; setTimeout(() => { engInput.placeholder = orig; }, 2200); }
           return;
         }
       }
@@ -191,7 +197,7 @@ function openEditWordModal(w, onSaveSuccess) {
 
       saveDictionaryToStorage();
 
-      saveBtn.textContent = `✅ ${newEng.slice(0, 20)} сохранено!`;
+      saveBtn.textContent = `✅ ${newEng.slice(0, 20)} saved!`;
       saveBtn.style.background = 'linear-gradient(135deg, #1db954, #16a34a)';
       saveBtn.disabled = true;
 
@@ -217,6 +223,10 @@ function openEditWordModal(w, onSaveSuccess) {
  */
 function openModalEl(el) {
   if (!el) return;
+  
+  // NOTE: history.pushState is handled by the MutationObserver in initModalHistoryAPI()
+  // to avoid double-push causing stray popstate events
+  
   document.documentElement.classList.add('modal-open');
   document.body.classList.add('modal-open');
   el.classList.remove('modal-animate-out');
@@ -232,6 +242,7 @@ function openModalEl(el) {
 function closeModalEl(el) {
   if (!el) return;
   if (el.style.display === 'none' || el.classList.contains('modal-animate-out')) return;
+  
   el.classList.remove('modal-animate-in');
   el.classList.add('modal-animate-out');
   setTimeout(() => {
@@ -244,10 +255,27 @@ function closeModalEl(el) {
       if (!anyOpen) {
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
+        // NOTE: history.back() is handled by the MutationObserver in initModalHistoryAPI()
+        // to avoid double-back causing stray popstate events that hide close buttons
       }
     }
   }, 200);
 }
+
+// Intercept popstate to close modals if the user swipes back on mobile
+window.addEventListener('popstate', (e) => {
+  if (!window.location.hash.includes('modal')) {
+    // Only target actual modal overlays, NOT inner cards/containers that happen to have "Modal" in their ID
+    const modals = document.querySelectorAll('.modal-overlay');
+    modals.forEach(m => {
+      if (m.style.display !== 'none' && m.style.display !== '') {
+        const closeBtn = m.querySelector('.modal-close-btn, .close-modal, .close-btn, .close-lightbox');
+        if (closeBtn) closeBtn.click();
+        else closeModalEl(m);
+      }
+    });
+  }
+});
 
 // 1. Fully detailed Song Dataset (Spotify-ready)
 const songsData = {
@@ -356,7 +384,7 @@ const songsData = {
         text: "I follow the Moskva\nDown to Gorky Park\nListening to the wind of change",
         translation: "Я иду вдоль Москвы-реки\nВниз, к Парку Горького\nВслушиваясь в ветер перемен",
         grammar: [
-          { highlight: "Listening to", text: "— Повторение куплета для усиления атмосферы единения." }
+          { highlight: "Listening to", text: "— Review куплета для усиления атмосферы единения." }
         ],
         words: [
           { word: "follow", phonetic: "/ˈfɒl.əʊ/", translation: "следовать", definition: "Идти вслед за кем-то." },
@@ -368,7 +396,7 @@ const songsData = {
         text: "Take me to the magic of the moment\nOn a glory night\nWhere the children of tomorrow dream away\nIn the wind of change",
         translation: "Перенеси меня в волшебство этого момента\nВ эту славную ночь\nГде дети завтрашнего дня мечтают и улетают в мыслях\nПопутно ветру перемен",
         grammar: [
-          { highlight: "Take me to", text: "— Повторение припева, призывающее к объединению человечества." }
+          { highlight: "Take me to", text: "— Review припева, призывающее к объединению человечества." }
         ],
         words: [
           { word: "magic", phonetic: "/ˈmædʒ.ɪk/", translation: "волшебство", definition: "Сверхъестественная или завораживающая таинственная сила." },
@@ -397,7 +425,7 @@ const songsData = {
         text: "Take me to the magic of the moment\nOn a glory night\nWhere the children of tomorrow dream away\nIn the wind of change",
         translation: "Перенеси меня в волшебство этого момента\nВ эту славную ночь\nГде дети завтрашнего дня мечтают и улетают в мыслях\nПопутно ветру перемен",
         grammar: [
-          { highlight: "Take me to", text: "— Повторение припева перед финальным угасанием звука." }
+          { highlight: "Take me to", text: "— Review припева перед финальным угасанием звука." }
         ],
         words: [
           { word: "moment", phonetic: "/ˈməʊ.mənt/", translation: "мгновение, момент", definition: "Очень короткий, краткий промежуток времени." },
@@ -545,7 +573,7 @@ const songsData = {
         words: [
           { word: "destruction", phonetic: "/dɪˈstrʌk.ʃən/", translation: "разрушение", definition: "Процесс разрушения, порчи или уничтожения чего-либо." },
           { word: "rough", phonetic: "/rʌf/", translation: "грубый, суровый", definition: "Неровный, шероховатый или тяжелый, тернистый (о пути)." },
-          { word: "breeds", phonetic: "/briːdz/", translation: "порождает", definition: "Давать начало, плодить, вызывать появление чего-либо." },
+          { word: "breeds", phonetic: "/briːdz/", translation: "порождает", definition: "Yesвать начало, плодить, вызывать появление чего-либо." },
           { word: "earthquakes", phonetic: "/ˈɜːθ.kweɪks/", translation: "землетрясения", definition: "Подземные толчки, колебания и смещения земной коры." }
         ]
       },
@@ -652,7 +680,7 @@ const performanceToggle = document.getElementById('performanceToggle');
   let speedToggle = document.getElementById(speedToggleId);
   if (!speedToggle && performanceToggle) {
     const perfGroup = performanceToggle.closest('.switch').parentElement.parentElement;
-    perfGroup.insertAdjacentHTML('beforeend', '<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05);"><div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Авто-ускорение видео (2x)</span><span style="font-size: 0.68rem; color: var(--text-muted);">Автоматически включать скорость воспроизведения 2x для видеоуроков.</span></div><label class="switch"><input type="checkbox" id="videoAutoAccelerateToggle"><span class="slider"></span></label></div>');
+    perfGroup.insertAdjacentHTML('beforeend', '<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05);"><div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Auto-Accelerate Video (2x)</span><span style="font-size: 0.68rem; color: var(--text-muted);">Automatically set 2x playback speed for video lessons.</span></div><label class="switch"><input type="checkbox" id="videoAutoAccelerateToggle"><span class="slider"></span></label></div>');
     speedToggle = document.getElementById(speedToggleId);
   }
   const savedSpeed = localStorage.getItem('galaxy_video_2x') !== 'false';
@@ -947,7 +975,7 @@ async function fetchLyrics(artist, title) {
     console.warn("[Lyrics Fetch] AI Lyrics Generator failed:", err);
   }
   
-  throw new Error("Не удалось найти текст песни ни в открытых базах (LRCLIB, Lyrics.ovh), ни на Genius, ни с помощью ИИ.");
+  throw new Error("Could not find lyrics in any open database (LRCLIB, Lyrics.ovh), Genius, or via AI.");
 }
 
 // Genius lyrics scraper using AllOrigins CORS proxy
@@ -1144,31 +1172,31 @@ function renderLyricsError(title, artist, errorMessage) {
     <div style="text-align: center; padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; max-width: 550px; margin: 0 auto; animation: fadeIn 0.5s ease-out;">
       <div style="font-size: 3.5rem; filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.15));">🎵</div>
       <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); line-height: 1.3; margin: 0;">
-        Не удалось загрузить текст песни «${escapeHTML(title)}»
+        Could not load lyrics for "${escapeHTML(title)}"
       </h2>
       <p style="font-size: 0.88rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
-        Открытые музыкальные базы не нашли текст этой композиции. Но наш ИИ готов перевести и разобрать смысл названия для вас!
+        Open music databases couldn't find lyrics for this track. But our AI is ready to translate and break down the title for you!
       </p>
       
       <!-- Premium Glassmorphic AI Translation Card -->
       <div id="lyrics-error-title-analysis" style="width: 100%; padding: 20px; background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 16px; text-align: left; box-shadow: 0 8px 32px rgba(0,0,0,0.15); display: flex; flex-direction: column; gap: 12px; transition: all 0.3s; backdrop-filter: blur(10px);">
         <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #a78bfa; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px;">
-          <span>✦ AI АВТО-ПЕРЕВОД НАЗВАНИЯ</span>
+          <span>✦ AI AUTO-TRANSLATION OF TITLE</span>
           <span class="pulse-dot-violet" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #8b5cf6; box-shadow: 0 0 8px #8b5cf6; animation: pulse 1.5s infinite;"></span>
         </div>
         <div id="errorTitleAnalysisContent" style="font-size: 0.88rem; color: var(--text-sub); line-height: 1.6;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="search-loading-spinner" style="position: static; display: inline-block; width: 14px; height: 14px; border-color: #8b5cf6; border-top-color: transparent;"></div>
-            <span>ИИ переводит название и анализирует его глубокий смысл...</span>
+            <span>AI is translating the title and analyzing its deeper meaning...</span>
           </div>
         </div>
       </div>
 
       <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem;">
-        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-align: left;">Или вставьте текст песни вручную:</span>
-        <textarea id="manualLyricsArea" placeholder="Вставьте сюда текст песни на английском..." rows="4"></textarea>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-align: left;">Or paste the lyrics manually:</span>
+        <textarea id="manualLyricsArea" placeholder="Paste the song lyrics in English here..." rows="4"></textarea>
         <button id="submitManualLyricsBtn" style="background: var(--accent-spotify); color: #000000; font-weight: 700; border: none; padding: 10px 20px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: var(--transition-fast); display: flex; align-items: center; justify-content: center; gap: 8px;">
-          🚀 Запустить разбор для вставленного текста
+          🚀 Start analyzing pasted lyrics
         </button>
       </div>
     </div>
@@ -1194,11 +1222,11 @@ function renderLyricsError(title, artist, errorMessage) {
             </strong>
           </div>
           <p style="margin: 0 0 12px 0; color: var(--text-main); font-size: 0.88rem; line-height: 1.55;">
-            ${escapeHTML(cached.songMeaning) || 'Смысл трека переводится...'}
+            ${escapeHTML(cached.songMeaning) || 'Translating track meaning...'}
           </p>
           ${cached.titleVocabulary && cached.titleVocabulary.length > 0 ? `
             <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; margin-top: 8px;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">Разбор слов из названия:</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">Vocabulary from the title:</span>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                 ${cached.titleVocabulary.map(item => {
                   const escWord = item.word.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
@@ -1211,7 +1239,7 @@ function renderLyricsError(title, artist, errorMessage) {
                           <strong style="color: var(--text-main);">${escapeHTML(item.translation)}</strong>
                         </div>
                         <button onclick="event.stopPropagation(); window.addWordToPersonalDictionary('${escWord}', '${escTrans}')" style="background: rgba(29, 185, 84, 0.08); border: 1px solid rgba(29, 185, 84, 0.2); color: var(--accent-spotify); border-radius: 20px; padding: 2px 8px; font-size: 0.65rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 2px; transition: all 0.2s;" onmouseover="this.style.background='rgba(29, 185, 84, 0.15)'" onmouseout="this.style.background='rgba(29, 185, 84, 0.08)'">
-                          <span>➕ В словарь</span>
+                          <span>➕ Add to dictionary</span>
                         </button>
                       </div>
                       <div style="color: var(--text-sub); font-size: 0.78rem;">${escapeHTML(item.context)}</div>
@@ -1227,7 +1255,7 @@ function renderLyricsError(title, artist, errorMessage) {
       console.error("[Lyrics Error AI Callback] Failed to fetch song title meaning:", e);
       analysisBox.innerHTML = `
         <span style="color: var(--text-muted); font-style: italic;">
-          Не удалось получить автоматический перевод от ИИ. Вы все еще можете вставить текст вручную!
+          Could not get an automatic translation from AI. You can still paste the lyrics manually!
         </span>
       `;
     }
@@ -1251,7 +1279,7 @@ function renderLyricsError(title, artist, errorMessage) {
       
       const stanzas = segmentLyricsIntoStanzas(customText);
       if (stanzas.length === 0) {
-        alert("Пожалуйста, введите текст песни.");
+        alert("Please enter the song lyrics.");
         return;
       }
       
@@ -1388,7 +1416,7 @@ function initAutocomplete() {
       if (favoritesList.length > 0) {
         const favHeader = document.createElement('div');
         favHeader.className = 'autocomplete-section-header';
-        favHeader.innerHTML = '💖 Избранные песни';
+        favHeader.innerHTML = '💖 Favorite Songs';
         dropdown.appendChild(favHeader);
 
         favoritesList.forEach((song, idx) => {
@@ -1414,7 +1442,7 @@ function initAutocomplete() {
         // Add section header for other songs
         const generalHeader = document.createElement('div');
         generalHeader.className = 'autocomplete-section-header';
-        generalHeader.innerHTML = '🔥 Все песни';
+        generalHeader.innerHTML = '🔥 All Songs';
         dropdown.appendChild(generalHeader);
       }
 
@@ -1453,13 +1481,13 @@ function initAutocomplete() {
 
     const totalCount = matchesMeta.length + matchesLyrics.length;
     if (totalCount === 0) {
-      dropdown.innerHTML = `<div class="autocomplete-no-results">Песни не найдены</div>`;
+      dropdown.innerHTML = `<div class="autocomplete-no-results">No songs found</div>`;
     } else {
       // 1. Render Metadata Matches Section (Songs and Artists)
       if (matchesMeta.length > 0) {
         const sectionHeader = document.createElement('div');
         sectionHeader.className = 'autocomplete-section-header';
-        sectionHeader.innerHTML = '🎵 Песни и исполнители';
+        sectionHeader.innerHTML = '🎵 Songs & Artists';
         dropdown.appendChild(sectionHeader);
 
         matchesMeta.forEach((song) => {
@@ -1491,7 +1519,7 @@ function initAutocomplete() {
       if (matchesLyrics.length > 0) {
         const sectionHeader = document.createElement('div');
         sectionHeader.className = 'autocomplete-section-header';
-        sectionHeader.innerHTML = '📝 Найденные строки из песен';
+        sectionHeader.innerHTML = '📝 Matching lyrics found';
         dropdown.appendChild(sectionHeader);
 
         matchesLyrics.forEach((song) => {
@@ -1531,7 +1559,7 @@ function initAutocomplete() {
     dropdown.innerHTML = `
       <div class="autocomplete-no-results" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px;">
         <div class="search-loading-spinner" style="position: static; display: inline-block;"></div>
-        <span>Ищем по всему миру...</span>
+        <span>Searching worldwide...</span>
       </div>
     `;
     dropdown.style.display = 'block';
@@ -1546,7 +1574,7 @@ function initAutocomplete() {
       activeDropdownIndex = -1;
       
       if (!results || results.length === 0) {
-        dropdown.innerHTML = `<div class="autocomplete-no-results">Ничего не найдено во всемирной базе</div>`;
+        dropdown.innerHTML = `<div class="autocomplete-no-results">Nothing found in the worldwide database</div>`;
         return;
       }
       
@@ -1600,7 +1628,7 @@ function initAutocomplete() {
       });
     } catch (err) {
       console.error("Global search error:", err);
-      dropdown.innerHTML = `<div class="autocomplete-no-results" style="color: #ef4444; padding: 12px;">Ошибка сети при глобальном поиске</div>`;
+      dropdown.innerHTML = `<div class="autocomplete-no-results" style="color: #ef4444; padding: 12px;">Network error during global search</div>`;
     }
   }
 
@@ -1646,10 +1674,10 @@ function initAutocomplete() {
         <div class="shimmer-wrapper" style="padding: 2rem;">
           <div style="text-align: center; margin-bottom: 1.5rem; color: var(--text-sub); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <div class="search-loading-spinner" style="position: static; display: inline-block;"></div>
-            Скачивание официального текста песни с серверов базы данных...
+            Downloading official lyrics from the database servers...
           </div>
           <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0;">
-            Пока ждёте — соберите фразу в тренажёре выше ↑
+            While you wait — try the phrase builder above ↑
           </p>
         </div>
       `;
@@ -1664,7 +1692,7 @@ function initAutocomplete() {
         const segmented = segmentLyricsIntoStanzas(rawLyrics);
         
         if (segmented.length === 0) {
-          throw new Error("Текст пустой или не содержит подходящих куплетов.");
+          throw new Error("Lyrics are empty or contain no suitable stanzas.");
         }
         
         songsData[song.id] = {
@@ -1761,7 +1789,7 @@ function pickSongFromSearch(song) {
   if (typeof window.selectSongFromDropdown === 'function') {
     return window.selectSongFromDropdown(song);
   }
-  console.warn('[App] Поиск песен ещё загружается — попробуйте снова через секунду.');
+  console.warn('[App] Search песен ещё загружается — попробуйте снова через секунду.');
 }
 
 // Global dashboard and favorites hub functions
@@ -1809,7 +1837,7 @@ function renderDashboardFavorites() {
   if (!favoriteSongs || favoriteSongs.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 1.5rem 0; color: var(--text-muted); font-size: 0.85rem; font-style: italic;">
-        У вас пока нет избранных песен. Добавьте песню в избранное, кликнув сердечко ❤️ в шапке воспроизведения!
+        You don't have any favorite songs yet. Add a song to favorites by clicking the heart ❤️ in the player header!
       </div>
     `;
     return;
@@ -1850,23 +1878,23 @@ function renderWelcomeHub() {
   lyricsBoard.innerHTML = `
     <div class="welcome-hub" style="text-align: center; padding: 4rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; max-width: 650px; margin: 0 auto; min-height: 50vh; animation: fadeIn 0.8s ease-out;">
       <div style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.8rem; font-weight: 800; line-height: 1.2; letter-spacing: -1px; text-shadow: var(--accent-glow);">
-        Разбирай любимые песни с ИИ 🎵
+        Learn English with your favorite songs 🎵
       </div>
       
       <p style="font-size: 1.1rem; color: var(--text-sub); line-height: 1.6; max-width: 480px; margin: 0;">
-        Интерактивный тренажер английского языка. Перевод строф, разбор грамматики и контекстные переводы слов прямо во время чтения.
+        Interactive English trainer. Stanza translations, grammar breakdowns, and contextual word definitions — all while reading lyrics.
       </p>
 
       <!-- Big Interactive Glow Input Trigger -->
       <div style="width: 100%; max-width: 440px; position: relative;" onclick="document.getElementById('songSearchInput').focus()">
         <div style="background: var(--bg-card); border: 2px solid var(--border-glass); padding: 16px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; cursor: text; box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s; text-align: left;" onmouseover="this.style.borderColor='var(--accent-spotify)'; this.style.boxShadow='var(--accent-glow)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.boxShadow='none';">
           <span style="font-size: 1.3rem;">🔍</span>
-          <span style="color: var(--text-sub); font-size: 1rem;">Введите название песни или исполнителя...</span>
+          <span style="color: var(--text-sub); font-size: 1rem;">Type a song name or artist...</span>
         </div>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 440px; margin-top: 1rem;">
-        <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-bottom: 0.2rem;">Популярные разборы:</div>
+        <div style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-bottom: 0.2rem;">Popular Breakdowns:</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
           <button onclick="window.selectRecommended('scorpions')" class="recommended-btn" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer; text-align: left; transition: all 0.3s; outline: none;" onmouseover="this.style.borderColor='var(--accent-spotify)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
             <div style="width: 32px; height: 32px; background: rgba(29, 185, 84, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--accent-spotify); font-size: 0.85rem;">SC</div>
@@ -2047,7 +2075,7 @@ function renderSong(songKey) {
   albumArt.textContent = song.art;
   songBadge.textContent = song.genre;
   songTitle.textContent = song.title;
-  songTitle.title = "Нажмите, чтобы перевести название и узнать смысл всей песни от ИИ!";
+  songTitle.title = "Click to translate the title and discover the song's meaning with AI!";
   songTitle.onclick = () => triggerSongMeaningAnalysis(songKey);
   artistName.textContent = song.artist;
 
@@ -2056,10 +2084,10 @@ function renderSong(songKey) {
   if (favoriteToggleBtn) {
     if (isSongFavorite(songKey)) {
       favoriteToggleBtn.classList.add('active');
-      favoriteToggleBtn.title = 'Удалить песню из избранного';
+      favoriteToggleBtn.title = 'Remove from favorites';
     } else {
       favoriteToggleBtn.classList.remove('active');
-      favoriteToggleBtn.title = 'Добавить песню в избранное';
+      favoriteToggleBtn.title = 'Add to favorites';
     }
   }
 
@@ -2076,9 +2104,9 @@ function renderSong(songKey) {
     sidebarContent.innerHTML = `
       <div class="analysis-card" style="text-align: center; padding: 3rem 2rem; background: transparent; border: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;">
         <div style="font-size: 3rem; animation: pulse 2s infinite ease-in-out;">✨</div>
-        <div style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">AI-Разбор Строф</div>
+        <div style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">AI Stanza Breakdown</div>
         <p style="font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; margin: 0; max-width: 280px;">
-          Нажмите на любую строчку песни слева, чтобы запустить мгновенный грамматический и лексический разбор с помощью ИИ.
+          Click on any line of the lyrics to get an instant grammar and vocabulary breakdown powered by AI.
         </p>
       </div>
     `;
@@ -2189,7 +2217,7 @@ function speakText(text) {
       setTimeout(() => speakBtn.style.transform = 'scale(1)', 400);
     }
   } else {
-    alert("К сожалению, ваш браузер не поддерживает синтез речи.");
+    alert("Unfortunately, your browser does not support speech synthesis.");
   }
 }
 
@@ -2297,13 +2325,13 @@ function setupEventListeners() {
         feedbackEl.style.background = 'rgba(16, 185, 129, 0.15)';
         feedbackEl.style.border = '1px solid rgba(16, 185, 129, 0.3)';
         feedbackEl.style.color = '#10b981';
-        feedbackEl.innerHTML = `🎉 Превосходно! Вы абсолютно верно расслышали и записали фразу! Она добавлена в ваши очки активности.`;
+        feedbackEl.innerHTML = `🎉 Excellent! You heard and wrote the phrase perfectly! It's been added to your activity score.`;
       } else {
         feedbackEl.style.display = 'block';
         feedbackEl.style.background = 'rgba(239, 68, 68, 0.15)';
         feedbackEl.style.border = '1px solid rgba(239, 68, 68, 0.3)';
         feedbackEl.style.color = '#ef4444';
-        feedbackEl.innerHTML = `❌ К сожалению, есть неточности. Попробуйте еще раз!<br><span style="display:inline-block; margin-top:0.4rem; font-size:0.9rem; opacity:0.85; color:var(--text-main);">Правильный вариант: <strong style="color:var(--accent-spotify);">${activeDictationOriginal}</strong></span>`;
+        feedbackEl.innerHTML = `❌ Unfortunately, there are some mistakes. Try again!<br><span style="display:inline-block; margin-top:0.4rem; font-size:0.9rem; opacity:0.85; color:var(--text-main);">Correct answer: <strong style="color:var(--accent-spotify);">${activeDictationOriginal}</strong></span>`;
       }
     });
   }
@@ -2324,10 +2352,10 @@ function setupEventListeners() {
       
       if (isSongFavorite(currentSongKey)) {
         favoriteToggleBtn.classList.add('active');
-        favoriteToggleBtn.title = 'Удалить песню из избранного';
+        favoriteToggleBtn.title = 'Remove from favorites';
       } else {
         favoriteToggleBtn.classList.remove('active');
-        favoriteToggleBtn.title = 'Добавить песню в избранное';
+        favoriteToggleBtn.title = 'Add to favorites';
       }
 
       // Auto-cache song metadata on favorite toggle for reliable dashboard rendering
@@ -2539,6 +2567,17 @@ function setupEventListeners() {
     const savedCapitalize = localStorage.getItem('galaxy_dictionary_capitalize') !== 'false';
     const dictionaryCapitalizeToggle = document.getElementById('dictionaryCapitalizeToggle');
     if (dictionaryCapitalizeToggle) dictionaryCapitalizeToggle.checked = savedCapitalize;
+
+    const savedLineNumbers = localStorage.getItem('galaxy_notebook_line_numbers') !== 'false';
+    const notebookLineNumbersToggle = document.getElementById('notebookLineNumbersToggle');
+    if (notebookLineNumbersToggle) {
+      notebookLineNumbersToggle.checked = savedLineNumbers;
+      if (savedLineNumbers) {
+        document.body.classList.remove('no-notebook-line-numbers');
+      } else {
+        document.body.classList.add('no-notebook-line-numbers');
+      }
+    }
 
     const savedSpotifyAutoPause = localStorage.getItem('galaxy_spotify_auto_pause') !== 'false';
     const spotifyAutoPauseToggle = document.getElementById('spotifyAutoPauseToggle');
@@ -2780,6 +2819,18 @@ function setupEventListeners() {
         localStorage.setItem('galaxy_dictionary_capitalize', dictionaryCapitalizeToggle.checked ? 'true' : 'false');
       }
 
+      // Save Notebook Line Numbers setting
+      const notebookLineNumbersToggle = document.getElementById('notebookLineNumbersToggle');
+      if (notebookLineNumbersToggle) {
+        const isChecked = notebookLineNumbersToggle.checked;
+        localStorage.setItem('galaxy_notebook_line_numbers', isChecked ? 'true' : 'false');
+        if (isChecked) {
+          document.body.classList.remove('no-notebook-line-numbers');
+        } else {
+          document.body.classList.add('no-notebook-line-numbers');
+        }
+      }
+
       // Save Spotify Auto-Pause setting
       const spotifyAutoPauseToggle = document.getElementById('spotifyAutoPauseToggle');
       if (spotifyAutoPauseToggle) {
@@ -2808,7 +2859,7 @@ function setupEventListeners() {
       const speedTog = document.getElementById('videoAutoAccelerateToggle');
       if (speedTog) localStorage.setItem('galaxy_video_2x', speedTog.checked ? 'true' : 'false');
       
-      apiStatusMessage.textContent = 'Настройки успешно сохранены!';
+      apiStatusMessage.textContent = 'Settings успешно сохранены!';
       apiStatusMessage.style.display = 'block';
       apiStatusMessage.className = 'modal-status success';
       
@@ -2829,6 +2880,11 @@ function setupEventListeners() {
       localStorage.removeItem('galaxy_dictionary_capitalize');
       const dictionaryCapitalizeToggle = document.getElementById('dictionaryCapitalizeToggle');
       if (dictionaryCapitalizeToggle) dictionaryCapitalizeToggle.checked = true;
+
+      localStorage.removeItem('galaxy_notebook_line_numbers');
+      const notebookLineNumbersToggle = document.getElementById('notebookLineNumbersToggle');
+      if (notebookLineNumbersToggle) notebookLineNumbersToggle.checked = true;
+      document.body.classList.remove('no-notebook-line-numbers');
 
       localStorage.removeItem('galaxy_spotify_auto_pause');
       const spotifyAutoPauseToggle = document.getElementById('spotifyAutoPauseToggle');
@@ -2921,7 +2977,7 @@ function setupEventListeners() {
           setTimeout(() => URL.revokeObjectURL(url), 10000);
 
           if (backupStatusMessage) {
-            backupStatusMessage.textContent = 'Данные экспортированы!';
+            backupStatusMessage.textContent = 'Yesнные экспортированы!';
             backupStatusMessage.style.display = 'block';
             backupStatusMessage.className = 'modal-status success';
             setTimeout(() => { backupStatusMessage.style.display = 'none'; }, 3000);
@@ -2929,7 +2985,7 @@ function setupEventListeners() {
         } catch (err) {
           console.error('Backup export failed:', err);
           if (backupStatusMessage) {
-            backupStatusMessage.textContent = 'Ошибка экспорта данных!';
+            backupStatusMessage.textContent = 'Error экспорта данных!';
             backupStatusMessage.style.display = 'block';
             backupStatusMessage.className = 'modal-status error';
           }
@@ -2970,7 +3026,7 @@ function setupEventListeners() {
             }
 
             if (backupStatusMessage) {
-              backupStatusMessage.textContent = 'Успешно! Страница перезагружается...';
+              backupStatusMessage.textContent = 'Success! Страница перезагружается...';
               backupStatusMessage.style.display = 'block';
               backupStatusMessage.className = 'modal-status success';
             }
@@ -2982,7 +3038,7 @@ function setupEventListeners() {
           } catch (err) {
             console.error('Backup import failed:', err);
             if (backupStatusMessage) {
-              backupStatusMessage.textContent = `Ошибка: ${err.message || 'неверный формат JSON'}`;
+              backupStatusMessage.textContent = `Error: ${err.message || 'неверный формат JSON'}`;
               backupStatusMessage.style.display = 'block';
               backupStatusMessage.className = 'modal-status error';
             }
@@ -3010,7 +3066,7 @@ function setupEventListeners() {
     if (user) {
       syncNotLoggedContainer.style.display = 'none';
       syncLoggedInContainer.style.display = 'flex';
-      syncUserEmail.textContent = user.displayName || user.email || 'Связанный профиль';
+      syncUserEmail.textContent = user.displayName || user.email || 'Linked profile';
       
       // If it's a real Google auth user, show their UID so they can copy it to phone
       if (!user.isOverride && user.uid) {
@@ -3291,7 +3347,7 @@ function initCustomChat() {
       if (response) {
         chatResponse.textContent = response.trim();
       } else {
-        chatResponse.textContent = 'Ошибка: Получен пустой ответ от ИИ-преподавателя.';
+        chatResponse.textContent = 'Error: Получен пустой ответ от ИИ-преподавателя.';
       }
     } catch (error) {
       console.error(error);
@@ -3358,5 +3414,40 @@ function initCustomChat() {
   });
 })();
 
+// --- Global Custom JS Tooltip ---
+// @AI-SECTION: GLOBAL_JS_TOOLTIP
+document.addEventListener('DOMContentLoaded', () => {
+  const tooltip = document.createElement('div');
+  tooltip.id = 'global-js-tooltip';
+  tooltip.style.cssText = 'position: fixed; background: rgba(0,0,0,0.85); color: #1db954; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 0.05s ease-out; z-index: 99999;';
+  document.body.appendChild(tooltip);
 
+  let tooltipTimeout;
 
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-en-tooltip]');
+    if (target) {
+      // Only show on non-touch devices
+      if (window.matchMedia('(hover: none)').matches) return;
+      clearTimeout(tooltipTimeout);
+      const text = target.getAttribute('data-en-tooltip');
+      tooltip.textContent = text;
+      const rect = target.getBoundingClientRect();
+      tooltip.style.left = (rect.left + rect.width / 2) + 'px';
+      tooltip.style.top = (rect.top - 35) + 'px';
+      tooltip.style.transform = 'translateX(-50%)';
+      tooltip.style.visibility = 'visible';
+      tooltip.style.opacity = '1';
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('[data-en-tooltip]');
+    if (target) {
+      tooltip.style.opacity = '0';
+      tooltipTimeout = setTimeout(() => {
+        tooltip.style.visibility = 'hidden';
+      }, 50);
+    }
+  });
+});

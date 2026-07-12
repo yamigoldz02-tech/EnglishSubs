@@ -40,7 +40,7 @@ function saveGrammarRules() {
   try {
     localStorage.setItem('grammar_rules', JSON.stringify(grammarRules));
   } catch (e) {
-    console.error("Ошибка сохранения правил:", e);
+    console.error("Error сохранения правил:", e);
   }
 }
 
@@ -112,8 +112,8 @@ function setupRulesUI() {
       activeEditingRuleId = null;
       if (ruleTitleInput) ruleTitleInput.value = '';
       if (ruleContentInput) ruleContentInput.value = '';
-      rulesTabAdd.innerHTML = '➕ Добавить правило';
-      if (saveRuleBtn) saveRuleBtn.textContent = 'Сохранить правило';
+      rulesTabAdd.innerHTML = '➕ Add Rule';
+      if (saveRuleBtn) saveRuleBtn.textContent = 'Save Rule';
       switchRulesTab('add');
     });
   }
@@ -135,10 +135,10 @@ function setupRulesUI() {
         rulesTabAdd.classList.remove('active');
         rulesTabAdd.style.color = 'var(--text-sub)';
         rulesTabAdd.style.borderBottomColor = 'transparent';
-        rulesTabAdd.innerHTML = '➕ Добавить правило';
+        rulesTabAdd.innerHTML = '➕ Add Rule';
       }
       if (saveRuleBtn) {
-        saveRuleBtn.textContent = 'Сохранить правило';
+        saveRuleBtn.textContent = 'Save Rule';
       }
       if (rulesSearchContainer) rulesSearchContainer.style.display = 'flex';
       if (rulesSearchInput) rulesSearchInput.value = '';
@@ -170,7 +170,7 @@ function setupRulesUI() {
       const content = ruleContentInput.value.trim();
 
       if (!title || !content) {
-        alert("Пожалуйста, заполните оба поля: заголовок правила и текст!");
+        alert("Please fill in both fields: rule title and content!");
         return;
       }
 
@@ -204,9 +204,9 @@ function setupRulesUI() {
       }
 
       // Briefly animate button to success state
-      const origText = isEditing ? 'Сохранить изменения' : 'Сохранить правило';
+      const origText = isEditing ? 'Save Changes' : 'Save Rule';
       const origBg = saveRuleBtn.style.background;
-      saveRuleBtn.textContent = isEditing ? `✓ Изменения сохранены!` : `✓ Правило сохранено!`;
+      saveRuleBtn.textContent = isEditing ? `✓ Changes saved!` : `✓ Rule saved!`;
       saveRuleBtn.style.background = 'linear-gradient(135deg, #1db954, #16a34a)';
       saveRuleBtn.disabled = true;
 
@@ -235,17 +235,17 @@ function setupRulesUI() {
         rulesListContainer.innerHTML = `
           <div style="text-align: center; padding: 40px 20px; color: var(--text-sub);">
             <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🔍</span>
-            <p style="font-size: 0.95rem; font-weight: 600; margin: 0 0 6px 0;">Правил с таким названием не найдено.</p>
-            <p style="font-size: 0.8rem; margin: 0;">Попробуйте изменить поисковый запрос.</p>
+            <p style="font-size: 0.95rem; font-weight: 600; margin: 0 0 6px 0;">No rules matching that name.</p>
+            <p style="font-size: 0.8rem; margin: 0;">Try changing your search query.</p>
           </div>
         `;
       } else {
         rulesListContainer.innerHTML = `
           <div style="text-align: center; padding: 40px 20px; color: var(--text-sub);">
             <span style="font-size: 3rem; display: block; margin-bottom: 12px;">📐</span>
-            <p style="font-size: 0.95rem; font-weight: 600; margin: 0 0 6px 0;">Ваш справочник правил пока пуст.</p>
-            <p style="font-size: 0.8rem; margin: 0 0 16px 0;">Добавьте свои первые грамматические правила или заметки во вкладке сверху!</p>
-            <button id="rulesEmptyAddBtn" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); border: none; border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;">➕ Создать правило</button>
+            <p style="font-size: 0.95rem; font-weight: 600; margin: 0 0 6px 0;">Your rules handbook is empty.</p>
+            <p style="font-size: 0.8rem; margin: 0 0 16px 0;">Add your first grammar rules or notes in the tab above!</p>
+            <button id="rulesEmptyAddBtn" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); border: none; border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s;">➕ Create Rule</button>
           </div>
         `;
         const emptyAddBtn = document.getElementById('rulesEmptyAddBtn');
@@ -271,10 +271,10 @@ function setupRulesUI() {
             <div style="white-space: pre-wrap; word-break: break-word; color: var(--text-main); font-size: 0.88rem; line-height: 1.5; text-align: left;">${escapeHTML(rule.content)}</div>
             <div style="display: flex; gap: 8px; justify-content: flex-end; width: 100%;">
               <button class="rules-edit-btn" data-id="${rule.id}">
-                <span>✏️</span> Изменить
+                <span>✏️</span> Edit
               </button>
               <button class="rules-delete-btn" data-id="${rule.id}">
-                <span>🗑️</span> Удалить
+                <span>🗑️</span> Delete
               </button>
             </div>
           </div>
@@ -317,10 +317,10 @@ function setupRulesUI() {
           if (ruleContentInput) ruleContentInput.value = rule.content;
           
           if (rulesTabAdd) {
-            rulesTabAdd.innerHTML = '✏️ Редактирование';
+            rulesTabAdd.innerHTML = '✏️ Editing';
           }
           if (saveRuleBtn) {
-            saveRuleBtn.textContent = 'Сохранить изменения';
+            saveRuleBtn.textContent = 'Save Changes';
           }
           
           switchRulesTab('add');
@@ -331,7 +331,7 @@ function setupRulesUI() {
       const deleteBtn = item.querySelector('.rules-delete-btn');
       deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation(); // prevent accordion toggle
-        const confirmDelete = confirm(`Вы уверены, что хотите удалить правило "${rule.title}"?`);
+        const confirmDelete = confirm(`Are you sure you want to delete the rule "${rule.title}"?`);
         if (confirmDelete) {
           grammarRules = grammarRules.filter(r => r.id !== rule.id);
           saveGrammarRules();

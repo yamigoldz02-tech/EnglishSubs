@@ -275,4 +275,8 @@ window.openGamificationModal = openGamificationModal;
 window.closeGamificationModal = closeGamificationModal;
 
 // Запуск при загрузке документа
-document.addEventListener('DOMContentLoaded', initGamification);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGamification);
+} else {
+    initGamification();
+}

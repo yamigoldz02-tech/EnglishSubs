@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Lyric-Trainer — Premium Language Learning Platform</title>
   <!-- SEO & Social Meta -->
-  <meta name="description" content="AI Lyric-Trainer — интерактивный тренажер английского языка по текстам песен с умным грамматическим разбором и словарем на базе искусственного интеллекта.">
+  <meta name="description" content="AI Lyric-Trainer — an interactive English language trainer using song lyrics with smart grammar analysis and an AI-powered dictionary.">
   <!-- Google Fonts Connection and Import -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
     
     <!-- 1. Premium Glassmorphic Header Navbar -->
     <header class="navbar" id="appNavbar">
-      <div class="nav-brand" id="navBrandLogo" title="Вернуться на главный экран">
+      <div class="nav-brand" id="navBrandLogo" title="Return to home screen">
         <div class="brand-icon">
           <!-- Premium Audio Wave/CD SVG Icon -->
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -47,8 +47,8 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="songSearchInput" placeholder="Поиск песни или артиста..." autocomplete="off" aria-label="Поиск песни или артиста">
-            <button id="clearSearchBtn" class="clear-btn" title="Очистить поиск" style="display: none;">✕</button>
+            <input type="text" id="songSearchInput" placeholder="Search song or artist..." autocomplete="off" aria-label="Search song or artist">
+            <button id="clearSearchBtn" class="clear-btn" title="Clear search" style="display: none;">✕</button>
           </div>
           <div class="autocomplete-dropdown" id="songSearchDropdown" style="display: none;"></div>
         </div>
@@ -56,44 +56,44 @@
 
       <div class="nav-controls">
         <!-- Gamification Progress Badge -->
-        <div id="userProgressBadge" title="Ударный режим и Опыт" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none;">
+        <div id="userProgressBadge" title="Streak & Experience" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none;">
           <span style="color: #f97316;">🔥 <span id="streakCountUI">0</span></span>
           <span style="color: #3b82f6;">✨ <span id="xpCountUI">0</span> XP</span>
         </div>
 
         <!-- Premium Personal Dictionary Modal Trigger Button -->
-        <button id="openDictionaryBtn" aria-label="Мой словарь" title="Мой словарь" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(29, 185, 84, 0.1); border: 1px solid rgba(29, 185, 84, 0.2); color: var(--accent-spotify); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(29,185,84,0.1);">
-          <span>📚 Словарь (<span id="savedWordsCount">0</span>)</span>
+        <button id="openDictionaryBtn" data-en-tooltip="My Dictionary" aria-label="My Dictionary" title="My Dictionary" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(29, 185, 84, 0.1); border: 1px solid rgba(29, 185, 84, 0.2); color: var(--accent-spotify); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(29,185,84,0.1);">
+          <span>📚 Dictionary (<span id="savedWordsCount">0</span>)</span>
         </button>
 
         <!-- Premium Rules Modal Trigger Button -->
-        <button id="openRulesBtn" aria-label="Правила" title="Справочник правил" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); color: #0ea5e9; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);">
-          📐 Правила
+        <button id="openRulesBtn" data-en-tooltip="Grammar Rules" aria-label="Rules" title="Grammar rules reference" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); color: #0ea5e9; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);">
+          📐 Rules
         </button>
 
         <!-- Premium Word Training Modal Trigger Button -->
-        <button id="openTrainingBtn" aria-label="Тренировка" title="Тренировать слова через карточки" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(245,158,11,0.1);">
-          🔥 Тренировка
+        <button id="openTrainingBtn" data-en-tooltip="Flashcards" aria-label="Training" title="Train words with flashcards" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(245,158,11,0.1);">
+          🔥 Training
         </button>
 
         <!-- Premium Video Course Modal Trigger Button -->
-        <button id="openVideoCourseBtn" aria-label="Видеокурс" title="Интерактивный видеокурс English Galaxy" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2); color: #a78bfa; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(167,139,250,0.1);">
-          <span>🎬 Видеокурс (<span id="navWatchedCount">0</span>/50)</span>
+        <button id="openVideoCourseBtn" data-en-tooltip="Video Course" aria-label="Video Course" title="Interactive English Galaxy video course" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2); color: #a78bfa; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(167,139,250,0.1);">
+          <span>🎬 Course (<span id="navWatchedCount">0</span>/50)</span>
         </button>
 
         <!-- Notebook Trigger Button -->
-        <button id="openNotebookBtn" aria-label="Мои заметки" title="Открыть блокнот с заметками" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); color: #fbbf24; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(251,191,36,0.08);">
-          📓 Заметки
+        <button id="openNotebookBtn" data-en-tooltip="My Notes" aria-label="My Notes" title="Open notebook" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); color: #fbbf24; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(251,191,36,0.08);">
+          📓 Notes
         </button>
 
         <!-- Force Sync Button -->
-        <button id="forceSyncDataBtn" aria-label="Синхронизация" title="Принудительная синхронизация с облаком" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #3b82f6; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(59,130,246,0.08);">
-          <span>🔄 Облако</span>
+        <button id="forceSyncDataBtn" data-en-tooltip="Sync Data" aria-label="Sync" title="Force cloud sync" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #3b82f6; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(59,130,246,0.08);">
+          <span>🔄 Cloud Sync</span>
         </button>
 
 
         <!-- Theme Toggle Switch (Sun/Moon Switcher) -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Переключить тему оформления" title="Переключить тему (Светлая/Серая/Темная)">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Toggle theme (Light/Gray/Dark)">
           <!-- Sun Icon (displayed in dark mode to switch to light mode) -->
           <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
@@ -118,7 +118,7 @@
         </button>
         
         <!-- API Settings Modal Trigger Button -->
-        <button class="settings-btn" id="apiSettingsBtn" aria-label="Настройки API" title="Настройки API ключа">
+        <button class="settings-btn" id="apiSettingsBtn" aria-label="API Settings" title="API key settings">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -143,7 +143,7 @@
               </svg>
             </div>
             <h1 style="font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--text-main), #1db954, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px; margin-bottom: 0.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.25);">AI LYRIC-TRAINER</h1>
-            <p style="font-size: 1rem; color: var(--text-sub); font-weight: 500; max-width: 500px; margin: 0 auto; line-height: 1.6;">Интерактивная языковая экосистема на основе текстов ваших любимых песен. Учите английский легко и весело!</p>
+            <p style="font-size: 1rem; color: var(--text-sub); font-weight: 500; max-width: 500px; margin: 0 auto; line-height: 1.6;">An interactive language ecosystem powered by your favorite song lyrics. Learn English the fun and easy way!</p>
           </div>
 
           <!-- Quick Navigation / Stats Grid -->
@@ -153,12 +153,12 @@
             <div class="dashboard-nav-card" id="dashGoDict" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; gap: 8px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <span style="font-size: 1.8rem;">📚</span>
-                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--accent-spotify); letter-spacing: 1px;">Личный Словарь</span>
+                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--accent-spotify); letter-spacing: 1px;">Personal Dictionary</span>
               </div>
-              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">Мой словарь</h3>
-              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Просматривайте изученные слова, повторяйте лексику и настраивайте списки интервального повторения.</p>
+              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">My Dictionary</h3>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Browse learned words, review vocabulary, and manage your spaced repetition lists.</p>
               <div style="margin-top: auto; font-size: 0.85rem; font-weight: 700; color: var(--accent-spotify); display: flex; align-items: center; gap: 4px; padding-top: 8px;">
-                <span>Открыть словарь (<span id="dashWordsCount">0</span> слов)</span> →
+                <span>Open dictionary (<span id="dashWordsCount">0</span> words)</span> →
               </div>
             </div>
 
@@ -166,12 +166,12 @@
             <div class="dashboard-nav-card" id="dashGoTrain" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; gap: 8px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <span style="font-size: 1.8rem;">🔥</span>
-                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #f59e0b; letter-spacing: 1px;">Интервальное Повторение</span>
+                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #f59e0b; letter-spacing: 1px;">Spaced Repetition</span>
               </div>
-              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">ИИ-Тренировка</h3>
-              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Запустите умную тренировку по системе интервального повторения Лейтнера для закрепления слов в памяти.</p>
+              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">AI Training</h3>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Start smart training using the Leitner spaced repetition system to commit words to memory.</p>
               <div style="margin-top: auto; font-size: 0.85rem; font-weight: 700; color: #f59e0b; display: flex; align-items: center; gap: 4px; padding-top: 8px;">
-                <span>Запустить тренировку</span> →
+                <span>Start training</span> →
               </div>
             </div>
 
@@ -179,15 +179,15 @@
             <div class="dashboard-nav-card" id="dashGoVideoCourse" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; gap: 8px;">
               <div style="display: flex; align-items: center; justify-content: space-between;">
                 <span style="font-size: 1.8rem;">🎬</span>
-                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #a78bfa; letter-spacing: 1px;">Интерактивный Видеокурс</span>
+                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #a78bfa; letter-spacing: 1px;">Interactive Video Course</span>
               </div>
-              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">Английский по видео</h3>
-              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Курс от Александра Бекишева (50 уроков). Смотрите уроки и отмечайте пройденные видео.</p>
+              <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">English by Video</h3>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--text-sub); line-height: 1.4;">Course by Alexander Bekishev (50 lessons). Watch lessons and mark completed videos.</p>
               
               <!-- Premium progress bar inside card -->
               <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px; padding-top: 8px; width: 100%; box-sizing: border-box;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-sub); font-weight: 600;">
-                  <span>Прогресс:</span>
+                  <span>Progress:</span>
                   <span><span id="dashWatchedCount">0</span>/50 (<span id="dashWatchedPercent">0</span>%)</span>
                 </div>
                 <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; position: relative;">
@@ -196,7 +196,7 @@
               </div>
 
               <div style="margin-top: 8px; font-size: 0.85rem; font-weight: 700; color: #a78bfa; display: flex; align-items: center; gap: 4px;">
-                <span>Открыть видеокурс</span> →
+                <span>Open video course</span> →
               </div>
             </div>
 
@@ -208,7 +208,7 @@
             <!-- Favorites List Block -->
             <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="font-size: 0.8rem; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;">
-                <span>💖 Избранные песни</span>
+                <span>💖 Favorite Songs</span>
               </div>
               <div id="dashFavoritesContainer" style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 4px;">
                 <!-- Favorites list will be loaded here dynamically -->
@@ -218,7 +218,7 @@
             <!-- Preloaded Best Practice Songs -->
             <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-spotify); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;">
-                <span>🚀 Рекомендуемый быстрый старт</span>
+                <span>🚀 Recommended Quick Start</span>
               </div>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                 <div class="dash-song-recommendation" id="dashStartScorpions" style="display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; cursor: pointer; transition: all 0.2s;">
@@ -258,14 +258,14 @@
             <div class="artist-name" id="artistName" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: var(--transition-fast);" onmouseover="this.style.color='var(--accent-spotify)'" onmouseout="this.style.color=''" onclick="window.showArtistSongsModal(this.textContent)">Scorpions</div>
           </div>
           <!-- Premium Favorites Toggle Button -->
-          <button class="favorite-toggle-btn" id="favoriteToggleBtn" aria-label="Добавить в избранное" title="Добавить песню в избранное">
+          <button class="favorite-toggle-btn" id="favoriteToggleBtn" aria-label="Add to favorites" title="Add song to favorites">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
           </button>
           
           <!-- Premium Edit Lyrics Button -->
-          <button class="edit-lyrics-btn" id="editLyricsBtn" aria-label="Редактировать текст песни" title="Редактировать текст песни" style="background: none; border: none; color: var(--text-sub); cursor: pointer; padding: 8px; transition: color 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: center; outline: none; margin-left: 8px;">
+          <button class="edit-lyrics-btn" id="editLyricsBtn" aria-label="Edit song lyrics" title="Edit song lyrics" style="background: none; border: none; color: var(--text-sub); cursor: pointer; padding: 8px; transition: color 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: center; outline: none; margin-left: 8px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
               <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path>
@@ -275,20 +275,20 @@
 
         <!-- Phrase Builder — Word Order Trainer Card -->
         <div class="lyrics-board-card" id="phrase-builder" style="padding: 1.8rem; min-height: auto; margin-bottom: 1.5rem; gap: 1rem; display: none;">
-          <div class="card-label" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--accent-spotify);">🏆 Phrase Builder — Тренажер порядка слов</div>
+          <div class="card-label" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--accent-spotify);">🏆 Phrase Builder — Word Order Trainer</div>
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 0.2rem; width: 100%;">
             <p style="font-size: 0.95rem; color: var(--text-sub); margin: 0; font-style: italic; flex: 1;" id="phrase-builder-hint">
-              Собирайте предложение по смыслу...
+              Build the sentence in the correct order...
             </p>
-            <button id="newPhraseBtn" title="Сгенерировать новое случайное предложение" style="background: rgba(255,255,255,0.06); padding: 7px 14px; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); color: var(--text-main); font-weight: 600; transition: all 0.2s; outline: none; user-select: none;">
-              <span>🔄 Другая фраза</span>
+            <button id="newPhraseBtn" title="Generate a new random sentence" style="background: rgba(255,255,255,0.06); padding: 7px 14px; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); color: var(--text-main); font-weight: 600; transition: all 0.2s; outline: none; user-select: none;">
+              <span>🔄 New Phrase</span>
             </button>
           </div>
           <div class="build-zone" id="buildZone"></div>
           <div class="pool-zone" id="poolZone"></div>
           <div style="display: flex; align-items: center; gap: 15px; margin-top: 0.2rem; width: 100%; flex-wrap: wrap;">
             <button id="checkPhraseBtn" style="background: var(--accent-spotify, #1db954); padding: 8px 22px; border-radius: 20px; font-size: 0.85rem; border: none; color: #000000; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; user-select: none; display: flex; align-items: center; gap: 6px;">
-              <span>Ответить</span>
+              <span>Submit</span>
             </button>
             <div id="phraseFeedbackMsg" style="font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;"></div>
           </div>
@@ -296,13 +296,13 @@
 
         <!-- Audio Dictation — Shadowing Mode Card -->
         <div class="lyrics-board-card" id="audio-dictation" style="padding: 1.8rem; min-height: auto; margin-bottom: 1.5rem; gap: 1rem; display: none;">
-          <div class="card-label" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--accent-spotify);">🎧 Audio Dictation — Аудио-диктант</div>
+          <div class="card-label" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--accent-spotify);">🎧 Audio Dictation — Listening Practice</div>
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 0.2rem; width: 100%;">
             <p style="font-size: 0.95rem; color: var(--text-sub); margin: 0; font-style: italic; flex: 1;">
-              Послушайте речь и запишите то, что услышали...
+              Listen to the speech and write down what you hear...
             </p>
-            <button id="dictationNewBtn" title="Новое случайное предложение" style="background: rgba(255,255,255,0.06); padding: 7px 14px; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); color: var(--text-main); font-weight: 600; transition: all 0.2s; outline: none; user-select: none;">
-              <span>🔄 Другая фраза</span>
+            <button id="dictationNewBtn" title="New random sentence" style="background: rgba(255,255,255,0.06); padding: 7px 14px; border-radius: 20px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); color: var(--text-main); font-weight: 600; transition: all 0.2s; outline: none; user-select: none;">
+              <span>🔄 New Phrase</span>
             </button>
           </div>
           
@@ -311,17 +311,17 @@
               🔊
             </button>
             <button id="dictationHintBtn" style="background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); color: var(--text-main); font-weight: 600; transition: all 0.2s; outline: none;">
-              💡 Подсказка
+              💡 Hint
             </button>
           </div>
           
-          <textarea id="dictationInput" rows="2" placeholder="Введите то, что услышали..." style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 12px; color: var(--text-main); font-family: inherit; font-size: 0.95rem; resize: none; outline: none; transition: border-color 0.2s; box-sizing: border-box;"></textarea>
+          <textarea id="dictationInput" rows="2" placeholder="Type what you heard..." style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 12px; color: var(--text-main); font-family: inherit; font-size: 0.95rem; resize: none; outline: none; transition: border-color 0.2s; box-sizing: border-box;"></textarea>
           
           <div id="dictationFeedback" style="display: none; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; line-height: 1.4; box-sizing: border-box; width: 100%;"></div>
           
           <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
             <button id="dictationCheckBtn" disabled style="background: var(--accent-spotify); padding: 8px 22px; border-radius: 20px; font-size: 0.85rem; border: none; color: #000000; font-weight: 700; cursor: pointer; transition: all 0.2s; opacity: 0.5; outline: none; user-select: none;">
-              Проверить
+              Check
             </button>
           </div>
         </div>
@@ -330,20 +330,20 @@
         <div class="lyrics-board-card" id="lyricsBoardCard">
           <div class="lyrics-hint">
             <div class="lyrics-hint-dot"></div>
-            <span>Нажмите на любую строчку песни, чтобы запустить интерактивный AI-разбор произношения, перевода и грамматики.</span>
+            <span>Click on any lyric line to launch an interactive AI analysis of pronunciation, translation, and grammar.</span>
           </div>
 
           <!-- AI Background Pre-fetching Status Bar (Premium Usability Upgrade) -->
           <div id="prefetchStatusContainer" style="display: none; margin-bottom: 12px; padding: 10px 16px; border-radius: 12px; background: rgba(139, 92, 246, 0.04); border: 1px solid rgba(139, 92, 246, 0.12); font-size: 0.8rem; align-items: center; justify-content: space-between; gap: 12px; transition: all 0.3s ease; box-sizing: border-box; width: 100%;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="pulse-dot-violet" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #8b5cf6; box-shadow: 0 0 8px #8b5cf6; flex-shrink: 0;"></span>
-              <span id="prefetchStatusText" style="color: var(--text-main); font-weight: 500;">Подготовка AI-анализа песни...</span>
+              <span id="prefetchStatusText" style="color: var(--text-main); font-weight: 500;">Preparing AI song analysis...</span>
             </div>
             <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
               <div style="width: 80px; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; position: relative;">
                 <div id="prefetchProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #8b5cf6, #ec4899); transition: width 0.4s ease;"></div>
               </div>
-              <button id="togglePrefetchBtn" style="background: none; border: none; padding: 4px 8px; font-size: 0.72rem; color: var(--accent-spotify); cursor: pointer; font-weight: 600; outline: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" title="Приостановить фоновый разбор">Пауза</button>
+              <button id="togglePrefetchBtn" style="background: none; border: none; padding: 4px 8px; font-size: 0.72rem; color: var(--accent-spotify); cursor: pointer; font-weight: 600; outline: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'" title="Pause background analysis">Pause</button>
             </div>
           </div>
 
@@ -355,13 +355,13 @@
       </section>
 
       <!-- Right Column: Hidden Overlay Drawer Panel (Inside sidebar-panel overlay) -->
-      <aside class="sidebar-panel" id="sidebarPanel" aria-label="Панель умного AI разбора">
+      <aside class="sidebar-panel" id="sidebarPanel" aria-label="AI smart analysis panel">
         <div class="sidebar-header">
           <div class="sidebar-title-container">
             <span class="ai-badge">AI INSIGHTS</span>
-            <h2 class="sidebar-title">Разбор Строки</h2>
+            <h2 class="sidebar-title">Line Analysis</h2>
           </div>
-          <button class="close-btn" id="closeBtn" aria-label="Закрыть панель">
+          <button class="close-btn" id="closeBtn" aria-label="Close panel">
             <!-- Close cross SVG Icon -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -379,11 +379,11 @@
           <div class="chat-divider"></div>
           <div class="chat-header">
             <span class="chat-icon">💬</span>
-            <span class="chat-label">Спросить ИИ-преподавателя</span>
+            <span class="chat-label">Ask AI Tutor</span>
           </div>
           <div class="chat-input-wrapper">
-            <textarea class="chat-input" id="chatInput" placeholder="Спросите ИИ о грамматике, сленге или произношении в этой строке..." rows="2"></textarea>
-            <button class="chat-send-btn" id="chatSendBtn" aria-label="Отправить вопрос" title="Отправить вопрос">
+            <textarea class="chat-input" id="chatInput" placeholder="Ask AI about grammar, slang, or pronunciation in this line..." rows="2"></textarea>
+            <button class="chat-send-btn" id="chatSendBtn" aria-label="Send question" title="Send question">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -410,69 +410,69 @@
   <div class="modal-overlay" id="settingsModal" style="display: none;">
     <div class="modal-card" style="max-width: 480px; width: 95%;">
       <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px;">⚙️ Настройки приложения</h3>
-        <button class="modal-close-btn" id="closeSettingsBtn">✕</button>
+        <h3 style="display: flex; align-items: center; gap: 8px;">⚙️ App Settings</h3>
+        <button class="modal-close-btn" id="closeSettingsBtn" >✕</button>
       </div>
       <div class="modal-body" style="display: flex; flex-direction: column; gap: 18px; max-height: 70vh; overflow-y: auto; text-align: left; padding: 20px;">
         
         <!-- Section 1: API Key -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: var(--accent-spotify); font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">🔑 API ключ для ИИ-разбора</h4>
+          <h4 style="margin: 0 0 4px 0; color: var(--accent-spotify); font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">🔑 API Key for AI Analysis</h4>
           <p style="margin: 0; font-size: 0.78rem; color: var(--text-sub); line-height: 1.4;">
-            Используется для ИИ-разборов через OpenRouter или Gemini API.
+            Used for AI analysis via OpenRouter or Gemini API.
           </p>
           <div class="form-group" style="margin: 0; display: flex; flex-direction: column; gap: 4px;">
-            <input type="password" id="apiKeyInput" placeholder="Вставьте sk-or-... или AIzaSy..." autocomplete="off" style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.85rem; outline: none;">
+            <input type="password" id="apiKeyInput" placeholder="Paste sk-or-... or AIzaSy..." autocomplete="off" style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.85rem; outline: none;">
           </div>
           <div class="modal-status" id="apiStatusMessage" style="font-size: 0.75rem; margin-top: 4px; display: none;"></div>
         </div>
 
         <!-- Section 2: Hotkeys & Shortcuts -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 12px;">
-          <h4 style="margin: 0 0 2px 0; color: #a78bfa; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">📓 Открытие заметок (Notebook)</h4>
+          <h4 style="margin: 0 0 2px 0; color: #a78bfa; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">📓 Notebook Shortcut</h4>
           
           <!-- Keyboard Hotkey Configuration -->
           <div style="display: flex; flex-direction: column; gap: 6px;">
-            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">⌨️ Горячая клавиша на клавиатуре:</label>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">⌨️ Keyboard hotkey:</label>
             <div style="display: flex; gap: 8px; align-items: center;">
-              <button id="notebookHotkeyRecorder" style="flex-grow: 1; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px; color: var(--text-main); font-size: 0.85rem; font-weight: 600; cursor: pointer; text-align: center; outline: none; transition: all 0.2s;" title="Кликните, чтобы задать клавишу">
-                Нажмите для записи...
+              <button id="notebookHotkeyRecorder" style="flex-grow: 1; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px; color: var(--text-main); font-size: 0.85rem; font-weight: 600; cursor: pointer; text-align: center; outline: none; transition: all 0.2s;" title="Click to set a key">
+                Press to record...
               </button>
-              <button id="notebookHotkeyClear" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; border-radius: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" title="Сбросить клавишу">✕</button>
+              <button id="notebookHotkeyClear" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; border-radius: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" title="Reset key">✕</button>
             </div>
-            <span style="font-size: 0.68rem; color: var(--text-muted);">Позволяет мгновенно открывать и закрывать блокнот нажатием клавиши (например, Alt+N, F4 или N).</span>
+            <span style="font-size: 0.68rem; color: var(--text-muted);">Instantly open and close the notebook with a key press (e.g., Alt+N, F4, or N).</span>
           </div>
 
           <!-- Mouse Trigger Configuration -->
           <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
-            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">🖱️ Быстрое действие мыши:</label>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">🖱️ Mouse quick action:</label>
             <select id="notebookMouseTriggerSelect" style="width: 100%; height: 38px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 0 10px; color: var(--text-main); font-size: 0.85rem; outline: none; box-sizing: border-box; cursor: pointer;">
-              <option value="none">❌ Отключено (только клик по вкладке)</option>
-              <option value="middle">🖱️ Клик средней кнопкой мыши (колесико)</option>
-              <option value="dblclick">🖱️ Двойной клик на фоне страницы</option>
+              <option value="none">❌ Disabled (tab click only)</option>
+              <option value="middle">🖱️ Middle mouse button (scroll wheel)</option>
+              <option value="dblclick">🖱️ Double-click on page background</option>
             </select>
-            <span style="font-size: 0.68rem; color: var(--text-muted);">Быстрое действие мыши для переключения блокнота из любого места.</span>
+            <span style="font-size: 0.68rem; color: var(--text-muted);">Mouse quick action to toggle the notebook from anywhere.</span>
           </div>
 
         </div>
 
         <!-- Section 3: Spotify Auto-Pause -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: #1db954; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">🎧 Spotify Авто-Пауза</h4>
+          <h4 style="margin: 0 0 4px 0; color: #1db954; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">🎧 Spotify Auto-Pause</h4>
           <p style="margin: 0; font-size: 0.78rem; color: var(--text-sub); line-height: 1.4;">
-            Автоматически ставит музыку Spotify на паузу при просмотре видеоуроков и включает её обратно при паузе видео.
+            Automatically pauses Spotify when watching video lessons and resumes it when video is paused.
           </p>
           <div class="form-group" style="margin: 0; display: flex; flex-direction: column; gap: 4px;">
-            <input type="text" id="spotifyClientIdInput" placeholder="Введите Spotify Client ID..." autocomplete="off" style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.85rem; outline: none;">
+            <input type="text" id="spotifyClientIdInput" placeholder="Enter Spotify Client ID..." autocomplete="off" style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.85rem; outline: none;">
           </div>
           <button id="spotifyConnectBtn" style="background: #1db954; color: #000; border: none; font-weight: 700; border-radius: 20px; padding: 8px 16px; margin-top: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(29, 185, 84, 0.2); transition: all 0.2s;">
-            <span>Подключить Spotify</span>
+            <span>Connect Spotify</span>
           </button>
           <div id="spotifyStatusMessage" style="font-size: 0.75rem; margin-top: 2px; color: #a78bfa; display: none;"></div>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);">
             <div style="display: flex; flex-direction: column; gap: 4px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Авто-пауза Spotify</span>
-              <span style="font-size: 0.68rem; color: var(--text-muted);">Ставить Spotify на паузу при воспроизведении видео и возобновлять при паузе.</span>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Spotify Auto-Pause</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Pause Spotify during video playback and resume when paused.</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="spotifyAutoPauseToggle" checked>
@@ -481,8 +481,8 @@
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);">
             <div style="display: flex; flex-direction: column; gap: 4px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Сейчас играет</span>
-              <span style="font-size: 0.68rem; color: var(--text-muted);">Показывать виджет с текущим треком Spotify в углу экрана.</span>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Now Playing</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Show a widget with the current Spotify track in the corner of the screen.</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="spotifyNowPlayingToggle" checked>
@@ -492,11 +492,11 @@
         </div>
         <!-- Section 4: Dictionary Options -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: #fbbf24; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">📚 Настройки словаря</h4>
+          <h4 style="margin: 0 0 4px 0; color: #fbbf24; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">📚 Dictionary Settings</h4>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
             <div style="display: flex; flex-direction: column; gap: 4px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Слова с большой буквы</span>
-              <span style="font-size: 0.68rem; color: var(--text-muted);">Автоматически капитализировать первую букву при добавлении в словарь.</span>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Capitalize first letter</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Automatically capitalize the first letter when adding to the dictionary.</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="dictionaryCapitalizeToggle" checked>
@@ -505,13 +505,28 @@
           </div>
         </div>
 
-        <!-- Section 4: Performance Options -->
+        <!-- Section 5: Notebook Settings -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: #10b981; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">⚡ Производительность</h4>
+          <h4 style="margin: 0 0 4px 0; color: #3b82f6; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">📝 Notebook Settings</h4>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
             <div style="display: flex; flex-direction: column; gap: 4px;">
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Режим экономии GPU</span>
-              <span style="font-size: 0.68rem; color: var(--text-muted);">Отключите размытие фона для повышения производительности на слабых видеокартах.</span>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Show Line Numbers</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Display line numbers on the left side of notes.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="notebookLineNumbersToggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Section 6: Performance Options -->
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
+          <h4 style="margin: 0 0 4px 0; color: #10b981; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">⚡ Performance</h4>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">GPU Saver Mode</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Disable background blur to improve performance on weaker GPUs.</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="performanceToggle">
@@ -522,16 +537,16 @@
 
         <!-- Section 5: Backup & Restore -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: #3b82f6; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">💾 Резервное копирование и Перенос</h4>
+          <h4 style="margin: 0 0 4px 0; color: #3b82f6; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">💾 Backup & Transfer</h4>
           <p style="margin: 0; font-size: 0.68rem; color: var(--text-muted); line-height: 1.45;">
-            Сохраните резервную копию вашего обучения в файл или перенесите её на другой адрес (интегрированный сайт).
+            Save a backup of your learning progress to a file or transfer it to another device.
           </p>
           <div style="display: flex; gap: 8px; margin-top: 4px;">
             <button id="exportBackupBtn" class="modal-btn" style="flex-grow: 1; margin: 0; padding: 8px 12px; font-size: 0.78rem; font-weight: 700; background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.25); color: #3b82f6; border-radius: 10px; cursor: pointer; transition: all 0.2s; outline: none;">
-              📥 Экспорт (Сохранить)
+              📥 Export (Save)
             </button>
             <button id="importBackupBtn" class="modal-btn" style="flex-grow: 1; margin: 0; padding: 8px 12px; font-size: 0.78rem; font-weight: 700; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); color: #10b981; border-radius: 10px; cursor: pointer; transition: all 0.2s; outline: none;">
-              📤 Импорт (Загрузить)
+              📤 Import (Load)
             </button>
           </div>
           <input type="file" id="importBackupFileInput" accept=".json" style="display: none;">
@@ -540,21 +555,21 @@
 
         <!-- Section 6: Cloud Synchronization -->
         <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px;">
-          <h4 style="margin: 0 0 4px 0; color: #f43f5e; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">☁️ Синхронизация (ПК и Телефон)</h4>
+          <h4 style="margin: 0 0 4px 0; color: #f43f5e; font-size: 0.9rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">☁️ Cloud Sync (PC & Phone)</h4>
           <p style="margin: 0; font-size: 0.68rem; color: var(--text-muted); line-height: 1.45;">
-            Синхронизируйте прогресс между вашим ПК и телефоном. На ПК войдите через Google, затем введите полученный код на телефоне.
+            Sync progress between your PC and phone. On PC, sign in with Google, then enter the code on your phone.
           </p>
           
           <div id="syncAuthContainer" style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
             <!-- Not logged in state -->
             <div id="syncNotLoggedContainer" style="display: flex; flex-direction: column; gap: 8px;">
               <button id="syncGoogleLoginBtn" class="modal-btn" style="padding: 8px 12px; font-size: 0.78rem; font-weight: 700; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.25); color: #f43f5e; border-radius: 10px; cursor: pointer; transition: all 0.2s; outline: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                Войти через Google (на ПК)
+                Sign in with Google (on PC)
               </button>
               <div style="display: flex; gap: 6px; align-items: stretch;">
-                <input type="text" id="syncCodeInput" placeholder="Код переноса (для телефона)" autocomplete="off" style="flex-grow: 1; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.8rem; outline: none; min-width: 0;">
+                <input type="text" id="syncCodeInput" placeholder="Transfer code (for phone)" autocomplete="off" style="flex-grow: 1; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.8rem; outline: none; min-width: 0;">
                 <button id="syncLinkCodeBtn" class="modal-btn" style="padding: 0 14px; font-size: 0.78rem; font-weight: 700; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); color: #10b981; border-radius: 10px; cursor: pointer; outline: none; flex-shrink: 0;">
-                  Связать
+                  Link
                 </button>
               </div>
             </div>
@@ -562,11 +577,11 @@
             <!-- Logged in state -->
             <div id="syncLoggedInContainer" style="display: none; flex-direction: column; gap: 8px;">
               <div style="font-size: 0.8rem; color: var(--text-main); display: flex; flex-direction: column; gap: 4px;">
-                <span>Вы вошли как: <strong id="syncUserEmail" style="color: #f43f5e;">...</strong></span>
-                <span id="syncCodeDisplayContainer" style="display: none;">Ваш код для телефона: <strong id="syncUserCode" style="background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 4px; user-select: all; font-family: monospace; display: inline-block; margin-top: 2px;">...</strong></span>
+                <span>Signed in as: <strong id="syncUserEmail" style="color: #f43f5e;">...</strong></span>
+                <span id="syncCodeDisplayContainer" style="display: none;">Your phone code: <strong id="syncUserCode" style="background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 4px; user-select: all; font-family: monospace; display: inline-block; margin-top: 2px;">...</strong></span>
               </div>
               <button id="syncLogoutBtn" class="modal-btn" style="padding: 6px 12px; font-size: 0.75rem; font-weight: 600; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-main); border-radius: 10px; cursor: pointer; transition: all 0.2s; outline: none; align-self: flex-start;">
-                Выйти / Отвязать
+                Sign Out / Unlink
               </button>
             </div>
           </div>
@@ -574,8 +589,8 @@
 
       </div>
       <div class="modal-footer" style="padding: 12px 24px; border-top: 1px solid rgba(255,255,255,0.05);">
-        <button class="modal-btn secondary-btn" id="resetApiKeyBtn" style="margin: 0;">Сбросить всё</button>
-        <button class="modal-btn primary-btn" id="saveApiKeyBtn" style="margin: 0; background: var(--accent-spotify); color: #000;">Сохранить настройки</button>
+        <button class="modal-btn secondary-btn" id="resetApiKeyBtn" style="margin: 0;">Reset All</button>
+        <button class="modal-btn primary-btn" id="saveApiKeyBtn" style="margin: 0; background: var(--accent-spotify); color: #000;">Save Settings</button>
       </div>
     </div>
   </div>
@@ -584,23 +599,23 @@
   <div class="modal-overlay" id="editLyricsModal" style="display: none;">
     <div class="modal-card" style="max-width: 600px;">
       <div class="modal-header">
-        <h3>📝 Редактировать текст песни</h3>
-        <button class="modal-close-btn" id="closeEditLyricsBtn">✕</button>
+        <h3>📝 Edit Song Lyrics</h3>
+        <button class="modal-close-btn" id="closeEditLyricsBtn" >✕</button>
       </div>
       <div class="modal-body">
         <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 1.25rem;">
-          Вы можете исправить опечатки, вставить правильный текст из Spotify или Genius.
-          Каждая пустая строка разделяет текст на куплеты (по 3-4 строчки).
+          You can fix typos or paste the correct lyrics from Spotify or Genius.
+          Each blank line separates the text into verses (3-4 lines each).
         </p>
         
         <div class="form-group" style="margin-bottom: 0px;">
-          <label for="editLyricsTextarea">Текст песни:</label>
-          <textarea id="editLyricsTextarea" placeholder="Введите или вставьте текст песни на английском..."></textarea>
+          <label for="editLyricsTextarea">Song lyrics:</label>
+          <textarea id="editLyricsTextarea" placeholder="Enter or paste English song lyrics..."></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="modal-btn secondary-btn" id="cancelEditLyricsBtn">Отмена</button>
-        <button class="modal-btn primary-btn" id="saveEditLyricsBtn">Сохранить изменения</button>
+        <button class="modal-btn secondary-btn" id="cancelEditLyricsBtn">Cancel</button>
+        <button class="modal-btn primary-btn" id="saveEditLyricsBtn">Save изменения</button>
       </div>
     </div>
   </div>
@@ -612,17 +627,17 @@
       <div class="mobile-drag-handle"></div>
       
       <div class="modal-header" style="flex-shrink: 0;">
-        <h3>📚 Мой словарь</h3>
+        <h3>📚 My Dictionary</h3>
         <div style="display: flex; align-items: center; gap: 6px;">
           <button id="dictExpandWidthBtn" title="Расширить по ширине" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">↔️</button>
           <button id="dictExpandHeightBtn" title="Расширить по высоте" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">↕️</button>
-          <button class="modal-close-btn" id="closeDictionaryBtn">✕</button>
+          <button class="modal-close-btn" id="closeDictionaryBtn" >✕</button>
         </div>
       </div>
 
       <!-- Premium Dictionary Tabs -->
       <div class="dict-tabs" style="display: flex; gap: 20px; padding: 0 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; box-sizing: border-box; background: rgba(255,255,255,0.01);">
-        <button class="dict-tab active" id="dictTabPersonal" style="background: none; border: none; color: var(--accent-spotify); font-weight: 700; padding: 12px 0; border-bottom: 2px solid var(--accent-spotify); cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">📂 Мой словарь</button>
+        <button class="dict-tab active" id="dictTabPersonal" style="background: none; border: none; color: var(--accent-spotify); font-weight: 700; padding: 12px 0; border-bottom: 2px solid var(--accent-spotify); cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">📂 My Dictionary</button>
         <button class="dict-tab" id="dictTabEssential" style="background: none; border: none; color: var(--text-muted); font-weight: 600; padding: 12px 0; border-bottom: 2px solid transparent; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">🎓 Частотный Топ-1000</button>
       </div>
 
@@ -647,7 +662,7 @@
               <div style="display: flex; align-items: center; gap: 4px; flex-grow: 1; min-width: 140px;">
                 <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap;">📁 Папка:</span>
                 <select id="dictCategoryFilter" class="premium-select-filter" style="width: 100%; min-width: 0;">
-                  <option value="Все слова">📚 Все папки</option>
+                  <option value="Все слова">📚 All Folders</option>
                   <option value="Общее">📁 Общее</option>
                   <option value="Базовые глаголы">📁 Базовые глаголы</option>
                   <option value="Сленг и идиомы">📁 Сленг и идиомы</option>
@@ -656,12 +671,15 @@
                 <button id="addCustomCategoryBtn" title="Создать свою папку" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
                   ➕
                 </button>
+                <button id="manageFoldersBtn" title="Manage Folders" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
+                  ⚙️
+                </button>
               </div>
               <!-- Category filter -->
               <div style="display: flex; align-items: center; gap: 4px; flex-grow: 1; min-width: 140px;">
                 <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap;">🏷️ Кат.:</span>
                 <select id="dictCustomCategoryFilter" class="premium-select-filter" style="width: 100%; min-width: 0;">
-                  <option value="Все категории">🏷️ Все категории</option>
+                  <option value="All Categories">🏷️ All Categories</option>
                   <option value="Без категории">🏷️ Без категории</option>
                 </select>
                 <button id="addCustomCustomCategoryBtn" title="Создать свою категорию" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
@@ -699,7 +717,7 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="dictSearchInput" placeholder="Поиск в словаре..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.82rem; outline: none; width: 100%;">
+              <input type="text" id="dictSearchInput" placeholder="Search в словаре..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.82rem; outline: none; width: 100%;">
             </div>
             <button id="startMatchGameBtn" title="&#1055;&#1086;&#1080;&#1075;&#1088;&#1072;&#1090;&#1100; &#1074; Match &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 4px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">
               &#127918; Match
@@ -722,15 +740,15 @@
 
           <!-- Bottom dictionary controls side-by-side -->
           <div class="dict-bottom-controls" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; flex-shrink: 0; width: 100%; gap: 6px; flex-wrap: wrap;">
-            <button class="modal-btn secondary-btn" id="clearDictBtn" style="font-size: 0.8rem; padding: 6px 12px; border-radius: 20px; outline: none; margin: 0;">☠️ Очистить</button>
+            <button class="modal-btn secondary-btn" id="clearDictBtn" style="font-size: 0.8rem; padding: 6px 12px; border-radius: 20px; outline: none; margin: 0;">☠️ Clear</button>
             <button class="modal-btn" id="startTrainingFromDictBtn" style="background: #f59e0b; color: #000000; font-weight: 700; border: none; border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; box-shadow: 0 4px 12px rgba(245,158,11,0.25); margin: 0;">
-              🔥 Тренировка
+              🔥 Training
             </button>
             <div style="display: flex; gap: 6px; align-items: center;">
-              <button id="addManualWordBtn" title="Добавить слово вручную" style="background: var(--accent-spotify); border: none; color: #000000; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 12px rgba(29,185,84,0.2);">
+              <button id="addManualWordBtn" title="Add word manually" style="background: var(--accent-spotify); border: none; color: #000000; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 12px rgba(29,185,84,0.2);">
                 <span style="font-size: 1.05rem; font-weight: 900; line-height: 1; color: #000;">+</span><span>Слово</span>
               </button>
-              <button id="addManualPhraseBtn" title="Добавить фразу вручную" style="background: #3b82f6; border: none; color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 12px rgba(59,130,246,0.25);">
+              <button id="addManualPhraseBtn" title="Add phrase manually" style="background: #3b82f6; border: none; color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 12px rgba(59,130,246,0.25);">
                 <span style="font-size: 1.05rem; font-weight: 900; line-height: 1; color: #fff;">+</span><span>Фразу</span>
               </button>
             </div>
@@ -745,7 +763,7 @@
               <span style="font-size: 1.1rem; font-weight: 700; color: var(--accent-spotify);">⏱️</span>
               <span id="matchTimer" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text-main); letter-spacing: 1px;">0.0s</span>
             </div>
-            <button id="exitMatchGameBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; outline: none; margin: 0; flex-shrink: 0; cursor: pointer;">✕ Выйти из игры</button>
+            <button id="exitMatchGameBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; outline: none; margin: 0; flex-shrink: 0; cursor: pointer;">✕ Log Out из игры</button>
           </div>
 
           <!-- 12-tile Game Grid -->
@@ -767,7 +785,7 @@
                 <div id="learnProgressBar" style="width: 10%; height: 100%; background: var(--accent-spotify); border-radius: 3px; transition: width 0.3s ease;"></div>
               </div>
             </div>
-            <button id="exitLearnGameBtn" class="modal-btn secondary-btn" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px; outline: none; margin: 0; flex-shrink: 0; cursor: pointer;">✕ Выйти</button>
+            <button id="exitLearnGameBtn" class="modal-btn secondary-btn" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px; outline: none; margin: 0; flex-shrink: 0; cursor: pointer;">✕ Log Out</button>
           </div>
 
           <!-- Question Area -->
@@ -803,14 +821,14 @@
 
   <!-- Training Modal -->
   <div class="modal-overlay" id="trainingModal" style="display: none; z-index: 10050;">
-    <div class="modal-card" id="trainingModalCard" style="max-width: 480px; width: 90%; height: 68vh; min-height: 520px; max-height: 72vh; display: flex; flex-direction: column; box-sizing: border-box;">
+    <div class="modal-card" id="trainingModalCard" style="max-width: 480px; width: 90%; height: 75vh; min-height: 600px; max-height: 85vh; display: flex; flex-direction: column; box-sizing: border-box;">
       <div class="modal-header" style="flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; padding-bottom: 8px; gap: 10px; border-bottom: none !important;">
-        <h3 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1.05rem; display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%;">
-          🔥 Тренировка (<span id="trainingCategoryLabel" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Все слова</span>)
+        <h3 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1.05rem; display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1 1 auto; min-width: 0; padding-right: 12px;">
+          🔥 Training (<span id="trainingCategoryLabel" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;">Все слова</span>)
         </h3>
-        <div style="display: flex; align-items: center; flex-shrink: 0; gap: 6px;">
-          <button id="trainingExpandWidthBtn" title="Расширить по ширине" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">↔️</button>
-          <button class="modal-close-btn" id="closeTrainingModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
+        <div style="display: flex; align-items: center; flex-shrink: 0; gap: 8px; min-width: max-content;">
+          <button id="trainingExpandWidthBtn" title="Расширить по ширине" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none; flex-shrink: 0;">↔️</button>
+          <button class="modal-close-btn" id="closeTrainingModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; flex-shrink: 0; padding: 4px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;">✕</button>
         </div>
       </div>
 
@@ -829,6 +847,9 @@
       <div id="trainingSettingsBar" class="training-settings-collapse" style="flex-shrink: 0; padding: 0 1.5rem; border-bottom: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: space-between; gap: 8px; box-sizing: border-box; flex-wrap: wrap;">
         <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px;">Параметры:</span>
         <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <select id="trainingFolderSelect" class="premium-micro-select" style="font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; height: 26px; border: 1px solid var(--border-glass); outline: none;" title="Папка для тренировки">
+            <option value="Все слова">📚 All Folders</option>
+          </select>
           <select id="trainingTypeSelect" class="premium-micro-select" style="font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; height: 26px; border: 1px solid var(--border-glass); outline: none;">
             <option value="all">📚 Всё подряд</option>
             <option value="words">🔤 Только слова</option>
@@ -849,6 +870,10 @@
             <option value="shuffle">🔀 Случайно</option>
             <option value="ordered">🔢 По порядку</option>
           </select>
+          <label style="display: flex; align-items: center; gap: 4px; font-size: 0.72rem; color: var(--text-sub); margin-left: 4px; cursor: pointer; height: 26px;" title="Если включено, будут добавлены все слова выбранной папки, игнорируя интервалы повторений">
+            <input type="checkbox" id="trainingForceAllCheckbox" style="accent-color: var(--accent-spotify); margin: 0; width: 14px; height: 14px; cursor: pointer;">
+            Учить всё (Без интервалов)
+          </label>
         </div>
       </div>
 
@@ -898,13 +923,13 @@
         </div>
 
         <!-- Interactive 3D Flip Card -->
-        <div class="flashcard-container" id="dictFlashcard" style="display: none;">
+        <div class="flashcard-container" id="dictFlashcard" style="display: none; width: 100%; max-width: 320px; height: 420px; margin: 0 auto;">
           <div class="flashcard-inner" id="flashcardInner">
             
             <!-- Front Side -->
             <div class="flashcard-front">
               <div id="cardFrontLabel" style="flex-shrink: 0; font-size: 0.65rem; letter-spacing: 1px; color: var(--accent-spotify); font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">СЛОВО НА АНГЛИЙСКОМ</div>
-              <div id="cardWordContainer" style="flex: 1 1 auto; display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%; padding: 4px 0; box-sizing: border-box;">
+              <div id="cardWordContainer" style="flex: 1 1 auto; display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%; padding: 4px 0; box-sizing: border-box;">
                 <span id="cardWord" style="text-align: center;">word</span>
                 <button id="cardSpeakBtn" title="Прослушать слово" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--text-main); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                   🔊
@@ -912,7 +937,7 @@
                 <button id="cardPracticeBtn" title="Практика в диалоге" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                   💬
                 </button>
-                <button id="cardEditBtnFront" title="Редактировать слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <button id="cardEditBtnFront" title="Edit слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                   ✏️
                 </button>
               </div>
@@ -925,7 +950,7 @@
             <div class="flashcard-back">
               <div id="cardBackLabel" style="flex-shrink: 0; font-size: 0.65rem; letter-spacing: 1px; color: var(--text-sub); font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">ПЕРЕВОД</div>
               <div style="flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 6px; padding: 4px 0; box-sizing: border-box;">
-                <div style="display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; width: 100%;">
+                <div style="display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%;">
                   <span id="cardTranslation" style="font-size: 1.3rem; font-weight: 700; color: var(--accent-spotify); text-align: center;">перевод</span>
                   <button id="cardSpeakBtnBack" title="Прослушать слово" style="display: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--text-main); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                     🔊
@@ -933,7 +958,7 @@
                   <button id="cardPracticeBtnBack" title="Практика в диалоге" style="display: none; background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 32px; height: 32px; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                     💬
                   </button>
-                  <button id="cardEditBtnBack" title="Редактировать слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                  <button id="cardEditBtnBack" title="Edit слово/фразу" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                     ✏️
                   </button>
                 </div>
@@ -984,13 +1009,13 @@
           <div id="spacedRepetitionPills" style="display: flex; align-items: center; gap: 8px; justify-content: center; width: 100%;">
             <button class="modal-btn" id="cardForgotBtn" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; font-size: 0.8rem; padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; outline: none;">🟥 Забыл</button>
             <button class="modal-btn" id="cardHardBtn" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #f59e0b; font-size: 0.8rem; padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; outline: none;">🟨 С трудом</button>
-            <button class="modal-btn" id="cardEasyBtn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; font-size: 0.8rem; padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; outline: none;">🟩 Легко</button>
+            <button class="modal-btn" id="cardEasyBtn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; font-size: 0.8rem; padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; outline: none;">🟩 Easy</button>
           </div>
 
           <!-- Card utility controls -->
           <div style="display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;">
-            <button class="modal-btn secondary-btn" id="cardUndoBtn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; color: #a78bfa; border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.05); margin-top: 4px; display: none;">↩️ Назад</button>
-            <button class="modal-btn secondary-btn" id="cardDeleteBtn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; color: #ef4444; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); margin-top: 4px;">🗑️ Удалить слово</button>
+            <button class="modal-btn secondary-btn" id="cardUndoBtn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; color: #a78bfa; border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.05); margin-top: 4px; display: none;">↩️ Back</button>
+            <button class="modal-btn secondary-btn" id="cardDeleteBtn" style="font-size: 0.75rem; padding: 6px 14px; border-radius: 20px; color: #ef4444; border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05); margin-top: 4px;">🗑️ Delete слово</button>
           </div>
           
         </div>
@@ -1003,19 +1028,19 @@
   <div class="modal-overlay" id="addWordModal" style="display: none; z-index: 10100;">
     <div class="modal-card" style="max-width: 400px; width: 95%; height: auto; max-height: 80vh; overflow-y: auto; padding: 2rem; box-sizing: border-box;">
       <div class="modal-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; margin-bottom: 20px; box-sizing: border-box; width: 100%;">
-        <h3 id="manualWordTitle" style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">➕ Добавить слово вручную</h3>
-        <button class="modal-close-btn" id="closeAddWordBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
+        <h3 id="manualWordTitle" style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">➕ Add word manually</h3>
+        <button class="modal-close-btn" id="closeAddWordBtn"  style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
       </div>
       
       <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label id="manualWordEngLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Слово на английском:</label>
+          <label id="manualWordEngLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">English Word:</label>
           <input type="text" id="manualWordEng" lang="en" placeholder="например, apple" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
           <span id="addWordEngHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;">⌨️ Если вы наберёте кириллицу — раскладка исправится автоматически</span>
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label id="manualWordRusLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Перевод на русский:</label>
+          <label id="manualWordRusLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Translation:</label>
           <input type="text" id="manualWordRus" lang="ru" placeholder="например, яблоко" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
           <span id="addWordRusHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;">⌨️ Если вы наберёте латиницу — раскладка исправится автоматически</span>
         </div>
@@ -1047,7 +1072,7 @@
         <!-- Smart Input Settings -->
         <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden;">
           <button id="addWordSettingsToggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 9px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.75rem; font-weight: 600; transition: background 0.2s;">
-            <span style="display: flex; align-items: center; gap: 6px;">⚙️ Настройки умного ввода</span>
+            <span style="display: flex; align-items: center; gap: 6px;">⚙️ Settings умного ввода</span>
             <span id="addWordSettingsChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
           </button>
           <div id="addWordSettingsPanel" style="display: none; padding: 10px 14px 12px; background: rgba(0,0,0,0.15); flex-direction: column; gap: 10px;">
@@ -1063,7 +1088,7 @@
         </div>
 
         <button id="saveManualWordBtn" style="background: var(--accent-spotify); color: #000000; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 20px; padding: 12px 0; margin-top: 10px; cursor: pointer; transition: all 0.2s; outline: none; box-shadow: 0 4px 15px rgba(29,185,84,0.3); width: 100%;">
-          Сохранить слово
+          Save слово
         </button>
       </div>
     </div>
@@ -1073,8 +1098,8 @@
   <div class="modal-overlay" id="addPhraseModal" style="display: none; z-index: 10100;">
     <div class="modal-card" style="max-width: 400px; width: 95%; height: auto; max-height: 80vh; overflow-y: auto; padding: 2rem; box-sizing: border-box;">
       <div class="modal-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; margin-bottom: 20px; box-sizing: border-box; width: 100%;">
-        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">➕ Добавить фразу вручную</h3>
-        <button class="modal-close-btn" id="closeAddPhraseBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
+        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">➕ Add phrase manually</h3>
+        <button class="modal-close-btn" id="closeAddPhraseBtn"  style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
       </div>
       
       <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
@@ -1086,7 +1111,7 @@
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Перевод на русский:</label>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Translation:</label>
           <input type="text" id="manualPhraseRus" lang="ru" placeholder="например, растопить лед" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
           <span id="addPhraseRusHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;">⌨️ Если вы наберёте латиницу — раскладка исправится автоматически</span>
         </div>
@@ -1116,7 +1141,7 @@
         </div>
         
         <button id="saveManualPhraseBtn" style="background: #3b82f6; color: #ffffff; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 20px; padding: 12px 0; margin-top: 10px; cursor: pointer; transition: all 0.2s; outline: none; box-shadow: 0 4px 15px rgba(59,130,246,0.3); width: 100%;">
-          Сохранить фразу
+          Save фразу
         </button>
       </div>
     </div>
@@ -1126,7 +1151,7 @@
   <div class="modal-overlay" id="editWordModal" style="display: none; z-index: 10200;">
     <div class="modal-card" style="max-width: 420px; width: 95%; height: auto; max-height: 85vh; overflow-y: auto; padding: 2rem; box-sizing: border-box;">
       <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; margin-bottom: 20px; box-sizing: border-box; width: 100%; display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">✏️ Редактировать</h3>
+        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700;">✏️ Edit</h3>
         <button id="closeEditWordModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
       </div>
 
@@ -1167,7 +1192,7 @@
         </div>
 
         <button id="editWordSaveModalBtn" style="background: linear-gradient(135deg, #a78bfa, #7c3aed); color: #ffffff; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 20px; padding: 12px 0; margin-top: 6px; cursor: pointer; transition: all 0.2s; outline: none; box-shadow: 0 4px 15px rgba(167,139,250,0.3); width: 100%;">
-          💾 Сохранить изменения
+          💾 Save изменения
         </button>
       </div>
     </div>
@@ -1182,7 +1207,7 @@
           <span style="font-size: 0.72rem; font-weight: 700; color: var(--accent-spotify); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">Исполнитель</span>
           <h3 id="artistSongsModalTitle" style="margin: 0; font-size: 1.25rem; color: var(--text-main); font-weight: 800; font-family: var(--font-display);">Артист</h3>
         </div>
-        <button class="modal-close-btn" id="closeArtistSongsModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; margin: 0; padding: 4px;">✕</button>
+        <button class="modal-close-btn" id="closeArtistSongsModalBtn"  style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; margin: 0; padding: 4px;">✕</button>
       </div>
       
       <!-- Modal Content: Scrollable list of songs -->
@@ -1204,7 +1229,7 @@
           </h4>
           <span style="font-size: 0.72rem; color: var(--accent-spotify); margin-top: 1px; font-weight: 600;">Фраза: <strong id="roleplayTargetWord" style="color: var(--text-main);">target phrase</strong></span>
         </div>
-        <button class="modal-close-btn" id="closeRoleplayModalBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; margin: 0; padding: 0;">✕</button>
+        <button class="modal-close-btn" id="closeRoleplayModalBtn"  style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none; margin: 0; padding: 0;">✕</button>
       </div>
 
       <!-- Messages Area -->
@@ -1238,15 +1263,15 @@
     <div class="modal-card video-course-modal-card">
       <div class="modal-header">
         <h3 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
-          🎬 Видеокурс English Galaxy
+          🎬 Video Course English Galaxy
         </h3>
-        <button class="modal-close-btn" id="closeVideoCourseModalBtn">✕</button>
+        <button class="modal-close-btn" id="closeVideoCourseModalBtn" >✕</button>
       </div>
 
       <!-- Course Progress Bar inside Modal -->
       <div class="video-course-progress-panel">
         <div class="progress-details">
-          <span class="progress-percent">Прогресс курса: <strong id="modalWatchedCount">0</strong> / 50 уроков (<strong id="modalWatchedPercent">0%</strong>)</span>
+          <span class="progress-percent">Course Progress: <strong id="modalWatchedCount">0</strong> / 50 уроков (<strong id="modalWatchedPercent">0%</strong>)</span>
           <span class="activity-points-note">🏆 +100 XP ЗА КАЖДЫЙ УРОК</span>
         </div>
         <div class="progress-track">
@@ -1257,7 +1282,7 @@
       <!-- Mobile Course Tabs -->
       <div class="mobile-course-tabs" id="mobileCourseTabs" style="display: none;">
         <button class="course-tab-btn active" id="videoTabLessonsBtn">📋 Список уроков</button>
-        <button class="course-tab-btn" id="videoTabNotesBtn">📝 Заметки и детали</button>
+        <button class="course-tab-btn" id="videoTabNotesBtn">📝 Notes и детали</button>
       </div>
 
       <!-- Controls: Filter & Search -->
@@ -1272,7 +1297,7 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="videoSearchInput" placeholder="Поиск урока..." autocomplete="off">
+          <input type="text" id="videoSearchInput" placeholder="Search урока..." autocomplete="off">
           <button id="clearVideoSearchBtn" class="clear-video-search" style="display: none;">✕</button>
         </div>
       </div>
@@ -1295,7 +1320,7 @@
             <span class="floating-video-title">English Galaxy</span>
             <div class="floating-video-controls">
               <button id="expandFloatingVideoBtn" title="Развернуть" style="font-size: 1.2rem;">&#9744;</button>
-              <button id="closeFloatingVideoBtn" title="Закрыть" style="font-size: 1.2rem;">&#10005;</button>
+              <button id="closeFloatingVideoBtn" title="Close" style="font-size: 1.2rem;">&#10005;</button>
             </div>
           </div>
           <div id="activeVideoPlayer" class="video-player-wrapper">
@@ -1326,7 +1351,10 @@
               <label class="lesson-note-label">
                 <span>📝</span> Заметка к уроку
               </label>
-              <textarea id="activeLessonNoteTextarea" class="lesson-note-textarea" placeholder="Напишите заметку к этому уроку..."></textarea>
+              <div class="editor-container">
+                <div class="editor-line-numbers" id="lineNumbers_activeLessonNoteTextarea">1</div>
+                <textarea id="activeLessonNoteTextarea" class="lesson-note-textarea editor-textarea" placeholder="Напишите заметку к этому уроку..."></textarea>
+              </div>
               <span class="lesson-note-save-status" id="lessonNoteSaveStatus">💾 Автосохранение</span>
             </div>
           </div>
@@ -1340,7 +1368,7 @@
   <!-- ======================================================== -->
 
   <!-- Tab toggle — always visible on left edge -->
-  <button id="notebookDrawerTab" class="notebook-drawer-tab" title="Мои заметки (открыть/закрыть)">
+  <button id="notebookDrawerTab" class="notebook-drawer-tab" title="My Notes (открыть/закрыть)">
     <span class="notebook-tab-emoji">📓</span>
     <span class="notebook-tab-label">З<br>А<br>М<br>Е<br>Т<br>К<br>И</span>
   </button>
@@ -1358,7 +1386,7 @@
           <div class="notebook-header-left">
             <span class="notebook-icon-big">📓</span>
             <div>
-              <h3 class="notebook-title">Мои заметки</h3>
+              <h3 class="notebook-title">My Notes</h3>
               <p class="notebook-subtitle">Автосохранение в браузере</p>
             </div>
           </div>
@@ -1370,17 +1398,17 @@
           <span class="notebook-wordcount" id="notebookWordCount">0 символов</span>
           <div style="display: flex; gap: 8px; align-items: center;">
             <button id="notebookGeneralTranslitBtn" title="Переключить раскладку (Рус ↔ Eng)" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 12px; color: #a5b4fc; font-size: 0.72rem; font-weight: 700; cursor: pointer; padding: 4px 10px; display: flex; align-items: center; gap: 4px; transition: all 0.2s; outline: none;">⌨️ Рус ↔ Eng</button>
-            <button class="notebook-clear-btn" id="notebookClearBtn" title="Очистить всё">🗑️ Очистить</button>
+            <button class="notebook-clear-btn" id="notebookClearBtn" title="Clear всё">🗑️ Clear</button>
           </div>
         </div>
       </div>
 
       <!-- Toolbar -->
       <div class="notebook-toolbar">
-        <span class="notebook-status" id="notebookSaveStatus">✓ Сохранено</span>
+        <span class="notebook-status" id="notebookSaveStatus">✓ Saved</span>
         <div class="notebook-tabs">
           <button class="notebook-tab active" data-tab="general" id="notebookTabGeneral">📝 Общие</button>
-          <button class="notebook-tab" data-tab="lessons" id="notebookTabLessons">🎬 Уроки</button>
+          <button class="notebook-tab" data-tab="lessons" id="notebookTabLessons">🎬 Lessons</button>
           <button class="notebook-tab" data-tab="custom" id="notebookTabCustom">📁 Папки</button>
         </div>
       </div>
@@ -1389,7 +1417,10 @@
       <div class="notebook-body">
         <!-- General notes tab -->
         <div class="notebook-tab-content" id="notebookTabContentGeneral">
-          <textarea id="notebookTextarea" class="notebook-textarea" placeholder="Свободное пространство для ваших мыслей, правил грамматики, списков слов или любых других учебных заметок..."></textarea>
+          <div class="editor-container" style="flex-grow: 1;">
+            <div class="editor-line-numbers" id="lineNumbers_notebookTextarea">1</div>
+            <textarea id="notebookTextarea" class="notebook-textarea editor-textarea" placeholder="Свободное пространство для ваших мыслей, правил грамматики, списков слов или любых других учебных заметок..."></textarea>
+          </div>
         </div>
 
         <!-- Lesson notes tab -->
@@ -1404,7 +1435,7 @@
           <!-- Search notes input -->
           <div id="notebookNotesSearchContainer" style="display: flex; align-items: center; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-glass); border-radius: 20px; padding: 6px 12px; margin-bottom: 12px; width: 100%; box-sizing: border-box; transition: all 0.2s;">
             <span style="font-size: 0.85rem; color: var(--text-muted); margin-right: 6px; display: flex; align-items: center; justify-content: center; user-select: none;">🔍</span>
-            <input type="text" id="notebookNotesSearchInput" placeholder="Поиск по названию и тексту..." style="background: none; border: none; color: var(--text-main); font-size: 0.8rem; width: 100%; outline: none;">
+            <input type="text" id="notebookNotesSearchInput" placeholder="Search по названию и тексту..." style="background: none; border: none; color: var(--text-main); font-size: 0.8rem; width: 100%; outline: none;">
           </div>
 
           <!-- Custom Folders list view -->
@@ -1452,18 +1483,40 @@
           <div id="notebookNoteEditorView" style="display: none; flex-direction: column; gap: 12px; width: 100%; flex-grow: 1;">
             <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
               <button id="notebookBackToNotesBtn" style="background: none; border: none; color: #fbbf24; font-size: 0.72rem; font-weight: 700; cursor: pointer; padding: 0; text-align: left; display: flex; align-items: center; gap: 4px; transition: opacity 0.2s;">
-                <span>◀</span> Назад
+                <span>◀</span> Back
               </button>
               <button id="notebookTranslitBtn" title="Переключить раскладку (Рус ↔ Eng)" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 8px; color: #a5b4fc; font-size: 0.7rem; font-weight: 700; cursor: pointer; padding: 4px 10px; display: flex; align-items: center; gap: 5px; transition: all 0.2s; outline: none;">
                 <span style="font-size: 0.85rem;">⌨️</span> Рус ↔ Eng
               </button>
               <button id="notebookDeleteNoteBtn" style="background: none; border: none; color: #ef4444; font-size: 0.72rem; font-weight: 700; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 4px; transition: opacity 0.2s;">
-                <span>🗑️</span> Удалить
+                <span>🗑️</span> Delete
               </button>
             </div>
             <input type="text" id="notebookNoteTitleInput" placeholder="Заголовок заметки..." style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-glass); border-radius: 10px; padding: 8px 12px; color: var(--text-main); font-size: 0.85rem; font-weight: 700; outline: none; box-sizing: border-box; transition: all 0.2s;">
-            <textarea id="notebookNoteContentInput" placeholder="Текст заметки..." style="width: 100%; flex-grow: 1; min-height: 250px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-glass); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.82rem; line-height: 1.5; outline: none; box-sizing: border-box; resize: none; transition: all 0.2s;"></textarea>
+            <div class="editor-container" style="flex-grow: 1;">
+              <div class="editor-line-numbers" id="lineNumbers_notebookNoteContentInput">1</div>
+              <textarea id="notebookNoteContentInput" class="editor-textarea" placeholder="Текст заметки..." style="min-height: 250px;"></textarea>
+            </div>
           </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Manage Folders Modal -->
+  <div class="modal-overlay" id="manageFoldersModal" style="display: none; z-index: 10060;">
+    <div class="modal-card" style="max-width: 400px; display: flex; flex-direction: column; overflow: hidden; height: 75vh; max-height: 600px;">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.25rem;">⚙️</span> Manage Folders
+        </h3>
+        <button class="modal-close-btn" id="closeManageFoldersBtn" >✕</button>
+      </div>
+      <div class="modal-body" style="flex-grow: 1; overflow-y: auto; padding: 16px; background: rgba(0,0,0,0.1);">
+        <p style="font-size: 0.8rem; margin-bottom: 16px; color: var(--text-sub);">
+          Отключите папки, которые вы хотите временно скрыть. Слова из скрытых папок не будут появляться в словаре и тренировках, пока вы их не включите снова.
+        </p>
+        <div id="manageFoldersList" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Folder items injected via JS -->
         </div>
       </div>
     </div>
@@ -1478,7 +1531,7 @@
         <h3 style="display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800;">
           <span>🏆</span> Моя активность и достижения
         </h3>
-        <button class="modal-close-btn" id="closeGamificationBtn" title="Закрыть">✕</button>
+        <button class="modal-close-btn" id="closeGamificationBtn"  title="Close">✕</button>
       </div>
 
       <div class="modal-body" style="flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
@@ -1619,7 +1672,7 @@
                 <span style="font-size: 1.4rem;">💡</span>
                 <div>
                   <div style="font-size: 0.9rem; font-weight: 600;">Правильный ответ во флешкартах</div>
-                  <div style="font-size: 0.75rem; color: var(--text-sub);">Нажатие кнопок «Помню» (3) или «Легко» (4) в тренировке</div>
+                  <div style="font-size: 0.75rem; color: var(--text-sub);">Нажатие кнопок «Помню» (3) или «Easy» (4) в тренировке</div>
                 </div>
               </div>
               <div style="font-weight: 800; color: #60a5fa; font-size: 1rem;">+2 XP</div>
@@ -1632,18 +1685,18 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- Rules Modal (Справочник правил)                           -->
+  <!-- Rules Modal (Grammar Rules Reference)                           -->
   <!-- ======================================================== -->
   <div class="modal-overlay" id="rulesModal" style="display: none; z-index: 10050;">
     <div class="modal-card" id="rulesModalCard" style="width: 700px; max-width: 95%; height: 80vh; display: flex; flex-direction: column;">
       <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.25rem;">📐</span> Справочник правил</h3>
-        <button class="modal-close-btn" id="closeRulesBtn" title="Закрыть">✕</button>
+        <h3 style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.25rem;">📐</span> Grammar Rules Reference</h3>
+        <button class="modal-close-btn" id="closeRulesBtn"  title="Close">✕</button>
       </div>
       
       <!-- Sub-header / Tabs -->
       <div class="rules-tabs" style="display: flex; gap: 4px; padding: 10px 24px; border-bottom: 1px solid var(--border-glass); background: rgba(0,0,0,0.15);">
-        <button class="rules-tab active" id="rulesTabList" style="background: none; border: none; color: #0ea5e9; border-bottom: 2px solid #0ea5e9; font-size: 0.85rem; font-weight: 700; padding: 6px 12px; cursor: pointer; transition: all 0.2s;">📚 Список правил</button>
+        <button class="rules-tab active" id="rulesTabList" style="background: none; border: none; color: #0ea5e9; border-bottom: 2px solid #0ea5e9; font-size: 0.85rem; font-weight: 700; padding: 6px 12px; cursor: pointer; transition: all 0.2s;">📚 Rules List</button>
         <button class="rules-tab" id="rulesTabAdd" style="background: none; border: none; color: var(--text-sub); border-bottom: 2px solid transparent; font-size: 0.85rem; font-weight: 600; padding: 6px 12px; cursor: pointer; transition: all 0.2s;">➕ Добавить правило</button>
       </div>
 
@@ -1651,7 +1704,7 @@
       <div id="rulesSearchContainer" style="padding: 12px 24px 4px 24px; display: flex; box-sizing: border-box; background: rgba(0,0,0,0.1); border-bottom: 1px solid rgba(255,255,255,0.03);">
         <div style="position: relative; width: 100%;">
           <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; opacity: 0.6; pointer-events: none;">🔍</span>
-          <input type="text" id="rulesSearchInput" placeholder="Поиск правил по названию..." style="width: 100%; height: 36px; padding: 8px 12px 8px 36px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-glass); border-radius: 18px; color: var(--text-main); font-size: 0.82rem; outline: none; box-sizing: border-box; transition: all 0.2s;">
+          <input type="text" id="rulesSearchInput" placeholder="Search правил по названию..." style="width: 100%; height: 36px; padding: 8px 12px 8px 36px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-glass); border-radius: 18px; color: var(--text-main); font-size: 0.82rem; outline: none; box-sizing: border-box; transition: all 0.2s;">
         </div>
       </div>
 
@@ -1673,7 +1726,7 @@
         </div>
         
         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px;">
-          <button id="saveRuleBtn" class="modal-btn primary-btn" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3); border: none; outline: none; border-radius: 10px; padding: 10px 20px; font-weight: 700; font-size: 0.85rem; color: #fff; cursor: pointer; transition: all 0.2s;">➕ Сохранить правило</button>
+          <button id="saveRuleBtn" class="modal-btn primary-btn" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3); border: none; outline: none; border-radius: 10px; padding: 10px 20px; font-weight: 700; font-size: 0.85rem; color: #fff; cursor: pointer; transition: all 0.2s;">➕ Save правило</button>
         </div>
       </div>
     </div>
@@ -1687,11 +1740,11 @@
     </button>
     <button class="mobile-nav-item" id="mobileNavDictBtn">
       <span class="mobile-nav-icon">📚</span>
-      <span class="mobile-nav-label">Словарь</span>
+      <span class="mobile-nav-label">Dictionary</span>
     </button>
     <button class="mobile-nav-item" id="mobileNavRulesBtn">
       <span class="mobile-nav-icon">📐</span>
-      <span class="mobile-nav-label">Правила</span>
+      <span class="mobile-nav-label">Rules</span>
     </button>
     <button class="mobile-nav-item" id="mobileNavTrainBtn">
       <span class="mobile-nav-icon">🔥</span>
@@ -1703,7 +1756,7 @@
     </button>
     <button class="mobile-nav-item" id="mobileNavNotesBtn">
       <span class="mobile-nav-icon">📓</span>
-      <span class="mobile-nav-label">Заметки</span>
+      <span class="mobile-nav-label">Notes</span>
     </button>
   </div>
 
@@ -1753,6 +1806,83 @@
     </div>
   </div>
 
+
+<!-- TEMPORARY DEBUG: Remove after diagnosing close button bug -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('closeTrainingModalBtn');
+  const modal = document.getElementById('trainingModal');
+  if (!btn || !modal) return;
+
+  let openCount = 0;
+
+  // Watch for attribute/child changes on the button itself
+  const btnObs = new MutationObserver((muts) => {
+    muts.forEach(m => {
+      const cs = getComputedStyle(btn);
+      console.warn('[DEBUG-BTN] mutation:', m.type, m.attributeName, 
+        'display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
+        'w=' + cs.width, 'h=' + cs.height, 'connected=' + btn.isConnected,
+        'text=' + JSON.stringify(btn.textContent));
+    });
+  });
+  btnObs.observe(btn, { attributes: true, childList: true, characterData: true, subtree: true });
+
+  // Watch if button gets removed from its parent
+  const parent = btn.parentElement;
+  if (parent) {
+    new MutationObserver((muts) => {
+      muts.forEach(m => {
+        if (m.removedNodes.length > 0) {
+          const removed = Array.from(m.removedNodes);
+          const btnRemoved = removed.some(n => n === btn || n.contains?.(btn));
+          if (btnRemoved) console.error('[DEBUG] !!! CLOSE BUTTON REMOVED FROM PARENT !!!');
+          console.warn('[DEBUG-PARENT] removed:', removed.map(n => n.id || n.tagName || n.textContent?.slice(0,20)));
+        }
+        if (m.addedNodes.length > 0) {
+          console.warn('[DEBUG-PARENT] added:', Array.from(m.addedNodes).map(n => n.id || n.tagName || n.textContent?.slice(0,20)));
+        }
+      });
+    }).observe(parent, { childList: true });
+  }
+
+  // Watch the modal overlay for open/close
+  new MutationObserver(() => {
+    const isOpen = modal.style.display === 'flex' || modal.style.display === 'block';
+    if (isOpen) {
+      openCount++;
+      const cs = getComputedStyle(btn);
+      console.log('%c[DEBUG] Training modal OPENED (#' + openCount + ')', 'color: lime; font-weight: bold;',
+        '\n  btn display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
+        'w=' + cs.width, 'h=' + cs.height,
+        '\n  btn.isConnected=' + btn.isConnected,
+        '\n  btn.offsetWidth=' + btn.offsetWidth, 'btn.offsetHeight=' + btn.offsetHeight,
+        '\n  btn.textContent=' + JSON.stringify(btn.textContent),
+        '\n  btn in DOM=' + !!document.getElementById('closeTrainingModalBtn'));
+    }
+  }).observe(modal, { attributes: true, attributeFilter: ['style'] });
+
+  // Periodic check
+  setInterval(() => {
+    if (modal.style.display !== 'flex' && modal.style.display !== 'block') return;
+    const el = document.getElementById('closeTrainingModalBtn');
+    if (!el) { console.error('[DEBUG-POLL] BUTTON GONE FROM DOM!'); return; }
+    const cs = getComputedStyle(el);
+    if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0' || 
+        parseFloat(cs.width) < 1 || parseFloat(cs.height) < 1) {
+      console.error('[DEBUG-POLL] BUTTON HIDDEN!', 
+        'display=' + cs.display, 'vis=' + cs.visibility, 'opacity=' + cs.opacity,
+        'w=' + cs.width, 'h=' + cs.height, 'overflow=' + cs.overflow,
+        'clip=' + cs.clip, 'clipPath=' + cs.clipPath);
+    }
+  }, 300);
+
+  console.log('%c[DEBUG] Close button monitor ACTIVE', 'color: cyan; font-size: 14px; font-weight: bold;');
+});
+</script>
+
 </body>
 </html>
+
+
 

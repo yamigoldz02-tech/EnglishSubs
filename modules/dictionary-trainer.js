@@ -63,6 +63,50 @@ function loadCategories() {
 function saveCategories() {
   localStorage.setItem('personal_categories', JSON.stringify(personalCategories));
   localStorage.setItem('personal_custom_categories', JSON.stringify(personalCustomCategories));
+  localStorage.setItem('personal_hidden_categories', JSON.stringify(personalHiddenCategories));
+}
+
+let personalHiddenCategories = [];
+
+function loadHiddenCategories() {
+  try {
+    const saved = localStorage.getItem('personal_hidden_categories');
+    if (saved) {
+      personalHiddenCategories = JSON.parse(saved);
+    } else {
+      localStorage.setItem('personal_hidden_categories', JSON.stringify(personalHiddenCategories));
+    }
+  } catch (e) {
+    console.error("Failed to load hidden categories:", e);
+  }
+}
+
+function runOldWordsMigration() {
+  const migratedFlag = localStorage.getItem('galaxy_migrated_old_words_v1');
+  if (!migratedFlag && personalDictionary && personalDictionary.length > 0) {
+    console.log('Running one-time migration to move all existing words to "Старые"...');
+    // Ensure "Старые" exists in categories
+    if (!personalCategories.includes('Старые')) {
+      personalCategories.push('Старые');
+      saveCategories();
+    }
+    // Move all words to "Старые"
+    let updated = false;
+    personalDictionary.forEach(w => {
+      w.category = 'Старые';
+      w.categories = ['Старые'];
+      updated = true;
+    });
+    if (updated) {
+      saveDictionaryToStorage();
+    }
+    // Hide "Старые" by default as user requested to start from scratch
+    if (!personalHiddenCategories.includes('Старые')) {
+      personalHiddenCategories.push('Старые');
+      saveCategories();
+    }
+    localStorage.setItem('galaxy_migrated_old_words_v1', 'true');
+  }
 }
 
 function populateCategorySelectors() {
@@ -76,7 +120,7 @@ function populateCategorySelectors() {
       // Add default "All folders"
       const allOpt = document.createElement('option');
       allOpt.value = 'Все слова';
-      allOpt.textContent = '📚 Все папки';
+      allOpt.textContent = '📚 All Folders';
       dictFilter.appendChild(allOpt);
       
       // Add custom folders
@@ -115,6 +159,13 @@ function populateCategorySelectors() {
         dictFilter.value = '«Топ-300 Первых слов»';
       }
     }
+    
+    // NEW: Sync trainingFolderSelect
+    const trainingFolderSelect = document.getElementById('trainingFolderSelect');
+    if (trainingFolderSelect) {
+      trainingFolderSelect.innerHTML = dictFilter.innerHTML;
+      trainingFolderSelect.value = dictFilter.value;
+    }
   }
 
   // 1b. Populate dictCustomCategoryFilter (Categories) in modal
@@ -124,8 +175,8 @@ function populateCategorySelectors() {
     dictCustomFilter.innerHTML = '';
     
     const allOpt = document.createElement('option');
-    allOpt.value = 'Все категории';
-    allOpt.textContent = '🏷️ Все категории';
+    allOpt.value = 'All Categories';
+    allOpt.textContent = '🏷️ All Categories';
     dictCustomFilter.appendChild(allOpt);
     
     const noneOpt = document.createElement('option');
@@ -140,10 +191,10 @@ function populateCategorySelectors() {
       dictCustomFilter.appendChild(option);
     });
     
-    if (currentValue === 'Все категории' || currentValue === 'Без категории' || personalCustomCategories.includes(currentValue)) {
+    if (currentValue === 'All Categories' || currentValue === 'Без категории' || personalCustomCategories.includes(currentValue)) {
       dictCustomFilter.value = currentValue;
     } else {
-      dictCustomFilter.value = 'Все категории';
+      dictCustomFilter.value = 'All Categories';
     }
   }
 
@@ -432,6 +483,7 @@ function populateCategorySelectors() {
 
 function initDictionary() {
   loadCategories();
+  loadHiddenCategories();
   try {
     const saved = localStorage.getItem('personal_dictionary');
     if (saved) {
@@ -468,6 +520,7 @@ function initDictionary() {
       if (migrated) {
         saveDictionaryToStorage();
       }
+      runOldWordsMigration();
     }
   } catch (e) {
     console.error("Failed to load personal dictionary:", e);
@@ -535,7 +588,7 @@ function renderDictWeekChart() {
   header.className = 'dwc-header';
   const title = document.createElement('span');
   title.className = 'dwc-title';
-  title.textContent = 'Добавлено за 7 дней';
+  title.textContent = 'Added за 7 дней';
   header.appendChild(title);
   chartContainer.appendChild(header);
   // Calculate counts for last 7 days
@@ -648,7 +701,7 @@ window.showWordCard = function(event, word) {
         🔄 Сброс
       </button>
       <button class="wcp-btn wcp-delete-btn" onclick="window._wcpDelete('${escapeHTML(entry.word).replace(/'/g,"\\'")}')">
-        🗑 Удалить
+        🗑 Delete
       </button>
     </div>
   `;
@@ -725,7 +778,7 @@ window._wcpPractice = function(word) {
 };
 
 window._wcpDelete = function(word) {
-  if (!confirm(`Удалить «${word}» из словаря?`)) return;
+  if (!confirm(`Delete «${word}» из словаря?`)) return;
   personalDictionary = personalDictionary.filter(w => w.word.toLowerCase() !== word.toLowerCase());
   saveDictionaryToStorage();
   if (typeof renderDictWordsList === 'function') renderDictWordsList();
@@ -1121,9 +1174,9 @@ function setupDictionaryUI() {
       const inputRusEl = document.getElementById('manualWordRus');
       const saveBtnEl = document.getElementById('saveManualWordBtn');
       
-      if (titleEl) titleEl.textContent = '➕ Добавить слово вручную';
-      if (labelEngEl) labelEngEl.textContent = 'Слово на английском:';
-      if (labelRusEl) labelRusEl.textContent = 'Перевод на русский:';
+      if (titleEl) titleEl.textContent = '➕ Add word manually';
+      if (labelEngEl) labelEngEl.textContent = 'English Word:';
+      if (labelRusEl) labelRusEl.textContent = 'Russian Translation:';
       if (inputEngEl) {
         inputEngEl.value = '';
         inputEngEl.placeholder = 'например, apple';
@@ -1132,7 +1185,7 @@ function setupDictionaryUI() {
         inputRusEl.value = '';
         inputRusEl.placeholder = 'например, яблоко';
       }
-      if (saveBtnEl) saveBtnEl.textContent = 'Сохранить слово';
+      if (saveBtnEl) saveBtnEl.textContent = 'Save слово';
       
       // Populate category list inside popup
       populateCategorySelectors();
@@ -1366,7 +1419,7 @@ function setupDictionaryUI() {
           const catF = document.getElementById('dictCategoryFilter');
           const cusF = document.getElementById('dictCustomCategoryFilter');
           if (catF) catF.value = 'Все слова';
-          if (cusF) cusF.value = 'Все категории';
+          if (cusF) cusF.value = 'All Categories';
           
           const pillsC = document.getElementById('dictTypePills');
           if (pillsC) {
@@ -1462,7 +1515,7 @@ function setupDictionaryUI() {
       const catF = document.getElementById('dictCategoryFilter');
       const cusF = document.getElementById('dictCustomCategoryFilter');
       if (catF) catF.value = 'Все слова';
-      if (cusF) cusF.value = 'Все категории';
+      if (cusF) cusF.value = 'All Categories';
       
       const pillsC = document.getElementById('dictTypePills');
       if (pillsC) {
@@ -1764,7 +1817,7 @@ function setupDictionaryUI() {
           const catF = document.getElementById('dictCategoryFilter');
           const cusF = document.getElementById('dictCustomCategoryFilter');
           if (catF) catF.value = 'Все слова';
-          if (cusF) cusF.value = 'Все категории';
+          if (cusF) cusF.value = 'All Categories';
           const pillsC = document.getElementById('dictTypePills');
           if (pillsC) {
             pillsC.querySelectorAll('.dict-type-pill').forEach(p => {
@@ -1871,7 +1924,7 @@ function setupDictionaryUI() {
         categoryFilter.value = 'Все слова';
       }
       if (customFilterSelect) {
-        customFilterSelect.value = 'Все категории';
+        customFilterSelect.value = 'All Categories';
       }
       // Also reset type filter pills to 'all' so new entry is visible
       dictTypeFilter = 'all';
@@ -2061,6 +2114,43 @@ function setupDictionaryUI() {
     });
   }
 
+  // 3i. Training Force All Checkbox listener (Ignore Intervals)
+  const trainingForceAllCheckbox = document.getElementById('trainingForceAllCheckbox');
+  if (trainingForceAllCheckbox) {
+    const savedForceAll = localStorage.getItem('galaxy_training_force_all') === 'true';
+    trainingForceAllCheckbox.checked = savedForceAll;
+
+    trainingForceAllCheckbox.addEventListener('change', () => {
+      localStorage.setItem('galaxy_training_force_all', trainingForceAllCheckbox.checked);
+      clearStudySession();
+      startStudySession();
+      resetFlashcard();
+    });
+  }
+
+  // 3j. Training Folder Select listener
+  const trainingFolderSelect = document.getElementById('trainingFolderSelect');
+  if (trainingFolderSelect) {
+    trainingFolderSelect.addEventListener('change', () => {
+      const dictFilter = document.getElementById('dictCategoryFilter');
+      if (dictFilter) {
+        dictFilter.value = trainingFolderSelect.value;
+      }
+      
+      const trainingCategoryLabel = document.getElementById('trainingCategoryLabel');
+      if (trainingCategoryLabel) {
+        trainingCategoryLabel.textContent = trainingFolderSelect.value;
+      }
+      
+      clearStudySession();
+      startStudySession();
+      resetFlashcard();
+      
+      // Update dictionary view behind the scenes if it's open or will be opened later
+      renderDictionary();
+    });
+  }
+
   // Open dictionary modal
   const openDictionaryModal = () => {
     window.dictForceStudyAll = false; // Reset force-study on new modal session
@@ -2193,9 +2283,13 @@ function setupDictionaryUI() {
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
     
-    // Sync category label
-    if (trainingCategoryLabel && categoryFilter) {
-      trainingCategoryLabel.textContent = categoryFilter.value;
+    // Sync category label and selector
+    if (categoryFilter) {
+      if (trainingCategoryLabel) trainingCategoryLabel.textContent = categoryFilter.value;
+      const trainingFolderSelect = document.getElementById('trainingFolderSelect');
+      if (trainingFolderSelect) {
+        trainingFolderSelect.value = categoryFilter.value;
+      }
     }
     
     // Sync progress bar display state
@@ -2313,7 +2407,7 @@ function setupDictionaryUI() {
       e.stopPropagation();
       const activeCat = categoryFilter ? categoryFilter.value : 'Все слова';
       if (activeDictTab === 'essential' || activeCat.startsWith('«Топ-')) {
-        alert("Встроенные частотные коллекции нельзя очистить. Переключитесь на вкладку «Мой словарь».");
+        alert("Встроенные частотные коллекции нельзя очистить. Переключитесь на вкладку «My Dictionary».");
         return;
       }
       if (personalDictionary.length === 0) return;
@@ -2372,7 +2466,7 @@ function setupDictionaryUI() {
             opacity: 0.4;
             transition: opacity 0.2s;
             outline: none;
-          " disabled>☠️ Удалить всё</button>
+          " disabled>☠️ Delete всё</button>
           <button id="clearDictCancelBtn" style="
             background: transparent;
             color: var(--text-sub);
@@ -2383,7 +2477,7 @@ function setupDictionaryUI() {
             cursor: pointer;
             transition: opacity 0.2s;
             outline: none;
-          ">Отмена</button>
+          ">Cancel</button>
         </div>
       `;
 
@@ -2535,7 +2629,7 @@ function setupDictionaryUI() {
   const addCatBtn = document.getElementById('addCustomCategoryBtn');
   if (addCatBtn) {
     addCatBtn.addEventListener('click', async () => {
-      const name = await (window.showCustomPrompt ? window.showCustomPrompt("📁 Новая папка", "Введите название новой папки для слов:", "Например: Глаголы движения") : prompt("Введите название новой папки для слов:"));
+      const name = await (window.showCustomPrompt ? window.showCustomPrompt("📁 Новая папка", "Enter new folder name для слов:", "Например: Глаголы движения") : prompt("Enter new folder name для слов:"));
       if (name === null) return; // Cancelled
       const cleanName = name.trim();
       if (!cleanName) {
@@ -2570,6 +2664,89 @@ function setupDictionaryUI() {
       }
       if (window.showToast) window.showToast(`Папка «${cleanName}» успешно создана!`, "success");
     });
+  }
+
+  // Manage Folders Modal
+  const manageFoldersBtn = document.getElementById('manageFoldersBtn');
+  const manageFoldersModal = document.getElementById('manageFoldersModal');
+  const closeManageFoldersBtn = document.getElementById('closeManageFoldersBtn');
+
+  function renderManageFoldersList() {
+    const list = document.getElementById('manageFoldersList');
+    if (!list) return;
+    list.innerHTML = '';
+    
+    // Ensure "Старые" exists so user can toggle it even if it's the only one
+    const catsToRender = [...personalCategories];
+    if (!catsToRender.includes('Старые')) catsToRender.push('Старые');
+
+    catsToRender.forEach(cat => {
+      const isHidden = personalHiddenCategories.includes(cat);
+      const row = document.createElement('div');
+      row.style.cssText = `display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);`;
+      
+      const nameSpan = document.createElement('span');
+      nameSpan.style.cssText = `color: #fff; font-size: 0.9rem; font-weight: 600; flex-grow: 1;`;
+      nameSpan.textContent = '📁 ' + cat;
+      
+      const toggleWrapper = document.createElement('label');
+      toggleWrapper.style.cssText = `position: relative; display: inline-block; width: 44px; height: 24px;`;
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = !isHidden; // checked = active, unchecked = hidden
+      checkbox.style.cssText = `opacity: 0; width: 0; height: 0; position: absolute;`;
+      
+      const slider = document.createElement('span');
+      slider.className = 'toggle-slider'; // assuming toggle-slider CSS exists, otherwise fallback
+      slider.style.cssText = `position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: ${checkbox.checked ? '#1db954' : '#4b5563'}; transition: .4s; border-radius: 24px;`;
+      
+      const knob = document.createElement('span');
+      knob.style.cssText = `position: absolute; content: ""; height: 18px; width: 18px; left: ${checkbox.checked ? '22px' : '3px'}; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;`;
+      
+      slider.appendChild(knob);
+      toggleWrapper.appendChild(checkbox);
+      toggleWrapper.appendChild(slider);
+      
+      checkbox.addEventListener('change', () => {
+        const checked = checkbox.checked;
+        slider.style.backgroundColor = checked ? '#1db954' : '#4b5563';
+        knob.style.left = checked ? '22px' : '3px';
+        
+        if (checked) {
+          // Remove from hidden
+          personalHiddenCategories = personalHiddenCategories.filter(c => c !== cat);
+        } else {
+          // Add to hidden
+          if (!personalHiddenCategories.includes(cat)) {
+            personalHiddenCategories.push(cat);
+          }
+        }
+        saveCategories();
+      });
+      
+      row.appendChild(nameSpan);
+      row.appendChild(toggleWrapper);
+      list.appendChild(row);
+    });
+  }
+
+  if (manageFoldersBtn && manageFoldersModal) {
+    manageFoldersBtn.addEventListener('click', () => {
+      renderManageFoldersList();
+      manageFoldersModal.style.display = 'flex';
+      document.body.classList.add('modal-open');
+    });
+    
+    if (closeManageFoldersBtn) {
+      closeManageFoldersBtn.addEventListener('click', () => {
+        manageFoldersModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        // Re-render dictionary to apply any hidden folder changes
+        populateCategorySelectors();
+        renderDictWordsList(searchInput ? searchInput.value.trim() : "");
+      });
+    }
   }
 
   // Create custom word category / tag
@@ -2671,15 +2848,31 @@ function setupDictionaryUI() {
   // Delete active flashcard word
   const deleteBtn = document.getElementById('cardDeleteBtn');
   if (deleteBtn) {
-    bindSnappyInteraction(deleteBtn, () => {
-      const activeWord = document.getElementById('cardWord')?.textContent;
+    bindSnappyInteraction(deleteBtn, async () => {
+      const activeWord = activeTrainerWordObj ? activeTrainerWordObj.word : document.getElementById('cardWord')?.textContent;
       if (!activeWord) return;
+      
+      const confirmed = await window.showCustomConfirm(
+        '🗑️ Удаление слова',
+        `Вы уверены, что хотите удалить слово "${activeWord}" из словаря? Это действие нельзя отменить.`,
+        { okText: 'Удалить', cancelText: 'Отмена', isDestructive: true }
+      );
+      if (!confirmed) return;
+      
       personalDictionary = personalDictionary.filter(w => w.word !== activeWord);
       saveDictionaryToStorage();
+      
+      const wasInQueue = sessionQueue.some(w => w.word === activeWord);
       sessionQueue = sessionQueue.filter(w => w.word !== activeWord);
+      if (wasInQueue) {
+        sessionTotalInitialCount = Math.max(0, sessionTotalInitialCount - 1);
+      }
+      
       saveStudySession();
       renderDictWordsList(searchInput ? searchInput.value.trim() : "");
       resetFlashcard();
+      
+      if (window.showToast) window.showToast(`Слово "${activeWord}" удалено`);
     });
   }
 
@@ -3115,7 +3308,7 @@ Start the conversation now by introducing the scenario and giving the first gree
       })
       .catch(err => {
         removeRoleplayTypingIndicator();
-        appendRoleplayMessageBubble('Ошибка соединения с ИИ: ' + err.message, 'ai');
+        appendRoleplayMessageBubble('Error соединения с ИИ: ' + err.message, 'ai');
       });
   }
 
@@ -3158,7 +3351,7 @@ Rule 4: Always keep the conversation interactive, ending with a question or prom
       })
       .catch(err => {
         removeRoleplayTypingIndicator();
-        appendRoleplayMessageBubble('Ошибка соединения с ИИ: ' + err.message, 'ai');
+        appendRoleplayMessageBubble('Error соединения с ИИ: ' + err.message, 'ai');
       });
   }
 
@@ -3324,13 +3517,18 @@ function startStudySession() {
 
   // Filter words that are due for review (nextReview <= now)
   const now = Date.now();
-  let dueWords = filteredWords.filter(w => !w.nextReview || w.nextReview <= now);
-  
-  // Filter new words (level === 0)
-  let newWords = filteredWords.filter(w => !w.level || w.level === 0);
+  let pool = [];
 
-  // Combine them: Priority is due words first, then new words
-  let pool = [...dueWords];
+  const forceAllCheckbox = document.getElementById('trainingForceAllCheckbox');
+  const isForceAll = forceAllCheckbox ? forceAllCheckbox.checked : false;
+
+  if (isForceAll) {
+    pool = [...filteredWords];
+  } else {
+    let dueWords = filteredWords.filter(w => !w.nextReview || w.nextReview <= now);
+    let newWords = filteredWords.filter(w => !w.level || w.level === 0);
+    pool = [...dueWords];
+  }
   
   // Determine training session word limit (20, 40, or all)
   let limit = 20;
@@ -3351,8 +3549,10 @@ function startStudySession() {
     }
   }
   
-  // Supplement with new words if pool is below limit
-  if (pool.length < limit) {
+  // Supplement with new words if pool is below limit (only if not forcing all)
+  if (!isForceAll && pool.length < limit) {
+    // newWords is only defined if not isForceAll, wait, I need to define newWords in a wider scope or check isForceAll
+    let newWords = filteredWords.filter(w => !w.level || w.level === 0);
     newWords.forEach(w => {
       if (!pool.some(item => item.word.toLowerCase() === w.word.toLowerCase())) {
         pool.push(w);
@@ -3544,7 +3744,7 @@ function resetFlashcard() {
       emptyState.style.display = 'flex';
       const emptyTitle = document.getElementById('emptyStateTitle');
       const emptyText = document.getElementById('emptyStateText');
-      if (emptyTitle) emptyTitle.textContent = "Словарь пуст 📂";
+      if (emptyTitle) emptyTitle.textContent = "Dictionary пуст 📂";
       if (emptyText) {
         emptyText.innerHTML = `
           Добавьте слова из песен во время прослушивания или просмотра субтитров, чтобы начать интервальные тренировки Leitner!
@@ -3610,7 +3810,7 @@ function showRandomFlashcard() {
             summaryListEl.appendChild(tag);
           });
         } else {
-          summaryListEl.textContent = 'Нет изученных слов.';
+          summaryListEl.textContent = 'No изученных слов.';
         }
       }
       
@@ -4108,7 +4308,7 @@ function renderDictWordsList(filterQuery = "") {
           <button class="row-edit-btn" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa;">✏️ Править</button>
           <button class="row-practice-btn" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify);">💬 Практика</button>
           <button class="row-reset-btn" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); color: #f59e0b;" title="Сбросить прогресс заучивания">🔄 Сбросить</button>
-          <button class="row-del-btn" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); color: #ef4444;">🗑️ Удалить</button>
+          <button class="row-del-btn" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); color: #ef4444;">🗑️ Delete</button>
         </div>
       `;
 
@@ -4452,10 +4652,18 @@ function handleWordReview(rating) {
   }
 }
 
+// Helper to get local date string YYYY-MM-DD
+function getLocalISODate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 // Record an activity log entry for the heatmap
 function recordActivity(points = 1) {
   try {
-    const today = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+    const today = getLocalISODate(new Date()); // "YYYY-MM-DD" in local time
     const activityStr = localStorage.getItem('dictionary_activity') || '{}';
     const activityObj = JSON.parse(activityStr);
     activityObj[today] = (activityObj[today] || 0) + points;
@@ -4465,6 +4673,39 @@ function recordActivity(points = 1) {
     console.error("Failed to record heatmap activity:", e);
   }
 }
+
+// AUTO-FIX: Restore streaks broken by the UTC to Local Timezone transition AND Firebase rollback
+(function fixTimezoneStreakGap() {
+  try {
+    if (localStorage.getItem('streak_tz_fixed_v2')) return;
+    const activityStr = localStorage.getItem('dictionary_activity');
+    if (!activityStr) return;
+    
+    const activityObj = JSON.parse(activityStr);
+    let hasChanges = false;
+    const today = new Date();
+    
+    // We forcefully grant activity for the last 5 days to compensate for the Firebase cloud rollback bug
+    for (let i = 0; i <= 5; i++) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const localDate = getLocalISODate(d);
+        
+        if (!activityObj[localDate] || activityObj[localDate] === 0) {
+            activityObj[localDate] = 1; // Grant 1 minimum review point to bridge the lost days
+            hasChanges = true;
+        }
+    }
+
+    if (hasChanges) {
+      localStorage.setItem('dictionary_activity', JSON.stringify(activityObj));
+      console.log("[Auto-Fix] Forcefully restored missing streak days lost to Firebase rollback.");
+    }
+    localStorage.setItem('streak_tz_fixed_v2', 'true');
+  } catch (e) {
+    console.error("Timezone streak fix failed", e);
+  }
+})();
 
 // Calculate daily consecutive study streak count
 function getDailyStreak() {
@@ -4476,7 +4717,7 @@ function getDailyStreak() {
     let checkDate = new Date();
     
     while (true) {
-      const dateStr = checkDate.toISOString().split('T')[0];
+      const dateStr = getLocalISODate(checkDate);
       if (activityObj[dateStr] && activityObj[dateStr] > 0) {
         streak++;
         checkDate.setDate(checkDate.getDate() - 1);
@@ -4484,7 +4725,7 @@ function getDailyStreak() {
         if (streak === 0) {
           const yesterday = new Date();
           yesterday.setDate(yesterday.getDate() - 1);
-          const yesterdayStr = yesterday.toISOString().split('T')[0];
+          const yesterdayStr = getLocalISODate(yesterday);
           if (activityObj[yesterdayStr] && activityObj[yesterdayStr] > 0) {
             checkDate = yesterday;
             continue;
@@ -4523,7 +4764,7 @@ function renderHeatmap() {
   }
   
   dates.forEach(date => {
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = getLocalISODate(date);
     const count = activityObj[dateStr] || 0;
     
     let intensity = 0;
@@ -4571,12 +4812,18 @@ function getFilteredDictionaryWords() {
   const activeCategory = filterSelect ? filterSelect.value : 'Все слова';
 
   const customFilterSelect = document.getElementById('dictCustomCategoryFilter');
-  const activeCustomCategory = customFilterSelect ? customFilterSelect.value : 'Все категории';
+  const activeCustomCategory = customFilterSelect ? customFilterSelect.value : 'All Categories';
   
   let list = [];
   
   if (activeCategory === 'Все слова') {
-    list = personalDictionary;
+    list = personalDictionary.filter(w => {
+      // If the word belongs to any hidden category, filter it out
+      if (w.categories && w.categories.some(c => personalHiddenCategories.includes(c))) {
+        return false;
+      }
+      return true;
+    });
   } else if (activeCategory.startsWith('«Топ-')) {
     // Essential preloaded packs handling
     let startIdx = 0;
@@ -4621,7 +4868,7 @@ function getFilteredDictionaryWords() {
   }
 
   // Filter by custom category
-  if (activeCustomCategory !== 'Все категории') {
+  if (activeCustomCategory !== 'All Categories') {
     list = list.filter(w => {
       const wordCustomCats = w.customCategories && Array.isArray(w.customCategories) && w.customCategories.length > 0
         ? w.customCategories

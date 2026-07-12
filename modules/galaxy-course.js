@@ -25,10 +25,10 @@ const GALAXY_COURSE_VIDEOS = GALAXY_VIDEO_IDS.map((id, index) => {
   const isEng = num <= 4;
   const title = isEng 
     ? `English from Beginner to Advanced. A Practical Course Using the English Galaxy App. A0. Lesson ${num}`
-    : `Английский язык с нуля до продвинутого. Практический курс по приложению English Galaxy. А0. Урок ${num}`;
+    : `English from Beginner to Advanced. Practical Course with the English Galaxy App. A0. Lesson ${num}`;
   const shortTitle = isEng
     ? `Lesson ${num}: English from Beginner to Advanced`
-    : `Урок ${num}: Практический курс English Galaxy`;
+    : `Lesson ${num}: English Galaxy Practical Course`;
   return { id, num, title, shortTitle };
 });
 
@@ -118,8 +118,8 @@ function initVideoCourse() {
           player.innerHTML = `
             <div class="player-placeholder">
               <div class="placeholder-vinyl-art">🎬</div>
-              <h4>Выберите урок для просмотра</h4>
-              <p>Кликните по уроку в списке слева, чтобы открыть видео в плеере</p>
+              <h4>Select a lesson to watch</h4>
+              <p>Click a lesson from the list on the left to open the video player</p>
             </div>
           `;
         }
@@ -394,7 +394,7 @@ function renderVideoLessons() {
   if (filtered.length === 0) {
     const empty = document.createElement('div');
     empty.style.cssText = 'text-align: center; padding: 2rem 1rem; color: var(--text-sub); font-size: 0.82rem; font-style: italic;';
-    empty.textContent = 'Уроки не найдены 🔍';
+    empty.textContent = 'No lessons found 🔍';
     fragment.appendChild(empty);
   } else {
     filtered.forEach(v => {
@@ -406,13 +406,13 @@ function renderVideoLessons() {
       item.dataset.id = v.id;
 
       item.innerHTML = `
-        <span class="lesson-badge">${v.num <= 4 ? 'Lesson' : 'Урок'} ${v.num}</span>
+        <span class="lesson-badge">Lesson ${v.num}</span>
         <div class="lesson-info-col">
           <h4 class="lesson-item-title">${escapeHTML(v.shortTitle)}</h4>
-          <p class="lesson-item-subtitle">${v.num <= 4 ? 'Level A0 • Intro Course' : 'Уровень А0 • Практика'}</p>
+          <p class="lesson-item-subtitle">Level A0 • Practice</p>
         </div>
-        ${galaxyLessonNotes[v.id] ? '<span class="lesson-note-dot" title="Есть заметка"></span>' : ''}
-        <label class="lesson-watch-checkbox-container" title="Отметить как пройденный" onclick="event.stopPropagation();">
+        ${galaxyLessonNotes[v.id] ? '<span class="lesson-note-dot" title="Has notes"></span>' : ''}
+        <label class="lesson-watch-checkbox-container" title="Mark as completed" onclick="event.stopPropagation();">
           <input type="checkbox" class="lesson-item-check" data-id="${v.id}" ${isWatched ? 'checked' : ''}>
           <span class="lesson-custom-checkmark"></span>
         </label>
@@ -541,7 +541,7 @@ function playGalaxyVideo(videoId, title, lessonNum) {
   const activeCheck = document.getElementById('activeVideoCheckbox');
 
   if (details) details.style.display = 'flex';
-  if (badge) badge.textContent = `${lessonNum <= 4 ? 'Lesson' : 'Урок'} ${lessonNum}`;
+  if (badge) badge.textContent = `Lesson ${lessonNum}`;
   if (titleEl) titleEl.textContent = title;
   if (activeCheck) activeCheck.checked = galaxyWatchedVideos.includes(videoId);
 
@@ -556,7 +556,7 @@ function playGalaxyVideo(videoId, title, lessonNum) {
     noteTa.value = galaxyLessonNotes[videoId] || '';
     const statusEl = document.getElementById('lessonNoteSaveStatus');
     if (statusEl) {
-      statusEl.textContent = '\ud83d\udcbe Автосохранение';
+      statusEl.textContent = '\ud83d\udcbe Auto-save';
       statusEl.className = 'lesson-note-save-status';
     }
   }
@@ -581,7 +581,7 @@ function toggleWatchedStatus(videoId) {
     // Award 10 activity points in Heatmap!
     if (typeof recordActivity === 'function') {
       recordActivity(10);
-      showCourseToast('🎉 Урок пройден! Вам начислено +100 XP.');
+      showCourseToast('🎉 Lesson completed! You earned +100 XP.');
     }
     
     // --- GAMIFICATION XP LOGIC ---
