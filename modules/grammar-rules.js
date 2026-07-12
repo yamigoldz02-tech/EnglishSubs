@@ -3,6 +3,7 @@
  * @file modules/grammar-rules.js
  * @description Extracted Grammar Rules Interactive Handbook Module.
  */
+import { openModalEl, closeModalEl } from './modal-helpers.js';
 
 // ========================================================
 // --- ЛОГИКА СПРАВОЧНИКА ПРАВИЛ ---
@@ -468,6 +469,15 @@ function setupRulesUI() {
   }
 })();
 
-// Backward Compatibility
+// Self-initialize — this module is a type="module" script and runs after DOM is ready
+// (ES6 modules are deferred by default). We call both init functions here directly.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => { initGrammarRules(); setupRulesUI(); });
+} else {
+  initGrammarRules();
+  setupRulesUI();
+}
+
+// Backward Compatibility for app.js calls (safe to call again — addEventListener is idempotent)
 window.initGrammarRules = initGrammarRules;
 window.setupRulesUI = setupRulesUI;

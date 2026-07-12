@@ -2,6 +2,7 @@
  * @AI-SECTION: GAMIFICATION_ENGINE
  * Управляет Огоньком дня (Daily Streaks) и Опытом (XP)
  */
+import { openModalEl, closeModalEl } from './modal-helpers.js';
 
 const XP_STORAGE_KEY = 'lyric_user_xp';
 const STREAK_STORAGE_KEY = 'lyric_streak_days';
@@ -246,11 +247,7 @@ function openGamificationModal() {
     if (statVideosEl) statVideosEl.textContent = `${watchedCount} / 50 (${Math.round((watchedCount / 50) * 100)}%)`;
     if (statSongsEl) statSongsEl.textContent = songsCount;
 
-    if (typeof openModalEl === 'function') {
-        openModalEl(modal);
-    } else {
-        modal.style.display = 'flex';
-    }
+    openModalEl(modal);
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
 }
@@ -263,11 +260,7 @@ function closeGamificationModal() {
     if (!modal) return;
     document.documentElement.classList.remove('modal-open');
     document.body.classList.remove('modal-open');
-    if (typeof closeModalEl === 'function') {
-        closeModalEl(modal);
-    } else {
-        modal.style.display = 'none';
-    }
+    closeModalEl(modal);
 }
 
 // Экспорт глобальных методов (Backward Compatibility)
