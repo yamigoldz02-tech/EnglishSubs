@@ -467,3 +467,7 @@ function setupRulesUI() {
     });
   }
 })();
+
+// Backward Compatibility
+window.initGrammarRules = initGrammarRules;
+window.setupRulesUI = setupRulesUI;

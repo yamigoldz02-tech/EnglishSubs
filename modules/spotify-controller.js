@@ -7,7 +7,7 @@
 /* ==========================================================================
    Spotify Auto-Pause Integration (Authorization Code + PKCE)
    ========================================================================== */
-const SpotifyController = {
+export const SpotifyController = {
   clientId: localStorage.getItem('spotifyClientId') || '',
   accessToken: localStorage.getItem('spotifyAccessToken') || '',
   // Always use 127.0.0.1 for redirect (Spotify requires exact match)
@@ -521,6 +521,9 @@ const SpotifyController = {
     }
   }
 };
+
+// Initialization is now self-contained, but we also expose it globally for backward compatibility
+window.SpotifyController = SpotifyController;
 
 document.addEventListener('DOMContentLoaded', () => {
   SpotifyController.init();

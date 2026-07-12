@@ -8,10 +8,10 @@
    6. Audio Dictation (Shadowing Mode) Engine & Utilities
    ========================================================================== */
 
-let activeDictationOriginal = '';
-let activeDictationTranslation = '';
+export let activeDictationOriginal = '';
+export let activeDictationTranslation = '';
 
-function playHiddenPhrase(text) {
+export function playHiddenPhrase(text) {
   if (!window.speechSynthesis) {
     console.error("SpeechSynthesis API is not supported in this browser.");
     return;
@@ -33,7 +33,7 @@ function playHiddenPhrase(text) {
   window.speechSynthesis.speak(utterance);
 }
 
-function initAudioDictation(originalText, translation) {
+export function initAudioDictation(originalText, translation) {
   const container = document.getElementById('audio-dictation');
   if (!container) return;
   
@@ -47,6 +47,9 @@ function initAudioDictation(originalText, translation) {
   
   activeDictationOriginal = originalText;
   activeDictationTranslation = translation || 'English phrase from the song';
+  // Expose to window for app.js backwards compatibility
+  window.activeDictationOriginal = activeDictationOriginal;
+  window.activeDictationTranslation = activeDictationTranslation;
   
   const inputEl = document.getElementById('dictationInput');
   const checkBtn = document.getElementById('dictationCheckBtn');
@@ -71,7 +74,7 @@ function initAudioDictation(originalText, translation) {
   }
 }
 
-function normalizeTextForComparison(text) {
+export function normalizeTextForComparison(text) {
   return text
     .toLowerCase()
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"’]/g, "") // strip all punctuation
@@ -79,10 +82,7 @@ function normalizeTextForComparison(text) {
     .trim();
 }
 
-// Expose showArtistSongsModal globally
-window.showArtistSongsModal = showArtistSongsModal;
-
-function showArtistSongsModal(artistNameText) {
+export function showArtistSongsModal(artistNameText) {
   const modal = document.getElementById('artistSongsModal');
   const modalTitle = document.getElementById('artistSongsModalTitle');
   const songsListContainer = document.getElementById('artistSongsList');
@@ -168,3 +168,9 @@ function showArtistSongsModal(artistNameText) {
   closeBtn.onclick = hideModal;
   // Backdrop click intentionally disabled — use the close button (✕) to dismiss
 }
+
+// Expose globally for backward compatibility with app.js and HTML inline handlers
+window.playHiddenPhrase = playHiddenPhrase;
+window.initAudioDictation = initAudioDictation;
+window.normalizeTextForComparison = normalizeTextForComparison;
+window.showArtistSongsModal = showArtistSongsModal;
