@@ -35,6 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// 1. Fully detailed Song Dataset (Spotify-ready)
+
+// State Variables
+let currentSongKey = 'scorpions';
+let lastRenderedSongKey = null;
+let activeLineData = null;
+let activeOriginalText = '';
+let csvSongs = []; // Array of parsed CSV songs: { id, title, artist, spotifyId, art, genre }
+let activeDropdownIndex = -1; // Keyboard index for autocomplete navigation
+
+// Favorites State Layer
+let favoriteSongs = JSON.parse(localStorage.getItem('favorite_songs')) || [];
+
+function isSongFavorite(songId) {
+  return favoriteSongs.includes(songId);
+}
 
 function toggleSongFavorite(songId) {
   const index = favoriteSongs.indexOf(songId);
