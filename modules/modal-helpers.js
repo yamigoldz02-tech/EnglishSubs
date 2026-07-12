@@ -11,7 +11,7 @@
  * Sets display:flex, then triggers .modal-animate-in via double-rAF
  * so the CSS animation always fires exactly once per open.
  */
-export function openModalEl(el) {
+function openModalEl(el) {
   if (!el) return;
   
   // NOTE: history.pushState is handled by the MutationObserver in initModalHistoryAPI()
@@ -29,7 +29,7 @@ export function openModalEl(el) {
 /**
  * Closes a modal element and plays animation out.
  */
-export function closeModalEl(el) {
+function closeModalEl(el) {
   if (!el) return;
   if (el.style.display === 'none' || el.classList.contains('modal-animate-out')) return;
   

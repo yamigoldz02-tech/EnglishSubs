@@ -15,7 +15,7 @@ let lastStudyDate = null;
 /**
  * Инициализация геймификации при загрузке
  */
-export function initGamification() {
+function initGamification() {
     currentXP = parseInt(localStorage.getItem(XP_STORAGE_KEY)) || 0;
     currentStreak = parseInt(localStorage.getItem(STREAK_STORAGE_KEY)) || 0;
     lastStudyDate = localStorage.getItem(LAST_STUDY_DATE_KEY);
@@ -70,7 +70,7 @@ function checkAndUpdateStreak() {
  * @param {string} reason Причина (необязательно)
  * @param {Event|HTMLElement} sourceElement Элемент/событие для привязки всплывающей анимации
  */
-export function awardXP(amount, reason = '', sourceElement = null) {
+function awardXP(amount, reason = '', sourceElement = null) {
     // 1. Обновляем XP
     currentXP += amount;
     localStorage.setItem(XP_STORAGE_KEY, currentXP);
@@ -120,7 +120,7 @@ export function awardXP(amount, reason = '', sourceElement = null) {
 /**
  * Обновляет счетчики в интерфейсе
  */
-export function updateGamificationUI() {
+function updateGamificationUI() {
     const xpUI = document.getElementById('xpCountUI');
     const streakUI = document.getElementById('streakCountUI');
 
@@ -131,7 +131,7 @@ export function updateGamificationUI() {
 /**
  * Плавающая анимация "+10 XP"
  */
-export function showXPAnimation(amount, reason, sourceElement) {
+function showXPAnimation(amount, reason, sourceElement) {
     const animEl = document.createElement('div');
     animEl.className = 'xp-float-animation';
     animEl.innerHTML = `+${amount} <span class="xp-text">XP</span>`;
@@ -170,7 +170,7 @@ export function showXPAnimation(amount, reason, sourceElement) {
 /**
  * Определяет ранг игрока на основе XP
  */
-export function getRankInfo(xp) {
+function getRankInfo(xp) {
     if (xp < 500) return { title: 'Новичок 🌱', min: 0, max: 500 };
     if (xp < 1500) return { title: 'Искатель 🧭', min: 500, max: 1500 };
     if (xp < 3000) return { title: 'Ученик 📚', min: 1500, max: 3000 };
@@ -182,7 +182,7 @@ export function getRankInfo(xp) {
 /**
  * Открывает модальное окно достижений и активности
  */
-export function openGamificationModal() {
+function openGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
     
@@ -246,8 +246,8 @@ export function openGamificationModal() {
     if (statVideosEl) statVideosEl.textContent = `${watchedCount} / 50 (${Math.round((watchedCount / 50) * 100)}%)`;
     if (statSongsEl) statSongsEl.textContent = songsCount;
 
-    if (typeof window.openModalEl === 'function') {
-        window.openModalEl(modal);
+    if (typeof openModalEl === 'function') {
+        openModalEl(modal);
     } else {
         modal.style.display = 'flex';
     }
@@ -258,13 +258,13 @@ export function openGamificationModal() {
 /**
  * Закрывает модальное окно достижений
  */
-export function closeGamificationModal() {
+function closeGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
     document.documentElement.classList.remove('modal-open');
     document.body.classList.remove('modal-open');
-    if (typeof window.closeModalEl === 'function') {
-        window.closeModalEl(modal);
+    if (typeof closeModalEl === 'function') {
+        closeModalEl(modal);
     } else {
         modal.style.display = 'none';
     }

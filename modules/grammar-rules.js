@@ -64,7 +64,7 @@ function setupRulesUI() {
 
   // Open modal
   openRulesBtn.addEventListener('click', () => {
-    window.openModalEl(rulesModal);
+    openModalEl(rulesModal);
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
     document.body.style.overflow = 'hidden'; // lock scrolling
@@ -76,7 +76,7 @@ function setupRulesUI() {
 
   // Close modal
   const closeModal = () => {
-    window.closeModalEl(rulesModal);
+    closeModalEl(rulesModal);
     
     // Disable scroll lock only if no other major modal is open
     const notebookModal = document.getElementById('notebookModal');
@@ -377,7 +377,7 @@ function setupRulesUI() {
   function closeAllModals() {
     [dictionaryModal, rulesModal, trainingModal, videoCourseModal, notebookModal].forEach(m => {
       if (m) {
-        window.closeModalEl(m);
+        closeModalEl(m);
         m.classList.remove('open');
       }
     });
