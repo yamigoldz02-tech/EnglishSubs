@@ -246,8 +246,8 @@ export function openGamificationModal() {
     if (statVideosEl) statVideosEl.textContent = `${watchedCount} / 50 (${Math.round((watchedCount / 50) * 100)}%)`;
     if (statSongsEl) statSongsEl.textContent = songsCount;
 
-    if (typeof openModalEl === 'function') {
-        openModalEl(modal);
+    if (typeof window.openModalEl === 'function') {
+        window.openModalEl(modal);
     } else {
         modal.style.display = 'flex';
     }
@@ -263,8 +263,8 @@ export function closeGamificationModal() {
     if (!modal) return;
     document.documentElement.classList.remove('modal-open');
     document.body.classList.remove('modal-open');
-    if (typeof closeModalEl === 'function') {
-        closeModalEl(modal);
+    if (typeof window.closeModalEl === 'function') {
+        window.closeModalEl(modal);
     } else {
         modal.style.display = 'none';
     }

@@ -243,6 +243,14 @@ export function setupEventListeners() {
       }
 
       // 8b. Rules Modal
+      // 8a. Gamification Modal
+      const gamificationModal = document.getElementById(\'gamificationModal\');
+      if (gamificationModal && gamificationModal.style.display !== \'none\' && gamificationModal.style.display !== \'\') {
+        const closeBtn = document.getElementById(\'closeGamificationBtn\');
+        if (closeBtn) closeBtn.click();
+        return;
+      }
+
       const rulesModal = document.getElementById('rulesModal');
       if (rulesModal && rulesModal.style.display !== 'none' && rulesModal.style.display !== '') {
         const closeBtn = document.getElementById('closeRulesBtn');
