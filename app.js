@@ -852,7 +852,10 @@ function showDashboard() {
   // Update Stats counts
   const dashWordsCount = document.getElementById('dashWordsCount');
   if (dashWordsCount) {
-    dashWordsCount.textContent = personalDictionary ? personalDictionary.length : 0;
+    const activeCount = typeof window.getActiveWordsCount === 'function'
+      ? window.getActiveWordsCount()
+      : (personalDictionary ? personalDictionary.length : 0);
+    dashWordsCount.textContent = activeCount;
   }
 
   // Render Dashboard Favorites list
@@ -1049,7 +1052,13 @@ function highlightWordsFromDictionary(text) {
   // Sort dictionary items by length of the target word/phrase in descending order
   // to prioritize matching longer phrases first and avoid partial substring overlap bugs
   const sortedDict = [...personalDictionary]
-    .filter(item => item && item.word && item.word.trim().length > 0)
+    .filter(item => {
+      if (!item || !item.word || item.word.trim().length === 0) return false;
+      if (item.categories && item.categories.some(c => window.personalHiddenCategories && window.personalHiddenCategories.includes(c))) {
+        return false;
+      }
+      return true;
+    })
     .sort((a, b) => b.word.trim().length - a.word.trim().length);
 
   if (sortedDict.length === 0) {
@@ -1433,8 +1442,6 @@ function initCustomChat() {
 // @AI-SECTION: MOBILE_BACK_BUTTON_MODALS
 (function initModalHistoryAPI() {
   document.addEventListener('DOMContentLoaded', () => {
-    // Disable in Capacitor/Cordova app to avoid history conflicts with main app router
-    // Must check after DOM load so Capacitor bridge is fully injected
     const isMobileApp = !!window.Capacitor || !!window.Cordova || window.location.protocol === 'file:';
     if (isMobileApp) {
       console.log("History API modal helper disabled on mobile app wrapper.");
@@ -1443,27 +1450,71 @@ function initCustomChat() {
 
     let programmaticBacks = 0;
 
+    function closeTopmostModal() {
+      const modalPriority = [
+        'addWordModal',
+        'addPhraseModal',
+        'wordEditModal',
+        'trainingModal',
+        'roleplayModal',
+        'manageFoldersModal',
+        'settingsModal',
+        'editLyricsModal',
+        'artistSongsModal',
+        'gamificationModal',
+        'rulesModal',
+        'dictionaryModal',
+        'videoCourseModal'
+      ];
+
+      for (const id of modalPriority) {
+        const el = document.getElementById(id);
+        if (el && el.style.display !== 'none' && el.style.display !== '') {
+          // If video course modal is minimized as a floating player, skip it from modal stack closure
+          if (id === 'videoCourseModal' && el.classList.contains('video-modal-minimized')) {
+            continue;
+          }
+          const closeBtn = el.querySelector('#closeAddWordBtn, #closeAddPhraseBtn, #closeDictionaryBtn, #closeTrainingModalBtn, #closeRoleplayModalBtn, #closeSettingsBtn, #closeGamificationBtn, #closeRulesBtn, #closeVideoCourseModalBtn, .modal-close-btn');
+          if (closeBtn) {
+            closeBtn.click();
+          } else if (typeof window.closeModalEl === 'function') {
+            window.closeModalEl(el);
+          } else {
+            el.style.display = 'none';
+          }
+          return true; // CLOSED EXACTLY ONE TOPMOST MODAL, STOP!
+        }
+      }
+
+      return false;
+    }
+    window.closeTopmostModal = closeTopmostModal;
+
     window.addEventListener('popstate', (e) => {
       if (programmaticBacks > 0) {
         programmaticBacks--;
         return;
       }
-      // Dispatch Escape key to trigger existing hierarchical close logic
-      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      closeTopmostModal();
     });
+
+    // Only observe top-level modals for History API (sub-modals like addWordModal do not pollute history stack)
+    const topLevelModalIds = new Set(['dictionaryModal', 'settingsModal', 'gamificationModal', 'rulesModal']);
 
     const modalObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-          const display = mutation.target.style.display;
+          const target = mutation.target;
+          if (!topLevelModalIds.has(target.id)) return;
+          if (target.classList.contains('video-modal-minimized')) return;
+
+          const display = target.style.display;
           const isVisible = display === 'flex' || display === 'block';
           const wasVisible = mutation.oldValue && (mutation.oldValue.includes('display: flex') || mutation.oldValue.includes('display: block'));
-          
+
           if (isVisible && !wasVisible) {
-            // Modal opened
-            window.history.pushState({ modalOpen: true, modalId: mutation.target.id }, '');
+            window.history.pushState({ modalOpen: true, modalId: target.id }, '');
           } else if (!isVisible && wasVisible) {
-            // Modal closed (by direct click, not by popstate)
             if (window.history.state && window.history.state.modalOpen) {
               programmaticBacks++;
               window.history.back();
@@ -1474,11 +1525,9 @@ function initCustomChat() {
     });
 
     document.querySelectorAll('.modal-overlay').forEach(modal => {
-      // Exclude the notebook drawer — it is a slide-in panel, not a stacked modal.
-      // Its open/close should NOT push/pop history, otherwise closing it fires a
-      // synthetic Escape that accidentally closes any other open modal (e.g. Grammar, Gamification).
-      if (modal.id === 'notebookModal') return;
-      modalObserver.observe(modal, { attributes: true, attributeFilter: ['style'], attributeOldValue: true });
+      if (topLevelModalIds.has(modal.id)) {
+        modalObserver.observe(modal, { attributes: true, attributeFilter: ['style'], attributeOldValue: true });
+      }
     });
   });
 })();

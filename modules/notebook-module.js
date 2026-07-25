@@ -259,6 +259,65 @@ function initNotebook() {
 
 
   // ── General notes transliteration button ──────────────────────────────────
+  const moveToFolderBtn = document.getElementById('notebookMoveToFolderBtn');
+  if (moveToFolderBtn && textarea) {
+    moveToFolderBtn.addEventListener('click', async () => {
+      const text = textarea.value.trim();
+      if (!text) {
+        if (window.showToast) window.showToast("В общих заметках нет текста для переноса!", "warning");
+        else alert("В общих заметках нет текста для переноса!");
+        return;
+      }
+
+      const defaultFolderName = '📁 Заметки (' + new Date().toLocaleDateString('ru-RU') + ')';
+      const folderName = await (window.showCustomPrompt
+        ? window.showCustomPrompt('📁 Перенос заметок в папку', 'Введите название для новой папки с заметками:', defaultFolderName)
+        : prompt('Введите название для новой папки с заметками:', defaultFolderName));
+
+      if (!folderName || !folderName.trim()) return;
+
+      const cleanFolderName = folderName.trim();
+      const newFolderId = 'folder_' + Date.now();
+      const newNoteId = 'note_' + Date.now();
+
+      const firstLine = text.split('\n')[0].replace(/[#*`]/g, '').trim();
+      const noteTitle = firstLine ? (firstLine.slice(0, 45) + (firstLine.length > 45 ? '...' : '')) : 'Заметка от ' + new Date().toLocaleDateString('ru-RU');
+
+      const newFolder = {
+        id: newFolderId,
+        name: cleanFolderName,
+        notes: [
+          {
+            id: newNoteId,
+            title: noteTitle,
+            content: text,
+            updatedAt: Date.now()
+          }
+        ]
+      };
+
+      customNoteFolders.unshift(newFolder);
+      saveCustomNoteFolders();
+
+      textarea.value = '';
+      try {
+        localStorage.removeItem('user_notebook_text');
+      } catch (e) {}
+
+      updateNotebookWordCount();
+
+      if (window.showToast) {
+        window.showToast(`✓ Текст перенесён в папку "${cleanFolderName}" и заметки очищены!`, "success");
+      }
+
+      const tabCustom = document.getElementById('notebookTabCustom');
+      if (tabCustom) {
+        tabCustom.click();
+        showCustomNotesListView(newFolderId);
+      }
+    });
+  }
+
   const generalTranslitBtn = document.getElementById('notebookGeneralTranslitBtn');
   if (generalTranslitBtn && textarea) {
     generalTranslitBtn.addEventListener('click', () => {

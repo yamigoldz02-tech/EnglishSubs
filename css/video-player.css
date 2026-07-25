@@ -1,3 +1,4 @@
+/* ==========================================================================
    RESTORED FLOATING VIDEO PLAYER CSS
    ========================================================================== */
 .video-modal-minimized {
@@ -15,6 +16,7 @@
   max-width: none !important;
   max-height: none !important;
   transform: none !important;
+  pointer-events: none !important;
 }
 .video-modal-minimized .modal-header,
 .video-modal-minimized .video-course-progress-panel,
@@ -28,6 +30,10 @@
 .video-modal-minimized .video-course-body {
   border: none !important;
   background: transparent !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  pointer-events: none !important;
 }
 .video-modal-minimized .player-container-pane {
   pointer-events: auto !important;
@@ -36,7 +42,7 @@
   right: 20px !important;
   top: auto !important;
   left: auto !important;
-  width: 350px;
+  width: 360px;
   padding: 0 !important;
   background: var(--bg-surface, #121216);
   border: 1px solid var(--border-glass);
@@ -44,21 +50,24 @@
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   z-index: 100000;
   overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
   cursor: grab;
-  transition: width 0.2s, height 0.2s;
+  transition: none !important;
   display: flex;
   flex-direction: column;
   order: unset !important;
+  will-change: width, bottom, right, top, left;
 }
 .video-modal-minimized .player-container-pane.floating-dragged {
   transition: none !important;
   cursor: grabbing !important;
-  bottom: auto !important;
-  right: auto !important;
 }
 .video-modal-minimized .video-player-wrapper {
   border-radius: 0 0 12px 12px !important;
   border: none !important;
+  min-height: 0 !important;
+  height: auto !important;
 }
 
 .floating-video-header {
@@ -99,19 +108,90 @@
   color: var(--text-main);
 }
 
+/* Handles */
 .floating-resize-handle {
   position: absolute;
-  width: 15px;
-  height: 100%;
-  top: 0;
-  cursor: ew-resize;
-  z-index: 100001;
-}
-.floating-resize-handle.left-handle {
-  left: -7px;
-}
-.floating-resize-handle.right-handle {
-  right: -7px;
+  z-index: 100005 !important;
+  pointer-events: auto !important;
+  touch-action: none;
 }
 
-/* ==========================================================================
+.floating-resize-handle.top-left-handle {
+  width: 26px;
+  height: 26px;
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+  border-top: 3px solid var(--accent-spotify, #1db954);
+  border-left: 3px solid var(--accent-spotify, #1db954);
+  border-top-left-radius: 8px;
+  box-sizing: border-box;
+  background: rgba(29, 185, 84, 0.2);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.4);
+  opacity: 0.85;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-resize-handle.bottom-right-handle {
+  width: 26px;
+  height: 26px;
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+  border-bottom: 3px solid var(--accent-spotify, #1db954);
+  border-right: 3px solid var(--accent-spotify, #1db954);
+  border-bottom-right-radius: 8px;
+  box-sizing: border-box;
+  background: rgba(29, 185, 84, 0.2);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.4);
+  opacity: 0.85;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-resize-handle.top-left-handle:hover,
+.floating-resize-handle.top-left-handle.active,
+.floating-resize-handle.bottom-right-handle:hover,
+.floating-resize-handle.bottom-right-handle.active {
+  opacity: 1;
+  transform: scale(1.25);
+  background: rgba(29, 185, 84, 0.4);
+}
+
+.floating-resize-handle.left-handle {
+  width: 12px;
+  height: calc(100% - 24px);
+  top: 12px;
+  left: -6px;
+  cursor: ew-resize;
+}
+.floating-resize-handle.right-handle {
+  width: 12px;
+  height: calc(100% - 24px);
+  top: 12px;
+  right: -6px;
+  cursor: ew-resize;
+}
+.floating-resize-handle.top-handle {
+  height: 12px;
+  width: calc(100% - 24px);
+  left: 12px;
+  top: -6px;
+  cursor: ns-resize;
+}
+.floating-resize-handle.bottom-handle {
+  height: 12px;
+  width: calc(100% - 24px);
+  left: 12px;
+  bottom: -6px;
+  cursor: ns-resize;
+}
+
+body.floating-resizing,
+body.floating-resizing * {
+  user-select: none !important;
+}
+
+body.floating-resizing iframe,
+body.floating-resizing .player-container-pane iframe {
+  pointer-events: none !important;
+}

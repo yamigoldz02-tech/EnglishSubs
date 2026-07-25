@@ -11,7 +11,7 @@
  * Sets display:flex, then triggers .modal-animate-in via double-rAF
  * so the CSS animation always fires exactly once per open.
  */
-export function openModalEl(el) {
+function openModalEl(el) {
   if (!el) return;
   
   // NOTE: history.pushState is handled by the MutationObserver in initModalHistoryAPI()
@@ -29,7 +29,7 @@ export function openModalEl(el) {
 /**
  * Closes a modal element and plays animation out.
  */
-export function closeModalEl(el) {
+function closeModalEl(el) {
   if (!el) return;
   if (el.style.display === 'none' || el.classList.contains('modal-animate-out')) return;
   
@@ -52,18 +52,10 @@ export function closeModalEl(el) {
   }, 200);
 }
 
-// Intercept popstate to close modals if the user swipes back on mobile
+// Intercept popstate to close top-most modal safely
 window.addEventListener('popstate', (e) => {
-  if (!window.location.hash.includes('modal')) {
-    // Only target actual modal overlays, NOT inner cards/containers that happen to have "Modal" in their ID
-    const modals = document.querySelectorAll('.modal-overlay');
-    modals.forEach(m => {
-      if (m.style.display !== 'none' && m.style.display !== '') {
-        const closeBtn = m.querySelector('.modal-close-btn, .close-modal, .close-btn, .close-lightbox');
-        if (closeBtn) closeBtn.click();
-        else closeModalEl(m);
-      }
-    });
+  if (typeof window.closeTopmostModal === 'function') {
+    window.closeTopmostModal();
   }
 });
 

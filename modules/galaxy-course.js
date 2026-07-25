@@ -67,16 +67,17 @@ function initVideoCourse() {
       modal.classList.remove('video-modal-minimized');
       const header = document.getElementById('floatingPlayerHeader');
       if (header) header.style.display = 'none';
-      const rhLeft = document.getElementById('floatingResizeHandleLeft');
-      const rhRight = document.getElementById('floatingResizeHandleRight');
-      if (rhLeft) rhLeft.style.display = 'none';
-      if (rhRight) rhRight.style.display = 'none';
-      // Reset any inline width/position set by JS resize/drag
+      ['floatingResizeHandleTopLeft', 'floatingResizeHandleBottomRight', 'floatingResizeHandleLeft', 'floatingResizeHandleTop', 'floatingResizeHandleRight', 'floatingResizeHandleBottom'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
       const pane = modal.querySelector('.player-container-pane');
       if (pane) {
         pane.style.removeProperty('width');
         pane.style.removeProperty('left');
         pane.style.removeProperty('top');
+        pane.style.removeProperty('bottom');
+        pane.style.removeProperty('right');
         pane.classList.remove('floating-dragged');
       }
       
@@ -96,18 +97,18 @@ function initVideoCourse() {
         document.body.classList.remove('modal-open');
         const header = document.getElementById('floatingPlayerHeader');
         if (header) header.style.display = 'flex';
-        const rhLeft = document.getElementById('floatingResizeHandleLeft');
-        const rhRight = document.getElementById('floatingResizeHandleRight');
-        if (rhLeft) rhLeft.style.display = 'block';
-        if (rhRight) rhRight.style.display = 'block';
+        ['floatingResizeHandleTopLeft', 'floatingResizeHandleBottomRight', 'floatingResizeHandleLeft', 'floatingResizeHandleTop', 'floatingResizeHandleRight', 'floatingResizeHandleBottom'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = 'block';
+        });
       } else {
         modal.classList.remove('video-modal-minimized');
         const header = document.getElementById('floatingPlayerHeader');
         if (header) header.style.display = 'none';
-        const rhLeft = document.getElementById('floatingResizeHandleLeft');
-        const rhRight = document.getElementById('floatingResizeHandleRight');
-        if (rhLeft) rhLeft.style.display = 'none';
-        if (rhRight) rhRight.style.display = 'none';
+        ['floatingResizeHandleTopLeft', 'floatingResizeHandleBottomRight', 'floatingResizeHandleLeft', 'floatingResizeHandleTop', 'floatingResizeHandleRight', 'floatingResizeHandleBottom'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
         
         modal.style.display = 'none';
         document.documentElement.classList.remove('modal-open');
@@ -135,7 +136,11 @@ function initVideoCourse() {
   const expandFloatingBtn = document.getElementById('expandFloatingVideoBtn');
 
   if (closeFloatingBtn) {
-    closeFloatingBtn.onclick = () => {
+    closeFloatingBtn.onclick = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       galaxyActiveVideoId = null;
       hideModal();
     };
@@ -147,68 +152,154 @@ function initVideoCourse() {
     };
   }
 
-  // --- JS Drag-to-Resize for floating player (left & right edges) ---
+  // --- JS Drag-to-Resize for floating player (with strict screen boundary clamping) ---
+  const handleTopLeft = document.getElementById('floatingResizeHandleTopLeft');
+  const handleBottomRight = document.getElementById('floatingResizeHandleBottomRight');
   const handleLeft = document.getElementById('floatingResizeHandleLeft');
+  const handleTop = document.getElementById('floatingResizeHandleTop');
   const handleRight = document.getElementById('floatingResizeHandleRight');
-  
-  function initResizeHandle(handle, isLeft) {
+  const handleBottom = document.getElementById('floatingResizeHandleBottom');
+
+  function initResizeHandle(handle, handleType) {
     if (!handle) return;
     let isResizing = false;
     let startX = 0;
+    let startY = 0;
     let startWidth = 0;
-    let startLeft = 0;
+    let fixedBottom = 0;
+    let fixedRight = 0;
+    let fixedTop = 0;
+    let fixedLeft = 0;
+    let latestMouseX = 0;
+    let latestMouseY = 0;
+    let isPendingrAF = false;
 
     handle.addEventListener('mousedown', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const pane = handle.closest('.player-container-pane');
       if (!pane) return;
+
       isResizing = true;
       startX = e.clientX;
-      startWidth = pane.offsetWidth;
-      
-      // Convert to absolute left/top positioning if not already done
-      if (!pane.classList.contains('floating-dragged')) {
-        const rect = pane.getBoundingClientRect();
-        pane.style.setProperty('left', rect.left + 'px', 'important');
-        pane.style.setProperty('top', rect.top + 'px', 'important');
-        pane.classList.add('floating-dragged');
-      }
-      
-      startLeft = pane.getBoundingClientRect().left;
+      startY = e.clientY;
+
+      const rect = pane.getBoundingClientRect();
+      startWidth = rect.width;
+
+      fixedBottom = window.innerHeight - rect.bottom;
+      fixedRight = window.innerWidth - rect.right;
+      fixedTop = rect.top;
+      fixedLeft = rect.left;
+
       handle.classList.add('active');
       document.body.classList.add('floating-resizing');
+
+      const iframe = pane.querySelector('iframe');
+      if (iframe) iframe.style.setProperty('pointer-events', 'none', 'important');
     });
 
     document.addEventListener('mousemove', (e) => {
       if (!isResizing) return;
-      const pane = handle.closest('.player-container-pane');
-      if (!pane) return;
-      
-      let newWidth;
-      if (isLeft) {
-        const delta = startX - e.clientX;
-        newWidth = Math.max(280, Math.min(window.innerWidth * 0.8, startWidth + delta));
-        pane.style.setProperty('width', newWidth + 'px', 'important');
-        const newLeft = Math.max(0, startLeft - (newWidth - startWidth));
-        pane.style.setProperty('left', newLeft + 'px', 'important');
-      } else {
-        const delta = e.clientX - startX;
-        newWidth = Math.max(280, Math.min(window.innerWidth * 0.8, startWidth + delta));
-        pane.style.setProperty('width', newWidth + 'px', 'important');
+      latestMouseX = e.clientX;
+      latestMouseY = e.clientY;
+
+      if (!isPendingrAF) {
+        isPendingrAF = true;
+        requestAnimationFrame(() => {
+          isPendingrAF = false;
+          if (!isResizing) return;
+          const pane = handle.closest('.player-container-pane');
+          if (!pane) return;
+
+          let delta = 0;
+          let anchorMode = 'bottom-right';
+
+          if (handleType === 'top-left') {
+            const dx = startX - latestMouseX;
+            const dy = startY - latestMouseY;
+            delta = (dx + dy) / 2;
+            anchorMode = 'bottom-right';
+          } else if (handleType === 'bottom-right') {
+            const dx = latestMouseX - startX;
+            const dy = latestMouseY - startY;
+            delta = (dx + dy) / 2;
+            anchorMode = 'top-left';
+          } else if (handleType === 'left') {
+            delta = startX - latestMouseX;
+            anchorMode = 'bottom-right';
+          } else if (handleType === 'right') {
+            delta = latestMouseX - startX;
+            anchorMode = 'top-left';
+          } else if (handleType === 'top') {
+            delta = (startY - latestMouseY) * 1.77;
+            anchorMode = 'bottom-right';
+          } else if (handleType === 'bottom') {
+            delta = (latestMouseY - startY) * 1.77;
+            anchorMode = 'top-left';
+          }
+
+          const minWidth = 260;
+          let maxAllowedWidth = 1000;
+
+          if (anchorMode === 'bottom-right') {
+            // Constrain left edge >= 10px & top edge >= 10px
+            const availWFromLeft = window.innerWidth - fixedRight - 10;
+            const availHFromTop = window.innerHeight - fixedBottom - 10;
+            const availVideoH = Math.max(0, availHFromTop - 35);
+            const maxWFromTop = availVideoH * (16 / 9);
+            maxAllowedWidth = Math.max(minWidth, Math.min(availWFromLeft, maxWFromTop));
+          } else {
+            // Constrain right edge <= window.innerWidth - 10 & bottom edge <= window.innerHeight - 10
+            const availWFromRight = window.innerWidth - fixedLeft - 10;
+            const availHFromBottom = window.innerHeight - fixedTop - 10;
+            const availVideoH = Math.max(0, availHFromBottom - 35);
+            const maxWFromBottom = availVideoH * (16 / 9);
+            maxAllowedWidth = Math.max(minWidth, Math.min(availWFromRight, maxWFromBottom));
+          }
+
+          const targetWidth = Math.max(minWidth, Math.min(maxAllowedWidth, startWidth + delta));
+
+          if (anchorMode === 'top-left') {
+            pane.style.setProperty('top', Math.max(10, fixedTop) + 'px', 'important');
+            pane.style.setProperty('left', Math.max(10, fixedLeft) + 'px', 'important');
+            pane.style.setProperty('bottom', 'auto', 'important');
+            pane.style.setProperty('right', 'auto', 'important');
+            pane.style.setProperty('width', targetWidth + 'px', 'important');
+          } else {
+            pane.style.setProperty('bottom', Math.max(10, fixedBottom) + 'px', 'important');
+            pane.style.setProperty('right', Math.max(10, fixedRight) + 'px', 'important');
+            pane.style.setProperty('top', 'auto', 'important');
+            pane.style.setProperty('left', 'auto', 'important');
+            pane.style.setProperty('width', targetWidth + 'px', 'important');
+          }
+        });
       }
     });
 
-    document.addEventListener('mouseup', () => {
+    const stopResize = () => {
       if (isResizing) {
         isResizing = false;
         handle.classList.remove('active');
         document.body.classList.remove('floating-resizing');
+
+        const pane = handle.closest('.player-container-pane');
+        if (pane) {
+          const iframe = pane.querySelector('iframe');
+          if (iframe) iframe.style.removeProperty('pointer-events');
+        }
       }
-    });
+    };
+
+    document.addEventListener('mouseup', stopResize);
   }
 
-  initResizeHandle(handleLeft, true);
-  initResizeHandle(handleRight, false);
+  initResizeHandle(handleTopLeft, 'top-left');
+  initResizeHandle(handleBottomRight, 'bottom-right');
+  initResizeHandle(handleLeft, 'left');
+  initResizeHandle(handleTop, 'top');
+  initResizeHandle(handleRight, 'right');
+  initResizeHandle(handleBottom, 'bottom');
 
   // --- JS Drag-to-Move for floating player (grab header) ---
   const floatingHeader = document.getElementById('floatingPlayerHeader');
@@ -220,7 +311,6 @@ function initVideoCourse() {
     let paneStartTop = 0;
 
     floatingHeader.addEventListener('mousedown', (e) => {
-      // Don't drag if clicking buttons inside the header
       if (e.target.closest('button')) return;
       e.preventDefault();
       const pane = floatingHeader.closest('.player-container-pane');
@@ -230,7 +320,6 @@ function initVideoCourse() {
       dragStartX = e.clientX;
       dragStartY = e.clientY;
 
-      // If first drag, convert from bottom/right to top/left
       if (!pane.classList.contains('floating-dragged')) {
         const rect = pane.getBoundingClientRect();
         pane.style.setProperty('left', rect.left + 'px', 'important');
@@ -241,34 +330,56 @@ function initVideoCourse() {
       paneStartLeft = parseInt(pane.style.left) || 0;
       paneStartTop = parseInt(pane.style.top) || 0;
 
-      document.body.classList.add('floating-resizing'); // reuse to block iframe
+      document.body.classList.add('floating-resizing');
+
+      const iframe = pane.querySelector('iframe');
+      if (iframe) iframe.style.pointerEvents = 'none';
     });
+
+    let latestDragX = 0;
+    let latestDragY = 0;
+    let isPendingDragrAF = false;
 
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      const pane = floatingHeader.closest('.player-container-pane');
-      if (!pane) return;
+      latestDragX = e.clientX;
+      latestDragY = e.clientY;
 
-      const dx = e.clientX - dragStartX;
-      const dy = e.clientY - dragStartY;
-      
-      let newLeft = paneStartLeft + dx;
-      let newTop = paneStartTop + dy;
-      
-      // Keep within viewport
-      const pw = pane.offsetWidth;
-      const ph = pane.offsetHeight;
-      newLeft = Math.max(0, Math.min(window.innerWidth - pw, newLeft));
-      newTop = Math.max(0, Math.min(window.innerHeight - ph, newTop));
+      if (!isPendingDragrAF) {
+        isPendingDragrAF = true;
+        requestAnimationFrame(() => {
+          isPendingDragrAF = false;
+          if (!isDragging) return;
+          const pane = floatingHeader.closest('.player-container-pane');
+          if (!pane) return;
 
-      pane.style.setProperty('left', newLeft + 'px', 'important');
-      pane.style.setProperty('top', newTop + 'px', 'important');
+          const dx = latestDragX - dragStartX;
+          const dy = latestDragY - dragStartY;
+
+          let newLeft = paneStartLeft + dx;
+          let newTop = paneStartTop + dy;
+
+          const rect = pane.getBoundingClientRect();
+          newLeft = Math.max(10, Math.min(window.innerWidth - rect.width - 10, newLeft));
+          newTop = Math.max(10, Math.min(window.innerHeight - rect.height - 10, newTop));
+
+          pane.style.setProperty('left', newLeft + 'px', 'important');
+          pane.style.setProperty('top', newTop + 'px', 'important');
+          pane.style.setProperty('bottom', 'auto', 'important');
+          pane.style.setProperty('right', 'auto', 'important');
+        });
+      }
     });
 
     document.addEventListener('mouseup', () => {
       if (isDragging) {
         isDragging = false;
         document.body.classList.remove('floating-resizing');
+        const pane = floatingHeader.closest('.player-container-pane');
+        if (pane) {
+          const iframe = pane.querySelector('iframe');
+          if (iframe) iframe.style.pointerEvents = 'auto';
+        }
       }
     });
   }

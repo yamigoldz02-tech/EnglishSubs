@@ -1,5 +1,5 @@
 // UI Event Listeners Manager
-export function setupEventListeners() {
+function setupEventListeners() {
   
   // Logo brand click -> go to Dashboard welcome hub
   const logoBrand = document.getElementById('navBrandLogo');
@@ -171,94 +171,12 @@ export function setupEventListeners() {
   // Hierarchical Esc key closure for all modals and drawers
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      // 1. Settings Modal
-      const settingsModal = document.getElementById('settingsModal');
-      if (settingsModal && settingsModal.style.display !== 'none' && settingsModal.style.display !== '') {
-        closeModalEl(settingsModal);
-        return;
+      if (typeof window.closeTopmostModal === 'function') {
+        const closed = window.closeTopmostModal();
+        if (closed) return;
       }
 
-      // 2. Add Word Modal (usually on top of Dictionary Modal)
-      const addWordModal = document.getElementById('addWordModal');
-      if (addWordModal && addWordModal.style.display !== 'none' && addWordModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeAddWordBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 2b. Add Phrase Modal (usually on top of Dictionary Modal)
-      const addPhraseModal = document.getElementById('addPhraseModal');
-      if (addPhraseModal && addPhraseModal.style.display !== 'none' && addPhraseModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeAddPhraseBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 3. Training Modal (usually on top of Dictionary Modal)
-      const trainingModal = document.getElementById('trainingModal');
-      if (trainingModal && trainingModal.style.display !== 'none' && trainingModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeTrainingModalBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 4. Roleplay Modal
-      const roleplayModal = document.getElementById('roleplayModal');
-      if (roleplayModal && roleplayModal.style.display !== 'none' && roleplayModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeRoleplayModalBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 5. Dictionary Modal
-      const dictionaryModal = document.getElementById('dictionaryModal');
-      if (dictionaryModal && dictionaryModal.style.display !== 'none' && dictionaryModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeDictionaryBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 6. Edit Lyrics Modal
-      const editLyricsModal = document.getElementById('editLyricsModal');
-      if (editLyricsModal && editLyricsModal.style.display !== 'none' && editLyricsModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeEditLyricsBtn') || document.getElementById('cancelEditLyricsBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 7. Artist Songs Modal
-      const artistSongsModal = document.getElementById('artistSongsModal');
-      if (artistSongsModal && artistSongsModal.style.display !== 'none' && artistSongsModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeArtistSongsModalBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 8. Video Course Modal
-      const videoCourseModal = document.getElementById('videoCourseModal');
-      if (videoCourseModal && videoCourseModal.style.display !== 'none' && videoCourseModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeVideoCourseModalBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 8b. Rules Modal
-      // 8a. Gamification Modal
-      const gamificationModal = document.getElementById(\'gamificationModal\');
-      if (gamificationModal && gamificationModal.style.display !== \'none\' && gamificationModal.style.display !== \'\') {
-        const closeBtn = document.getElementById(\'closeGamificationBtn\');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      const rulesModal = document.getElementById('rulesModal');
-      if (rulesModal && rulesModal.style.display !== 'none' && rulesModal.style.display !== '') {
-        const closeBtn = document.getElementById('closeRulesBtn');
-        if (closeBtn) closeBtn.click();
-        return;
-      }
-
-      // 9. Notebook Drawer
+      // Notebook Drawer
       const notebookModal = document.getElementById('notebookModal');
       if (notebookModal && notebookModal.classList.contains('is-open')) {
         const closeBtn = document.getElementById('closeNotebookBtn');
@@ -266,7 +184,7 @@ export function setupEventListeners() {
         return;
       }
 
-      // 10. Sidebar Panel (Right details sidebar)
+      // Sidebar Panel
       if (typeof closeSidebar === 'function') {
         const sidebarPanel = document.getElementById('sidebarPanel');
         if (sidebarPanel && sidebarPanel.classList.contains('open')) {

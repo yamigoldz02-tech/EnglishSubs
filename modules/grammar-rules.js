@@ -3,7 +3,7 @@
  * @file modules/grammar-rules.js
  * @description Extracted Grammar Rules Interactive Handbook Module.
  */
-import { openModalEl, closeModalEl } from './modal-helpers.js';
+
 
 // ========================================================
 // --- ЛОГИКА СПРАВОЧНИКА ПРАВИЛ ---

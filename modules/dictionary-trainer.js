@@ -64,6 +64,7 @@ function saveCategories() {
   localStorage.setItem('personal_categories', JSON.stringify(personalCategories));
   localStorage.setItem('personal_custom_categories', JSON.stringify(personalCustomCategories));
   localStorage.setItem('personal_hidden_categories', JSON.stringify(personalHiddenCategories));
+  window.personalHiddenCategories = personalHiddenCategories;
 }
 
 let personalHiddenCategories = [];
@@ -76,36 +77,95 @@ function loadHiddenCategories() {
     } else {
       localStorage.setItem('personal_hidden_categories', JSON.stringify(personalHiddenCategories));
     }
+    window.personalHiddenCategories = personalHiddenCategories;
   } catch (e) {
     console.error("Failed to load hidden categories:", e);
   }
 }
 
-function runOldWordsMigration() {
-  const migratedFlag = localStorage.getItem('galaxy_migrated_old_words_v1');
-  if (!migratedFlag && personalDictionary && personalDictionary.length > 0) {
-    console.log('Running one-time migration to move all existing words to "Старые"...');
-    // Ensure "Старые" exists in categories
-    if (!personalCategories.includes('Старые')) {
-      personalCategories.push('Старые');
-      saveCategories();
-    }
-    // Move all words to "Старые"
-    let updated = false;
+function getActiveWordsCount() {
+  if (!personalDictionary) return 0;
+  return personalDictionary.filter(w => {
+    if (w.categories && w.categories.some(c => personalHiddenCategories.includes(c))) return false;
+    return true;
+  }).length;
+}
+window.getActiveWordsCount = getActiveWordsCount;
+
+function _doArchiveCurrentDictionary(manual = false) {
+  if (!personalCategories.includes('Старые')) {
+    personalCategories.push('Старые');
+  }
+  if (!personalHiddenCategories.includes('Старые')) {
+    personalHiddenCategories.push('Старые');
+  }
+  saveCategories();
+
+  let movedCount = 0;
+  if (personalDictionary && personalDictionary.length > 0) {
     personalDictionary.forEach(w => {
-      w.category = 'Старые';
-      w.categories = ['Старые'];
-      updated = true;
+      const isOnlyOld = w.categories && w.categories.length === 1 && w.categories[0] === 'Старые';
+      if (!isOnlyOld) {
+        w.category = 'Старые';
+        w.categories = ['Старые'];
+        movedCount++;
+      }
     });
-    if (updated) {
-      saveDictionaryToStorage();
+  }
+
+  saveDictionaryToStorage();
+  clearStudySession();
+
+  if (typeof renderDictWordsList === 'function') renderDictWordsList();
+  if (typeof populateCategorySelectors === 'function') populateCategorySelectors();
+  if (typeof renderManageFoldersList === 'function') renderManageFoldersList();
+
+  if (manual && window.showToast) {
+    window.showToast(`Успешно отложено ${movedCount} слов в архив «Старые». Новый словарь готов! 🚀`, "success");
+  }
+}
+
+function archiveCurrentDictionaryToOldWords(manual = false) {
+  if (!personalDictionary || personalDictionary.length === 0) {
+    if (manual && window.showToast) window.showToast("В вашем словаре пока нет слов для архивации.", "info");
+    return;
+  }
+
+  const activeCount = getActiveWordsCount();
+
+  if (manual) {
+    if (activeCount === 0) {
+      if (window.showToast) window.showToast("В активном словаре нет слов для архивации. Все слова уже в «Старые»!", "info");
+      return;
     }
-    // Hide "Старые" by default as user requested to start from scratch
-    if (!personalHiddenCategories.includes('Старые')) {
-      personalHiddenCategories.push('Старые');
-      saveCategories();
+    const confirmMsg = `Отложить ${activeCount} активных слов/фраз в скрытую папку «Старые» и создать полностью новый словарь?`;
+    if (window.showCustomConfirm) {
+      window.showCustomConfirm('Архивация словаря', confirmMsg, { isDestructive: false }).then(confirmed => {
+        if (confirmed) _doArchiveCurrentDictionary(true);
+      });
+      return;
+    } else if (!confirm(confirmMsg)) {
+      return;
     }
+  }
+
+  _doArchiveCurrentDictionary(manual);
+}
+window.archiveCurrentDictionaryToOldWords = archiveCurrentDictionaryToOldWords;
+
+function runOldWordsMigration() {
+  const migratedFlagV1 = localStorage.getItem('galaxy_migrated_old_words_v1');
+  const migratedFlagV2 = localStorage.getItem('galaxy_migrated_old_words_v2');
+
+  if (!migratedFlagV1 && personalDictionary && personalDictionary.length > 0) {
+    console.log('Running one-time migration v1 to move all existing words to "Старые"...');
+    _doArchiveCurrentDictionary(false);
     localStorage.setItem('galaxy_migrated_old_words_v1', 'true');
+    localStorage.setItem('galaxy_migrated_old_words_v2', 'true');
+  } else if (!migratedFlagV2 && personalDictionary && personalDictionary.length > 0) {
+    console.log('Running migration v2 to archive current dictionary into "Старые"...');
+    _doArchiveCurrentDictionary(false);
+    localStorage.setItem('galaxy_migrated_old_words_v2', 'true');
   }
 }
 
@@ -558,9 +618,14 @@ function updateEssentialProgress() {
 }
 
 function updateSavedWordsCount() {
+  const activeCount = getActiveWordsCount();
   const countEl = document.getElementById('savedWordsCount');
   if (countEl) {
-    countEl.textContent = personalDictionary.length;
+    countEl.textContent = activeCount;
+  }
+  const dashWordsCount = document.getElementById('dashWordsCount');
+  if (dashWordsCount) {
+    dashWordsCount.textContent = activeCount;
   }
 }
 
@@ -2246,9 +2311,13 @@ function setupDictionaryUI() {
   const closeDictModal = () => {
     stopMatchGame();
     stopLearnGame();
-    modal.style.display = 'none';
-    document.documentElement.classList.remove('modal-open');
-    document.body.classList.remove('modal-open');
+    if (typeof closeModalEl === 'function') {
+      closeModalEl(modal);
+    } else {
+      modal.style.display = 'none';
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    }
   };
 
   if (closeBtn) {

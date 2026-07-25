@@ -2233,7 +2233,26 @@ body.no-notebook-line-numbers .editor-line-numbers {
   outline: none;
   box-sizing: border-box;
   resize: none;
-  white-space: pre; 
-  overflow-x: auto;
-  overflow-wrap: normal;
+  white-space: pre-wrap !important; 
+  overflow-x: hidden !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+
+/* Modal Close Buttons */
+.modal-close-btn {
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #9ca3af);
+  font-size: 1.25rem;
+  transition: color 0.2s;
+  padding: 8px;
+}
+.modal-close-btn:hover {
+  color: var(--accent-spotify, #1db954);
 }

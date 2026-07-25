@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="styles.css?v=2.8.0">
+  <link rel="stylesheet" href="css/app-core.css">
   <link rel="stylesheet" href="mobile-compact.css?v=2.7.11">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
@@ -518,6 +518,15 @@
               <input type="checkbox" id="dictionaryCapitalizeToggle" checked>
               <span class="slider"></span>
             </label>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">Архивировать словарь</span>
+              <span style="font-size: 0.68rem; color: var(--text-muted);">Отложить все текущие слова и фразы в скрытую папку «Старые» и начать новый словарь.</span>
+            </div>
+            <button id="archiveDictionaryBtn" onclick="window.archiveCurrentDictionaryToOldWords(true)" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #fbbf24; border-radius: 10px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; outline: none; transition: all 0.2s;">
+              📦 В «Старые»
+            </button>
           </div>
         </div>
 
@@ -1329,8 +1338,12 @@
         <!-- Right: Player Container -->
         <div class="player-container-pane">
           <!-- Resize handles (only functional when minimized) -->
+          <div id="floatingResizeHandleTopLeft" class="floating-resize-handle top-left-handle" style="display: none;" title="Зажмите и тяните для изменения размера"></div>
+          <div id="floatingResizeHandleBottomRight" class="floating-resize-handle bottom-right-handle" style="display: none;" title="Зажмите и тяните для изменения размера"></div>
           <div id="floatingResizeHandleLeft" class="floating-resize-handle left-handle" style="display: none;"></div>
+          <div id="floatingResizeHandleTop" class="floating-resize-handle top-handle" style="display: none;"></div>
           <div id="floatingResizeHandleRight" class="floating-resize-handle right-handle" style="display: none;"></div>
+          <div id="floatingResizeHandleBottom" class="floating-resize-handle bottom-handle" style="display: none;"></div>
           <!-- Floating Header (only visible when minimized) -->
           <div id="floatingPlayerHeader" class="floating-video-header" style="display: none;">
             <span class="floating-video-title">English Galaxy</span>
@@ -1412,8 +1425,9 @@
         <!-- Bottom Row: Word Count & Clear Button -->
         <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid var(--border-glass); width: 100%;">
           <span class="notebook-wordcount" id="notebookWordCount">0 символов</span>
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <button id="notebookGeneralTranslitBtn" title="Переключить раскладку (Рус ↔ Eng)" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 12px; color: #a5b4fc; font-size: 0.72rem; font-weight: 700; cursor: pointer; padding: 4px 10px; display: flex; align-items: center; gap: 4px; transition: all 0.2s; outline: none;">⌨️ Рус ↔ Eng</button>
+          <div style="display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; flex-shrink: 0;">
+            <button id="notebookMoveToFolderBtn" title="Перенести весь текст из заметок в отдельную папку и очистить полe" style="background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.35); border-radius: 10px; color: #fbbf24; font-size: 0.68rem; font-weight: 700; cursor: pointer; padding: 4px 8px; display: flex; align-items: center; gap: 4px; transition: all 0.2s; outline: none; white-space: nowrap;">📁 В папку</button>
+            <button id="notebookGeneralTranslitBtn" title="Переключить раскладку (Рус ↔ Eng)" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.35); border-radius: 10px; color: #a5b4fc; font-size: 0.68rem; font-weight: 700; cursor: pointer; padding: 4px 8px; display: flex; align-items: center; gap: 4px; transition: all 0.2s; outline: none; white-space: nowrap;">⌨️ Рус ↔ Eng</button>
             <button class="notebook-clear-btn" id="notebookClearBtn" title="Clear всё">🗑️ Clear</button>
           </div>
         </div>
@@ -1435,7 +1449,7 @@
         <div class="notebook-tab-content" id="notebookTabContentGeneral">
           <div class="editor-container" style="flex-grow: 1;">
             <div class="editor-line-numbers" id="lineNumbers_notebookTextarea">1</div>
-            <textarea id="notebookTextarea" class="notebook-textarea editor-textarea" placeholder="Свободное пространство для ваших мыслей, правил грамматики, списков слов или любых других учебных заметок..."></textarea>
+            <textarea id="notebookTextarea" class="notebook-textarea editor-textarea" placeholder="Свободное пространство для ваших мыслей, правил и заметок..."></textarea>
           </div>
         </div>
 

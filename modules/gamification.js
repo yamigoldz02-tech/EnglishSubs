@@ -2,7 +2,7 @@
  * @AI-SECTION: GAMIFICATION_ENGINE
  * Управляет Огоньком дня (Daily Streaks) и Опытом (XP)
  */
-import { openModalEl, closeModalEl } from './modal-helpers.js';
+
 
 const XP_STORAGE_KEY = 'lyric_user_xp';
 const STREAK_STORAGE_KEY = 'lyric_streak_days';
