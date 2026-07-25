@@ -16,14 +16,23 @@ This document is the authoritative navigation and architecture map for AI assist
 ## 2. Directory & File Structure
 ```text
 c:/Users/svato/EnglishSub/
-├── index.html               # Main application layout, modals, SVG icons, and container DOM (1580+ lines)
-├── styles.css               # Primary design system (Vanilla CSS, 5200+ lines, table of contents at line 1)
-├── mobile-compact.css       # Responsive compact rules for mobile viewports
+├── index.html               # Main application layout, modals, SVG icons, and container DOM
+├── verify.js                # Automated self-verification test runner
 ├── app.js                   # Main application core logic (~3350 lines, indexed by TOC at line 1)
 ├── sync-manager.js          # Offline-first Firebase Firestore cloud backup & localStorage interception
 ├── app-back-button.js       # Back-button navigation handler for mobile and browser history
-├── essentialWords.js        # Built-in vocabulary dataset (Essential Words 3000)
-├── playlist_db.js           # Built-in songs and video playlists dataset
+├── css/                     # Modular stylesheets & viewport design tokens
+│   ├── styles.css           # Primary design system
+│   ├── mobile-compact.css   # Responsive compact rules for mobile viewports
+│   └── ...
+├── data/                    # Static datasets & content files
+│   ├── essentialWords.js    # Built-in vocabulary dataset (Essential Words 3000)
+│   ├── playlist_db.js       # Built-in songs and video playlists dataset
+│   ├── floods.json          # Lesson floods data
+│   └── Баня.csv             # Song metadata CSV
+├── docs/                    # Architectural guidelines & version history
+│   ├── changelog.md         # Active changelog
+│   └── changelog_archive.md # Archived changelog
 ├── modules/                 # Modular subsystems and JSDoc type definitions
 │   ├── types.js             # JSDoc @typedef annotations for IDE intellisense & AI type checking
 │   ├── gemini-ai.js         # Live AI Integration (Google Gemini 1.5 Flash API & Dynamic Sidebar)
@@ -33,8 +42,7 @@ c:/Users/svato/EnglishSub/
 │   ├── grammar-rules.js     # Interactive grammar rules & exercises engine (Extracted from app.js)
 │   ├── notebook-module.js   # Global notes & video-lesson notes controller (Extracted from app.js)
 │   └── galaxy-course.js     # English Galaxy A0 course tracker (50 lessons) (Extracted from app.js)
-├── scripts-archive/         # Archive of legacy one-off helper scripts (fix-*.js, bump*.js, etc.)
-└── changelog.md / _archive  # Architectural guidelines and project version history
+└── scripts-archive/         # Archive of legacy one-off helper scripts (fix-*.js, check-*.js, etc.)
 ```
 
 ---
