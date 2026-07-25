@@ -144,7 +144,7 @@ try {
   assert.strictEqual(testDate.getMinutes(), 0, 'Next review minutes must align to 0');
   
     // 2. Test Essential Words built-in dictionary integrity
-  const essentialWordsPath = path.join(__dirname, 'essentialWords.js');
+  const essentialWordsPath = path.join(__dirname, 'data', 'essentialWords.js');
   if (fs.existsSync(essentialWordsPath)) {
     const ewContent = fs.readFileSync(essentialWordsPath, 'utf8');
     assert.ok(ewContent.includes('top1000Words') && ewContent.includes('top1000Translations'), 'top1000Words and top1000Translations must be defined');

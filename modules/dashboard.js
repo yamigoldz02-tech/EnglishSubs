@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Path Option 1: Direct Unicode Russian filename
     try {
-      const response = await fetch('Баня.csv?cb=' + Date.now());
+      const response = await fetch('data/Баня.csv?cb=' + Date.now());
       if (response.ok) {
         text = await response.text();
         console.log("[CSV Loader] Successfully fetched Баня.csv via unicode path.");
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Path Option 2: URL Encoded filename fallback
     if (!text) {
       try {
-        const response = await fetch('%D0%91%D0%B0%D0%BD%D1%8F.csv?cb=' + Date.now());
+        const response = await fetch('data/%D0%91%D0%B0%D0%BD%D1%8F.csv?cb=' + Date.now());
         if (response.ok) {
           text = await response.text();
           console.log("[CSV Loader] Successfully fetched Баня.csv via URL encoded path (%D0%91%D0%B0%D0%BD%D1%8F.csv).");
