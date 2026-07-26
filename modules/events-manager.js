@@ -804,7 +804,6 @@ function setupEventListeners() {
           const user = await window.SyncManager.signIn();
           updateSyncUI(user);
         } catch (err) {
-          console.error(err);
         }
       });
     }

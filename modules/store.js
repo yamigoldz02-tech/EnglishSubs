@@ -12,7 +12,6 @@ export const store = {
         this.personalDictionary = JSON.parse(saved);
       }
     } catch (e) {
-      console.error("Error:", e);
       this.personalDictionary = [];
     }
     return this.personalDictionary;

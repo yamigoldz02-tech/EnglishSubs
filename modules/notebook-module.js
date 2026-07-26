@@ -742,7 +742,6 @@ function initNotebook() {
     try {
       localStorage.setItem('galaxy_custom_note_folders', JSON.stringify(customNoteFolders));
     } catch (e) {
-      console.error(e);
     }
   }
 

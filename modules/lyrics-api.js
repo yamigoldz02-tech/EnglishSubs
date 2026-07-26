@@ -86,7 +86,7 @@ export function loadCSVSongs(csvText) {
         art
       });
     }
-    console.log(`[CSV Loader] Successfully parsed ${csvSongs.length} songs from CSV.`);
+    console.debug(`[CSV Loader] Successfully parsed ${csvSongs.length} songs from CSV.`);
   } catch (error) {
     console.error("Error loading CSV songs:", error);
   }
@@ -109,7 +109,7 @@ export async function fetchLyrics(artist, title) {
   const cleanArtist = cleanQueryTerm(artist);
   const cleanTitle = cleanQueryTerm(title);
   
-  console.log(`[Lyrics Fetch] Searching lyrics for: "${cleanArtist} - ${cleanTitle}" (Original: "${artist} - ${title}")`);
+  console.debug(`[Lyrics Fetch] Searching lyrics for: "${cleanArtist} - ${cleanTitle}" (Original: "${artist} - ${title}")`);
   
   // 1. Try LRCLIB exact lookup
   try {
@@ -118,10 +118,10 @@ export async function fetchLyrics(artist, title) {
     if (response.ok) {
       const data = await response.json();
       if (data && data.plainLyrics) {
-        console.log("[Lyrics Fetch] Found exact plain lyrics on LRCLIB");
+        console.debug("[Lyrics Fetch] Found exact plain lyrics on LRCLIB");
         return data.plainLyrics;
       } else if (data && data.syncedLyrics) {
-        console.log("[Lyrics Fetch] Found exact synced lyrics on LRCLIB");
+        console.debug("[Lyrics Fetch] Found exact synced lyrics on LRCLIB");
         return data.syncedLyrics.replace(/\[\d{2}:\d{2}\.\d{2,3}\]/g, '').trim();
       }
     }
@@ -139,7 +139,7 @@ export async function fetchLyrics(artist, title) {
         // Find first item with lyrics
         const bestMatch = results.find(item => item.plainLyrics || item.syncedLyrics);
         if (bestMatch) {
-          console.log("[Lyrics Fetch] Found lyrics via LRCLIB fuzzy search (by signature)");
+          console.debug("[Lyrics Fetch] Found lyrics via LRCLIB fuzzy search (by signature)");
           if (bestMatch.plainLyrics) return bestMatch.plainLyrics;
           return bestMatch.syncedLyrics.replace(/\[\d{2}:\d{2}\.\d{2,3}\]/g, '').trim();
         }
@@ -158,7 +158,7 @@ export async function fetchLyrics(artist, title) {
       if (results && results.length > 0) {
         const bestMatch = results.find(item => item.plainLyrics || item.syncedLyrics);
         if (bestMatch) {
-          console.log("[Lyrics Fetch] Found lyrics via LRCLIB text search (by q)");
+          console.debug("[Lyrics Fetch] Found lyrics via LRCLIB text search (by q)");
           if (bestMatch.plainLyrics) return bestMatch.plainLyrics;
           return bestMatch.syncedLyrics.replace(/\[\d{2}:\d{2}\.\d{2,3}\]/g, '').trim();
         }
@@ -175,7 +175,7 @@ export async function fetchLyrics(artist, title) {
     if (response.ok) {
       const data = await response.json();
       if (data && data.lyrics) {
-        console.log("[Lyrics Fetch] Found lyrics on Lyrics.ovh");
+        console.debug("[Lyrics Fetch] Found lyrics on Lyrics.ovh");
         return data.lyrics;
       }
     }
@@ -185,10 +185,10 @@ export async function fetchLyrics(artist, title) {
 
   // 5. Try Genius (via AllOrigins CORS-proxy + DOMParser Scraper)
   try {
-    console.log("[Lyrics Fetch] Attempting Genius lookup...");
+    console.debug("[Lyrics Fetch] Attempting Genius lookup...");
     const geniusLyrics = await fetchGeniusLyrics(cleanArtist, cleanTitle);
     if (geniusLyrics) {
-      console.log("[Lyrics Fetch] Successfully scraped lyrics from Genius!");
+      console.debug("[Lyrics Fetch] Successfully scraped lyrics from Genius!");
       return geniusLyrics;
     }
   } catch (err) {
@@ -199,7 +199,7 @@ export async function fetchLyrics(artist, title) {
   try {
     const currentApiKey = typeof getAPIKey === 'function' ? getAPIKey() : null;
     if (currentApiKey) {
-      console.log("[Lyrics Fetch] Attempting AI Lyrics Generator fallback...");
+      console.debug("[Lyrics Fetch] Attempting AI Lyrics Generator fallback...");
       const aiLyrics = await fetchAILyrics(artist, title);
       if (aiLyrics) {
         return aiLyrics;
@@ -228,7 +228,7 @@ async function fetchGeniusLyrics(artist, title) {
   
   const hit = songSection.hits[0].result;
   const songPath = hit.path;
-  console.log(`[Genius Scraper] Found Genius path: ${songPath}`);
+  console.debug(`[Genius Scraper] Found Genius path: ${songPath}`);
   
   // Fetch HTML from Genius song page
   const lyricUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://genius.com${songPath}`)}`;

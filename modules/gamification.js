@@ -63,7 +63,7 @@ function checkAndUpdateStreak() {
         // Пропустил больше одного дня - сбрасываем стрик
         currentStreak = 0;
         localStorage.setItem(STREAK_STORAGE_KEY, currentStreak);
-        console.log('[Gamification] Streak reset to 0 due to inactivity');
+        console.debug('[Gamification] Streak reset to 0 due to inactivity');
     }
 }
 
@@ -116,7 +116,7 @@ function awardXP(amount, reason = '', sourceElement = null) {
     showXPAnimation(amount, reason, sourceElement);
 
     if (streakIncreased) {
-        console.log(`[Gamification] Streak increased to ${currentStreak}! 🔥`);
+        console.debug(`[Gamification] Streak increased to ${currentStreak}! 🔥`);
     }
 };
 

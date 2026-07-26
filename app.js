@@ -648,7 +648,6 @@ function initCustomChat() {
         chatResponse.textContent = 'Error: Получен пустой ответ от ИИ-преподавателя.';
       }
     } catch (error) {
-      console.error(error);
       chatResponse.textContent = 'Не удалось получить ответ от ИИ. Пожалуйста, попробуйте еще раз.';
     }
   });
@@ -668,7 +667,7 @@ function initCustomChat() {
   document.addEventListener('DOMContentLoaded', () => {
     const isMobileApp = !!window.Capacitor || !!window.Cordova || window.location.protocol === 'file:';
     if (isMobileApp) {
-      console.log("History API modal helper disabled on mobile app wrapper.");
+      console.debug("History API modal helper disabled on mobile app wrapper.");
       return;
     }
 

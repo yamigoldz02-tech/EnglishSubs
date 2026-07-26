@@ -1,8 +1,0 @@
-const fs = require('fs');
-let html = fs.readFileSync('index.html', 'binary');
-const badBlockRegex = /<button id="startMatchGameBtn"[^>]+>[\s\S]*?<\/button>\s*<\/button>\s*<\/div>\s*<div style="position: relative; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column;">\s*<div id="dictWordsList"/;
-const replacement = '<button id="startMatchGameBtn" title="&#1055;&#1086;&#1080;&#1075;&#1088;&#1072;&#1090;&#1100; &#1074; Match &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify); font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 4px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">\n              &#127918; Match\n            </button>\n            <button id="startLearnGameBtn" title="&#1058;&#1088;&#1077;&#1085;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; &#1101;&#1090;&#1080; 4 &#1089;&#1083;&#1086;&#1074;&#1072;" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); color: #f59e0b; font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 4px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">\n              &#127891; &#1058;&#1077;&#1089;&#1090;\n            </button>\n          </div>\n          \n          <div style="position: relative; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column;">\n            <div id="dictWordsList"';
-html = html.replace(badBlockRegex, replacement);
-fs.writeFileSync('index.html', html, 'binary');
-console.log('Fixed HTML layout 4');
-

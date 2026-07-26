@@ -42,7 +42,7 @@ c:/Users/svato/EnglishSub/
 │   ├── grammar-rules.js     # Interactive grammar rules & exercises engine (Extracted from app.js)
 │   ├── notebook-module.js   # Global notes & video-lesson notes controller (Extracted from app.js)
 │   └── galaxy-course.js     # English Galaxy A0 course tracker (50 lessons) (Extracted from app.js)
-└── scripts-archive/         # Archive of legacy one-off helper scripts (fix-*.js, check-*.js, etc.)
+
 ```
 
 ---

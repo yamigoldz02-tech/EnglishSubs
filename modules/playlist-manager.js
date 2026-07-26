@@ -465,7 +465,6 @@ function initAutocomplete() {
         
         renderSong(song.id);
       } catch (err) {
-        console.error(err);
         renderLyricsError(song.title, song.artist, err.message);
       }
     }
@@ -556,14 +555,14 @@ function pickSongFromSearch(song) {
   async function loadCSVWithFallbacks() {
     // Priority Option: CORS-free local script bundle (ideal for double-clicking index.html directly)
     if (window.PLAYLIST_CSV_DATA) {
-      console.log("[CSV Loader] Successfully loaded database via CORS-free local script variable!");
+      console.debug("[CSV Loader] Successfully loaded database via CORS-free local script variable!");
       loadCSVSongs(window.PLAYLIST_CSV_DATA);
       initAutocomplete();
       if (typeof renderDashboardFavorites === 'function') renderDashboardFavorites();
       return;
     }
 
-    console.log("[CSV Loader] Local script bundle not present. Falling back to HTTP fetch...");
+    console.debug("[CSV Loader] Local script bundle not present. Falling back to HTTP fetch...");
     let text = null;
     let lastError = null;
 
@@ -572,7 +571,7 @@ function pickSongFromSearch(song) {
       const response = await fetch('data/Баня.csv?cb=' + Date.now());
       if (response.ok) {
         text = await response.text();
-        console.log("[CSV Loader] Successfully fetched Баня.csv via unicode path.");
+        console.debug("[CSV Loader] Successfully fetched Баня.csv via unicode path.");
       } else {
         console.warn(`[CSV Loader] Fetching Баня.csv via unicode path returned status: ${response.status}`);
       }
@@ -587,7 +586,7 @@ function pickSongFromSearch(song) {
         const response = await fetch('data/%D0%91%D0%B0%D0%BD%D1%8F.csv?cb=' + Date.now());
         if (response.ok) {
           text = await response.text();
-          console.log("[CSV Loader] Successfully fetched Баня.csv via URL encoded path (%D0%91%D0%B0%D0%BD%D1%8F.csv).");
+          console.debug("[CSV Loader] Successfully fetched Баня.csv via URL encoded path (%D0%91%D0%B0%D0%BD%D1%8F.csv).");
         } else {
           console.warn(`[CSV Loader] Fetching Баня.csv via URL encoded path returned status: ${response.status}`);
         }

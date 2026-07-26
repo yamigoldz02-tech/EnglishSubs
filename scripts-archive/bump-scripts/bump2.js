@@ -1,4 +1,0 @@
-const fs = require('fs');
-let html = fs.readFileSync('index.html', 'binary');
-html = html.replace(/v=2\.6\.8/g, 'v=2.6.9');
-fs.writeFileSync('index.html', html, 'binary');

@@ -43,12 +43,9 @@ function initVideoCourse() {
   // Load watched state
   try {
     const saved = localStorage.getItem('galaxy_watched_videos');
-    console.log('[VideoCourse] Raw localStorage value:', saved);
     if (saved) {
       galaxyWatchedVideos = JSON.parse(saved);
-      console.log('[VideoCourse] Loaded watched videos:', galaxyWatchedVideos.length, galaxyWatchedVideos);
     } else {
-      console.log('[VideoCourse] No watched videos in localStorage');
     }
   } catch (e) {
     console.error("Failed to load watched videos from storage:", e);
