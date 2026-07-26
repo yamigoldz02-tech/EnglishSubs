@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @file modules/dictionary-trainer.js
  * @description Personal Dictionary & 3D Flashcard Leitner Trainer Module.

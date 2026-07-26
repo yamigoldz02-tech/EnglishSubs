@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 // UI Event Listeners Manager
 function setupEventListeners() {
   

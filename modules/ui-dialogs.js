@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: UI_DIALOGS
  * @file modules/ui-dialogs.js

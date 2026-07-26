@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: GRAMMAR_RULES_ENGINE
  * @file modules/grammar-rules.js

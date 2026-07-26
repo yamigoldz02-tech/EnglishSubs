@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 export function openEditWordModal(w, onSaveSuccess) {
   const editModal     = document.getElementById('editWordModal');
   const closeEditBtn  = document.getElementById('closeEditWordModalBtn');

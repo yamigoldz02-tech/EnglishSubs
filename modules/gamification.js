@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: GAMIFICATION_ENGINE
  * Управляет Огоньком дня (Daily Streaks) и Опытом (XP)

@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: SHADOWING_DICTATION_ENGINE
  * @file modules/shadowing-dictation.js

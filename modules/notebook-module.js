@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: NOTEBOOK_NOTES_CONTROLLER
  * @file modules/notebook-module.js

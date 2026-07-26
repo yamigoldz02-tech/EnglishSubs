@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 export const csvSongs = [];
 // RFC-compliant safe CSV parser
 export function parseCSV(text) {

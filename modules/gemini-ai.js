@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: GEMINI_AI_ENGINE
  * @file modules/gemini-ai.js
@@ -1645,6 +1647,8 @@ function initPhraseBuilder(originalText, translation, highlightedHTML = null, op
 
 // Generates a random phrase builder game from any line of the selected song
 function generateRandomPhraseGame(songKey) {
+  if (typeof hasAPIKey === 'function' && !hasAPIKey()) return; // Silently abort without warnings
+  
   const song = songsData[songKey];
   if (!song || !song.lines) return;
 

@@ -158,10 +158,20 @@ function scheduleCloudSync() {
     }, 2000);
 }
 
+let isSyncingToCloud = false;
+let pendingCloudSync = false;
+
 // Push local storage payload to Cloud Firestore
 async function pushLocalToCloud() {
+    if (isSyncingToCloud) {
+        pendingCloudSync = true;
+        return;
+    }
+    
     const user = getSyncUser();
     if (!user) return;
+    
+    isSyncingToCloud = true;
     
     // Compile payload
     const payload = {};
@@ -190,6 +200,12 @@ async function pushLocalToCloud() {
     } catch (e) {
         console.error('[SyncManager] Failed to back up data to Cloud:', e);
         showSyncNotice('Синхронизация оффлайн или ошибка облака: ' + (e.message || e), true);
+    } finally {
+        isSyncingToCloud = false;
+        if (pendingCloudSync) {
+            pendingCloudSync = false;
+            scheduleCloudSync();
+        }
     }
 }
 

@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: SPOTIFY_PKCE_CONTROLLER
  * @file modules/spotify-controller.js

@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 /**
  * @AI-SECTION: GALAXY_VIDEO_COURSE
  * @file modules/galaxy-course.js
@@ -320,15 +322,15 @@ function initVideoCourse() {
       dragStartX = e.clientX;
       dragStartY = e.clientY;
 
+      const rect = pane.getBoundingClientRect();
       if (!pane.classList.contains('floating-dragged')) {
-        const rect = pane.getBoundingClientRect();
         pane.style.setProperty('left', rect.left + 'px', 'important');
         pane.style.setProperty('top', rect.top + 'px', 'important');
         pane.classList.add('floating-dragged');
       }
 
-      paneStartLeft = parseInt(pane.style.left) || 0;
-      paneStartTop = parseInt(pane.style.top) || 0;
+      paneStartLeft = rect.left;
+      paneStartTop = rect.top;
 
       document.body.classList.add('floating-resizing');
 

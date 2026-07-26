@@ -16,7 +16,7 @@
   margin-top: 12px;
   margin-left: calc(25px + 1.5rem); /* Align perfectly with English stanza text */
   font-size: 0.95rem;
-  color: var(--accent);
+  color: var(--accent-spotify);
   font-weight: 500;
   opacity: 0;
   transform: translateY(4px);

@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="./types.js" />
 // Централизованное хранилище данных (Store)
 export const store = {
   personalDictionary: [],
