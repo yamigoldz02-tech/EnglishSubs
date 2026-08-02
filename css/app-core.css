@@ -1605,6 +1605,8 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
     border-radius: 16px !important;
     max-height: 90vh !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
   
   .modal-header {

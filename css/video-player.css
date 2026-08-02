@@ -195,3 +195,47 @@ body.floating-resizing iframe,
 body.floating-resizing .player-container-pane iframe {
   pointer-events: none !important;
 }
+
+/* ==========================================================================
+   MOBILE: Floating Video Player Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Constrain floating player to screen width, position above mobile bottom nav */
+  .video-modal-minimized .player-container-pane {
+    width: calc(100vw - 16px) !important;
+    max-width: 360px !important;
+    right: 8px !important;
+    bottom: 72px !important; /* 56px nav + 16px gap */
+    left: auto !important;
+    border-radius: 10px !important;
+  }
+
+  .video-modal-minimized .video-player-wrapper {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  .video-modal-minimized .floating-video-header {
+    border-radius: 10px 10px 0 0 !important;
+    padding: 6px 10px !important;
+  }
+
+  .video-modal-minimized .floating-video-title {
+    font-size: 0.78rem !important;
+  }
+
+  /* Hide resize corner handles — too small for touch interaction */
+  .video-modal-minimized .floating-resize-handle.top-left-handle,
+  .video-modal-minimized .floating-resize-handle.bottom-right-handle {
+    display: none !important;
+  }
+
+  /* Keep edge handles but make them bigger for touch targets */
+  .video-modal-minimized .floating-resize-handle.left-handle,
+  .video-modal-minimized .floating-resize-handle.right-handle {
+    width: 18px !important;
+  }
+  .video-modal-minimized .floating-resize-handle.top-handle,
+  .video-modal-minimized .floating-resize-handle.bottom-handle {
+    height: 18px !important;
+  }
+}

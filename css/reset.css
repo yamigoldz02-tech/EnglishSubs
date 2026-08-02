@@ -110,20 +110,6 @@ body {
   z-index: 1;
 }
 
-/* Glassmorphic Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 1.5rem;
-  background: var(--bg-navbar);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-glass);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
 
 .nav-brand {
   display: flex;
@@ -200,16 +186,7 @@ body {
   color: var(--text-main);
 }
 
-.song-selector-container::after {
-  content: "↓";
-  font-size: 0.8rem;
-  color: var(--text-sub);
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
+/* (Removed: .song-selector-container::after — overridden by app-core.css display:none) */
 
 /* Premium Settings Switch */
 .perf-switch {
