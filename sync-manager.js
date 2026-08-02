@@ -81,6 +81,8 @@ function shouldExclude(key) {
     if (key.startsWith('analysis_')) return true;
     if (key.startsWith('last_sync_timestamp')) return true;
     if (key.startsWith('last_sync_payload')) return true;
+    if (key.startsWith('galaxy_video_progress_')) return true;
+    if (key.startsWith('video_progress_')) return true;
     if (key.includes('cache')) return true;
     return false;
 }
@@ -147,15 +149,18 @@ function showSyncNotice(msg, isError = false) {
     } catch (e) { /* ignore DOM errors */ }
 }
 
+let lastCloudWriteTime = 0;
+const MIN_CLOUD_SYNC_INTERVAL_MS = 15000; // Throttle to max 1 write per 15s to prevent Firestore queue exhaustion
+
 // Schedule cloud write with debounce
-function scheduleCloudSync() {
+function scheduleCloudSync(delayMs = 10000) {
     const user = getSyncUser();
     if (!user) return;
     clearTimeout(syncTimeout);
     syncTimeout = setTimeout(async () => {
         syncTimeout = null;
         await pushLocalToCloud();
-    }, 2000);
+    }, delayMs);
 }
 
 let isSyncingToCloud = false;
@@ -171,6 +176,15 @@ async function pushLocalToCloud() {
     const user = getSyncUser();
     if (!user) return;
     
+    // Throttle writes: if last write was less than 15 seconds ago, reschedule
+    const now = Date.now();
+    const timeSinceLastWrite = now - lastCloudWriteTime;
+    if (timeSinceLastWrite < MIN_CLOUD_SYNC_INTERVAL_MS) {
+        const waitTime = MIN_CLOUD_SYNC_INTERVAL_MS - timeSinceLastWrite;
+        scheduleCloudSync(waitTime);
+        return;
+    }
+
     isSyncingToCloud = true;
     
     // Compile payload
@@ -193,6 +207,8 @@ async function pushLocalToCloud() {
             payload: payload
         });
         
+        lastCloudWriteTime = Date.now();
+        
         // Save timestamp and payload locally to prevent self-triggering updates
         originalSetItem.call(localStorage, 'last_sync_timestamp_' + projectName, timestamp);
         originalSetItem.call(localStorage, 'last_sync_payload_' + projectName, JSON.stringify(payload));
@@ -204,7 +220,7 @@ async function pushLocalToCloud() {
         isSyncingToCloud = false;
         if (pendingCloudSync) {
             pendingCloudSync = false;
-            scheduleCloudSync();
+            scheduleCloudSync(5000);
         }
     }
 }

@@ -480,16 +480,14 @@ function setupEventListeners() {
       apiStatusMessage.style.display = 'none';
       apiStatusMessage.className = 'modal-status';
       
-      openModalEl(settingsModal);
-      document.documentElement.classList.add('modal-open');
-      document.body.classList.add('modal-open');
+      if (typeof window.openModalEl === 'function') window.openModalEl(settingsModal);
+      else settingsModal.style.display = 'flex';
     });
 
     // Close modal
     const closeModal = () => {
-      closeModalEl(settingsModal);
-      document.documentElement.classList.remove('modal-open');
-      document.body.classList.remove('modal-open');
+      if (typeof window.closeModalEl === 'function') window.closeModalEl(settingsModal);
+      else settingsModal.style.display = 'none';
     };
     closeSettingsBtn.addEventListener('click', closeModal);
     
@@ -851,15 +849,13 @@ function setupEventListeners() {
       const fullText = song.lines.map(line => line.text).join('\n\n');
       editLyricsTextarea.value = fullText;
       
-      openModalEl(editLyricsModal);
-      document.documentElement.classList.add('modal-open');
-      document.body.classList.add('modal-open');
+      if (typeof window.openModalEl === 'function') window.openModalEl(editLyricsModal);
+      else editLyricsModal.style.display = 'flex';
     });
 
     const closeEditModal = () => {
-      closeModalEl(editLyricsModal);
-      document.documentElement.classList.remove('modal-open');
-      document.body.classList.remove('modal-open');
+      if (typeof window.closeModalEl === 'function') window.closeModalEl(editLyricsModal);
+      else editLyricsModal.style.display = 'none';
     };
 
     closeEditLyricsBtn.addEventListener('click', closeEditModal);

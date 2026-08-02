@@ -160,7 +160,8 @@ export function showArtistSongsModal(artistNameText) {
   }
 
   // Open modal overlay
-  openModalEl(modal);
+  if (typeof window.openModalEl === 'function') window.openModalEl(modal);
+  else modal.style.display = 'flex';
 
   // Wire close actions
   const hideModal = () => {

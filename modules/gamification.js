@@ -249,9 +249,11 @@ function openGamificationModal() {
     if (statVideosEl) statVideosEl.textContent = `${watchedCount} / 50 (${Math.round((watchedCount / 50) * 100)}%)`;
     if (statSongsEl) statSongsEl.textContent = songsCount;
 
-    openModalEl(modal);
-    document.documentElement.classList.add('modal-open');
-    document.body.classList.add('modal-open');
+    if (typeof window.openModalEl === 'function') {
+        window.openModalEl(modal);
+    } else {
+        modal.style.display = 'flex';
+    }
 }
 
 /**
@@ -260,9 +262,11 @@ function openGamificationModal() {
 function closeGamificationModal() {
     const modal = document.getElementById('gamificationModal');
     if (!modal) return;
-    document.documentElement.classList.remove('modal-open');
-    document.body.classList.remove('modal-open');
-    closeModalEl(modal);
+    if (typeof window.closeModalEl === 'function') {
+        window.closeModalEl(modal);
+    } else {
+        modal.style.display = 'none';
+    }
 }
 
 // Экспорт глобальных методов (Backward Compatibility)

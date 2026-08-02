@@ -13,6 +13,8 @@
   overscroll-behavior: contain;
   padding-top: env(safe-area-inset-top, 24px); /* Prevent hiding behind Android/iOS status bar */
   box-sizing: border-box;
+  pointer-events: auto !important;
+  touch-action: pan-y !important;
 }
 
 .modal-card {
@@ -23,8 +25,17 @@
   max-width: 90%;
   box-shadow: var(--shadow-main);
   overflow: hidden;
-  touch-action: auto !important;
+  touch-action: pan-y !important;
+  pointer-events: auto !important;
   position: relative;
+}
+
+.modal-body {
+  overflow-y: auto !important;
+  touch-action: pan-y !important;
+  pointer-events: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
 }
 
 @keyframes fadeIn {

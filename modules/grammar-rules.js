@@ -67,9 +67,8 @@ function setupRulesUI() {
 
   // Open modal
   openRulesBtn.addEventListener('click', () => {
-    openModalEl(rulesModal);
-    document.documentElement.classList.add('modal-open');
-    document.body.classList.add('modal-open');
+    if (typeof window.openModalEl === 'function') window.openModalEl(rulesModal);
+    else rulesModal.style.display = 'flex';
     document.body.style.overflow = 'hidden'; // lock scrolling
     if (rulesSearchInput) rulesSearchInput.value = '';
     // Switch to List tab by default
@@ -79,7 +78,8 @@ function setupRulesUI() {
 
   // Close modal
   const closeModal = () => {
-    closeModalEl(rulesModal);
+    if (typeof window.closeModalEl === 'function') window.closeModalEl(rulesModal);
+    else rulesModal.style.display = 'none';
     
     // Disable scroll lock only if no other major modal is open
     const notebookModal = document.getElementById('notebookModal');

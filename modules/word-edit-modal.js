@@ -108,12 +108,14 @@ export function openEditWordModal(w, onSaveSuccess) {
   if (rusInput)  rusInput.oninput  = () => applyLayoutFix(rusInput,  'latToCyr');
 
   // ── Open modal ─────────────────────────────────────────────────────
-  openModalEl(editModal);
+  if (typeof window.openModalEl === 'function') window.openModalEl(editModal);
+  else editModal.style.display = 'flex';
   setTimeout(() => { if (engInput) engInput.focus(); }, 120);
 
   // ── Close handlers ─────────────────────────────────────────────────
   const doClose = () => {
-    closeModalEl(editModal);
+    if (typeof window.closeModalEl === 'function') window.closeModalEl(editModal);
+    else editModal.style.display = 'none';
     if (saveBtn) { saveBtn.textContent = '💾 Save Changes'; saveBtn.style.background = 'linear-gradient(135deg, #a78bfa, #7c3aed)'; saveBtn.disabled = false; }
     if (closeEditBtn) closeEditBtn.onclick = null;
     if (saveBtn) saveBtn.onclick = null;

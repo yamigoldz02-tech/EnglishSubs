@@ -608,7 +608,7 @@ function playGalaxyVideo(videoId, title, lessonNum) {
   if (playerContainer) {
     const savedTimeInit = localStorage.getItem(`galaxy_video_progress_${videoId}`);
     const startTimeInit = savedTimeInit ? parseInt(savedTimeInit, 10) : 0;
-    playerContainer.innerHTML = `<iframe id="ytplayer-container" width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1&rel=0&start=${startTimeInit}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; z-index:2;"></iframe>`;
+    playerContainer.innerHTML = `<div id="ytplayer-container" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;"></div>`;
     
     const setupPlayer = () => {
       const savedTime = localStorage.getItem(`galaxy_video_progress_${videoId}`);
@@ -618,9 +618,12 @@ function playGalaxyVideo(videoId, title, lessonNum) {
         height: '100%',
         width: '100%',
         videoId: videoId,
+        host: 'https://www.youtube.com',
         playerVars: {
           'autoplay': 1,
           'enablejsapi': 1,
+          'origin': window.location.origin,
+          'widget_referrer': window.location.origin,
           'rel': 0,
           'start': startTime
         },

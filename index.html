@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
   <title>AI Lyric-Trainer — Premium Language Learning Platform</title>
   <!-- SEO & Social Meta -->
   <meta name="description" content="AI Lyric-Trainer — an interactive English language trainer using song lyrics with smart grammar analysis and an AI-powered dictionary.">
@@ -1555,8 +1556,8 @@
   <!-- ======================================================== -->
   <!-- Gamification Modal (Ударный режим и Опыт)                 -->
   <!-- ======================================================== -->
-  <div class="modal-overlay" id="gamificationModal" style="display: none; z-index: 10050;">
-    <div class="modal-card" style="width: 650px; max-width: 95%; max-height: 85vh; display: flex; flex-direction: column;">
+  <div class="modal-overlay" id="gamificationModal" style="display: none; z-index: 200050;">
+    <div class="modal-card" style="width: 650px; max-width: 95%; height: 85vh; max-height: 85vh; display: flex; flex-direction: column;">
       <div class="modal-header" style="border-bottom: 1px solid var(--border-glass); padding-bottom: 16px;">
         <h3 style="display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800;">
           <span>🏆</span> Моя активность и достижения
@@ -1564,7 +1565,7 @@
         <button class="modal-close-btn" id="closeGamificationBtn"  title="Close">✕</button>
       </div>
 
-      <div class="modal-body" style="flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+      <div class="modal-body" style="flex-grow: 1; flex-shrink: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
         <!-- Daily Streak Banner -->
         <div style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.05)); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 20px; box-shadow: 0 8px 24px rgba(249, 115, 22, 0.1);">
           <div style="font-size: 3.5rem; filter: drop-shadow(0 4px 12px rgba(249,115,22,0.4)); animation: pulse 2s infinite;">🔥</div>
@@ -1717,7 +1718,7 @@
   <!-- ======================================================== -->
   <!-- Rules Modal (Grammar Rules Reference)                           -->
   <!-- ======================================================== -->
-  <div class="modal-overlay" id="rulesModal" style="display: none; z-index: 10050;">
+  <div class="modal-overlay" id="rulesModal" style="display: none; z-index: 200050;">
     <div class="modal-card" id="rulesModalCard" style="width: 700px; max-width: 95%; height: 80vh; display: flex; flex-direction: column;">
       <div class="modal-header">
         <h3 style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.25rem;">📐</span> Grammar Rules Reference</h3>

@@ -16,7 +16,7 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10500;
+  z-index: 10600 !important; /* In front of floating video (10500) when collapsed */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,7 @@
   left: 360px;
   background: rgba(251, 191, 36, 0.14);
   border-color: rgba(251, 191, 36, 0.35);
+  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
 }
 body.light-theme .notebook-drawer-tab {
   background: rgba(255, 255, 255, 0.95);
@@ -74,7 +75,7 @@ body.gray-theme .notebook-drawer-tab {
 .notebook-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 10490;
+  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
   pointer-events: none; /* only active when open */
 }
 .notebook-modal-overlay.is-open {
