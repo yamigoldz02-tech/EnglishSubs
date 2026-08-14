@@ -218,6 +218,15 @@ body.light-theme {
   --flashcard-glow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
+body.warm-theme {
+  --flashcard-front-bg: #FFFFFF;
+  --flashcard-front-border: 1px solid rgba(62, 39, 35, 0.08);
+  --flashcard-back-bg: #FFFFFF;
+  --flashcard-back-border: 1px solid rgba(62, 39, 35, 0.08);
+  --flashcard-shadow: 0 10px 30px rgba(62, 39, 35, 0.08);
+  --flashcard-glow: 0 4px 18px rgba(244, 162, 97, 0.25);
+}
+
 body.gray-theme {
   --flashcard-front-bg: #1d222e;
   --flashcard-front-border: 1px solid var(--border-glass);

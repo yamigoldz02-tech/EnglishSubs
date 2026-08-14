@@ -1157,3 +1157,30 @@ body.warm-theme .lesson-note-dot {
   background: #F4A261;
   box-shadow: 0 0 5px rgba(244, 162, 97, 0.8);
 }
+
+body.warm-theme .notebook-body,
+body.warm-theme .notebook-tab-content,
+body.warm-theme #notebookTabContentGeneral,
+body.warm-theme #notebookTabContentLessons,
+body.warm-theme #notebookTabContentCustom {
+  background: #FFFFFF !important;
+}
+
+body.warm-theme #notebookTextarea,
+body.warm-theme .notebook-textarea,
+body.warm-theme .editor-textarea {
+  background: transparent !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .editor-container {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .editor-line-numbers,
+body.warm-theme #lineNumbers_notebookTextarea {
+  background: #FDF6E3 !important;
+  border-right: 1px solid rgba(62, 39, 35, 0.06) !important;
+  color: #8D6E63 !important;
+}

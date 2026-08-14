@@ -1333,6 +1333,62 @@ body.light-theme #activeLessonNoteTextarea::placeholder {
   color: #8e8e93 !important;
 }
 
+/* Warm Theme: Clean white backgrounds, rich coffee text, and soft borders */
+body.warm-theme #apiKeyInput,
+body.warm-theme #manualWordEng,
+body.warm-theme #manualWordRus,
+body.warm-theme #manualPhraseEng,
+body.warm-theme #manualPhraseRus,
+body.warm-theme #manualWordDefinition,
+body.warm-theme #manualWordRule,
+body.warm-theme #manualPhraseDefinition,
+body.warm-theme #manualPhraseRule,
+body.warm-theme #ruleTitleInput,
+body.warm-theme #ruleContentInput,
+body.warm-theme #notebookNoteTitleInput,
+body.warm-theme #notebookNoteContentInput,
+body.warm-theme #rulesSearchInput,
+body.warm-theme #roleplayChatInput,
+body.warm-theme #dictationInput,
+body.warm-theme #chatInput,
+body.warm-theme #editLyricsTextarea,
+body.warm-theme #activeLessonNoteTextarea {
+  background: #ffffff !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #notebookTextarea,
+body.warm-theme .editor-textarea,
+body.warm-theme #notebookTextarea.editor-textarea {
+  background: transparent !important;
+  border: none !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #apiKeyInput::placeholder,
+body.warm-theme #manualWordEng::placeholder,
+body.warm-theme #manualWordRus::placeholder,
+body.warm-theme #manualPhraseEng::placeholder,
+body.warm-theme #manualPhraseRus::placeholder,
+body.warm-theme #manualWordDefinition::placeholder,
+body.warm-theme #manualWordRule::placeholder,
+body.warm-theme #manualPhraseDefinition::placeholder,
+body.warm-theme #manualPhraseRule::placeholder,
+body.warm-theme #ruleTitleInput::placeholder,
+body.warm-theme #ruleContentInput::placeholder,
+body.warm-theme #notebookNoteTitleInput::placeholder,
+body.warm-theme #notebookNoteContentInput::placeholder,
+body.warm-theme #notebookTextarea::placeholder,
+body.warm-theme #rulesSearchInput::placeholder,
+body.warm-theme #roleplayChatInput::placeholder,
+body.warm-theme #dictationInput::placeholder,
+body.warm-theme #chatInput::placeholder,
+body.warm-theme #editLyricsTextarea::placeholder,
+body.warm-theme #activeLessonNoteTextarea::placeholder {
+  color: #8D6E63 !important;
+}
+
 /* Gray Theme: Solid input aesthetics */
 body.gray-theme #apiKeyInput,
 body.gray-theme #manualWordEng,

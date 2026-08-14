@@ -1716,3 +1716,85 @@ body.warm-theme .learn-choice-btn.incorrect {
   border-color: rgba(225, 29, 72, 0.3) !important;
   color: #E11D48 !important;
 }
+
+/* Training Modal 3D Flashcards and Container Components */
+body.warm-theme .flashcard-container {
+  background: transparent !important;
+}
+
+body.warm-theme .flashcard-front,
+body.warm-theme .flashcard-back {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .flashcard-front:hover,
+body.warm-theme .flashcard-back:hover {
+  border-color: #F4A261 !important;
+}
+
+body.warm-theme #cardWordContainer {
+  color: #3E2723 !important;
+}
+
+body.warm-theme #cardHintContainer,
+body.warm-theme #cardPracticeContainer {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #cardPracticeInput {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #toggleTrainingSettingsBtn,
+body.warm-theme #toggleTrainingHeatmapBtn {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme #toggleTrainingSettingsBtn:hover,
+body.warm-theme #toggleTrainingHeatmapBtn:hover {
+  background: #FFFFFF !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #trainingActivityHeatmap {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.06) !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+}
+
+body.warm-theme #dictEmptyState {
+  color: #3E2723 !important;
+}
+
+body.warm-theme #dictEmptyState #emptyStateTitle {
+  color: #3E2723 !important;
+}
+
+body.warm-theme #dictEmptyState #emptyStateText {
+  color: #5D4037 !important;
+}
+
+body.warm-theme #sessionSuccessView h2 {
+  color: #3E2723 !important;
+}
+
+body.warm-theme #sessionSuccessView p {
+  color: #5D4037 !important;
+}
+
+body.warm-theme #sessionSuccessView > div:last-of-type {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
