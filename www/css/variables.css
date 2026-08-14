@@ -5,45 +5,47 @@
 /* 1. Imports & Typography */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
-/* 2. Root Design Tokens — Dark Graphite Palette (Default) */
+/* 2. Root Design Tokens — True Black & Dark Zinc Music Dashboard Theme (Default) */
 :root {
   /* Modern Neutral Typography */
   --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* True Black & Deep Graphite Minimalist Surfaces */
+  /* True Black & Dark Zinc Minimalist Surfaces */
   --bg-base: #09090b;
   --bg-surface: #121215;
-  --bg-card: #141417;
-  --bg-card-hover: #1c1c20;
+  --bg-card: #18181b;
+  --bg-card-hover: #222226;
   --bg-glow-spot: transparent;
-  --bg-navbar: rgba(9, 9, 11, 0.88);
-  --bg-sidebar: rgba(18, 18, 21, 0.96);
-  --bg-modal: #121215;
+  --bg-navbar: rgba(9, 9, 11, 0.92);
+  --bg-sidebar: rgba(24, 24, 27, 0.96);
+  --bg-modal: #18181b;
 
-  /* Monochromatic & Restrained Accents */
-  --accent-spotify: #ffffff;
+  /* Vibrant Music Dashboard Fiery Orange-Red Accent */
+  --accent-spotify: #FF4500;
+  --accent-primary: #FF4500;
+  --accent-orange: #F97316;
   --accent-emerald: #10b981;
   --accent-indigo: #6366f1;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
   --accent-cyan: #38bdf8;
-  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  --accent-gradient: linear-gradient(135deg, #FF4500 0%, #F97316 100%);
   
-  /* Delicate Subtle Shadows (No glowing neon) */
-  --accent-glow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  --cyan-glow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  /* Music Ambient Glow */
+  --accent-glow: 0 4px 20px rgba(255, 69, 0, 0.35);
+  --cyan-glow: 0 4px 20px rgba(249, 115, 22, 0.35);
 
-  /* High-legibility Monochromatic Text */
-  --text-main: #f4f4f5;
+  /* High-legibility Zinc Text */
+  --text-main: #fafafa;
   --text-sub: #a1a1aa;
   --text-muted: #71717a;
-  --text-inactive: rgba(244, 244, 245, 0.35);
+  --text-inactive: rgba(250, 250, 250, 0.35);
 
-  /* Subtle Crisp Graphite Borders */
+  /* Subtle Crisp Zinc Glass Borders */
   --border-glass: rgba(255, 255, 255, 0.08);
   --border-glass-hover: rgba(255, 255, 255, 0.16);
-  --border-focus: rgba(255, 255, 255, 0.3);
+  --border-focus: rgba(255, 69, 0, 0.4);
   --glass-blur: 20px;
   
   /* Smooth Geometry Scale */

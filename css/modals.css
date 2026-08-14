@@ -175,16 +175,16 @@
 }
 
 .modal-btn.primary-btn {
-  background: #ffffff;
-  color: #09090b;
+  background: #FF4500;
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(255, 69, 0, 0.3);
 }
 
 .modal-btn.primary-btn:hover {
-  background: #e4e4e7;
+  background: #ff5722;
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.45);
 }
 
 .modal-btn.secondary-btn {

@@ -92,15 +92,15 @@
 }
 
 .dash-action-btn.primary {
-  background: #ffffff;
-  color: #09090b;
+  background: #FF4500;
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(255, 69, 0, 0.35);
 }
 .dash-action-btn.primary:hover {
-  background: #e4e4e7;
+  background: #ff5722;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 26px rgba(255, 69, 0, 0.5);
 }
 
 .dash-action-btn.secondary {
@@ -168,9 +168,9 @@
 }
 
 .bento-card:hover .bento-icon {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-glass-hover);
-  color: #ffffff;
+  background: rgba(255, 69, 0, 0.12);
+  border-color: rgba(255, 69, 0, 0.3);
+  color: #FF4500;
 }
 
 .bento-card-body {
@@ -183,7 +183,7 @@
 .bento-stat-num {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #fafafa;
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -198,7 +198,7 @@
   margin: 4px 0 2px 0;
   font-size: 1.05rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #fafafa;
   letter-spacing: -0.01em;
 }
 
@@ -220,7 +220,7 @@
 .bento-progress-fill {
   width: 0%;
   height: 100%;
-  background: #ffffff;
+  background: linear-gradient(90deg, #FF4500 0%, #F97316 100%);
   border-radius: var(--radius-pill);
   transition: width 0.4s ease;
 }
@@ -390,10 +390,11 @@
 }
 
 .dash-song-item:hover .dash-song-play-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--border-glass-hover);
+  background: #FF4500;
+  border-color: #FF4500;
   color: #ffffff;
   transform: scale(1.08);
+  box-shadow: 0 2px 10px rgba(255, 69, 0, 0.4);
 }
 
 /* ── Warm Paper Minimalist Light Theme Overrides ── */

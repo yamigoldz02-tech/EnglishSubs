@@ -429,7 +429,7 @@ body.gray-theme .dict-highlighted-word.speaking {
 .video-course-progress-panel .activity-points-note {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #a78bfa;
+  color: #FF4500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -444,16 +444,21 @@ body.gray-theme .dict-highlighted-word.speaking {
 }
 
 body.light-theme .video-course-progress-panel .progress-track {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(55, 53, 47, 0.08);
 }
 
 .video-course-progress-panel .progress-bar-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #a78bfa, #c084fc);
+  background: linear-gradient(90deg, #FF4500, #F97316);
   border-radius: 4px;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.4);
+  box-shadow: 0 0 12px rgba(255, 69, 0, 0.4);
+}
+
+body.light-theme .video-course-progress-panel .progress-bar-fill {
+  background: #D9534F;
+  box-shadow: none;
 }
 
 .video-course-controls {
@@ -1911,7 +1916,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #a1a1aa;
+  background: #FF4500;
 }
 
 .header-nav-dropdown {
@@ -1919,7 +1924,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   top: calc(100% + 8px);
   right: 0;
   width: 290px;
-  background: #121215;
+  background: #18181b;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 10px;
@@ -2075,7 +2080,7 @@ body.light-theme .header-menu-streak-dot {
 }
 
 .nav-stat-streak {
-  color: #f4f4f5;
+  color: #FF4500;
   display: inline-flex;
   align-items: center;
   gap: 3px;

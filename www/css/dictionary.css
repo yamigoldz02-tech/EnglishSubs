@@ -438,6 +438,18 @@ body.gray-theme {
   font-weight: 700;
 }
 
+#startTrainingFromDictBtn {
+  background: #FF4500 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(255, 69, 0, 0.35) !important;
+}
+
+#startTrainingFromDictBtn:hover {
+  background: #ff5722 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5) !important;
+}
+
 /* Light Theme Dictionary Overrides */
 body.light-theme .dict-tabs {
   border-bottom-color: rgba(55, 53, 47, 0.09);
