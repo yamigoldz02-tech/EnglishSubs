@@ -374,8 +374,8 @@ body.light-theme .autocomplete-section-header {
 
 /* Warm Theme tweaks for Autocomplete */
 body.warm-theme .search-input-wrapper input {
-  background: #FFFFFF;
-  border-color: rgba(62, 39, 35, 0.08);
+  background: #FCF9F2 var(--texture-cotton-paper);
+  border-color: rgba(62, 39, 35, 0.09);
   color: #3E2723;
   box-shadow: var(--shadow-sm);
 }
@@ -383,9 +383,9 @@ body.warm-theme .search-input-wrapper input:hover {
   border-color: rgba(62, 39, 35, 0.16);
 }
 body.warm-theme .search-input-wrapper input:focus {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
-  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.3);
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
 }
 body.warm-theme .search-input-wrapper .search-icon {
   color: #3E2723;

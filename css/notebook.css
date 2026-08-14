@@ -43,7 +43,7 @@
 }
 
 body.light-theme .notebook-drawer-tab {
-  background: #ffffff;
+  background: #FFFFFF var(--texture-cotton-paper-white);
   border-color: rgba(0, 0, 0, 0.08);
   color: #000000;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -124,7 +124,7 @@ body.light-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
 }
 
 body.light-theme .notebook-modal-card {
-  background: #FFFFFF;
+  background: #FFFFFF var(--texture-cotton-paper-white);
   border-right-color: rgba(0, 0, 0, 0.08);
   box-shadow: 8px 0 40px rgba(0, 0, 0, 0.08);
 }
@@ -918,13 +918,13 @@ body.warm-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
 }
 
 body.warm-theme .notebook-modal-card {
-  background: #FFFFFF;
-  border-right-color: rgba(62, 39, 35, 0.08);
+  background: #FCF9F2 var(--texture-cotton-paper);
+  border-right-color: rgba(62, 39, 35, 0.09);
   box-shadow: 8px 0 40px rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .notebook-header {
-  border-bottom-color: rgba(62, 39, 35, 0.06);
+  border-bottom-color: rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .notebook-icon-big {
@@ -946,16 +946,16 @@ body.warm-theme .notebook-wordcount {
 }
 
 body.warm-theme .notebook-action-btn {
-  background: #FDF6E3;
+  background: #F4EEDB var(--texture-cotton-paper);
   border: 1px solid rgba(62, 39, 35, 0.09);
   color: #3E2723;
   font-weight: 700;
 }
 body.warm-theme .notebook-action-btn:hover {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
   color: #3E2723;
-  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.25);
+  box-shadow: none;
 }
 
 body.warm-theme .notebook-primary-btn {
@@ -963,18 +963,18 @@ body.warm-theme .notebook-primary-btn {
   border: 1px solid #F4A261;
   color: #3E2723;
   font-weight: 800;
-  border-radius: 10px;
-  padding: 4px 10px;
+  border-radius: 20px;
+  padding: 4px 12px;
   font-size: 0.72rem;
-  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.4);
+  box-shadow: none;
 }
 body.warm-theme .notebook-primary-btn:hover {
   background: #e8934f;
-  box-shadow: 0 4px 12px rgba(244, 162, 97, 0.6);
+  box-shadow: none;
 }
 
 body.warm-theme .notebook-clear-btn {
-  background: #FDF6E3;
+  background: #F4EEDB var(--texture-cotton-paper);
   border: 1px solid rgba(62, 39, 35, 0.09);
   color: #8D6E63;
   font-weight: 700;
@@ -986,13 +986,13 @@ body.warm-theme .notebook-clear-btn:hover {
 }
 
 body.warm-theme .notebook-close-btn {
-  background: #FDF6E3;
+  background: #F4EEDB var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.09);
   color: #3E2723;
   font-weight: 800;
 }
 body.warm-theme .notebook-close-btn:hover {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
   color: #3E2723;
 }
@@ -1003,7 +1003,7 @@ body.warm-theme .notebook-back-btn {
 }
 
 body.warm-theme .notebook-toolbar {
-  border-bottom-color: rgba(62, 39, 35, 0.06);
+  border-bottom-color: rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .notebook-status {
@@ -1012,7 +1012,7 @@ body.warm-theme .notebook-status {
 }
 
 body.warm-theme .notebook-tabs {
-  background: #FDF6E3;
+  background: #F4EEDB var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.08);
 }
 
@@ -1025,21 +1025,21 @@ body.warm-theme .notebook-tab:hover {
   background: rgba(62, 39, 35, 0.04);
 }
 body.warm-theme .notebook-tab.active {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   color: #3E2723 !important;
   font-weight: 800;
-  box-shadow: 0 1px 4px rgba(62, 39, 35, 0.08);
-  border: 1px solid rgba(62, 39, 35, 0.04);
+  box-shadow: 0 1px 3px rgba(62, 39, 35, 0.08);
+  border: 1px solid rgba(62, 39, 35, 0.06);
 }
 
 body.warm-theme .notebook-search-container {
-  background: #FDF6E3;
+  background: #FAF6ED var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.08);
 }
 body.warm-theme .notebook-search-container:focus-within {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
-  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
 }
 
 body.warm-theme .notebook-search-input {
@@ -1051,27 +1051,27 @@ body.warm-theme .notebook-search-input::placeholder {
 }
 
 body.warm-theme .notebook-title-input {
-  background: #FDF6E3;
+  background: #FAF6ED var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.08);
   color: #3E2723;
   font-weight: 800;
 }
 body.warm-theme .notebook-title-input:focus {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
-  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
 }
 
 body.warm-theme .notebook-folder-item,
 body.warm-theme .notebook-note-item {
-  background: #FDF6E3;
+  background: #FAF6ED var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.08);
 }
 body.warm-theme .notebook-folder-item:hover,
 body.warm-theme .notebook-note-item:hover {
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
   border-color: #F4A261;
-  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.2);
+  box-shadow: 0 2px 8px rgba(62, 39, 35, 0.06);
 }
 
 body.warm-theme .notebook-textarea {

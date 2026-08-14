@@ -67,14 +67,16 @@
   --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 3. IGOR Minimalist Light Theme (Dusty Pink #EBB2C0 + Radical Black #000000 + Pale Warm #FCF8F9) */
+/* 3. IGOR Minimalist Light Theme with White Cotton Paper Texture */
 body.light-theme {
+  --texture-cotton-paper-white: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='whiteCottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.15  0 0 0 0 0.15  0 0 0 0 0.15  0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23whiteCottonFiber)'/%3E%3C/svg%3E");
   --bg-base: #FCF8F9;
   --bg-surface: #FFFFFF;
   --bg-card: #FFFFFF;
   --bg-card-hover: #FFFFFF;
+  --bg-cotton-white: #FFFFFF url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='whiteCottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.15  0 0 0 0 0.15  0 0 0 0 0.15  0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23whiteCottonFiber)'/%3E%3C/svg%3E");
   --bg-glow-spot: rgba(235, 178, 192, 0.08);
-  --bg-navbar: rgba(252, 248, 249, 0.92);
+  --bg-navbar: rgba(252, 248, 249, 0.94);
   --bg-sidebar: #FFFFFF;
   --bg-modal: #FFFFFF;
 
@@ -103,17 +105,24 @@ body.light-theme {
   --shadow-main: 0 16px 36px rgba(0, 0, 0, 0.07);
 }
 
+body.light-theme {
+  background-color: #FCF8F9 !important;
+  background-image: var(--texture-cotton-paper-white) !important;
+}
 
-/* 4. Warm Paper / Solarized Cream Theme (Warm Yellow-Cream #FDF6E3 + Deep Coffee #3E2723 + Terracotta #F4A261 & Sand #E9C46A) */
+
+/* 4. Warm Cotton Paper Theme (Natural Cotton Rag Fiber Texture + Deep Coffee #3E2723 + Terracotta #F4A261 & Sand #E9C46A) */
 body.warm-theme {
-  --bg-base: #FDF6E3;
-  --bg-surface: #FFFFFF;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #FFFFFF;
-  --bg-glow-spot: rgba(244, 162, 97, 0.08);
-  --bg-navbar: rgba(253, 246, 227, 0.94);
-  --bg-sidebar: #FFFFFF;
-  --bg-modal: #FFFFFF;
+  --texture-cotton-paper: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.26  0 0 0 0 0.18  0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cottonFiber)'/%3E%3C/svg%3E");
+  --bg-base: #F8F4EA;
+  --bg-surface: #FCF9F2;
+  --bg-card: #FCF9F2;
+  --bg-card-hover: #FFFDF9;
+  --bg-glow-spot: rgba(244, 162, 97, 0.06);
+  --bg-navbar: rgba(248, 244, 234, 0.94);
+  --bg-sidebar: #FCF9F2;
+  --bg-modal: #FCF9F2;
+  --bg-cotton-card: #FCF9F2 url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.26  0 0 0 0 0.18  0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cottonFiber)'/%3E%3C/svg%3E");
 
   --accent-spotify: #F4A261;
   --accent-warm-sand: #E9C46A;
@@ -123,8 +132,8 @@ body.warm-theme {
   --accent-rose: #F4A261;
   --accent-cyan: #F4A261;
   --accent-gradient: linear-gradient(135deg, #F4A261 0%, #E9C46A 100%);
-  --accent-glow: 0 4px 18px rgba(244, 162, 97, 0.4);
-  --cyan-glow: 0 4px 18px rgba(244, 162, 97, 0.4);
+  --accent-glow: none;
+  --cyan-glow: none;
 
   --text-main: #3E2723;
   --text-sub: #5D4037;
@@ -134,10 +143,15 @@ body.warm-theme {
   --border-glass: rgba(62, 39, 35, 0.08);
   --border-glass-hover: rgba(62, 39, 35, 0.16);
   --border-focus: rgba(244, 162, 97, 0.6);
-  --shadow-sm: 0 1px 4px rgba(62, 39, 35, 0.06), 0 1px 2px rgba(62, 39, 35, 0.03);
-  --shadow-md: 0 4px 16px rgba(62, 39, 35, 0.08), 0 1px 3px rgba(62, 39, 35, 0.04);
-  --shadow-lg: 0 12px 32px rgba(62, 39, 35, 0.1), 0 2px 6px rgba(62, 39, 35, 0.04);
-  --shadow-main: 0 16px 40px rgba(62, 39, 35, 0.09);
+  --shadow-sm: 0 1px 3px rgba(62, 39, 35, 0.04), 0 1px 2px rgba(62, 39, 35, 0.02);
+  --shadow-md: 0 3px 10px rgba(62, 39, 35, 0.06), 0 1px 2px rgba(62, 39, 35, 0.03);
+  --shadow-lg: 0 8px 24px rgba(62, 39, 35, 0.08), 0 2px 4px rgba(62, 39, 35, 0.03);
+  --shadow-main: 0 12px 30px rgba(62, 39, 35, 0.07);
+}
+
+body.warm-theme {
+  background-color: #F8F4EA !important;
+  background-image: var(--texture-cotton-paper) !important;
 }
 
 /* 5. Cool Slate Steel Theme (Gray Theme) */

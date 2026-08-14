@@ -1353,7 +1353,7 @@ body.warm-theme #dictationInput,
 body.warm-theme #chatInput,
 body.warm-theme #editLyricsTextarea,
 body.warm-theme #activeLessonNoteTextarea {
-  background: #ffffff !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.12) !important;
   color: #3E2723 !important;
 }
@@ -2662,31 +2662,31 @@ body.warm-theme .video-course-controls {
 }
 
 body.warm-theme .video-course-controls .filter-pill.active {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   color: #3E2723 !important;
   font-weight: 800;
   box-shadow: 0 1px 3px rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .editor-container {
-  background: #FFFFFF;
+  background: #FAF6ED var(--texture-cotton-paper);
   border-color: rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .editor-container:focus-within {
   border-color: #F4A261;
-  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
 }
 
 body.warm-theme .editor-line-numbers {
-  background: #FDF6E3;
+  background: #F4EEDB var(--texture-cotton-paper);
   border-right-color: rgba(62, 39, 35, 0.06);
   color: #8D6E63;
 }
 
 body.warm-theme .header-menu-btn:hover {
   border-color: #F4A261;
-  background: #FFFFFF;
+  background: #FFFDF9 var(--texture-cotton-paper);
 }
 
 body.warm-theme .header-menu-streak-dot {
@@ -2695,23 +2695,23 @@ body.warm-theme .header-menu-streak-dot {
 
 /* ── Warm Theme Header Navigation Dropdown & Video Course ── */
 body.warm-theme .header-nav-dropdown {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border: 1px solid rgba(62, 39, 35, 0.09) !important;
   box-shadow: 0 16px 40px rgba(62, 39, 35, 0.12) !important;
 }
 
 body.warm-theme .nav-dropdown-profile {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .nav-dropdown-profile:hover {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
 }
 
 body.warm-theme .nav-dropdown-avatar {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   color: #3E2723 !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
@@ -2732,7 +2732,7 @@ body.warm-theme .nav-stat-xp {
 }
 
 body.warm-theme .nav-dropdown-sparks-link {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.12) !important;
   color: #3E2723 !important;
   font-weight: 800 !important;
@@ -2750,7 +2750,7 @@ body.warm-theme .nav-dropdown-item {
 }
 
 body.warm-theme .nav-dropdown-item:hover {
-  background: #FDF6E3 !important;
+  background: #FAF4E6 var(--texture-cotton-paper) !important;
   color: #3E2723 !important;
 }
 
@@ -2765,7 +2765,7 @@ body.warm-theme .nav-dropdown-item:hover svg {
 }
 
 body.warm-theme .nav-dropdown-pill {
-  background: #FDF6E3 !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   color: #5D4037 !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
@@ -2775,14 +2775,14 @@ body.warm-theme .nav-dropdown-divider {
 }
 
 body.warm-theme .header-menu-btn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
 }
 
 body.warm-theme .header-menu-btn:hover,
 body.warm-theme .header-menu-btn.active {
-  background: #FDF6E3 !important;
+  background: #F8F2E4 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
@@ -2792,7 +2792,7 @@ body.warm-theme .header-menu-streak-dot {
 }
 
 body.warm-theme .video-player-wrapper {
-  background: #FDF6E3 !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   box-shadow: inset 0 0 20px rgba(62, 39, 35, 0.04) !important;
 }
@@ -2802,7 +2802,7 @@ body.warm-theme .player-placeholder {
 }
 
 body.warm-theme .placeholder-vinyl-art {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 2px solid rgba(244, 162, 97, 0.3) !important;
   box-shadow: 0 8px 24px rgba(62, 39, 35, 0.08) !important;
 }
@@ -2818,22 +2818,22 @@ body.warm-theme .player-placeholder p {
 
 body.warm-theme .video-course-body .lessons-sidebar {
   border-right-color: rgba(62, 39, 35, 0.08) !important;
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
 }
 
 body.warm-theme .video-lesson-item {
-  background: #FFFFFF !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }
 
 body.warm-theme .video-lesson-item:hover {
-  background: #FDF6E3 !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
 }
 
 body.warm-theme .video-lesson-item.playing {
-  background: #FDF6E3 !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   box-shadow: 0 0 10px rgba(244, 162, 97, 0.2) !important;
 }
@@ -2843,7 +2843,7 @@ body.warm-theme .video-lesson-item.playing::before {
 }
 
 body.warm-theme .video-lesson-item .lesson-badge {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
   font-weight: 700 !important;
@@ -2857,7 +2857,7 @@ body.warm-theme .video-lesson-item.playing .lesson-badge {
 }
 
 body.warm-theme .active-video-details {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }

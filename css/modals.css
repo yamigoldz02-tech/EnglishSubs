@@ -254,14 +254,14 @@ body.light-theme .modal-overlay {
 
 body.light-theme .modal-card,
 body.light-theme .video-course-modal-card {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   color: #000000 !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12) !important;
 }
 
 body.light-theme .modal-header {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
   color: #000000 !important;
 }
@@ -278,7 +278,7 @@ body.light-theme .modal-header svg {
 }
 
 body.light-theme .modal-footer {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border-top: 1px solid rgba(0, 0, 0, 0.07) !important;
 }
 
@@ -549,7 +549,7 @@ body.light-theme #syncGoogleLoginBtn,
 body.light-theme #syncLogoutBtn,
 body.light-theme #archiveDictionaryBtn,
 body.light-theme #finishRoleplayBtn {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
   color: #000000 !important;
   font-weight: 700 !important;
@@ -789,12 +789,12 @@ body.light-theme #gamificationModal a[href="sparks.html"] {
 
 /* Rules Modal (Grammar Rules Handbook) */
 body.light-theme #rulesModalCard {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 body.light-theme .rules-tabs {
-  background: #F9F9F8 !important;
+  background: #FCF8F9 var(--texture-cotton-paper-white) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
 }
 
@@ -811,18 +811,18 @@ body.light-theme .rules-tab.active {
 }
 
 body.light-theme #rulesSearchContainer {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
 }
 
 body.light-theme .rules-accordion-item {
-  background: #F9F9F8 !important;
+  background: #FCF8F9 var(--texture-cotton-paper-white) !important;
   border: 1px solid rgba(0, 0, 0, 0.07) !important;
   border-radius: 12px !important;
 }
 
 body.light-theme .rules-accordion-item.active {
-  background: #FFFFFF !important;
+  background: #FFFFFF var(--texture-cotton-paper-white) !important;
   border-color: rgba(0, 0, 0, 0.18) !important;
   box-shadow: var(--shadow-sm) !important;
 }
@@ -985,15 +985,15 @@ body.warm-theme .modal-overlay {
 
 body.warm-theme .modal-card,
 body.warm-theme .video-course-modal-card {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border: 1px solid rgba(62, 39, 35, 0.09) !important;
   color: #3E2723 !important;
   box-shadow: 0 20px 50px rgba(62, 39, 35, 0.12) !important;
 }
 
 body.warm-theme .modal-header {
-  background: #FFFFFF !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }
 
@@ -1009,8 +1009,8 @@ body.warm-theme .modal-header svg {
 }
 
 body.warm-theme .modal-footer {
-  background: #FFFFFF !important;
-  border-top: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border-top: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .modal-body {
@@ -1036,7 +1036,7 @@ body.warm-theme #closeVideoCourseModalBtn,
 body.warm-theme #closeManageFoldersBtn,
 body.warm-theme #closeGamificationBtn,
 body.warm-theme #closeRulesBtn {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.09) !important;
   color: #3E2723 !important;
   border-radius: 8px !important;
@@ -1057,10 +1057,9 @@ body.warm-theme #closeVideoCourseModalBtn:hover,
 body.warm-theme #closeManageFoldersBtn:hover,
 body.warm-theme #closeGamificationBtn:hover,
 body.warm-theme #closeRulesBtn:hover {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
-  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.25) !important;
 }
 
 body.warm-theme #dictExpandWidthBtn,
@@ -1069,7 +1068,7 @@ body.warm-theme #trainingExpandWidthBtn,
 body.warm-theme #addCustomCategoryBtn,
 body.warm-theme #manageFoldersBtn,
 body.warm-theme #toggleTrainingHeatmapBtn {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.09) !important;
   color: #3E2723 !important;
 }
@@ -1080,10 +1079,9 @@ body.warm-theme #trainingExpandWidthBtn:hover,
 body.warm-theme #addCustomCategoryBtn:hover,
 body.warm-theme #manageFoldersBtn:hover,
 body.warm-theme #toggleTrainingHeatmapBtn:hover {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
-  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.25) !important;
 }
 
 /* Modal Inner Section Containers */
@@ -1093,7 +1091,7 @@ body.warm-theme #addPhraseModal .modal-body > div,
 body.warm-theme #editWordModal .modal-body > div,
 body.warm-theme #manageFoldersModal .modal-body,
 body.warm-theme .form-group {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   border-radius: 14px !important;
 }
@@ -1152,7 +1150,7 @@ body.warm-theme #editWordRuleInput,
 body.warm-theme #notebookNoteTitleInput,
 body.warm-theme #notebookNoteContentInput,
 body.warm-theme #notebookNotesSearchInput {
-  background: #FFFFFF !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.12) !important;
   color: #3E2723 !important;
   border-radius: 10px !important;
@@ -1192,9 +1190,9 @@ body.warm-theme #editWordRuleInput:focus,
 body.warm-theme #notebookNoteTitleInput:focus,
 body.warm-theme #notebookNoteContentInput:focus,
 body.warm-theme #notebookNotesSearchInput:focus {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
-  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25) !important;
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25) !important;
 }
 
 body.warm-theme .form-group input::placeholder,
@@ -1210,12 +1208,12 @@ body.warm-theme #manualPhraseCategoryPillsContainer,
 body.warm-theme #manualPhraseCustomCategoryPillsContainer,
 body.warm-theme #editWordCategoryPillsContainer,
 body.warm-theme #editWordCustomCategoryPillsContainer {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .category-pill-selectable {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
 }
@@ -1245,7 +1243,7 @@ body.warm-theme #sendRoleplayMsgBtn {
   border: 1px solid #F4A261 !important;
   font-weight: 800 !important;
   border-radius: 20px !important;
-  box-shadow: 0 2px 10px rgba(244, 162, 97, 0.35) !important;
+  box-shadow: none !important;
 }
 
 body.warm-theme .modal-btn.primary-btn:hover,
@@ -1264,7 +1262,7 @@ body.warm-theme #sendRoleplayMsgBtn:hover {
   border-color: #e8934f !important;
   color: #3E2723 !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(244, 162, 97, 0.5) !important;
+  box-shadow: none !important;
 }
 
 /* Modal Secondary Buttons */
@@ -1283,12 +1281,12 @@ body.warm-theme #syncGoogleLoginBtn,
 body.warm-theme #syncLogoutBtn,
 body.warm-theme #archiveDictionaryBtn,
 body.warm-theme #finishRoleplayBtn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.12) !important;
   color: #3E2723 !important;
   font-weight: 700 !important;
   border-radius: 20px !important;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none !important;
 }
 
 body.warm-theme .modal-btn.secondary-btn:hover,
@@ -1306,7 +1304,7 @@ body.warm-theme #syncGoogleLoginBtn:hover,
 body.warm-theme #syncLogoutBtn:hover,
 body.warm-theme #archiveDictionaryBtn:hover,
 body.warm-theme #finishRoleplayBtn:hover {
-  background: #FDF6E3 !important;
+  background: #F8F2E4 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
@@ -1359,7 +1357,7 @@ body.warm-theme #cardEasyBtn {
 body.warm-theme #cardUndoBtn,
 body.warm-theme #cardDeleteBtn,
 body.warm-theme #dictDeleteCardBtn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.12) !important;
   color: #3E2723 !important;
   font-weight: 700 !important;
@@ -1369,7 +1367,7 @@ body.warm-theme #dictDeleteCardBtn {
 body.warm-theme #cardUndoBtn:hover,
 body.warm-theme #cardDeleteBtn:hover,
 body.warm-theme #dictDeleteCardBtn:hover {
-  background: #FDF6E3 !important;
+  background: #F8F2E4 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
@@ -1377,8 +1375,8 @@ body.warm-theme #dictDeleteCardBtn:hover {
 body.warm-theme .dict-heatmap-container,
 body.warm-theme .essential-progress-container,
 body.warm-theme #trainingSettingsBar {
-  background: #FDF6E3 !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }
 
@@ -1414,7 +1412,7 @@ body.warm-theme #cardEditBtnFront,
 body.warm-theme #cardSpeakBtnBack,
 body.warm-theme #cardPracticeBtnBack,
 body.warm-theme #cardEditBtnBack {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
 }
@@ -1425,20 +1423,20 @@ body.warm-theme #cardEditBtnFront:hover,
 body.warm-theme #cardSpeakBtnBack:hover,
 body.warm-theme #cardPracticeBtnBack:hover,
 body.warm-theme #cardEditBtnBack:hover {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
 
 body.warm-theme .session-pill.remaining {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
   font-weight: 800 !important;
 }
 
 body.warm-theme .session-pill.learned {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
   font-weight: 800 !important;
@@ -1478,14 +1476,14 @@ body.warm-theme .heatmap-cell.intensity-3 {
 /* Gamification / Stats Modal */
 body.warm-theme #gamificationModal .modal-body > div,
 body.warm-theme #statsModal .modal-body > div {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }
 
 body.warm-theme #gamificationModal .stats-grid > div,
 body.warm-theme #statsModal .stats-grid > div {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   box-shadow: var(--shadow-sm) !important;
 }
@@ -1498,7 +1496,7 @@ body.warm-theme #statsModal .stats-grid > div div[id^="modalStat"] {
 
 body.warm-theme #gamificationModal .stats-grid > div > div:first-child,
 body.warm-theme #statsModal .stats-grid > div > div:first-child {
-  background: #FDF6E3 !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
 }
@@ -1528,13 +1526,13 @@ body.warm-theme #gamificationModal a[href="sparks.html"] {
 
 /* Rules Modal */
 body.warm-theme #rulesModalCard {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .rules-tabs {
-  background: #FDF6E3 !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .rules-tab {
@@ -1550,18 +1548,18 @@ body.warm-theme .rules-tab.active {
 }
 
 body.warm-theme #rulesSearchContainer {
-  background: #FFFFFF !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme .rules-accordion-item {
-  background: #FDF6E3 !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   border-radius: 12px !important;
 }
 
 body.warm-theme .rules-accordion-item.active {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: rgba(244, 162, 97, 0.4) !important;
   box-shadow: var(--shadow-sm) !important;
 }
@@ -1587,7 +1585,7 @@ body.warm-theme .rules-delete-btn {
 }
 
 body.warm-theme .rules-edit-btn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
   font-weight: 700 !important;
@@ -1595,13 +1593,13 @@ body.warm-theme .rules-edit-btn {
 
 /* Artist Songs Modal */
 body.warm-theme .artist-song-item {
-  background: #FDF6E3 !important;
+  background: #FAF6ED var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   border-radius: 12px !important;
 }
 
 body.warm-theme .artist-song-item:hover {
-  background: #FFFFFF !important;
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
   border-color: rgba(244, 162, 97, 0.4) !important;
   transform: translateY(-2px) !important;
   box-shadow: var(--shadow-sm) !important;
@@ -1613,7 +1611,7 @@ body.warm-theme .artist-song-title {
 }
 
 body.warm-theme .artist-song-play-btn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.1) !important;
   color: #3E2723 !important;
 }
@@ -1626,12 +1624,12 @@ body.warm-theme .artist-song-item:hover .artist-song-play-btn {
 
 /* AI Roleplay Modal */
 body.warm-theme #roleplayModal .modal-card > div:first-child {
-  background: #FFFFFF !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 body.warm-theme #roleplayChatBody {
-  background: #FDF6E3 !important;
+  background: #F4EEDB var(--texture-cotton-paper) !important;
 }
 
 body.warm-theme .roleplay-msg-user {
@@ -1641,7 +1639,7 @@ body.warm-theme .roleplay-msg-user {
 }
 
 body.warm-theme .roleplay-msg-bot {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
   box-shadow: var(--shadow-sm) !important;
@@ -1649,14 +1647,14 @@ body.warm-theme .roleplay-msg-bot {
 
 body.warm-theme #roleplayModal .modal-card > div:nth-last-child(2),
 body.warm-theme #roleplayFinishContainer {
-  background: #FFFFFF !important;
-  border-top: 1px solid rgba(62, 39, 35, 0.07) !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border-top: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
 
 /* Manage Folders Modal */
 body.warm-theme #manageFoldersModal .folder-item,
 body.warm-theme #manageFoldersList > div {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
   color: #3E2723 !important;
   box-shadow: var(--shadow-sm) !important;
@@ -1664,7 +1662,7 @@ body.warm-theme #manageFoldersList > div {
 
 /* Match & Learn Game Modes in Dictionary Modal */
 body.warm-theme .match-tile {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.09) !important;
   color: #3E2723 !important;
   box-shadow: var(--shadow-sm) !important;
@@ -1672,7 +1670,7 @@ body.warm-theme .match-tile {
 }
 
 body.warm-theme .match-tile:hover {
-  background: #FDF6E3 !important;
+  background: #FAF4E6 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   transform: translateY(-2px) !important;
 }
@@ -1691,7 +1689,7 @@ body.warm-theme .match-tile.wrong {
 }
 
 body.warm-theme .learn-choice-btn {
-  background: #FFFFFF !important;
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
   border: 1px solid rgba(62, 39, 35, 0.09) !important;
   color: #3E2723 !important;
   box-shadow: var(--shadow-sm) !important;
@@ -1699,7 +1697,7 @@ body.warm-theme .learn-choice-btn {
 }
 
 body.warm-theme .learn-choice-btn:hover {
-  background: #FDF6E3 !important;
+  background: #FAF4E6 var(--texture-cotton-paper) !important;
   border-color: #F4A261 !important;
   transform: translateY(-1px) !important;
 }
