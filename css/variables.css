@@ -88,10 +88,10 @@ body.light-theme {
   --accent-glow: 0 4px 14px rgba(217, 83, 79, 0.15);
   --cyan-glow: 0 4px 14px rgba(79, 121, 66, 0.15);
 
-  --text-main: #2F3437;
+  --text-main: #0A0A0A;
   --text-sub: #787774;
   --text-muted: #9B9A97;
-  --text-inactive: rgba(47, 52, 55, 0.4);
+  --text-inactive: rgba(10, 10, 10, 0.4);
 
   --border-glass: rgba(55, 53, 47, 0.09);
   --border-glass-hover: rgba(55, 53, 47, 0.16);

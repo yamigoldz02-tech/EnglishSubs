@@ -399,7 +399,7 @@
 
 /* ── Warm Paper Minimalist Light Theme Overrides ── */
 body.light-theme .dash-hero-title {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dash-hero-subtitle {
@@ -431,7 +431,7 @@ body.light-theme .dash-action-btn.primary:hover {
 body.light-theme .dash-action-btn.secondary {
   background: #FFFFFF;
   border-color: rgba(55, 53, 47, 0.12);
-  color: #2F3437;
+  color: #0A0A0A;
   box-shadow: var(--shadow-sm);
 }
 
@@ -455,7 +455,7 @@ body.light-theme .bento-card:hover {
 body.light-theme .bento-icon {
   background: #F9F9F8;
   border-color: rgba(55, 53, 47, 0.09);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .bento-card:hover .bento-icon {
@@ -465,11 +465,11 @@ body.light-theme .bento-card:hover .bento-icon {
 }
 
 body.light-theme .bento-stat-num {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .bento-card-title {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .bento-card-desc {
@@ -485,7 +485,7 @@ body.light-theme .bento-progress-fill {
 }
 
 body.light-theme .bento-card:hover .bento-card-footer {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dash-music-panel {
@@ -495,7 +495,7 @@ body.light-theme .dash-music-panel {
 }
 
 body.light-theme .dash-panel-title {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dash-song-item {
@@ -516,7 +516,7 @@ body.light-theme .dash-song-cover {
 }
 
 body.light-theme .dash-song-item:hover .dash-song-cover {
-  color: #2F3437;
+  color: #0A0A0A;
   border-color: rgba(55, 53, 47, 0.18);
 }
 
@@ -531,7 +531,7 @@ body.light-theme .dash-song-item:hover .dash-song-cover.fav svg {
 }
 
 body.light-theme .dash-song-title {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dash-song-artist {

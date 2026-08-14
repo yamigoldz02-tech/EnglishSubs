@@ -344,7 +344,7 @@ body.light-theme #manualLyricsArea {
 body.light-theme .search-input-wrapper input {
   background: #FFFFFF;
   border-color: rgba(55, 53, 47, 0.09);
-  color: #2F3437;
+  color: #0A0A0A;
   box-shadow: var(--shadow-sm);
 }
 body.light-theme .search-input-wrapper input:hover {

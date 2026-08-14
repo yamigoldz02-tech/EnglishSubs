@@ -1968,11 +1968,11 @@ body.light-theme .nav-dropdown-profile:hover {
 
 body.light-theme .nav-dropdown-avatar {
   background: rgba(55, 53, 47, 0.06);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .nav-stat-streak {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .nav-stat-xp {
@@ -1982,7 +1982,7 @@ body.light-theme .nav-stat-xp {
 body.light-theme .nav-dropdown-sparks-link {
   background: #FFFFFF;
   border-color: rgba(55, 53, 47, 0.12);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .nav-dropdown-sparks-link:hover {
@@ -1991,12 +1991,12 @@ body.light-theme .nav-dropdown-sparks-link:hover {
 }
 
 body.light-theme .nav-dropdown-item {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .nav-dropdown-item:hover {
   background: #F9F9F8;
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .nav-dropdown-item svg {
@@ -2004,20 +2004,20 @@ body.light-theme .nav-dropdown-item svg {
 }
 
 body.light-theme .nav-dropdown-item:hover svg {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .header-menu-btn {
   background: #FFFFFF;
   border-color: rgba(55, 53, 47, 0.09);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .header-menu-btn:hover,
 body.light-theme .header-menu-btn.active {
   background: #F9F9F8;
   border-color: rgba(55, 53, 47, 0.16);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .header-menu-streak-dot {

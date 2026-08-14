@@ -460,11 +460,11 @@ body.light-theme .dict-tab {
 }
 
 body.light-theme .dict-tab:hover {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dict-tab.active {
-  color: #2F3437 !important;
+  color: #0A0A0A !important;
   border-bottom: 2px solid #D9534F !important;
 }
 
@@ -473,12 +473,12 @@ body.light-theme .dict-type-pill {
 }
 
 body.light-theme .dict-type-pill:hover {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .dict-type-pill.active {
   background: #FFFFFF !important;
-  color: #2F3437 !important;
+  color: #0A0A0A !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -504,7 +504,7 @@ body.light-theme .filters-toggle-btn {
 
 body.light-theme .filters-toggle-btn:hover {
   background: #FFFFFF;
-  color: #2F3437;
+  color: #0A0A0A;
   border-color: rgba(55, 53, 47, 0.16);
 }
 
@@ -521,7 +521,7 @@ body.light-theme #addManualWordBtn,
 body.light-theme #addManualPhraseBtn {
   background: #FFFFFF !important;
   border-color: rgba(55, 53, 47, 0.14) !important;
-  color: #2F3437 !important;
+  color: #0A0A0A !important;
 }
 
 body.light-theme #addManualWordBtn:hover,

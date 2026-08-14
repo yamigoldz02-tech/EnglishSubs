@@ -131,7 +131,7 @@ body.light-theme .bg-blobs {
 }
 
 body.light-theme .nav-brand {
-  color: #2F3437;
+  color: #0A0A0A;
 }
 
 body.light-theme .brand-accent {
@@ -139,7 +139,7 @@ body.light-theme .brand-accent {
 }
 
 body.light-theme .brand-icon {
-  background: #2F3437;
+  background: #0A0A0A;
   color: #ffffff;
   box-shadow: var(--shadow-sm);
 }

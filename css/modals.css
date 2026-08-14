@@ -261,7 +261,7 @@ body.light-theme .modal-close-btn {
 }
 body.light-theme .modal-close-btn:hover {
   background: #FFFFFF;
-  color: #2F3437;
+  color: #0A0A0A;
   border-color: rgba(55, 53, 47, 0.2);
 }
 body.light-theme .settings-btn {
@@ -271,7 +271,7 @@ body.light-theme .settings-btn {
 body.light-theme .form-group input {
   background: #F9F9F8;
   border-color: rgba(55, 53, 47, 0.09);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 body.light-theme .form-group input:focus {
   background: #FFFFFF;
@@ -287,7 +287,7 @@ body.light-theme .modal-btn.primary-btn:hover {
 body.light-theme .modal-btn.secondary-btn {
   background: #FFFFFF;
   border-color: rgba(55, 53, 47, 0.12);
-  color: #2F3437;
+  color: #0A0A0A;
 }
 body.light-theme .modal-btn.secondary-btn:hover {
   background: #F9F9F8;
