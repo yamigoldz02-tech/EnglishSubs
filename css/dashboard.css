@@ -292,6 +292,9 @@
   gap: 8px;
   max-height: 280px;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+  margin: -4px;
 }
 
 .dash-song-item {
@@ -303,13 +306,14 @@
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .dash-song-item:hover {
   background: rgba(255, 255, 255, 0.07);
   border-color: var(--border-glass-hover);
-  transform: translateX(4px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .dash-song-cover {
@@ -498,56 +502,72 @@ body.light-theme .dash-panel-title {
   color: #0A0A0A;
 }
 
+body.light-theme .dash-panel-title svg {
+  stroke: #0A0A0A;
+  color: #0A0A0A;
+}
+
 body.light-theme .dash-song-item {
   background: #F9F9F8;
-  border-color: rgba(55, 53, 47, 0.06);
+  border-color: rgba(10, 10, 10, 0.08);
 }
 
 body.light-theme .dash-song-item:hover {
   background: #FFFFFF;
-  border-color: rgba(55, 53, 47, 0.14);
-  box-shadow: var(--shadow-sm);
+  border-color: rgba(10, 10, 10, 0.22);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 body.light-theme .dash-song-cover {
   background: #FFFFFF;
-  border-color: rgba(55, 53, 47, 0.09);
-  color: #787774;
+  border-color: rgba(10, 10, 10, 0.12);
+  color: #0A0A0A;
+  font-weight: 700;
 }
 
-body.light-theme .dash-song-item:hover .dash-song-cover {
+body.light-theme .dash-song-cover.fav {
   color: #0A0A0A;
-  border-color: rgba(55, 53, 47, 0.18);
 }
 
 body.light-theme .dash-song-cover.fav svg {
-  fill: #9B9A97;
-  stroke: #9B9A97;
+  fill: #0A0A0A;
+  stroke: #0A0A0A;
+}
+
+body.light-theme .dash-song-item:hover .dash-song-cover {
+  background: #0A0A0A;
+  border-color: #0A0A0A;
+  color: #FFFFFF;
 }
 
 body.light-theme .dash-song-item:hover .dash-song-cover.fav svg {
-  fill: #D9534F;
-  stroke: #D9534F;
+  fill: #FFFFFF;
+  stroke: #FFFFFF;
 }
 
 body.light-theme .dash-song-title {
   color: #0A0A0A;
+  font-weight: 700;
 }
 
 body.light-theme .dash-song-artist {
-  color: #787774;
+  color: #0A0A0A;
+  font-weight: 500;
+  opacity: 0.85;
 }
 
 body.light-theme .dash-song-play-btn {
   background: #FFFFFF;
-  border-color: rgba(55, 53, 47, 0.09);
-  color: #787774;
+  border-color: rgba(10, 10, 10, 0.14);
+  color: #0A0A0A;
 }
 
 body.light-theme .dash-song-item:hover .dash-song-play-btn {
-  background: #D9534F;
-  border-color: #D9534F;
+  background: #0A0A0A;
+  border-color: #0A0A0A;
   color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ── Responsive Breakpoints ── */
