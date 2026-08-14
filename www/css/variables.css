@@ -11,57 +11,57 @@
   --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Refined Graphite & Slate Backgrounds */
-  --bg-base: #0b0e14;
-  --bg-surface: #111622;
-  --bg-card: rgba(20, 26, 38, 0.65);
-  --bg-card-hover: rgba(28, 36, 52, 0.85);
-  --bg-glow-spot: rgba(16, 185, 129, 0.04);
-  --bg-navbar: rgba(11, 14, 20, 0.8);
-  --bg-sidebar: rgba(15, 20, 30, 0.9);
-  --bg-modal: #131824;
+  /* True Black & Deep Graphite Minimalist Surfaces */
+  --bg-base: #09090b;
+  --bg-surface: #121215;
+  --bg-card: #141417;
+  --bg-card-hover: #1c1c20;
+  --bg-glow-spot: transparent;
+  --bg-navbar: rgba(9, 9, 11, 0.88);
+  --bg-sidebar: rgba(18, 18, 21, 0.96);
+  --bg-modal: #121215;
 
-  /* Soft Harmonic Accents (Sage, Emerald, Indigo, Amber, Rose) */
-  --accent-spotify: #10b981;
+  /* Monochromatic & Restrained Accents */
+  --accent-spotify: #ffffff;
   --accent-emerald: #10b981;
   --accent-indigo: #6366f1;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
-  --accent-cyan: #06b6d4;
-  --accent-gradient: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --accent-cyan: #38bdf8;
+  --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
   
-  /* Delicate Atmospheric Lighting (No harsh neon glow) */
-  --accent-glow: 0 4px 16px rgba(16, 185, 129, 0.2);
-  --cyan-glow: 0 4px 16px rgba(6, 182, 212, 0.2);
+  /* Delicate Subtle Shadows (No glowing neon) */
+  --accent-glow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --cyan-glow: 0 4px 14px rgba(0, 0, 0, 0.4);
 
-  /* High-legibility Soft Text */
-  --text-main: #f8fafc;
-  --text-sub: #94a3b8;
-  --text-muted: #64748b;
-  --text-inactive: rgba(248, 250, 252, 0.45);
+  /* High-legibility Monochromatic Text */
+  --text-main: #f4f4f5;
+  --text-sub: #a1a1aa;
+  --text-muted: #71717a;
+  --text-inactive: rgba(244, 244, 245, 0.35);
 
-  /* Subtle Borders & Frosted Glass */
-  --border-glass: rgba(255, 255, 255, 0.07);
-  --border-glass-hover: rgba(255, 255, 255, 0.15);
-  --border-focus: rgba(99, 102, 241, 0.4);
+  /* Subtle Crisp Graphite Borders */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-hover: rgba(255, 255, 255, 0.16);
+  --border-focus: rgba(255, 255, 255, 0.3);
   --glass-blur: 20px;
   
   /* Smooth Geometry Scale */
   --radius-xs: 6px;
   --radius-sm: 10px;
   --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 26px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-pill: 9999px;
 
   /* Natural Multi-layered Ambient Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.4);
-  --shadow-main: 0 16px 36px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-main: 0 16px 36px rgba(0, 0, 0, 0.6);
 
   /* Natural Spring Transitions */
-  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

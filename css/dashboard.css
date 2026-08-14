@@ -34,10 +34,10 @@
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #a1a1aa;
   letter-spacing: 0.2px;
 }
 
@@ -45,7 +45,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #3b82f6;
+  background-color: #a1a1aa;
 }
 
 .dash-hero-title {
@@ -92,24 +92,25 @@
 }
 
 .dash-action-btn.primary {
-  background: #3b82f6;
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+  background: #ffffff;
+  color: #09090b;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
 }
 .dash-action-btn.primary:hover {
-  background: #2563eb;
+  background: #e4e4e7;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
 }
 
 .dash-action-btn.secondary {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f4f4f5;
 }
 .dash-action-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-glass-hover);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
   color: #ffffff;
 }
@@ -218,7 +219,7 @@
 .bento-progress-fill {
   width: 0%;
   height: 100%;
-  background: #3b82f6;
+  background: #ffffff;
   border-radius: var(--radius-pill);
   transition: width 0.4s ease;
 }

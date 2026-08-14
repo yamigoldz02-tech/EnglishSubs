@@ -39,18 +39,15 @@ body {
   z-index: -2;
   overflow: hidden;
   pointer-events: none;
-  background: radial-gradient(ellipse 80% 50% at 50% -15%, rgba(16, 185, 129, 0.07), transparent 70%),
-              radial-gradient(ellipse 60% 40% at 85% 10%, rgba(99, 102, 241, 0.05), transparent 70%);
+  background: none;
 }
 
 body.gray-theme .bg-blobs {
-  background: radial-gradient(ellipse 80% 50% at 50% -15%, rgba(99, 102, 241, 0.08), transparent 70%),
-              radial-gradient(ellipse 60% 40% at 85% 10%, rgba(56, 189, 248, 0.05), transparent 70%);
+  background: none;
 }
 
 body.light-theme .bg-blobs {
-  background: radial-gradient(ellipse 80% 50% at 50% -15%, rgba(16, 185, 129, 0.03), transparent 70%),
-              radial-gradient(ellipse 60% 40% at 85% 10%, rgba(99, 102, 241, 0.02), transparent 70%);
+  background: none;
 }
 
 .blob {
@@ -73,7 +70,7 @@ body.light-theme .bg-blobs {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-spotify);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 ::-webkit-scrollbar-corner,
@@ -98,31 +95,56 @@ body.light-theme .bg-blobs {
   align-items: center;
   gap: 0.75rem;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.4px;
+  color: #ffffff;
   position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-accent {
+  color: #a1a1aa;
+  font-weight: 500;
 }
 
 .brand-icon {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: var(--accent-gradient);
+  background: #ffffff;
+  color: #09090b;
   position: relative;
-  box-shadow: var(--accent-glow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
 }
 
 .brand-icon svg {
   fill: none;
-  width: 18px;
-  height: 18px;
+  stroke: #09090b;
+  width: 17px;
+  height: 17px;
+}
+
+body.light-theme .nav-brand {
+  color: #0f172a;
+}
+
+body.light-theme .brand-accent {
+  color: #64748b;
+}
+
+body.light-theme .brand-icon {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+body.light-theme .brand-icon svg {
+  stroke: #ffffff;
 }
 
 .nav-controls {
