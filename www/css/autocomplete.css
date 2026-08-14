@@ -340,11 +340,34 @@ body.light-theme #manualLyricsArea {
   margin-top: 0;
 }
 
-/* Light theme tweaks */
+/* Warm Paper Light theme tweaks */
+body.light-theme .search-input-wrapper input {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #2F3437;
+  box-shadow: var(--shadow-sm);
+}
+body.light-theme .search-input-wrapper input:hover {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.16);
+}
+body.light-theme .search-input-wrapper input:focus {
+  background: #FFFFFF;
+  border-color: #D9534F;
+  box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.12);
+}
+body.light-theme .search-input-wrapper .search-icon {
+  color: #9B9A97;
+}
+body.light-theme .search-input-wrapper input:focus + .search-icon {
+  color: #D9534F;
+}
 body.light-theme .favorite-toggle-btn {
-  background: rgba(0, 0, 0, 0.03);
-  color: var(--text-muted);
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #9B9A97;
 }
 body.light-theme .autocomplete-section-header {
-  border-top-color: rgba(0, 0, 0, 0.05);
+  border-top-color: rgba(55, 53, 47, 0.08);
+  color: #787774;
 }

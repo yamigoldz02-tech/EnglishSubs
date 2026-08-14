@@ -131,16 +131,17 @@ body.light-theme .bg-blobs {
 }
 
 body.light-theme .nav-brand {
-  color: #0f172a;
+  color: #2F3437;
 }
 
 body.light-theme .brand-accent {
-  color: #64748b;
+  color: #787774;
 }
 
 body.light-theme .brand-icon {
-  background: #0f172a;
+  background: #2F3437;
   color: #ffffff;
+  box-shadow: var(--shadow-sm);
 }
 
 body.light-theme .brand-icon svg {

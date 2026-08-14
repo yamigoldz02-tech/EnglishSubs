@@ -380,3 +380,140 @@ body.gray-theme {
 .rules-accordion-header:hover {
   background: rgba(255, 255, 255, 0.04);
 }
+
+/* ── Dictionary Modal Components & Warm Paper Light Theme ── */
+.dict-tabs {
+  display: flex;
+  gap: 20px;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border-glass);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.dict-tab {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.dict-tab:hover {
+  color: var(--text-main);
+}
+
+.dict-tab.active {
+  color: var(--text-main) !important;
+  border-bottom: 2px solid var(--accent-spotify) !important;
+  font-weight: 700;
+}
+
+.dict-type-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+
+.dict-type-pill:hover {
+  color: var(--text-main);
+}
+
+.dict-type-pill.active {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: var(--text-main) !important;
+  font-weight: 700;
+}
+
+/* Light Theme Dictionary Overrides */
+body.light-theme .dict-tabs {
+  border-bottom-color: rgba(55, 53, 47, 0.09);
+}
+
+body.light-theme .dict-tab {
+  color: #787774;
+}
+
+body.light-theme .dict-tab:hover {
+  color: #2F3437;
+}
+
+body.light-theme .dict-tab.active {
+  color: #2F3437 !important;
+  border-bottom: 2px solid #D9534F !important;
+}
+
+body.light-theme .dict-type-pill {
+  color: #787774;
+}
+
+body.light-theme .dict-type-pill:hover {
+  color: #2F3437;
+}
+
+body.light-theme .dict-type-pill.active {
+  background: #FFFFFF !important;
+  color: #2F3437 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .dict-word-row {
+  border-radius: 8px;
+}
+
+body.light-theme .dict-word-row:hover {
+  background: #F9F9F8;
+}
+
+body.light-theme .dict-cat-badge {
+  background: rgba(55, 53, 47, 0.06);
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #787774;
+}
+
+body.light-theme .filters-toggle-btn {
+  background: #F9F9F8;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #787774;
+}
+
+body.light-theme .filters-toggle-btn:hover {
+  background: #FFFFFF;
+  color: #2F3437;
+  border-color: rgba(55, 53, 47, 0.16);
+}
+
+body.light-theme #startTrainingFromDictBtn {
+  background: #D9534F !important;
+  color: #FFFFFF !important;
+}
+
+body.light-theme #startTrainingFromDictBtn:hover {
+  background: #c94743 !important;
+}
+
+body.light-theme #addManualWordBtn,
+body.light-theme #addManualPhraseBtn {
+  background: #FFFFFF !important;
+  border-color: rgba(55, 53, 47, 0.14) !important;
+  color: #2F3437 !important;
+}
+
+body.light-theme #addManualWordBtn:hover,
+body.light-theme #addManualPhraseBtn:hover {
+  background: #F9F9F8 !important;
+  border-color: rgba(55, 53, 47, 0.22) !important;
+}

@@ -396,22 +396,157 @@
   transform: scale(1.08);
 }
 
-/* ── Light Theme Overrides ── */
+/* ── Warm Paper Minimalist Light Theme Overrides ── */
 body.light-theme .dash-hero-title {
-  color: #0f172a;
+  color: #2F3437;
 }
+
+body.light-theme .dash-hero-subtitle {
+  color: #787774;
+}
+
+body.light-theme .dash-hero-badge {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #787774;
+  box-shadow: var(--shadow-sm);
+}
+
+body.light-theme .dash-hero-badge-dot {
+  background: #D9534F;
+}
+
+body.light-theme .dash-action-btn.primary {
+  background: #D9534F;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(217, 83, 79, 0.25);
+}
+
+body.light-theme .dash-action-btn.primary:hover {
+  background: #c94743;
+  box-shadow: 0 4px 14px rgba(217, 83, 79, 0.35);
+}
+
 body.light-theme .dash-action-btn.secondary {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.12);
+  color: #2F3437;
+  box-shadow: var(--shadow-sm);
 }
+
 body.light-theme .dash-action-btn.secondary:hover {
-  background: rgba(0, 0, 0, 0.06);
+  background: #F9F9F8;
+  border-color: rgba(55, 53, 47, 0.2);
 }
+
+body.light-theme .bento-card {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  box-shadow: var(--shadow-sm);
+}
+
+body.light-theme .bento-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.16);
+  box-shadow: var(--shadow-md);
+}
+
+body.light-theme .bento-icon {
+  background: #F9F9F8;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #2F3437;
+}
+
+body.light-theme .bento-card:hover .bento-icon {
+  background: rgba(217, 83, 79, 0.08);
+  border-color: rgba(217, 83, 79, 0.25);
+  color: #D9534F;
+}
+
+body.light-theme .bento-stat-num {
+  color: #2F3437;
+}
+
+body.light-theme .bento-card-title {
+  color: #2F3437;
+}
+
+body.light-theme .bento-card-desc {
+  color: #787774;
+}
+
+body.light-theme .bento-progress-track {
+  background: rgba(55, 53, 47, 0.08);
+}
+
+body.light-theme .bento-progress-fill {
+  background: #D9534F;
+}
+
+body.light-theme .bento-card:hover .bento-card-footer {
+  color: #2F3437;
+}
+
+body.light-theme .dash-music-panel {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  box-shadow: var(--shadow-sm);
+}
+
+body.light-theme .dash-panel-title {
+  color: #2F3437;
+}
+
 body.light-theme .dash-song-item {
-  background: rgba(0, 0, 0, 0.02);
+  background: #F9F9F8;
+  border-color: rgba(55, 53, 47, 0.06);
 }
+
 body.light-theme .dash-song-item:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.14);
+  box-shadow: var(--shadow-sm);
+}
+
+body.light-theme .dash-song-cover {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #787774;
+}
+
+body.light-theme .dash-song-item:hover .dash-song-cover {
+  color: #2F3437;
+  border-color: rgba(55, 53, 47, 0.18);
+}
+
+body.light-theme .dash-song-cover.fav svg {
+  fill: #9B9A97;
+  stroke: #9B9A97;
+}
+
+body.light-theme .dash-song-item:hover .dash-song-cover.fav svg {
+  fill: #D9534F;
+  stroke: #D9534F;
+}
+
+body.light-theme .dash-song-title {
+  color: #2F3437;
+}
+
+body.light-theme .dash-song-artist {
+  color: #787774;
+}
+
+body.light-theme .dash-song-play-btn {
+  background: #FFFFFF;
+  border-color: rgba(55, 53, 47, 0.09);
+  color: #787774;
+}
+
+body.light-theme .dash-song-item:hover .dash-song-play-btn {
+  background: #D9534F;
+  border-color: #D9534F;
+  color: #FFFFFF;
 }
 
 /* ── Responsive Breakpoints ── */

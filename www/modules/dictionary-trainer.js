@@ -970,14 +970,11 @@ function setupDictionaryUI() {
       // Update UI classes
       if (tab === 'personal') {
         tabPersonal.classList.add('active');
-        tabPersonal.style.color = '#ffffff';
-        tabPersonal.style.borderBottomColor = '#ffffff';
-        tabPersonal.style.fontWeight = '700';
-        
+        tabPersonal.style.color = '';
+        tabPersonal.style.borderBottomColor = '';
         tabEssential.classList.remove('active');
-        tabEssential.style.color = 'var(--text-muted)';
-        tabEssential.style.borderBottomColor = 'transparent';
-        tabEssential.style.fontWeight = '600';
+        tabEssential.style.color = '';
+        tabEssential.style.borderBottomColor = '';
         
         // Show/Hide controls
         if (addCategoryBtn) addCategoryBtn.style.display = 'flex';
@@ -985,14 +982,11 @@ function setupDictionaryUI() {
         if (progressBarContainer) progressBarContainer.style.display = 'none'; // Only show in frequency tab
       } else {
         tabEssential.classList.add('active');
-        tabEssential.style.color = '#ffffff';
-        tabEssential.style.borderBottomColor = '#ffffff';
-        tabEssential.style.fontWeight = '700';
-        
+        tabEssential.style.color = '';
+        tabEssential.style.borderBottomColor = '';
         tabPersonal.classList.remove('active');
-        tabPersonal.style.color = 'var(--text-muted)';
-        tabPersonal.style.borderBottomColor = 'transparent';
-        tabPersonal.style.fontWeight = '600';
+        tabPersonal.style.color = '';
+        tabPersonal.style.borderBottomColor = '';
         
         // Show/Hide controls
         if (addCategoryBtn) addCategoryBtn.style.display = 'none';
