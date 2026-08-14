@@ -239,16 +239,16 @@
             <!-- Card 1: Dictionary -->
             <div class="bento-card" id="dashGoDict">
               <div class="bento-card-header">
-                <div class="bento-icon emerald">
+                <div class="bento-icon">
                   <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
                 </div>
-                <span class="bento-tag emerald">Словарь</span>
               </div>
               <div class="bento-card-body">
                 <div class="bento-stat-num"><span id="dashWordsCount">0</span> <span class="bento-stat-unit">слов</span></div>
-                <div class="bento-card-desc">Пополняйте личный словарь кликом по любому слову в субтитрах.</div>
+                <h3 class="bento-card-title">Личный словарь</h3>
+                <div class="bento-card-desc">Пополняйте словарный запас кликом по любому слову в субтитрах.</div>
               </div>
-              <div class="bento-card-footer emerald">
+              <div class="bento-card-footer">
                 <span>Открыть словарь</span>
                 <span class="bento-arrow">→</span>
               </div>
@@ -257,16 +257,16 @@
             <!-- Card 2: AI Leitner Training -->
             <div class="bento-card" id="dashGoTrain">
               <div class="bento-card-header">
-                <div class="bento-icon amber">
+                <div class="bento-icon">
                   <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                 </div>
-                <span class="bento-tag amber">Интервалы</span>
               </div>
               <div class="bento-card-body">
                 <div class="bento-stat-num">3D <span class="bento-stat-unit">тренировки</span></div>
-                <div class="bento-card-desc">Система Лейтнера для надежного запоминания слов.</div>
+                <h3 class="bento-card-title">Интервальные повторения</h3>
+                <div class="bento-card-desc">Система Лейтнера и умные интервалы для долговременной памяти.</div>
               </div>
-              <div class="bento-card-footer amber">
+              <div class="bento-card-footer">
                 <span>Начать повторение</span>
                 <span class="bento-arrow">→</span>
               </div>
@@ -275,19 +275,19 @@
             <!-- Card 3: Video Course -->
             <div class="bento-card" id="dashGoVideoCourse">
               <div class="bento-card-header">
-                <div class="bento-icon indigo">
+                <div class="bento-icon">
                   <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
                 </div>
-                <span class="bento-tag indigo">Видеокурс</span>
               </div>
               <div class="bento-card-body">
                 <div class="bento-stat-num"><span id="dashWatchedCount">0</span>/50 <span class="bento-stat-unit">уроков</span></div>
                 <div class="bento-progress-track">
                   <div class="bento-progress-fill" id="dashWatchedProgressBar"></div>
                 </div>
-                <div class="bento-card-desc">English Galaxy A0 — курс с практикой и конспектами.</div>
+                <h3 class="bento-card-title">Видеокурс English Galaxy</h3>
+                <div class="bento-card-desc">Пошаговый курс A0 от простого к сложному с практикой и конспектами.</div>
               </div>
-              <div class="bento-card-footer indigo">
+              <div class="bento-card-footer">
                 <span>Продолжить урок</span>
                 <span class="bento-arrow">→</span>
               </div>
@@ -302,7 +302,7 @@
             <div class="dash-music-panel">
               <div class="dash-panel-header">
                 <div class="dash-panel-title">
-                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                   <span>Избранные треки</span>
                 </div>
               </div>
@@ -315,7 +315,7 @@
             <div class="dash-music-panel">
               <div class="dash-panel-header">
                 <div class="dash-panel-title">
-                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   <span>Популярные песни для старта</span>
                 </div>
               </div>

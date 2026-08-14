@@ -31,29 +31,27 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-sub);
+  color: var(--text-muted);
   letter-spacing: 0.2px;
-  box-shadow: var(--shadow-sm);
 }
 
 .dash-hero-badge-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: var(--accent-spotify);
-  box-shadow: 0 0 8px var(--accent-spotify);
+  background-color: #3b82f6;
 }
 
 .dash-hero-title {
   font-size: 2.6rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: #ffffff;
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin: 0;
@@ -62,7 +60,7 @@
 
 .dash-hero-subtitle {
   font-size: 1.05rem;
-  color: var(--text-sub);
+  color: var(--text-muted);
   font-weight: 400;
   line-height: 1.55;
   max-width: 580px;
@@ -94,25 +92,26 @@
 }
 
 .dash-action-btn.primary {
-  background: var(--accent-spotify);
+  background: #3b82f6;
   color: #ffffff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
 }
 .dash-action-btn.primary:hover {
-  background: #059669;
+  background: #2563eb;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .dash-action-btn.secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
   color: var(--text-main);
 }
 .dash-action-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.08);
   border-color: var(--border-glass-hover);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 /* ── Bento Grid ── */
@@ -131,7 +130,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   box-shadow: var(--shadow-sm);
@@ -155,51 +154,22 @@
 }
 
 .bento-icon {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  transition: var(--transition-fast);
 }
 
-.bento-icon.emerald {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
-}
-.bento-icon.amber {
-  background: rgba(245, 158, 11, 0.12);
-  color: #f59e0b;
-}
-.bento-icon.indigo {
-  background: rgba(99, 102, 241, 0.12);
-  color: #6366f1;
-}
-
-.bento-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  border: 1px solid;
-}
-.bento-tag.emerald {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-  border-color: rgba(16, 185, 129, 0.25);
-}
-.bento-tag.amber {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
-  border-color: rgba(245, 158, 11, 0.25);
-}
-.bento-tag.indigo {
-  background: rgba(99, 102, 241, 0.1);
-  color: #818cf8;
-  border-color: rgba(99, 102, 241, 0.25);
+.bento-card:hover .bento-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-glass-hover);
+  color: #ffffff;
 }
 
 .bento-card-body {
@@ -209,37 +179,46 @@
 }
 
 .bento-stat-num {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  color: var(--text-main);
-  letter-spacing: -0.02em;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 .bento-stat-unit {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
-  color: var(--text-sub);
+  color: var(--text-muted);
+}
+
+.bento-card-title {
+  margin: 4px 0 2px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .bento-card-desc {
-  font-size: 0.82rem;
-  color: var(--text-sub);
-  line-height: 1.45;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .bento-progress-track {
   width: 100%;
-  height: 6px;
+  height: 4px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-pill);
   overflow: hidden;
-  margin: 4px 0;
+  margin: 6px 0 2px 0;
 }
 
 .bento-progress-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  background: #3b82f6;
   border-radius: var(--radius-pill);
   transition: width 0.4s ease;
 }
@@ -248,17 +227,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  padding-top: 8px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  transition: color 0.2s ease;
 }
-.bento-card-footer.emerald { color: #10b981; }
-.bento-card-footer.amber { color: #f59e0b; }
-.bento-card-footer.indigo { color: #818cf8; }
+
+.bento-card:hover .bento-card-footer {
+  color: #ffffff;
+}
 
 .bento-arrow {
   transition: transform 0.2s ease;
+  font-size: 0.95rem;
 }
 .bento-card:hover .bento-arrow {
   transform: translateX(4px);
@@ -291,11 +274,11 @@
 }
 
 .dash-panel-title {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--text-main);
+  color: var(--text-sub);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -328,36 +311,27 @@
 }
 
 .dash-song-cover {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
 }
 
-.dash-song-cover.scorpions {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.25);
-}
-.dash-song-cover.metallica {
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
-  border: 1px solid rgba(99, 102, 241, 0.25);
-}
-.dash-song-cover.rhcp {
-  background: rgba(244, 63, 94, 0.12);
-  color: #f43f5e;
-  border: 1px solid rgba(244, 63, 94, 0.25);
-}
+.dash-song-cover.scorpions,
+.dash-song-cover.metallica,
+.dash-song-cover.rhcp,
 .dash-song-cover.fav {
-  background: rgba(244, 63, 94, 0.1);
-  color: #f43f5e;
-  border: 1px solid rgba(244, 63, 94, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  border: 1px solid var(--border-glass);
 }
 
 .dash-song-meta {
@@ -368,7 +342,7 @@
 .dash-song-title {
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text-main);
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -376,7 +350,7 @@
 
 .dash-song-artist {
   font-size: 0.76rem;
-  color: var(--text-sub);
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -387,20 +361,22 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
-  color: var(--text-sub);
+  color: var(--text-muted);
   transition: var(--transition-fast);
   flex-shrink: 0;
 }
 
 .dash-song-item:hover .dash-song-play-btn {
-  background: var(--accent-spotify);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--border-glass-hover);
   color: #ffffff;
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 /* ── Light Theme Overrides ── */
