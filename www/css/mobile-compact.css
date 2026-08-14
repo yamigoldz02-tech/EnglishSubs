@@ -1,0 +1,219 @@
+/* ==========================================================================
+   SPOTIFY MOBILE EXACT CLONE (Ultra-Compact)
+   ========================================================================== */
+@media (max-width: 1024px) and (orientation: portrait), (max-width: 768px) {
+  
+  /* 1. Hide the huge central Hero block */
+  .hero-main-title-block {
+    display: none !important;
+  }
+  
+  /* 2. Container Padding */
+  .container {
+    padding: 0 8px !important;
+  }
+  
+  /* 3. Header & Top Bar */
+  .header {
+    padding: 8px 12px !important;
+    height: 52px !important;
+    gap: 12px !important;
+    justify-content: space-between !important;
+  }
+  
+  /* Logo */
+  .logo {
+    gap: 8px !important;
+  }
+  .logo-icon {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    flex-shrink: 0 !important;
+  }
+  .logo-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .logo h1 {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px !important;
+  }
+  
+  /* Top Right Buttons (Sync, Theme, Settings) */
+  .header > div, .header > button {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  
+  /* Make all top bar buttons compact pills/circles */
+  #forceSyncDataBtn, .theme-toggle-btn, #openSettingsBtn {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    border-radius: 16px !important;
+    background: rgba(255,255,255,0.1) !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Hide the text in Sync button on mobile, keep the SVG or first character if no SVG */
+  #forceSyncDataBtn span {
+    font-size: 0 !important; /* Hides text while keeping emojis/SVGs */
+    display: inline-block !important; /* Required for ::first-letter to work */
+  }
+  #forceSyncDataBtn span::first-letter {
+    font-size: 0.9rem !important; /* Keep the emoji visible */
+  }
+  
+  /* Theme toggle switch constraints */
+  .theme-toggle-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+  }
+  
+  /* 4. Search Input */
+  .search-input-container {
+    background: rgba(255,255,255,0.1) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    height: 38px !important;
+    padding: 0 12px !important;
+    margin-bottom: 16px !important;
+  }
+  .search-input-container svg {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+  }
+  .search-input-container input {
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    padding-left: 8px !important;
+  }
+  
+  /* 5. Dashboard Grid (Spotify Recent Playlists style) */
+  div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  
+  .dashboard-nav-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0 !important;
+    height: 56px !important;
+    background: rgba(255,255,255,0.08) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+  
+  /* Left image block in card */
+  .dashboard-nav-card > div:first-child {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    background: rgba(255,255,255,0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 8px !important;
+  }
+  .dashboard-nav-card > div:first-child span {
+    font-size: 1.4rem !important;
+  }
+  .dashboard-nav-card > div:first-child span:last-child {
+    display: none !important;
+  }
+  
+  /* Title of card */
+  .dashboard-nav-card h3 {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    color: #fff !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Hide description and lower block */
+  .dashboard-nav-card p, .dashboard-nav-card > div:not(:first-child) {
+    display: none !important;
+  }
+  #dashGoVideoCourse {
+    grid-column: 1 / -1 !important;
+  }
+  
+  /* 6. Song Lists (Like Spotify tracks) */
+  .dash-song-recommendation {
+    background: transparent !important;
+    border: none !important;
+    padding: 6px 0 !important;
+    gap: 12px !important;
+  }
+  .dash-song-recommendation > div:first-child {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    border-radius: 8px !important;
+  }
+  .dash-song-recommendation strong {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+  }
+  .dash-song-recommendation span {
+    font-size: 0.8rem !important;
+    color: #b3b3b3 !important;
+  }
+  
+  /* 7. Bottom Navigation TabBar */
+  .mobile-nav {
+    background: rgba(0,0,0,0.95) !important;
+    border-top: none !important;
+    height: 64px !important;
+    padding-bottom: env(safe-area-inset-bottom, 0) !important;
+  }
+  .mobile-nav-item {
+    color: #b3b3b3 !important;
+    gap: 4px !important;
+  }
+  .mobile-nav-item.active {
+    color: #fff !important;
+  }
+  .mobile-nav-item svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .mobile-nav-item span {
+    font-size: 0.65rem !important;
+    font-weight: 500 !important;
+  }
+  
+  /* 8. Player Widget floating above TabBar */
+  #spotifyNowPlayingWidget {
+    bottom: 66px !important;
+    background: #181818 !important;
+    border: none !important;
+    border-radius: 16px !important;
+    margin: 0 8px !important;
+    width: calc(100% - 16px) !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+  #spotifyNowPlayingWidget img {
+    border-radius: 12px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* Global constraints to prevent massive elements */
+  svg { max-width: 100% !important; max-height: 100% !important; }
+}

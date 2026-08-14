@@ -1,0 +1,105 @@
+   RESTORED SPOTIFY NOW PLAYING WIDGET
+   ========================================================================== */
+.spotify-now-playing {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(20, 20, 20, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom left;
+  max-width: 320px;
+}
+
+.spotify-np-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.spotify-np-album {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.spotify-np-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.spotify-np-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent-spotify);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.spotify-np-track {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.spotify-np-artist {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spotify-np-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+  padding-left: 8px;
+}
+
+.spotify-np-bars span {
+  display: block;
+  width: 3px;
+  background-color: var(--accent-spotify);
+  border-radius: 3px;
+  animation: spotify-bars 1.2s ease-in-out infinite;
+}
+
+.spotify-np-bars span:nth-child(1) { height: 12px; animation-delay: 0.0s; }
+.spotify-np-bars span:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+.spotify-np-bars span:nth-child(3) { height: 16px; animation-delay: 0.6s; }
+.spotify-np-bars span:nth-child(4) { height: 24px; animation-delay: 0.9s; }
+
+@keyframes spotify-bars {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+/* Light Theme overrides for Spotify Widget */
+body.light-theme .spotify-now-playing {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}

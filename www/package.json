@@ -1,0 +1,21 @@
+{
+  "name": "ai-lyric-trainer",
+  "version": "1.0.0",
+  "description": "AI Lyric-Trainer — interactive English learning platform",
+  "main": "index.html",
+  "scripts": {
+    "test": "node verify.js"
+  },
+  "keywords": [
+    "english",
+    "learning",
+    "lyrics"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0"
+  }
+}

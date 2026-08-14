@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI Lyric-Trainer — Gemini Sparks Daily Progress</title>
+  <meta name="description" content="Отчет ежедневного прогресса изучения английского языка в AI Lyric-Trainer для Google Gemini Sparks: карточки слов, видеоуроки, стрик и опыт.">
+  
+  <!-- Favicon / Meta -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/sparks.css">
+
+  <!-- Machine-Readable Structured JSON Data for Google Gemini Sparks -->
+  <script type="application/json" id="gemini-sparks-data">
+  {}
+  </script>
+</head>
+<body class="sparks-body">
+
+  <div class="sparks-layout">
+    
+    <!-- Top Navigation Header -->
+    <header class="sparks-header">
+      <a href="index.html" class="sparks-brand" title="Вернуться в AI Lyric-Trainer">
+        <div class="sparks-logo-icon">✨</div>
+        <div>
+          <div class="sparks-brand-title">Gemini Sparks Progress</div>
+          <div style="font-size: 0.75rem; color: var(--sparks-text-sub);">AI Lyric-Trainer Daily Hub</div>
+        </div>
+        <span class="sparks-brand-badge">Gemini Ready</span>
+      </a>
+
+      <div class="sparks-header-actions">
+        <a href="index.html" class="sparks-btn" id="backToAppBtn">
+          <span>←</span> <span>В приложение</span>
+        </a>
+        <button class="sparks-btn sparks-btn-primary" id="copyAiSummaryBtn" title="Скопировать готовый Markdown отчет для диалога с Gemini">
+          <span>📋</span> <span>Скопировать для Gemini</span>
+        </button>
+        <button class="sparks-btn sparks-btn-spotify" id="shareSnapshotBtn" title="Создать ссылку со снимком данных">
+          <span>🔗</span> <span>Поделиться ссылкой</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Date Filter & Status Bar -->
+    <section class="sparks-date-bar">
+      <div class="sparks-date-selector">
+        <button class="sparks-date-btn active" id="btnDateToday">Сегодня</button>
+        <button class="sparks-date-btn" id="btnDateYesterday">Вчера</button>
+        <input type="date" id="customDateInput" class="sparks-date-input" aria-label="Select date">
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--sparks-text-sub);">
+        <span id="activeDateDisplay">Загрузка даты...</span>
+        <span id="dataSourceIndicator" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; background: rgba(29,185,84,0.15); color: #1db954; font-weight: 700; font-size: 0.7rem;">● Live Data</span>
+      </div>
+    </section>
+
+    <!-- Hero Card with Goal Rings & Streak -->
+    <section class="sparks-hero-card">
+      <div class="sparks-hero-header">
+        <div>
+          <h1 class="sparks-hero-title">
+            <span>🎯</span> Дневные цели и активность
+          </h1>
+          <div class="sparks-hero-desc" id="heroSubtitleText">
+            Прогресс повторения флешкарт, просмотренных видеоуроков и накопления опыта за день.
+          </div>
+        </div>
+
+        <div class="sparks-streak-pill">
+          <span style="font-size: 1.4rem;">🔥</span>
+          <div>
+            <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--sparks-text-sub);">Ударный режим</div>
+            <div><span id="heroStreakCount">0</span> дн. подряд</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Visual Progress Rings -->
+      <div class="sparks-rings-grid">
+        
+        <!-- Flashcards Ring -->
+        <div class="sparks-ring-card">
+          <div class="sparks-circle-wrap">
+            <svg class="sparks-circle-svg" viewBox="0 0 80 80">
+              <circle class="sparks-circle-bg" cx="40" cy="40" r="32"></circle>
+              <circle class="sparks-circle-bar" id="ringCardsBar" cx="40" cy="40" r="32" stroke="#1db954" stroke-dasharray="201.06" stroke-dashoffset="201.06"></circle>
+            </svg>
+            <div class="sparks-circle-text" id="ringCardsPercent">0%</div>
+          </div>
+          <div class="sparks-ring-info">
+            <div class="sparks-ring-label">🃏 Флешкарты</div>
+            <div class="sparks-ring-value"><span id="cardsDoneCount">0</span> / <span id="cardsTargetCount">10</span></div>
+            <div class="sparks-ring-status" id="cardsStatusText">Повторено сегодня</div>
+          </div>
+        </div>
+
+        <!-- Video Lessons Ring -->
+        <div class="sparks-ring-card">
+          <div class="sparks-circle-wrap">
+            <svg class="sparks-circle-svg" viewBox="0 0 80 80">
+              <circle class="sparks-circle-bg" cx="40" cy="40" r="32"></circle>
+              <circle class="sparks-circle-bar" id="ringVideosBar" cx="40" cy="40" r="32" stroke="#8b5cf6" stroke-dasharray="201.06" stroke-dashoffset="201.06"></circle>
+            </svg>
+            <div class="sparks-circle-text" id="ringVideosPercent">0%</div>
+          </div>
+          <div class="sparks-ring-info">
+            <div class="sparks-ring-label">🎬 Видеоуроки</div>
+            <div class="sparks-ring-value"><span id="videosDoneCount">0</span> / <span id="videosTargetCount">1</span></div>
+            <div class="sparks-ring-status" id="videosStatusText">Пройдено сегодня</div>
+          </div>
+        </div>
+
+        <!-- Experience & Daily XP Ring -->
+        <div class="sparks-ring-card">
+          <div class="sparks-circle-wrap">
+            <svg class="sparks-circle-svg" viewBox="0 0 80 80">
+              <circle class="sparks-circle-bg" cx="40" cy="40" r="32"></circle>
+              <circle class="sparks-circle-bar" id="ringXpBar" cx="40" cy="40" r="32" stroke="#06b6d4" stroke-dasharray="201.06" stroke-dashoffset="201.06"></circle>
+            </svg>
+            <div class="sparks-circle-text" id="ringXpPercent">0%</div>
+          </div>
+          <div class="sparks-ring-info">
+            <div class="sparks-ring-label">✨ Опыт (XP)</div>
+            <div class="sparks-ring-value"><span id="xpDoneCount">+0</span> / <span id="xpTargetCount">50</span> XP</div>
+            <div class="sparks-ring-status">Всего: <strong id="totalXpCount">0</strong> XP</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- AI Integration Quick Bar -->
+      <div class="sparks-ai-panel">
+        <div class="sparks-ai-info">
+          <div class="sparks-ai-icon">🤖</div>
+          <div>
+            <div class="sparks-ai-text-title">Готово для анализа Google Gemini Sparks</div>
+            <div class="sparks-ai-text-desc">ИИ видит ваш прогресс, выученные слова, просмотренные уроки и стрик.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="sparks-btn" id="viewJsonBtn" style="font-size: 0.8rem;">
+            <span>{ }</span> <span>Показать JSON данные</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content: Timeline & Studied Words -->
+    <div class="sparks-grid-two">
+      
+      <!-- Left Column: Activity Timeline -->
+      <section class="sparks-panel-card">
+        <div class="sparks-panel-header">
+          <h2 class="sparks-panel-title">
+            <span>⏱️</span> Хронология обучения за день
+          </h2>
+          <span class="sparks-panel-count" id="timelineCount">0 событий</span>
+        </div>
+
+        <div class="sparks-timeline" id="activityTimeline">
+          <!-- Populated by JavaScript -->
+          <div class="sparks-empty-state">
+            <span>🍃</span>
+            <span>За выбранный день событий пока не зафиксировано.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Words Studied Today -->
+      <section class="sparks-panel-card">
+        <div class="sparks-panel-header">
+          <h2 class="sparks-panel-title">
+            <span>📚</span> Слова и фразы за сегодня
+          </h2>
+          <span class="sparks-panel-count" id="wordsCount">0 слов</span>
+        </div>
+
+        <div class="sparks-words-list" id="wordsStudiedList">
+          <!-- Populated by JavaScript -->
+          <div class="sparks-empty-state">
+            <span>📖</span>
+            <span>Слова за этот день пока не тренировались.</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Quick Manual Goal Simulation / Settings Bar (for convenience & testing) -->
+    <section class="sparks-date-bar" style="margin-top: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--sparks-text-sub); flex-wrap: wrap;">
+        <span>⚙️ <strong>Настройки дневных целей:</strong></span>
+        <label style="display: flex; align-items: center; gap: 4px;">
+          Карточек: <input type="number" id="settingGoalCards" min="1" max="100" style="width: 50px; background: rgba(255,255,255,0.05); border: 1px solid var(--sparks-border); color: #fff; border-radius: 4px; padding: 2px 4px;">
+        </label>
+        <label style="display: flex; align-items: center; gap: 4px;">
+          Видео: <input type="number" id="settingGoalVideos" min="1" max="20" style="width: 45px; background: rgba(255,255,255,0.05); border: 1px solid var(--sparks-border); color: #fff; border-radius: 4px; padding: 2px 4px;">
+        </label>
+        <button class="sparks-date-btn" id="saveGoalsSettingBtn">Сохранить цели</button>
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="sparks-date-btn" id="testAddCardBtn" title="Быстрое добавление +1 тренировки карточки для проверки">+1 Карточка</button>
+        <button class="sparks-date-btn" id="testAddVideoBtn" title="Быстрое добавление +1 видеоурока для проверки">+1 Видео</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Modal for Viewing JSON / Share Data -->
+  <div class="sparks-modal-overlay" id="jsonModalOverlay" style="display: none;">
+    <div class="sparks-modal-card">
+      <div class="sparks-modal-header">
+        <h3 style="margin: 0; font-size: 1.1rem; color: var(--sparks-text-main);">🤖 Структурированные данные Gemini Sparks</h3>
+        <button class="sparks-date-btn" id="closeJsonModalBtn" style="padding: 4px 10px;">✕</button>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--sparks-text-sub);">
+        Этот JSON-объект встраивается в разметку страницы и может автоматически считываться моделями Google Gemini при передаче URL страницы.
+      </div>
+      <pre class="sparks-json-view" id="jsonModalContent"></pre>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="sparks-btn sparks-btn-primary" id="copyJsonTextBtn">
+          <span>📋</span> <span>Скопировать JSON</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="modules/daily-tracker.js"></script>
+  <script>
+    // Sparks UI Controller
+    (function initSparksApp() {
+      let currentDate = (window.DailyTracker && window.DailyTracker.getLocalDateKey) ? window.DailyTracker.getLocalDateKey() : new Date().toISOString().split('T')[0];
+      let activeSnapshotData = null;
+
+      // Check if URL contains #snapshot=...
+      const hash = window.location.hash;
+      if (hash && hash.includes('snapshot=') && window.DailyTracker) {
+        activeSnapshotData = window.DailyTracker.importSnapshotFromHash(hash);
+        if (activeSnapshotData) {
+          const indicator = document.getElementById('dataSourceIndicator');
+          if (indicator) {
+            indicator.textContent = '📦 Shared Snapshot';
+            indicator.style.background = 'rgba(139, 92, 246, 0.2)';
+            indicator.style.color = '#c084fc';
+          }
+          if (activeSnapshotData.reportDate) {
+            currentDate = activeSnapshotData.reportDate;
+          }
+        }
+      }
+
+      // Initialize Date Picker
+      const dateInput = document.getElementById('customDateInput');
+      if (dateInput) {
+        dateInput.value = currentDate;
+        dateInput.addEventListener('change', (e) => {
+          currentDate = e.target.value;
+          updateDateButtonStates();
+          renderDashboard();
+        });
+      }
+
+      // Quick Date Buttons
+      const btnToday = document.getElementById('btnDateToday');
+      const btnYesterday = document.getElementById('btnDateYesterday');
+
+      if (btnToday) {
+        btnToday.addEventListener('click', () => {
+          currentDate = window.DailyTracker ? window.DailyTracker.getLocalDateKey() : new Date().toISOString().split('T')[0];
+          if (dateInput) dateInput.value = currentDate;
+          updateDateButtonStates();
+          renderDashboard();
+        });
+      }
+
+      if (btnYesterday) {
+        btnYesterday.addEventListener('click', () => {
+          const y = new Date();
+          y.setDate(y.getDate() - 1);
+          currentDate = window.DailyTracker ? window.DailyTracker.getLocalDateKey(y) : y.toISOString().split('T')[0];
+          if (dateInput) dateInput.value = currentDate;
+          updateDateButtonStates();
+          renderDashboard();
+        });
+      }
+
+      function updateDateButtonStates() {
+        const todayStr = window.DailyTracker ? window.DailyTracker.getLocalDateKey() : new Date().toISOString().split('T')[0];
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        const yStr = window.DailyTracker ? window.DailyTracker.getLocalDateKey(y) : y.toISOString().split('T')[0];
+
+        if (btnToday) btnToday.classList.toggle('active', currentDate === todayStr);
+        if (btnYesterday) btnYesterday.classList.toggle('active', currentDate === yStr);
+      }
+
+      // Render Dashboard
+      function renderDashboard() {
+        let dayData;
+        let streak = 0;
+        let totalXP = 0;
+
+        if (activeSnapshotData && activeSnapshotData.reportDate === currentDate) {
+          // Render from snapshot
+          const up = activeSnapshotData.userProgress;
+          streak = up.streakDays || 0;
+          totalXP = up.totalXP || 0;
+          dayData = {
+            date: activeSnapshotData.reportDate,
+            summary: {
+              cardsReviewed: up.todaySummary.flashcardsReviewed,
+              cardsCorrect: up.todaySummary.flashcardsCorrect,
+              cardsMastered: up.todaySummary.flashcardsMastered,
+              newWordsAdded: up.todaySummary.newWordsAdded,
+              videosWatched: up.todaySummary.videoLessonsWatched,
+              xpGained: up.dailyGoals.xpEarnedToday,
+              streak: streak
+            },
+            goals: {
+              cardsTarget: up.dailyGoals.cardsGoal,
+              cardsDone: up.todaySummary.flashcardsReviewed,
+              videosTarget: up.dailyGoals.videosGoal,
+              videosDone: up.todaySummary.videoLessonsWatched,
+              xpTarget: up.dailyGoals.xpGoal,
+              xpDone: up.dailyGoals.xpEarnedToday,
+              allCompleted: up.dailyGoals.allGoalsMet
+            },
+            events: up.recentTimeline || [],
+            wordsReviewedList: up.wordsStudiedToday || [],
+            videosWatchedList: up.videosWatchedToday || []
+          };
+        } else {
+          // Render from live storage
+          dayData = window.DailyTracker ? window.DailyTracker.getDayData(currentDate) : null;
+          streak = parseInt(localStorage.getItem('lyric_streak_days') || '0', 10);
+          totalXP = parseInt(localStorage.getItem('lyric_user_xp') || '0', 10);
+        }
+
+        if (!dayData) return;
+
+        // Date Display
+        const dateDisp = document.getElementById('activeDateDisplay');
+        if (dateDisp) {
+          const d = new Date(currentDate + 'T00:00:00');
+          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          dateDisp.textContent = d.toLocaleDateString('ru-RU', options);
+        }
+
+        // Streak & Total XP
+        const heroStreak = document.getElementById('heroStreakCount');
+        if (heroStreak) heroStreak.textContent = streak;
+        const totalXpEl = document.getElementById('totalXpCount');
+        if (totalXpEl) totalXpEl.textContent = totalXP;
+
+        // Goals & Rings
+        const goals = dayData.goals || { cardsTarget: 10, cardsDone: 0, videosTarget: 1, videosDone: 0, xpTarget: 50, xpDone: 0 };
+        const summary = dayData.summary || {};
+
+        // 1. Cards Ring
+        const cardsTarget = goals.cardsTarget || 10;
+        const cardsDone = summary.cardsReviewed || 0;
+        const cardsPct = Math.min(100, Math.round((cardsDone / cardsTarget) * 100));
+        
+        const cardsDoneEl = document.getElementById('cardsDoneCount');
+        const cardsTargetEl = document.getElementById('cardsTargetCount');
+        const cardsPctEl = document.getElementById('ringCardsPercent');
+        const cardsBar = document.getElementById('ringCardsBar');
+        
+        if (cardsDoneEl) cardsDoneEl.textContent = cardsDone;
+        if (cardsTargetEl) cardsTargetEl.textContent = cardsTarget;
+        if (cardsPctEl) cardsPctEl.textContent = `${cardsPct}%`;
+        if (cardsBar) {
+          const circumference = 201.06;
+          const offset = circumference - (cardsPct / 100) * circumference;
+          cardsBar.style.strokeDashoffset = offset;
+        }
+
+        // 2. Videos Ring
+        const videosTarget = goals.videosTarget || 1;
+        const videosDone = summary.videosWatched || 0;
+        const videosPct = Math.min(100, Math.round((videosDone / videosTarget) * 100));
+
+        const videosDoneEl = document.getElementById('videosDoneCount');
+        const videosTargetEl = document.getElementById('videosTargetCount');
+        const videosPctEl = document.getElementById('ringVideosPercent');
+        const videosBar = document.getElementById('ringVideosBar');
+
+        if (videosDoneEl) videosDoneEl.textContent = videosDone;
+        if (videosTargetEl) videosTargetEl.textContent = videosTarget;
+        if (videosPctEl) videosPctEl.textContent = `${videosPct}%`;
+        if (videosBar) {
+          const circumference = 201.06;
+          const offset = circumference - (videosPct / 100) * circumference;
+          videosBar.style.strokeDashoffset = offset;
+        }
+
+        // 3. XP Ring
+        const xpTarget = goals.xpTarget || 50;
+        const xpDone = summary.xpGained || 0;
+        const xpPct = Math.min(100, Math.round((xpDone / xpTarget) * 100));
+
+        const xpDoneEl = document.getElementById('xpDoneCount');
+        const xpTargetEl = document.getElementById('xpTargetCount');
+        const xpPctEl = document.getElementById('ringXpPercent');
+        const xpBar = document.getElementById('ringXpBar');
+
+        if (xpDoneEl) xpDoneEl.textContent = `+${xpDone}`;
+        if (xpTargetEl) xpTargetEl.textContent = xpTarget;
+        if (xpPctEl) xpPctEl.textContent = `${xpPct}%`;
+        if (xpBar) {
+          const circumference = 201.06;
+          const offset = circumference - (xpPct / 100) * circumference;
+          xpBar.style.strokeDashoffset = offset;
+        }
+
+        // Timeline Feed
+        renderTimeline(dayData.events || []);
+
+        // Studied Words List
+        renderWordsList(dayData.wordsReviewedList || []);
+
+        // Update JSON-LD Script tag in head for AI scrapers
+        if (window.DailyTracker) {
+          const payload = window.DailyTracker.generateSparksPayload(currentDate);
+          const scriptTag = document.getElementById('gemini-sparks-data');
+          if (scriptTag) {
+            scriptTag.textContent = JSON.stringify(payload, null, 2);
+          }
+        }
+      }
+
+      // Render Timeline
+      function renderTimeline(events) {
+        const timelineEl = document.getElementById('activityTimeline');
+        const countEl = document.getElementById('timelineCount');
+        if (!timelineEl) return;
+
+        if (countEl) countEl.textContent = `${events.length} ${events.length === 1 ? 'событие' : (events.length >= 2 && events.length <= 4 ? 'события' : 'событий')}`;
+
+        if (!events || events.length === 0) {
+          timelineEl.innerHTML = `
+            <div class="sparks-empty-state">
+              <span style="font-size: 2rem;">🍃</span>
+              <span>За этот день событий пока не зафиксировано.</span>
+            </div>
+          `;
+          return;
+        }
+
+        timelineEl.innerHTML = '';
+        events.forEach((evt) => {
+          const item = document.createElement('div');
+          item.className = 'sparks-timeline-item';
+          item.innerHTML = `
+            <div class="sparks-timeline-icon">${evt.icon || '📌'}</div>
+            <div class="sparks-timeline-content">
+              <div class="sparks-timeline-title">${escapeHtml(evt.title)}</div>
+              <div class="sparks-timeline-details">${escapeHtml(evt.details || '')}</div>
+            </div>
+            <div class="sparks-timeline-meta">
+              <span>${evt.time || ''}</span>
+              ${evt.xp ? `<span class="sparks-xp-tag">+${evt.xp} XP</span>` : ''}
+            </div>
+          `;
+          timelineEl.appendChild(item);
+        });
+      }
+
+      // Render Studied Words List
+      function renderWordsList(words) {
+        const listEl = document.getElementById('wordsStudiedList');
+        const countEl = document.getElementById('wordsCount');
+        if (!listEl) return;
+
+        if (countEl) countEl.textContent = `${words.length} ${words.length === 1 ? 'слово' : (words.length >= 2 && words.length <= 4 ? 'слова' : 'слов')}`;
+
+        if (!words || words.length === 0) {
+          listEl.innerHTML = `
+            <div class="sparks-empty-state">
+              <span style="font-size: 2rem;">📖</span>
+              <span>Слова за этот день пока не тренировались.</span>
+            </div>
+          `;
+          return;
+        }
+
+        listEl.innerHTML = '';
+        words.forEach((w) => {
+          const row = document.createElement('div');
+          row.className = 'sparks-word-row';
+          row.innerHTML = `
+            <div class="sparks-word-left">
+              <button class="sparks-audio-btn" title="Произнести слово" onclick="speakWord('${escapeHtml(w.word)}')">🔊</button>
+              <div>
+                <div class="sparks-word-text">${escapeHtml(w.word)}</div>
+                <div class="sparks-word-trans">${escapeHtml(w.translation || '—')}</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="sparks-level-badge">Ур. ${w.level || 0}</span>
+              <span style="font-size: 0.75rem; color: var(--sparks-text-muted);">×${w.reviewCount || 1}</span>
+            </div>
+          `;
+          listEl.appendChild(row);
+        });
+      }
+
+      // Text-To-Speech Pronunciation Helper
+      window.speakWord = function(text) {
+        if (!window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        utter.rate = 0.9;
+        window.speechSynthesis.speak(utter);
+      };
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>"']/g, (m) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[m]));
+      }
+
+      // Copy AI Summary Button
+      const copyAiSummaryBtn = document.getElementById('copyAiSummaryBtn');
+      if (copyAiSummaryBtn) {
+        copyAiSummaryBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const md = window.DailyTracker.generateMarkdownSummary(currentDate);
+          navigator.clipboard.writeText(md).then(() => {
+            const orig = copyAiSummaryBtn.innerHTML;
+            copyAiSummaryBtn.innerHTML = '<span>✅</span> <span>Скопировано в буфер!</span>';
+            setTimeout(() => { copyAiSummaryBtn.innerHTML = orig; }, 2000);
+          }).catch(() => {
+            prompt('Скопируйте отчет вручную:', md);
+          });
+        });
+      }
+
+      // Share Snapshot Link Button
+      const shareSnapshotBtn = document.getElementById('shareSnapshotBtn');
+      if (shareSnapshotBtn) {
+        shareSnapshotBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const url = window.DailyTracker.exportSnapshotUrl(currentDate);
+          navigator.clipboard.writeText(url).then(() => {
+            const orig = shareSnapshotBtn.innerHTML;
+            shareSnapshotBtn.innerHTML = '<span>🔗</span> <span>Ссылка скопирована!</span>';
+            setTimeout(() => { shareSnapshotBtn.innerHTML = orig; }, 2000);
+          }).catch(() => {
+            prompt('Скопируйте ссылку на снимок:', url);
+          });
+        });
+      }
+
+      // JSON Modal Toggle
+      const viewJsonBtn = document.getElementById('viewJsonBtn');
+      const jsonModal = document.getElementById('jsonModalOverlay');
+      const closeJsonModalBtn = document.getElementById('closeJsonModalBtn');
+      const jsonContent = document.getElementById('jsonModalContent');
+      const copyJsonBtn = document.getElementById('copyJsonTextBtn');
+
+      if (viewJsonBtn && jsonModal) {
+        viewJsonBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const payload = window.DailyTracker.generateSparksPayload(currentDate);
+          if (jsonContent) jsonContent.textContent = JSON.stringify(payload, null, 2);
+          jsonModal.style.display = 'flex';
+        });
+      }
+
+      if (closeJsonModalBtn && jsonModal) {
+        closeJsonModalBtn.addEventListener('click', () => {
+          jsonModal.style.display = 'none';
+        });
+      }
+
+      if (copyJsonBtn && jsonContent) {
+        copyJsonBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(jsonContent.textContent || '').then(() => {
+            const orig = copyJsonBtn.innerHTML;
+            copyJsonBtn.innerHTML = '<span>✅</span> <span>JSON Скопирован!</span>';
+            setTimeout(() => { copyJsonBtn.innerHTML = orig; }, 2000);
+          });
+        });
+      }
+
+      // Settings Goals Inputs
+      const goalCardsInp = document.getElementById('settingGoalCards');
+      const goalVideosInp = document.getElementById('settingGoalVideos');
+      const saveGoalsBtn = document.getElementById('saveGoalsSettingBtn');
+
+      if (window.DailyTracker) {
+        const currentGoals = window.DailyTracker.getDailyGoals();
+        if (goalCardsInp) goalCardsInp.value = currentGoals.cardsTarget;
+        if (goalVideosInp) goalVideosInp.value = currentGoals.videosTarget;
+      }
+
+      if (saveGoalsBtn) {
+        saveGoalsBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const cardsVal = parseInt(goalCardsInp.value, 10) || 10;
+          const vidVal = parseInt(goalVideosInp.value, 10) || 1;
+          window.DailyTracker.setDailyGoals({ cardsTarget: cardsVal, videosTarget: vidVal });
+          renderDashboard();
+          saveGoalsBtn.textContent = '✓ Сохранено!';
+          setTimeout(() => { saveGoalsBtn.textContent = 'Сохранить цели'; }, 1500);
+        });
+      }
+
+      // Simulation Test Buttons (+1 Card, +1 Video)
+      const testCardBtn = document.getElementById('testAddCardBtn');
+      const testVideoBtn = document.getElementById('testAddVideoBtn');
+
+      if (testCardBtn) {
+        testCardBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const testWords = ['confidence', 'resilient', 'mastery', 'enthusiastic', 'lucid', 'brilliant'];
+          const picked = testWords[Math.floor(Math.random() * testWords.length)];
+          window.DailyTracker.recordFlashcardReview({ word: picked, translation: 'тестовое слово', level: 2 }, 'correct', 2);
+          renderDashboard();
+        });
+      }
+
+      if (testVideoBtn) {
+        testVideoBtn.addEventListener('click', () => {
+          if (!window.DailyTracker) return;
+          const randomNum = Math.floor(Math.random() * 50) + 1;
+          window.DailyTracker.recordVideoWatched('vid_test_' + randomNum, `Урок ${randomNum}: Практика времен`, randomNum);
+          renderDashboard();
+        });
+      }
+
+      // Initial Render
+      updateDateButtonStates();
+      renderDashboard();
+    })();
+  </script>
+</body>
+</html>

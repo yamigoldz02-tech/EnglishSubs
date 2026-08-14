@@ -1,0 +1,559 @@
+/* ==========================================================================
+   13. Notebook Module — Left Slide-in Drawer
+   ========================================================================== */
+
+/* ── Navbar notebook button hover ── */
+#openNotebookBtn:hover {
+  background: rgba(251, 191, 36, 0.18) !important;
+  border-color: rgba(251, 191, 36, 0.4) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(251, 191, 36, 0.2) !important;
+}
+
+/* ── Left-edge persistent tab toggle ── */
+.notebook-drawer-tab {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10600 !important; /* In front of floating video (10500) when collapsed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 7px;
+  background: rgba(14, 14, 20, 0.92);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-left: none;
+  border-radius: 0 14px 14px 0;
+  color: #fbbf24;
+  cursor: pointer;
+  transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.2s, box-shadow 0.2s;
+  box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+  outline: none;
+  user-select: none;
+}
+.notebook-drawer-tab:hover {
+  background: rgba(251, 191, 36, 0.12);
+  box-shadow: 3px 0 20px rgba(251, 191, 36, 0.15);
+}
+.notebook-drawer-tab.drawer-open {
+  left: 360px;
+  background: rgba(251, 191, 36, 0.14);
+  border-color: rgba(251, 191, 36, 0.35);
+  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
+}
+body.light-theme .notebook-drawer-tab {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(234, 179, 8, 0.3);
+  box-shadow: 3px 0 16px rgba(0, 0, 0, 0.08);
+}
+body.light-theme .notebook-drawer-tab:hover {
+  background: rgba(251, 191, 36, 0.08);
+}
+body.gray-theme .notebook-drawer-tab {
+  background: rgba(30, 32, 40, 0.95);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.notebook-tab-emoji {
+  font-size: 1.3rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+}
+.notebook-tab-label {
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: #fbbf24;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ── Drawer wrapper / overlay ── */
+.notebook-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
+  pointer-events: none; /* only active when open */
+}
+.notebook-modal-overlay.is-open {
+  pointer-events: auto;
+}
+
+/* ── Semi-transparent backdrop ── */
+.notebook-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.35s;
+}
+.notebook-modal-overlay.is-open .notebook-drawer-backdrop {
+  background: rgba(0, 0, 0, 0.38);
+}
+body.light-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* ── Drawer panel ── */
+.notebook-modal-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 360px;
+  max-width: 92vw;
+  height: 100%;
+  background: rgba(12, 12, 18, 0.98);
+  border-right: 1px solid rgba(251, 191, 36, 0.18);
+  border-radius: 0 20px 20px 0;
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(-100%);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.notebook-modal-overlay.is-open .notebook-modal-card {
+  transform: translateX(0);
+}
+
+body.light-theme .notebook-modal-card {
+  background: rgba(255, 255, 255, 0.99);
+  border-right-color: rgba(234, 179, 8, 0.2);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.1);
+}
+body.gray-theme .notebook-modal-card {
+  background: rgba(28, 32, 40, 0.98);
+  border-right-color: rgba(251, 191, 36, 0.15);
+}
+
+/* ── Notebook Header ── */
+.notebook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 12px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  gap: 10px;
+}
+body.light-theme .notebook-header {
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+
+.notebook-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notebook-icon-big {
+  font-size: 1.7rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.45));
+  flex-shrink: 0;
+}
+
+.notebook-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--font-display);
+}
+
+.notebook-subtitle {
+  margin: 0;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.notebook-header-right {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.notebook-wordcount {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.notebook-clear-btn {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-radius: 10px;
+  padding: 4px 9px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+.notebook-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.notebook-close-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-sub);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  outline: none;
+  flex-shrink: 0;
+}
+.notebook-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+body.light-theme .notebook-close-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ── Notebook Toolbar / Tabs ── */
+.notebook-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+  gap: 12px;
+}
+body.light-theme .notebook-toolbar {
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.notebook-status {
+  font-size: 0.67rem;
+  color: #22c55e;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.notebook-status.saving {
+  color: #fbbf24;
+}
+
+.notebook-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 3px;
+}
+body.light-theme .notebook-tabs {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+.notebook-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-sub);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+.notebook-tab.active {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  box-shadow: 0 2px 6px rgba(251, 191, 36, 0.12);
+}
+.notebook-tab:not(.active):hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+}
+body.light-theme .notebook-tab:not(.active):hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Notebook Body ── */
+.notebook-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.notebook-tab-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── General Notes Textarea ── */
+.notebook-textarea {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  resize: none;
+  outline: none;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  padding: 16px 18px 20px 18px;
+  caret-color: #fbbf24;
+}
+.notebook-textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+.notebook-textarea::-webkit-scrollbar {
+  width: 4px;
+}
+.notebook-textarea::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.3);
+  border-radius: 2px;
+}
+
+/* ── Lesson Notes Tab ── */
+.notebook-lessons-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.notebook-lessons-list::-webkit-scrollbar {
+  width: 4px;
+}
+.notebook-lessons-list::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.25);
+  border-radius: 2px;
+}
+
+.notebook-lesson-entry {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+.notebook-lesson-entry:hover {
+  border-color: rgba(251, 191, 36, 0.2);
+}
+body.light-theme .notebook-lesson-entry {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.notebook-lesson-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.notebook-lesson-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 6px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.notebook-lesson-title {
+  font-size: 0.76rem;
+  color: var(--text-sub);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notebook-lesson-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  outline: none;
+}
+.notebook-lesson-delete-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.notebook-lesson-note-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 320px;
+  max-height: 520px;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  caret-color: #fbbf24;
+}
+.notebook-lesson-note-textarea:focus {
+  background: rgba(251, 191, 36, 0.03);
+  border-color: rgba(251, 191, 36, 0.35);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.06);
+}
+body.light-theme .notebook-lesson-note-textarea {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+body.light-theme .notebook-lesson-note-textarea:focus {
+  background: rgba(251, 191, 36, 0.02);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.notebook-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  flex: 1;
+}
+.notebook-empty-state span:first-child {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+/* ── Per-Lesson Note Section (in player panel) ── */
+.lesson-note-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.light-theme .lesson-note-section {
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+.lesson-note-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lesson-note-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 320px;
+  max-height: 520px;
+  outline: none;
+  caret-color: #a78bfa;
+  transition: border-color 0.2s, background 0.2s;
+}
+.lesson-note-textarea:focus {
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.04);
+}
+.lesson-note-textarea::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+body.light-theme .lesson-note-textarea {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-main);
+}
+body.light-theme .lesson-note-textarea:focus {
+  border-color: rgba(124, 58, 237, 0.3);
+  background: rgba(124, 58, 237, 0.03);
+}
+
+.lesson-note-save-status {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  align-self: flex-end;
+  transition: color 0.3s;
+}
+.lesson-note-save-status.saved {
+  color: #22c55e;
+}
+
+/* ── Note indicator dot on lesson cards ── */
+.lesson-note-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 5px rgba(251, 191, 36, 0.6);
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .notebook-modal-card {
+    width: 88vw;
+    border-radius: 0 16px 16px 0;
+  }
+  .notebook-drawer-tab.drawer-open {
+    left: 88vw;
+  }
+}
+/* ==========================================================================

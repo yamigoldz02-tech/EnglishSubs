@@ -1,0 +1,241 @@
+/* ==========================================================================
+   RESTORED FLOATING VIDEO PLAYER CSS
+   ========================================================================== */
+.video-modal-minimized {
+  z-index: 10500 !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+.video-modal-minimized .video-course-modal-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+.video-modal-minimized .modal-header,
+.video-modal-minimized .video-course-progress-panel,
+.video-modal-minimized .lessons-sidebar,
+.video-modal-minimized .player-header-row,
+.video-modal-minimized .active-video-details,
+.video-modal-minimized .video-course-controls,
+.video-modal-minimized .mobile-course-tabs {
+  display: none !important;
+}
+.video-modal-minimized .video-course-body {
+  border: none !important;
+  background: transparent !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  pointer-events: none !important;
+}
+.video-modal-minimized .player-container-pane {
+  pointer-events: auto !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
+  width: 360px;
+  padding: 0 !important;
+  background: var(--bg-surface, #121216);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  z-index: 100000;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  cursor: grab;
+  transition: none !important;
+  display: flex;
+  flex-direction: column;
+  order: unset !important;
+  will-change: width, bottom, right, top, left;
+}
+.video-modal-minimized .player-container-pane.floating-dragged {
+  transition: none !important;
+  cursor: grabbing !important;
+}
+.video-modal-minimized .video-player-wrapper {
+  border-radius: 0 0 12px 12px !important;
+  border: none !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.floating-video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-glass);
+  border-radius: 12px 12px 0 0;
+  user-select: none;
+}
+.floating-video-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.floating-video-controls {
+  display: flex;
+  gap: 8px;
+}
+.floating-video-controls button {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+.floating-video-controls button:hover {
+  color: var(--text-main);
+}
+
+/* Handles */
+.floating-resize-handle {
+  position: absolute;
+  z-index: 100005 !important;
+  pointer-events: auto !important;
+  touch-action: none;
+}
+
+.floating-resize-handle.top-left-handle {
+  width: 26px;
+  height: 26px;
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+  border-top: 3px solid var(--accent-spotify, #1db954);
+  border-left: 3px solid var(--accent-spotify, #1db954);
+  border-top-left-radius: 8px;
+  box-sizing: border-box;
+  background: rgba(29, 185, 84, 0.2);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.4);
+  opacity: 0.85;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-resize-handle.bottom-right-handle {
+  width: 26px;
+  height: 26px;
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+  border-bottom: 3px solid var(--accent-spotify, #1db954);
+  border-right: 3px solid var(--accent-spotify, #1db954);
+  border-bottom-right-radius: 8px;
+  box-sizing: border-box;
+  background: rgba(29, 185, 84, 0.2);
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.4);
+  opacity: 0.85;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-resize-handle.top-left-handle:hover,
+.floating-resize-handle.top-left-handle.active,
+.floating-resize-handle.bottom-right-handle:hover,
+.floating-resize-handle.bottom-right-handle.active {
+  opacity: 1;
+  transform: scale(1.25);
+  background: rgba(29, 185, 84, 0.4);
+}
+
+.floating-resize-handle.left-handle {
+  width: 12px;
+  height: calc(100% - 24px);
+  top: 12px;
+  left: -6px;
+  cursor: ew-resize;
+}
+.floating-resize-handle.right-handle {
+  width: 12px;
+  height: calc(100% - 24px);
+  top: 12px;
+  right: -6px;
+  cursor: ew-resize;
+}
+.floating-resize-handle.top-handle {
+  height: 12px;
+  width: calc(100% - 24px);
+  left: 12px;
+  top: -6px;
+  cursor: ns-resize;
+}
+.floating-resize-handle.bottom-handle {
+  height: 12px;
+  width: calc(100% - 24px);
+  left: 12px;
+  bottom: -6px;
+  cursor: ns-resize;
+}
+
+body.floating-resizing,
+body.floating-resizing * {
+  user-select: none !important;
+}
+
+body.floating-resizing iframe,
+body.floating-resizing .player-container-pane iframe {
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   MOBILE: Floating Video Player Adaptations
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Constrain floating player to screen width, position above mobile bottom nav */
+  .video-modal-minimized .player-container-pane {
+    width: calc(100vw - 16px) !important;
+    max-width: 360px !important;
+    right: 8px !important;
+    bottom: 72px !important; /* 56px nav + 16px gap */
+    left: auto !important;
+    border-radius: 10px !important;
+  }
+
+  .video-modal-minimized .video-player-wrapper {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  .video-modal-minimized .floating-video-header {
+    border-radius: 10px 10px 0 0 !important;
+    padding: 6px 10px !important;
+  }
+
+  .video-modal-minimized .floating-video-title {
+    font-size: 0.78rem !important;
+  }
+
+  /* Hide resize corner handles — too small for touch interaction */
+  .video-modal-minimized .floating-resize-handle.top-left-handle,
+  .video-modal-minimized .floating-resize-handle.bottom-right-handle {
+    display: none !important;
+  }
+
+  /* Keep edge handles but make them bigger for touch targets */
+  .video-modal-minimized .floating-resize-handle.left-handle,
+  .video-modal-minimized .floating-resize-handle.right-handle {
+    width: 18px !important;
+  }
+  .video-modal-minimized .floating-resize-handle.top-handle,
+  .video-modal-minimized .floating-resize-handle.bottom-handle {
+    height: 18px !important;
+  }
+}
