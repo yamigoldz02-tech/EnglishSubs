@@ -313,27 +313,42 @@
 }
 
 .dash-song-cover {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.82rem;
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.5px;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #71717a;
+  transition: var(--transition-fast);
 }
 
-.dash-song-cover.scorpions,
-.dash-song-cover.metallica,
-.dash-song-cover.rhcp,
+.dash-song-item:hover .dash-song-cover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
 .dash-song-cover.fav {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
-  border: 1px solid var(--border-glass);
+  color: #71717a;
+}
+
+.dash-song-cover.fav svg {
+  fill: #71717a;
+  stroke: #71717a;
+  transition: all 0.2s ease;
+}
+
+.dash-song-item:hover .dash-song-cover.fav svg {
+  fill: #ffffff;
+  stroke: #ffffff;
+  transform: scale(1.12);
 }
 
 .dash-song-meta {
