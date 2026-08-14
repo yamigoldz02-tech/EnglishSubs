@@ -199,9 +199,13 @@ function setupEventListeners() {
 
       // Notebook Drawer
       const notebookModal = document.getElementById('notebookModal');
-      if (notebookModal && notebookModal.classList.contains('is-open')) {
-        const closeBtn = document.getElementById('closeNotebookBtn');
-        if (closeBtn) closeBtn.click();
+      if (notebookModal && (notebookModal.classList.contains('is-open') || notebookModal.style.display === 'flex')) {
+        if (typeof window.closeNotebook === 'function') {
+          window.closeNotebook();
+        } else {
+          const closeBtn = document.getElementById('closeNotebookBtn');
+          if (closeBtn) closeBtn.click();
+        }
         return;
       }
 

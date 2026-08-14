@@ -72,41 +72,50 @@ function initNotebook() {
   const notebookRefs = { saveCurrentNote: null, customNoteSaveTimer: null };
 
   const openNotebook = () => {
-    openModalEl(modal);
+    modal.style.display = 'flex';
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
-    setTimeout(() => {
+    modal.classList.remove('modal-animate-out');
+    requestAnimationFrame(() => {
       modal.classList.add('is-open');
       if (drawerTab) drawerTab.classList.add('drawer-open');
-    }, 10);
+    });
     if (textarea) textarea.focus();
     updateNotebookWordCount();
   };
 
   const closeNotebook = () => {
-    // ── Flush all pending saves immediately before closing ──
-    if (notebookSaveTimer) {
-      clearTimeout(notebookSaveTimer);
-      notebookSaveTimer = null;
-      try {
+    // ── Flush all pending saves safely before closing ──
+    try {
+      if (notebookSaveTimer) {
+        clearTimeout(notebookSaveTimer);
+        notebookSaveTimer = null;
         const ta = document.getElementById('notebookTextarea');
         if (ta) localStorage.setItem('user_notebook_text', ta.value);
-      } catch (e) { /* ignore */ }
-    }
-    if (notebookRefs.customNoteSaveTimer) {
-      clearTimeout(notebookRefs.customNoteSaveTimer);
-      notebookRefs.customNoteSaveTimer = null;
-      if (notebookRefs.saveCurrentNote) notebookRefs.saveCurrentNote();
-    }
-    if (typeof lessonNoteSaveTimer !== 'undefined' && lessonNoteSaveTimer) {
-      clearTimeout(lessonNoteSaveTimer);
-      lessonNoteSaveTimer = null;
+      }
+    } catch (e) { /* ignore */ }
+
+    try {
+      if (notebookRefs.customNoteSaveTimer) {
+        clearTimeout(notebookRefs.customNoteSaveTimer);
+        notebookRefs.customNoteSaveTimer = null;
+      }
+      if (notebookRefs.saveCurrentNote) {
+        notebookRefs.saveCurrentNote();
+      }
+    } catch (e) { /* ignore */ }
+
+    try {
+      if (typeof lessonNoteSaveTimer !== 'undefined' && lessonNoteSaveTimer) {
+        clearTimeout(lessonNoteSaveTimer);
+        lessonNoteSaveTimer = null;
+      }
       const activeLessonTa = document.getElementById('activeLessonNoteTextarea');
       if (activeLessonTa && typeof galaxyActiveVideoId !== 'undefined' && galaxyActiveVideoId) {
         galaxyLessonNotes[galaxyActiveVideoId] = activeLessonTa.value;
-        try { localStorage.setItem('galaxy_lesson_notes', JSON.stringify(galaxyLessonNotes)); } catch(e){}
+        localStorage.setItem('galaxy_lesson_notes', JSON.stringify(galaxyLessonNotes));
       }
-    }
+    } catch (e) { /* ignore */ }
 
     modal.classList.remove('is-open');
     if (drawerTab) drawerTab.classList.remove('drawer-open');
@@ -132,7 +141,7 @@ function initNotebook() {
           document.body.style.overflow = '';
         }
       }
-    }, 380);
+    }, 350);
   };
 
   window.openNotebook = openNotebook;
@@ -145,8 +154,19 @@ function initNotebook() {
     }
   };
 
-  if (openBtn)  openBtn.onclick  = openNotebook;
-  if (closeBtn) closeBtn.onclick = closeNotebook;
+  if (openBtn) {
+    openBtn.onclick = (e) => {
+      e.stopPropagation();
+      openNotebook();
+    };
+  }
+
+  if (closeBtn) {
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      closeNotebook();
+    };
+  }
 
   if (drawerTab) {
     drawerTab.onclick = (e) => {
@@ -159,7 +179,14 @@ function initNotebook() {
     };
   }
 
-  // Backdrop click intentionally disabled — use the close/tab button to dismiss
+  // Backdrop click closes the drawer smoothly
+  const backdrop = document.getElementById('notebookBackdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeNotebook();
+    });
+  }
 
 
 

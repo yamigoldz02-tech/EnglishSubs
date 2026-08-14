@@ -41,7 +41,7 @@
 .notebook-drawer-tab.drawer-open {
   left: 360px;
   background: var(--bg-surface);
-  z-index: 10400 !important;
+  z-index: 10600 !important;
 }
 body.light-theme .notebook-drawer-tab {
   background: #ffffff;
@@ -83,6 +83,7 @@ body.gray-theme .notebook-drawer-tab {
   inset: 0;
   background: rgba(0, 0, 0, 0);
   transition: background 0.35s;
+  cursor: pointer;
 }
 .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
   background: rgba(0, 0, 0, 0.38);
@@ -200,29 +201,33 @@ body.light-theme .notebook-header {
 }
 
 .notebook-close-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-sub);
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 700;
   transition: all 0.2s;
   outline: none;
   flex-shrink: 0;
+  z-index: 10;
 }
 .notebook-close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
 }
 body.light-theme .notebook-close-btn {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Notebook Toolbar / Tabs ── */

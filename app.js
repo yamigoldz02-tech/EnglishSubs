@@ -674,6 +674,14 @@ function initCustomChat() {
     let programmaticBacks = 0;
 
     function closeTopmostModal() {
+      const notebookModal = document.getElementById('notebookModal');
+      if (notebookModal && (notebookModal.classList.contains('is-open') || (notebookModal.style.display && notebookModal.style.display !== 'none'))) {
+        if (typeof window.closeNotebook === 'function') {
+          window.closeNotebook();
+          return true;
+        }
+      }
+
       const modalPriority = [
         'addWordModal',
         'addPhraseModal',
