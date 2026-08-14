@@ -127,11 +127,11 @@
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.75rem 1.6rem 1.5rem 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.25rem;
+  gap: 1.5rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   box-shadow: var(--shadow-sm);
@@ -176,7 +176,8 @@
 .bento-card-body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  flex: 1;
 }
 
 .bento-stat-num {
@@ -204,7 +205,7 @@
 .bento-card-desc {
   font-size: 0.84rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .bento-progress-track {
@@ -228,10 +229,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-glass);
+  padding-top: 0.5rem;
+  border-top: none;
   color: var(--text-muted);
   transition: color 0.2s ease;
 }
