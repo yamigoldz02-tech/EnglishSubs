@@ -1,3 +1,17 @@
+/* Monoline Vector UI Icons Utility */
+.ui-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+}
+.ui-icon-xs { width: 12px; height: 12px; }
+.ui-icon-sm { width: 14px; height: 14px; }
+.ui-icon-md { width: 16px; height: 16px; }
+.ui-icon-lg { width: 20px; height: 20px; }
+.ui-icon-xl { width: 24px; height: 24px; }
+
 /* 8. AI Loading State Skeleton Shimmer */
 .shimmer-wrapper {
   display: flex;
