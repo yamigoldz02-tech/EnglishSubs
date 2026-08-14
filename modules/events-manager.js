@@ -909,6 +909,43 @@ function setupEventListeners() {
       closeEditModal();
     });
   }
+
+  // ── Header Minimalist Menu & Dropdown Controller ──
+  const menuBtn = document.getElementById('headerMenuBtn');
+  const navDropdown = document.getElementById('headerNavMenu');
+  const menuWrapper = document.getElementById('navMenuWrapper');
+
+  if (menuBtn && navDropdown) {
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVisible = navDropdown.style.display !== 'none';
+      if (isVisible) {
+        navDropdown.style.display = 'none';
+        menuBtn.classList.remove('active');
+      } else {
+        navDropdown.style.display = 'flex';
+        menuBtn.classList.add('active');
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (menuWrapper && !menuWrapper.contains(/** @type {Node} */ (e.target))) {
+        if (navDropdown.style.display !== 'none') {
+          navDropdown.style.display = 'none';
+          menuBtn.classList.remove('active');
+        }
+      }
+    });
+
+    // Close dropdown on click of any action inside
+    navDropdown.querySelectorAll('.nav-dropdown-item, .nav-dropdown-profile, .nav-dropdown-sparks-link').forEach(item => {
+      item.addEventListener('click', () => {
+        navDropdown.style.display = 'none';
+        menuBtn.classList.remove('active');
+      });
+    });
+  }
 }
 
 

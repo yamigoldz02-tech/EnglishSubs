@@ -74,65 +74,10 @@
       </div>
 
       <div class="nav-controls">
-        <!-- Gamification Progress Badge -->
-        <div id="userProgressBadge" class="header-nav-badge" title="Streak & Experience">
-          <span style="color: #f97316; display: inline-flex; align-items: center; gap: 4px;">
-            <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-            <span id="streakCountUI">0</span>
-          </span>
-          <span style="color: #60a5fa; display: inline-flex; align-items: center; gap: 4px;">
-            <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-            <span id="xpCountUI">0</span> XP
-          </span>
-        </div>
-
-        <!-- Gemini Sparks Hub Link Button -->
-        <a href="sparks.html" target="_blank" id="openSparksBtn" class="header-nav-btn" data-en-tooltip="Gemini Sparks" aria-label="Gemini Sparks" title="Daily Progress & Gemini Sparks Hub">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span>Sparks</span>
-        </a>
-
-        <!-- Premium Personal Dictionary Modal Trigger Button -->
-        <button id="openDictionaryBtn" class="header-nav-btn" data-en-tooltip="My Dictionary" aria-label="My Dictionary" title="My Dictionary">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-          <span>Dictionary (<span id="savedWordsCount">0</span>)</span>
-        </button>
-
-        <!-- Premium Rules Modal Trigger Button -->
-        <button id="openRulesBtn" class="header-nav-btn" data-en-tooltip="Grammar Rules" aria-label="Rules" title="Grammar rules reference">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-          <span>Rules</span>
-        </button>
-
-        <!-- Premium Word Training Modal Trigger Button -->
-        <button id="openTrainingBtn" class="header-nav-btn" data-en-tooltip="Flashcards" aria-label="Training" title="Train words with flashcards">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-          <span>Training</span>
-        </button>
-
-        <!-- Premium Video Course Modal Trigger Button -->
-        <button id="openVideoCourseBtn" class="header-nav-btn" data-en-tooltip="Video Course" aria-label="Video Course" title="Interactive English Galaxy video course">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
-          <span>Course (<span id="navWatchedCount">0</span>/50)</span>
-        </button>
-
-        <!-- Notebook Trigger Button -->
-        <button id="openNotebookBtn" class="header-nav-btn" data-en-tooltip="My Notes" aria-label="My Notes" title="Open notebook">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v20"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h6"/><path d="M6 10h6"/></svg>
-          <span>Notes</span>
-        </button>
-
-        <!-- Force Sync Button -->
-        <button id="forceSyncDataBtn" class="header-nav-btn" data-en-tooltip="Sync Data" aria-label="Sync" title="Force cloud sync">
-          <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
-          <span>Sync</span>
-        </button>
-
-
         <!-- Theme Toggle Switch (Sun/Moon Switcher) -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Toggle theme (Light/Gray/Dark)">
-          <!-- Sun Icon (displayed in dark mode to switch to light mode) -->
-          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Переключить тему">
+          <!-- Sun Icon -->
+          <svg class="sun-icon ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -143,24 +88,118 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <!-- Contrast/Half shaded circle Icon (displayed in light mode to switch to gray mode) -->
-          <svg class="gray-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <!-- Contrast/Half shaded circle Icon -->
+          <svg class="gray-icon ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 2v20a10 10 0 0 0 0-20z" fill="currentColor"></path>
           </svg>
-          <!-- Moon Icon (displayed in gray mode to switch to dark mode) -->
-          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <!-- Moon Icon -->
+          <svg class="moon-icon ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
-        
-        <!-- API Settings Modal Trigger Button -->
-        <button class="settings-btn" id="apiSettingsBtn" aria-label="API Settings" title="API key settings">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
-        </button>
+
+        <!-- Minimalist Profile / Navigation Dropdown Trigger -->
+        <div class="nav-menu-wrapper" id="navMenuWrapper">
+          <button id="headerMenuBtn" class="header-menu-btn" aria-label="Меню и профиль" title="Меню и профиль">
+            <svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12"/>
+              <line x1="4" x2="20" y1="6" y2="6"/>
+              <line x1="4" x2="20" y1="18" y2="18"/>
+            </svg>
+            <span class="header-menu-streak-dot" title="Активность"></span>
+          </button>
+
+          <!-- Floating Glassmorphic Dropdown Menu -->
+          <div id="headerNavMenu" class="header-nav-dropdown" style="display: none;">
+            <!-- Profile / Gamification Card (Click opens stats modal) -->
+            <div id="userProgressBadge" class="nav-dropdown-profile" title="Открыть профиль и достижения">
+              <div class="nav-dropdown-profile-left">
+                <div class="nav-dropdown-avatar">
+                  <svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                </div>
+                <div class="nav-dropdown-profile-info">
+                  <div class="nav-dropdown-profile-title">Мой прогресс</div>
+                  <div class="nav-dropdown-stats-row">
+                    <span class="nav-stat-streak">
+                      <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                      <span id="streakCountUI">0</span> дн.
+                    </span>
+                    <span class="nav-stat-xp">
+                      <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                      <span id="xpCountUI">0</span> XP
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <a href="sparks.html" target="_blank" id="openSparksBtn" class="nav-dropdown-sparks-link" title="Открыть Gemini Sparks">
+                <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>Sparks</span>
+              </a>
+            </div>
+
+            <div class="nav-dropdown-divider"></div>
+
+            <!-- Learning Navigation Links -->
+            <div class="nav-dropdown-section">
+              <button id="openDictionaryBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                  <span>Словарь</span>
+                </div>
+                <span class="nav-dropdown-pill"><span id="savedWordsCount">0</span> слов</span>
+              </button>
+
+              <button id="openTrainingBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                  <span>Тренировка карточек</span>
+                </div>
+              </button>
+
+              <button id="openVideoCourseBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+                  <span>Видеокурс</span>
+                </div>
+                <span class="nav-dropdown-pill"><span id="navWatchedCount">0</span>/50</span>
+              </button>
+
+              <button id="openRulesBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                  <span>Правила грамматики</span>
+                </div>
+              </button>
+
+              <button id="openNotebookBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v20"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h6"/><path d="M6 10h6"/></svg>
+                  <span>Заметки</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="nav-dropdown-divider"></div>
+
+            <!-- System & Utilities -->
+            <div class="nav-dropdown-section">
+              <button id="forceSyncDataBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                  <span>Синхронизация</span>
+                </div>
+              </button>
+
+              <button id="apiSettingsBtn" class="nav-dropdown-item">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  <span>Настройки API</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
