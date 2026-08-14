@@ -1,4 +1,4 @@
-/* Autocomplete Search Component Styling */
+/* Autocomplete Search Component Styling — Modern Spotlight Minimalist */
 .autocomplete-wrapper {
   position: relative;
   width: 100%;
@@ -13,32 +13,36 @@
 
 .search-input-wrapper input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
-  border-radius: 12px;
+  border-radius: var(--radius-pill);
   color: var(--text-main);
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   padding: 0.6rem 2.2rem 0.6rem 2.5rem;
   outline: none;
   transition: var(--transition-fast);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.search-input-wrapper input:hover, 
+.search-input-wrapper input:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-glass-hover);
+}
+
 .search-input-wrapper input:focus {
-  border-color: var(--accent-spotify);
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.15);
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-sm);
   background: rgba(255, 255, 255, 0.08);
 }
 
 .search-input-wrapper .search-icon {
   position: absolute;
-  left: 0.9rem;
-  width: 16px;
-  height: 16px;
+  left: 0.95rem;
+  width: 15px;
+  height: 15px;
   color: var(--text-sub);
   pointer-events: none;
   transition: var(--transition-fast);
@@ -75,23 +79,23 @@
   top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  max-height: 320px;
+  max-height: 340px;
   overflow-y: auto;
-  background: var(--bg-sidebar);
+  background: var(--bg-surface);
   border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  box-shadow: var(--shadow-main);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   z-index: 200;
-  padding: 6px;
-  animation: slideDownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 8px;
+  animation: slideDownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideDownFade {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
@@ -102,8 +106,8 @@
 .autocomplete-item {
   display: flex;
   flex-direction: column;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition-fast);
   user-select: none;
@@ -115,7 +119,7 @@
 }
 
 .autocomplete-item-title {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-main);
   white-space: nowrap;
@@ -124,7 +128,7 @@
 }
 
 .autocomplete-item-artist {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   color: var(--text-sub);
   margin-top: 2px;
   white-space: nowrap;
@@ -134,7 +138,7 @@
 
 .autocomplete-item:hover, 
 .autocomplete-item.active {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .autocomplete-item.active .autocomplete-item-title {
@@ -142,8 +146,8 @@
 }
 
 .autocomplete-no-results {
-  padding: 12px;
-  font-size: 0.8rem;
+  padding: 16px;
+  font-size: 0.85rem;
   color: var(--text-sub);
   text-align: center;
   font-style: italic;
@@ -175,23 +179,23 @@ body.light-theme .search-input-wrapper input:focus {
 }
 body.light-theme .autocomplete-item:hover, 
 body.light-theme .autocomplete-item.active {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.04);
 }
 body.light-theme .search-input-wrapper .clear-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 /* Light theme overrides for Audio Dictation card */
 body.light-theme #audio-dictation {
   background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: var(--shadow-md) !important;
 }
 
 body.light-theme #dictationInput {
   background: rgba(0, 0, 0, 0.02) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  color: #121214 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-main) !important;
 }
 
 body.light-theme #dictationInput:focus {
@@ -201,52 +205,51 @@ body.light-theme #dictationInput:focus {
 
 body.light-theme #dictationNewBtn,
 body.light-theme #dictationHintBtn {
-  background: rgba(0, 0, 0, 0.04) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  color: #121214 !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-main) !important;
 }
 
 body.light-theme #dictationNewBtn:hover,
 body.light-theme #dictationHintBtn:hover {
-  background: rgba(0, 0, 0, 0.08) !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 body.light-theme #dictationFeedback {
   background: rgba(0, 0, 0, 0.02) !important;
-  border-color: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
 }
 
 body.light-theme #dictationListenBtn {
-  background: rgba(29, 185, 84, 0.1) !important;
-  color: #121214 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: var(--text-main) !important;
 }
 
 /* Light theme overrides for Cultural Lore box */
 body.light-theme #lore-container {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.02)) !important;
-  border-color: rgba(139, 92, 246, 0.25) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03), 0 0 12px rgba(139, 92, 246, 0.08) !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(99, 102, 241, 0.02)) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 body.light-theme #lore-container p {
-  color: #2e2e33 !important;
+  color: #334155 !important;
 }
 
 body.light-theme #lore-container span {
-  color: #7c3aed !important;
+  color: #6366f1 !important;
 }
-
 
 /* Settings Gear Button */
 .settings-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
   color: var(--text-main);
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,71 +259,68 @@ body.light-theme #lore-container span {
 }
 
 .settings-btn:hover {
-  border-color: var(--accent-spotify);
-  color: var(--accent-spotify);
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.2);
+  border-color: var(--border-glass-hover);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-sm);
   transform: rotate(30deg);
 }
 
-
 body.light-theme #editLyricsTextarea {
-  background: rgba(0, 0, 0, 0.03);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
 }
 body.light-theme #manualLyricsArea {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 /* Premium Favorite Toggle Button */
 .favorite-toggle-btn {
   margin-left: auto;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
   color: var(--text-sub);
   cursor: pointer;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: var(--transition-fast);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   outline: none;
 }
 
 .favorite-toggle-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   fill: none;
   stroke: currentColor;
-  transition: all 0.3s ease;
+  transition: var(--transition-fast);
 }
 
 .favorite-toggle-btn:hover {
-  transform: scale(1.1);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.08);
+  transform: scale(1.05);
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.06);
 }
 
 .favorite-toggle-btn.active {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: #ef4444;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
-  animation: heartBeat 0.4s ease-out;
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #f43f5e;
+  animation: heartBeat 0.3s ease-out;
 }
 
 .favorite-toggle-btn.active svg {
-  fill: #ef4444;
+  fill: #f43f5e;
 }
 
 @keyframes heartBeat {
   0% { transform: scale(1); }
-  25% { transform: scale(1.25); }
-  50% { transform: scale(0.9); }
+  35% { transform: scale(1.2); }
   100% { transform: scale(1); }
 }
 
@@ -328,11 +328,11 @@ body.light-theme #manualLyricsArea {
 .autocomplete-section-header {
   padding: 8px 12px 4px 12px;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent-spotify);
-  letter-spacing: 0.8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-sub);
+  letter-spacing: 0.6px;
+  border-top: 1px solid var(--border-glass);
   margin-top: 4px;
 }
 .autocomplete-section-header:first-child {
@@ -343,7 +343,7 @@ body.light-theme #manualLyricsArea {
 /* Light theme tweaks */
 body.light-theme .favorite-toggle-btn {
   background: rgba(0, 0, 0, 0.03);
-  color: #666;
+  color: var(--text-muted);
 }
 body.light-theme .autocomplete-section-header {
   border-top-color: rgba(0, 0, 0, 0.05);

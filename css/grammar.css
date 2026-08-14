@@ -1,11 +1,15 @@
+/* ==========================================================================
+   GRAMMAR RULES STYLING — MODERN MINIMALIST
+   ========================================================================== */
+
 .rules-accordion-title {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--text-main);
 }
 
 .rules-accordion-chevron {
-  transition: transform 0.25s ease;
+  transition: transform 0.2s ease;
   color: var(--text-sub);
   font-size: 0.8rem;
 }
@@ -13,54 +17,54 @@
 .rules-accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0 20px;
+  transition: max-height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 18px;
   border-top: 1px solid transparent;
   box-sizing: border-box;
 }
 
 .rules-accordion-item.active {
-  border-color: rgba(14, 165, 233, 0.25);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.05);
+  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
 .rules-accordion-item.active .rules-accordion-chevron {
   transform: rotate(180deg);
-  color: #0ea5e9;
+  color: var(--accent-indigo);
 }
 
 .rules-accordion-item.active .rules-accordion-content {
-  border-top-color: rgba(255, 255, 255, 0.06);
-  padding: 0 20px;
+  border-top-color: var(--border-glass);
+  padding: 0 18px;
   max-height: 1000px;
 }
 
 .rules-accordion-body {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.6;
   color: var(--text-main);
   white-space: pre-wrap;
   text-align: left;
   display: flex;
   flex-direction: column;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .rules-delete-btn {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  color: #f43f5e;
   font-size: 0.72rem;
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
   outline: none;
   align-self: flex-end;
-  margin-top: 14px;
+  margin-top: 12px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -68,24 +72,24 @@
 }
 
 .rules-delete-btn:hover {
-  background: rgba(239, 68, 68, 0.18);
-  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(244, 63, 94, 0.16);
+  border-color: rgba(244, 63, 94, 0.35);
   transform: translateY(-1px);
 }
 
 .rules-edit-btn {
-  background: rgba(14, 165, 233, 0.1);
-  border: 1px solid rgba(14, 165, 233, 0.2);
-  color: #0ea5e9;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818cf8;
   font-size: 0.72rem;
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
   outline: none;
   align-self: flex-end;
-  margin-top: 14px;
+  margin-top: 12px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -93,14 +97,14 @@
 }
 
 .rules-edit-btn:hover {
-  background: rgba(14, 165, 233, 0.18);
-  border-color: rgba(14, 165, 233, 0.35);
+  background: rgba(99, 102, 241, 0.16);
+  border-color: rgba(99, 102, 241, 0.35);
   transform: translateY(-1px);
 }
 
 /* Light Theme overrides for Rules Modal */
 body.light-theme .rules-tabs {
-  background: rgba(0, 0, 0, 0.03) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
 }
 
 body.light-theme .rules-tab:hover {
@@ -108,13 +112,13 @@ body.light-theme .rules-tab:hover {
 }
 
 body.light-theme .rules-tab.active {
-  color: #0284c7 !important;
-  border-bottom-color: #0284c7 !important;
+  color: #4f46e5 !important;
+  border-bottom-color: #4f46e5 !important;
 }
 
 body.light-theme .rules-accordion-item {
   background: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 body.light-theme .rules-accordion-header {
@@ -122,43 +126,43 @@ body.light-theme .rules-accordion-header {
 }
 
 body.light-theme .rules-accordion-header:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 body.light-theme .rules-accordion-item.active {
-  border-color: rgba(14, 165, 233, 0.4);
+  border-color: rgba(99, 102, 241, 0.3);
   background: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
 }
 
 body.light-theme .rules-accordion-item.active .rules-accordion-chevron {
-  color: #0284c7;
+  color: #4f46e5;
 }
 
 body.light-theme .rules-accordion-item.active .rules-accordion-content {
-  border-top-color: rgba(0, 0, 0, 0.08);
+  border-top-color: rgba(0, 0, 0, 0.06);
 }
 
 body.light-theme #ruleTitleInput,
 body.light-theme #ruleContentInput {
   background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
-  color: #121214 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: var(--text-main) !important;
 }
 
 body.light-theme #ruleTitleInput:focus,
 body.light-theme #ruleContentInput:focus {
-  border-color: #0284c7 !important;
-  box-shadow: 0 0 10px rgba(14, 165, 233, 0.15) !important;
+  border-color: #4f46e5 !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 /* Gray Theme overrides for Rules Modal */
 body.gray-theme .rules-accordion-item {
-  background: rgba(255, 255, 255, 0.01);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 body.gray-theme .rules-accordion-item.active {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(14, 165, 233, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(99, 102, 241, 0.3);
 }

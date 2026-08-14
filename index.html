@@ -74,44 +74,44 @@
 
       <div class="nav-controls">
         <!-- Gamification Progress Badge -->
-        <div id="userProgressBadge" title="Streak & Experience" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-main); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none;">
+        <div id="userProgressBadge" class="header-nav-badge" title="Streak & Experience">
           <span style="color: #f97316;">🔥 <span id="streakCountUI">0</span></span>
-          <span style="color: #3b82f6;">✨ <span id="xpCountUI">0</span> XP</span>
+          <span style="color: #60a5fa;">✨ <span id="xpCountUI">0</span> XP</span>
         </div>
 
         <!-- Gemini Sparks Hub Link Button -->
-        <a href="sparks.html" target="_blank" id="openSparksBtn" data-en-tooltip="Gemini Sparks" aria-label="Gemini Sparks" title="Daily Progress & Gemini Sparks Hub" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(99, 102, 241, 0.15)); border: 1px solid rgba(139, 92, 246, 0.4); color: #c084fc; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; text-decoration: none; box-shadow: 0 4px 12px rgba(139,92,246,0.15);">
+        <a href="sparks.html" target="_blank" id="openSparksBtn" class="header-nav-btn" data-en-tooltip="Gemini Sparks" aria-label="Gemini Sparks" title="Daily Progress & Gemini Sparks Hub">
           <span>✨ Sparks</span>
         </a>
 
         <!-- Premium Personal Dictionary Modal Trigger Button -->
-        <button id="openDictionaryBtn" data-en-tooltip="My Dictionary" aria-label="My Dictionary" title="My Dictionary" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(29, 185, 84, 0.1); border: 1px solid rgba(29, 185, 84, 0.2); color: var(--accent-spotify); cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(29,185,84,0.1);">
+        <button id="openDictionaryBtn" class="header-nav-btn" data-en-tooltip="My Dictionary" aria-label="My Dictionary" title="My Dictionary">
           <span>📚 Dictionary (<span id="savedWordsCount">0</span>)</span>
         </button>
 
         <!-- Premium Rules Modal Trigger Button -->
-        <button id="openRulesBtn" data-en-tooltip="Grammar Rules" aria-label="Rules" title="Grammar rules reference" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); color: #0ea5e9; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);">
-          📐 Rules
+        <button id="openRulesBtn" class="header-nav-btn" data-en-tooltip="Grammar Rules" aria-label="Rules" title="Grammar rules reference">
+          <span>📐 Rules</span>
         </button>
 
         <!-- Premium Word Training Modal Trigger Button -->
-        <button id="openTrainingBtn" data-en-tooltip="Flashcards" aria-label="Training" title="Train words with flashcards" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); color: #f59e0b; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(245,158,11,0.1);">
-          🔥 Training
+        <button id="openTrainingBtn" class="header-nav-btn" data-en-tooltip="Flashcards" aria-label="Training" title="Train words with flashcards">
+          <span>🔥 Training</span>
         </button>
 
         <!-- Premium Video Course Modal Trigger Button -->
-        <button id="openVideoCourseBtn" data-en-tooltip="Video Course" aria-label="Video Course" title="Interactive English Galaxy video course" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2); color: #a78bfa; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(167,139,250,0.1);">
+        <button id="openVideoCourseBtn" class="header-nav-btn" data-en-tooltip="Video Course" aria-label="Video Course" title="Interactive English Galaxy video course">
           <span>🎬 Course (<span id="navWatchedCount">0</span>/50)</span>
         </button>
 
         <!-- Notebook Trigger Button -->
-        <button id="openNotebookBtn" data-en-tooltip="My Notes" aria-label="My Notes" title="Open notebook" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); color: #fbbf24; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(251,191,36,0.08);">
-          📓 Notes
+        <button id="openNotebookBtn" class="header-nav-btn" data-en-tooltip="My Notes" aria-label="My Notes" title="Open notebook">
+          <span>📓 Notes</span>
         </button>
 
         <!-- Force Sync Button -->
-        <button id="forceSyncDataBtn" data-en-tooltip="Sync Data" aria-label="Sync" title="Force cloud sync" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 14px; height: 38px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #3b82f6; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; outline: none; box-shadow: 0 4px 12px rgba(59,130,246,0.08);">
-          <span>🔄 Cloud Sync</span>
+        <button id="forceSyncDataBtn" class="header-nav-btn" data-en-tooltip="Sync Data" aria-label="Sync" title="Force cloud sync">
+          <span>🔄 Sync</span>
         </button>
 
 

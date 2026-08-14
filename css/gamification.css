@@ -1,8 +1,8 @@
-/* Match game premium tiles styling */
+/* Match game premium tiles styling — Modern Minimalist */
 .match-tile {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,31 +13,31 @@
   color: var(--text-main);
   cursor: pointer;
   user-select: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-fast);
   box-sizing: border-box;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(10px);
 }
 
 .match-tile:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--border-glass-hover);
   transform: translateY(-2px);
 }
 
 .match-tile.selected {
-  background: rgba(29, 185, 84, 0.12) !important;
-  border-color: rgba(29, 185, 84, 0.5) !important;
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3) !important;
-  color: #1db954 !important;
-  transform: scale(1.03) translateY(-2px);
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: #10b981 !important;
+  transform: scale(1.02) translateY(-2px);
 }
 
 .match-tile.wrong {
-  background: rgba(239, 68, 68, 0.15) !important;
-  border-color: rgba(239, 68, 68, 0.5) !important;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important;
-  color: #f87171 !important;
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: #f43f5e !important;
 }
 
 .match-tile.matched {
@@ -48,15 +48,15 @@
 
 /* Light Theme overrides for match tiles */
 body.light-theme .match-tile {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
   color: var(--text-main);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 body.light-theme .match-tile:hover {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 /* Tile and button animations */
@@ -73,16 +73,16 @@ body.light-theme .match-tile:hover {
 /* Multiple choice buttons inside Learn mode */
 .learn-choice-btn {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
   color: var(--text-main);
   padding: 12px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-fast);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -91,48 +91,47 @@ body.light-theme .match-tile:hover {
 }
 
 .learn-choice-btn:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-glass-hover);
   transform: translateY(-1px);
 }
 
 .learn-choice-btn.correct {
-  background: rgba(29, 185, 84, 0.15) !important;
-  border-color: rgba(29, 185, 84, 0.5) !important;
-  color: #1db954 !important;
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3) !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #10b981 !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 .learn-choice-btn.incorrect {
-  background: rgba(239, 68, 68, 0.15) !important;
-  border-color: rgba(239, 68, 68, 0.5) !important;
-  color: #f87171 !important;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important;
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  color: #f43f5e !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 /* Light theme choice button overrides */
 body.light-theme .learn-choice-btn {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
   color: var(--text-main);
 }
 
 body.light-theme .learn-choice-btn:hover {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
-   11. GAMIFICATION (XP & STREAKS) STYLING
-   ========================================================================== */
+/* GAMIFICATION (XP & STREAKS) STYLING */
 .xp-float-animation {
   position: fixed;
   pointer-events: none;
   z-index: 100000;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 800;
-  font-size: 1.5rem;
-  color: #fbbf24;
-  text-shadow: 0 4px 12px rgba(245, 158, 11, 0.4), 0 0 20px rgba(245, 158, 11, 0.2);
+  font-size: 1.4rem;
+  color: #f59e0b;
+  text-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
   animation: xpFloatUp 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   display: flex;
   align-items: center;
@@ -140,16 +139,16 @@ body.light-theme .learn-choice-btn:hover {
 }
 
 .xp-float-animation .xp-text {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #fff;
   opacity: 0.9;
 }
 
 .xp-bonus-animation {
-  font-size: 1.8rem;
-  color: #34d399;
-  text-shadow: 0 4px 16px rgba(52, 211, 153, 0.6), 0 0 24px rgba(52, 211, 153, 0.3);
+  font-size: 1.6rem;
+  color: #10b981;
+  text-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
 }
 
 @keyframes xpFloatUp {
@@ -159,7 +158,7 @@ body.light-theme .learn-choice-btn:hover {
   }
   15% {
     opacity: 1;
-    transform: translate(-50%, -10px) scale(1.2);
+    transform: translate(-50%, -10px) scale(1.15);
   }
   30% {
     transform: translate(-50%, 0) scale(1);

@@ -1,31 +1,32 @@
-/* 25. Premium Welcome Dashboard Styling Hub */
+/* 25. Welcome Dashboard Styling Hub — Modern Minimalist */
 .dashboard-nav-card {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth) !important;
+  border-radius: var(--radius-lg) !important;
 }
 .dashboard-nav-card:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 20px rgba(255,255,255,0.02) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--border-glass-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md) !important;
 }
 
 .dash-song-recommendation {
-  transition: all 0.2s ease-in-out !important;
+  transition: var(--transition-fast) !important;
+  border-radius: var(--radius-md) !important;
 }
 .dash-song-recommendation:hover {
-  background: rgba(255, 255, 255, 0.07) !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--border-glass-hover) !important;
   transform: translateX(4px);
 }
 
 .nav-brand {
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  transition: var(--transition-fast) !important;
 }
 .nav-brand:hover {
-  transform: scale(1.03);
-  text-shadow: 0 0 12px rgba(29, 185, 84, 0.5);
+  transform: scale(1.02);
   color: var(--accent-spotify);
 }
 

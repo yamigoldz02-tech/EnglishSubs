@@ -82,25 +82,22 @@ body.light-theme .dict-heatmap-container {
   opacity: 1;
 }
 
-/* Activity intensities using Neo-Green Spotify */
+/* Activity intensities using Soft Emerald */
 .heatmap-cell.intensity-0 {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 body.light-theme .heatmap-cell.intensity-0 {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .heatmap-cell.intensity-1 {
-  background: rgba(29, 185, 84, 0.3);
-  box-shadow: 0 0 6px rgba(29, 185, 84, 0.1);
+  background: rgba(16, 185, 129, 0.35);
 }
 .heatmap-cell.intensity-2 {
-  background: rgba(29, 185, 84, 0.6);
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.3);
+  background: rgba(16, 185, 129, 0.65);
 }
 .heatmap-cell.intensity-3 {
-  background: rgba(29, 185, 84, 0.95);
-  box-shadow: 0 0 12px rgba(29, 185, 84, 0.6);
+  background: rgba(16, 185, 129, 0.95);
 }
 
 .premium-micro-select {

@@ -1,194 +1,167 @@
 /* ==========================================================================
-   AI LYRIC-TRAINER — PREMIUM SPOTIFY-INSPIRED CSS STYLE SHEET
+   AI LYRIC-TRAINER — MODERN SOFT MINIMALIST DESIGN SYSTEM (CSS VARIABLES)
    ========================================================================== */
-/**
- * TABLE OF CONTENTS (TOC FOR AI & DEVELOPER NAVIGATION):
- * 01. [Lines ~0005-0183]: Imports, Fonts & Root Design System Tokens (:root)
- * 02. [Lines ~0184-0442]: Reset, Base Styles & General Layout Structure
- * 03. [Lines ~0443-0951]: Main Workspace (Left Lyrics Column & Right Drawer)
- * 04. [Lines ~0952-2563]: AI Chat, Welcome Dashboard & Shimmer Skeletons
- * 05. [Lines ~2564-3241]: Dictionary Highlights & Video Course Lesson Tracker
- * 06. [Lines ~3242-4014]: Notebook Drawer & Word Card Popup Modal
- * 07. [Lines ~4015-4447]: 3D Leitner Flashcards & Rules Handbook
- * 08. [Lines ~4448-4774]: Hotkeys, Confetti Progress & Theme-Aware Overrides
- * 09. [Lines ~4775-5255]: Mobile Responsive Rules & Modal Animations
- * 10. [Lines ~5256-End ]: Restored UI Components & Spotify Now Playing Widget
- */
 
-/* 1. Imports & Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* 1. Imports & Typography */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
-/* 2. Custom CSS Custom Properties (Design System) */
+/* 2. Root Design Tokens — Dark Graphite Palette (Default) */
 :root {
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Modern Neutral Typography */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Premium Spotify Dark Palette */
-  --bg-base: #08080a;
-  --bg-surface: #121216;
-  --bg-card: rgba(22, 22, 28, 0.45);
-  --bg-card-hover: rgba(30, 30, 38, 0.65);
-  --bg-glow-spot: rgba(29, 185, 84, 0.08);
-  --bg-navbar: rgba(8, 8, 10, 0.65);
-  --bg-sidebar: rgba(12, 12, 16, 0.75);
-  --bg-modal: #121216;
+  /* Refined Graphite & Slate Backgrounds */
+  --bg-base: #0b0e14;
+  --bg-surface: #111622;
+  --bg-card: rgba(20, 26, 38, 0.65);
+  --bg-card-hover: rgba(28, 36, 52, 0.85);
+  --bg-glow-spot: rgba(16, 185, 129, 0.04);
+  --bg-navbar: rgba(11, 14, 20, 0.8);
+  --bg-sidebar: rgba(15, 20, 30, 0.9);
+  --bg-modal: #131824;
 
-  /* Neon Glowing Accents */
-  --accent-spotify: #1db954;
-  --accent-cyan: #00f2fe;
-  --accent-gradient: linear-gradient(135deg, #1db954 0%, #00f2fe 100%);
-  --accent-glow: 0 0 20px rgba(29, 185, 84, 0.45);
-  --cyan-glow: 0 0 20px rgba(0, 242, 254, 0.4);
+  /* Soft Harmonic Accents (Sage, Emerald, Indigo, Amber, Rose) */
+  --accent-spotify: #10b981;
+  --accent-emerald: #10b981;
+  --accent-indigo: #6366f1;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-cyan: #06b6d4;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  
+  /* Delicate Atmospheric Lighting (No harsh neon glow) */
+  --accent-glow: 0 4px 16px rgba(16, 185, 129, 0.2);
+  --cyan-glow: 0 4px 16px rgba(6, 182, 212, 0.2);
 
-  /* Text Colors */
-  --text-main: #ffffff;
-  --text-sub: #a1a1aa;
-  --text-muted: #52525b;
-  --text-inactive: rgba(255, 255, 255, 0.55);
+  /* High-legibility Soft Text */
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --text-muted: #64748b;
+  --text-inactive: rgba(248, 250, 252, 0.45);
 
-  /* Borders & Glassmorphism */
-  --border-glass: rgba(255, 255, 255, 0.06);
-  --border-glass-hover: rgba(255, 255, 255, 0.12);
-  --glass-blur: 24px;
-  --shadow-main: 0 20px 40px rgba(0, 0, 0, 0.5);
+  /* Subtle Borders & Frosted Glass */
+  --border-glass: rgba(255, 255, 255, 0.07);
+  --border-glass-hover: rgba(255, 255, 255, 0.15);
+  --border-focus: rgba(99, 102, 241, 0.4);
+  --glass-blur: 20px;
+  
+  /* Smooth Geometry Scale */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-pill: 9999px;
 
-  /* Transitions */
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Natural Multi-layered Ambient Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.4);
+  --shadow-main: 0 16px 36px rgba(0, 0, 0, 0.35);
+
+  /* Natural Spring Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 2b. Premium Light Theme Custom Variables */
+/* 3. Pure Light Theme Custom Variables */
 body.light-theme {
-  /* Spotify Light Inspired Palette */
-  --bg-base: #f5f5f8;
+  --bg-base: #f8fafc;
   --bg-surface: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --bg-card-hover: rgba(255, 255, 255, 0.9);
-  --bg-glow-spot: rgba(29, 185, 84, 0.05);
-  --bg-navbar: rgba(255, 255, 255, 0.75);
-  --bg-sidebar: rgba(255, 255, 255, 0.88);
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-glow-spot: rgba(16, 185, 129, 0.03);
+  --bg-navbar: rgba(248, 250, 252, 0.85);
+  --bg-sidebar: rgba(255, 255, 255, 0.95);
   --bg-modal: #ffffff;
 
-  /* Neon Glowing Accents in Light Mode */
-  --accent-spotify: #1aa34a;
-  --accent-gradient: linear-gradient(135deg, #1aa34a 0%, #00b4db 100%);
-  --accent-glow: 0 0 20px rgba(26, 163, 74, 0.25);
-  --cyan-glow: 0 0 20px rgba(0, 180, 219, 0.2);
+  --accent-spotify: #059669;
+  --accent-emerald: #059669;
+  --accent-indigo: #4f46e5;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+  --accent-cyan: #0891b2;
+  --accent-gradient: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+  --accent-glow: 0 4px 14px rgba(5, 150, 105, 0.15);
+  --cyan-glow: 0 4px 14px rgba(8, 145, 178, 0.15);
 
-  /* Text Colors */
-  --text-main: #0c0c0e;
-  --text-sub: #4f4f56;
-  --text-muted: #71717a;
-  --text-inactive: rgba(0, 0, 0, 0.65);
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --text-muted: #94a3b8;
+  --text-inactive: rgba(15, 23, 42, 0.45);
 
-  /* Borders & Glassmorphism */
-  --border-glass: rgba(0, 0, 0, 0.08);
-  --border-glass-hover: rgba(0, 0, 0, 0.15);
-  --shadow-main: 0 20px 40px rgba(0, 0, 0, 0.05);
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --border-glass-hover: rgba(0, 0, 0, 0.12);
+  --border-focus: rgba(79, 70, 229, 0.35);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.08);
+  --shadow-main: 0 16px 32px rgba(0, 0, 0, 0.06);
 }
 
-/* 2c. Premium Gray Theme Custom Variables */
+/* 4. Cool Slate Steel Theme (Gray Theme) */
 body.gray-theme {
-  /* Slate/Steel Custom Palette */
-  --bg-base: #1e2026;
-  --bg-surface: #262930;
-  --bg-card: rgba(38, 41, 48, 0.55);
-  --bg-card-hover: rgba(48, 52, 60, 0.75);
-  --bg-glow-spot: rgba(99, 102, 241, 0.06);
-  --bg-navbar: rgba(30, 32, 38, 0.7);
-  --bg-sidebar: rgba(38, 41, 48, 0.85);
-  --bg-modal: #262930;
+  --bg-base: #151922;
+  --bg-surface: #1d222e;
+  --bg-card: rgba(29, 34, 46, 0.65);
+  --bg-card-hover: rgba(38, 45, 60, 0.85);
+  --bg-glow-spot: rgba(99, 102, 241, 0.04);
+  --bg-navbar: rgba(21, 25, 34, 0.8);
+  --bg-sidebar: rgba(29, 34, 46, 0.9);
+  --bg-modal: #1d222e;
 
-  /* Electric Indigo / Neon Purple Accents in Gray Mode */
   --accent-spotify: #6366f1;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --accent-glow: 0 0 20px rgba(99, 102, 241, 0.35);
-  --cyan-glow: 0 0 20px rgba(168, 85, 247, 0.3);
+  --accent-emerald: #10b981;
+  --accent-indigo: #6366f1;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-cyan: #38bdf8;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+  --accent-glow: 0 4px 14px rgba(99, 102, 241, 0.2);
+  --cyan-glow: 0 4px 14px rgba(56, 189, 248, 0.2);
 
-  /* Text Colors */
-  --text-main: #f1f3f9;
-  --text-sub: #9fa5b5;
+  --text-main: #f1f5f9;
+  --text-sub: #94a3b8;
   --text-muted: #64748b;
-  --text-inactive: rgba(241, 243, 249, 0.55);
+  --text-inactive: rgba(241, 245, 249, 0.45);
 
-  /* Borders & Glassmorphism */
-  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.07);
   --border-glass-hover: rgba(255, 255, 255, 0.15);
-  --shadow-main: 0 20px 40px rgba(0, 0, 0, 0.25);
+  --border-focus: rgba(99, 102, 241, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.35);
+  --shadow-main: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 
-/* Gray Theme Blob neon modifications */
+/* Ambient Background Blobs (Soft, subtle diffusion) */
+.blob-1 {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.blob-2 {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.10) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
 body.gray-theme .blob-1 {
-  background: radial-gradient(circle, #6366f1 0%, #3b82f6 100%);
-  opacity: 0.16;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  opacity: 0.6;
 }
 
 body.gray-theme .blob-2 {
-  background: radial-gradient(circle, #a855f7 0%, #ec4899 100%);
-  opacity: 0.16;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+  opacity: 0.6;
 }
 
-/* Scrollbar override for Gray Mode */
-body.gray-theme ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-}
-body.gray-theme ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-spotify);
-}
-
-/* Shimmer overlay for Gray Mode */
-body.gray-theme .scrim-overlay {
-  background: rgba(15, 17, 23, 0.4);
-}
-
-/* Shimmer pulses under Gray Mode */
-body.gray-theme .shimmer-card {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.01) 25%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.01) 75%
-  );
-  background-size: 200% 100%;
-}
-body.gray-theme .skeleton-text {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-/* Light Theme Blob pastel modifications */
 body.light-theme .blob-1 {
-  background: radial-gradient(circle, #a5f3fc 0%, #c4b5fd 100%);
-  opacity: 0.22;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  opacity: 0.5;
 }
 
 body.light-theme .blob-2 {
-  background: radial-gradient(circle, #fbcfe8 0%, #fef08a 100%);
-  opacity: 0.22;
-}
-
-/* Scrollbar override for Light Mode */
-body.light-theme ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.12);
-}
-body.light-theme ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-spotify);
-}
-
-/* Shimmer overlay for Light Mode */
-body.light-theme .scrim-overlay {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-/* Shimmer pulses under Light Mode */
-body.light-theme .shimmer-card {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.01) 25%,
-    rgba(0, 0, 0, 0.04) 50%,
-    rgba(0, 0, 0, 0.01) 75%
-  );
-  background-size: 200% 100%;
-}
-body.light-theme .skeleton-text {
-  background: rgba(0, 0, 0, 0.04);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  opacity: 0.5;
 }

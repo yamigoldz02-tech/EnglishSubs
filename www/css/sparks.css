@@ -6,13 +6,13 @@
  */
 
 :root {
-  --sparks-bg: #090d16;
-  --sparks-bg-card: rgba(18, 24, 38, 0.75);
-  --sparks-bg-card-hover: rgba(26, 34, 52, 0.85);
-  --sparks-border: rgba(255, 255, 255, 0.08);
-  --sparks-border-glow: rgba(139, 92, 246, 0.3);
-  --sparks-accent-spotify: #1db954;
-  --sparks-accent-gemini: #8b5cf6;
+  --sparks-bg: #0b0e14;
+  --sparks-bg-card: rgba(20, 26, 38, 0.75);
+  --sparks-bg-card-hover: rgba(28, 36, 52, 0.85);
+  --sparks-border: rgba(255, 255, 255, 0.07);
+  --sparks-border-glow: rgba(99, 102, 241, 0.2);
+  --sparks-accent-spotify: #10b981;
+  --sparks-accent-gemini: #6366f1;
   --sparks-accent-cyan: #06b6d4;
   --sparks-accent-amber: #f59e0b;
   --sparks-accent-rose: #f43f5e;
@@ -22,7 +22,7 @@
   --sparks-radius-lg: 20px;
   --sparks-radius-md: 14px;
   --sparks-radius-sm: 8px;
-  --sparks-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sparks-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body.sparks-body {

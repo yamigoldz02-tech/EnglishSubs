@@ -1,126 +1,101 @@
-/* Phrase Builder Mini-Game Styling */
+/* Phrase Builder Mini-Game Styling — Modern Minimalist */
 #phrase-builder {
-  transition: all 0.3s ease;
+  transition: var(--transition-smooth);
 }
 
 .build-zone {
   min-height: 55px;
   background: rgba(255, 255, 255, 0.02);
-  border: 2px dashed rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border: 2px dashed var(--border-glass);
+  border-radius: var(--radius-md);
   padding: 8px 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-content: flex-start;
   margin-bottom: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-fast);
 }
 
 .pool-zone {
   min-height: 55px;
   background: rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 8px 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-content: flex-start;
-  transition: all 0.3s ease;
+  transition: var(--transition-fast);
 }
 
 /* Word Pills */
 .word-pill {
   font-size: 0.85rem;
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  color: var(--text-main);
   cursor: pointer;
   user-select: none;
   font-weight: 500;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 .word-pill:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-glass-hover);
+  transform: translateY(-1px);
 }
 
 /* Success Glow states */
 .build-zone.success-glow {
-  border: 2px solid var(--accent-spotify, #1db954) !important;
-  background: rgba(29, 185, 84, 0.05) !important;
-  box-shadow: 0 0 15px rgba(29, 185, 84, 0.3) !important;
+  border: 2px solid var(--accent-spotify) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 .build-zone.success-glow .word-pill {
-  background: var(--accent-spotify, #1db954) !important;
-  border-color: var(--accent-spotify, #1db954) !important;
-  color: #000000 !important;
+  background: var(--accent-spotify) !important;
+  border-color: var(--accent-spotify) !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.5) !important;
 }
 
 /* Error Glow and Shake states for Phrase Builder */
 .build-zone.error-glow {
-  border: 2px solid #ef4444 !important;
-  background: rgba(239, 68, 68, 0.05) !important;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important;
+  border: 2px solid #f43f5e !important;
+  background: rgba(244, 63, 94, 0.08) !important;
+  box-shadow: var(--shadow-sm) !important;
   animation: shake 0.5s ease-in-out;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-6px); }
-  40%, 80% { transform: translateX(6px); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
 }
 
 /* Light theme overrides for Phrase Builder game */
 body.light-theme .build-zone {
   background: rgba(0, 0, 0, 0.02) !important;
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 body.light-theme .pool-zone {
-  background: rgba(0, 0, 0, 0.06) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
 }
 
 body.light-theme .word-pill {
   background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  color: #121214 !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: var(--text-main) !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 body.light-theme .word-pill:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  color: #000000 !important;
-}
-
-/* Gray theme overrides for Phrase Builder game */
-body.gray-theme .build-zone {
-  background: rgba(255, 255, 255, 0.01) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-body.gray-theme .pool-zone {
-  background: rgba(0, 0, 0, 0.15) !important;
-}
-
-body.gray-theme .word-pill {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  color: #e0e0e5 !important;
-}
-
-body.gray-theme .word-pill:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
 }
