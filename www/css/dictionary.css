@@ -460,25 +460,25 @@ body.light-theme .dict-tab {
 }
 
 body.light-theme .dict-tab:hover {
-  color: #0A0A0A;
+  color: #000000;
 }
 
 body.light-theme .dict-tab.active {
-  color: #0A0A0A !important;
-  border-bottom: 2px solid #D9534F !important;
+  color: #000000 !important;
+  border-bottom: 2px solid #EBB2C0 !important;
 }
 
 body.light-theme .dict-type-pill {
-  color: #787774;
+  color: #71717A;
 }
 
 body.light-theme .dict-type-pill:hover {
-  color: #0A0A0A;
+  color: #000000;
 }
 
 body.light-theme .dict-type-pill.active {
   background: #FFFFFF !important;
-  color: #0A0A0A !important;
+  color: #000000 !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -487,45 +487,50 @@ body.light-theme .dict-word-row {
 }
 
 body.light-theme .dict-word-row:hover {
-  background: #F9F9F8;
+  background: #FCF8F9;
 }
 
 body.light-theme .dict-cat-badge {
-  background: rgba(55, 53, 47, 0.06);
-  border-color: rgba(55, 53, 47, 0.09);
-  color: #787774;
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #000000;
 }
 
 body.light-theme .filters-toggle-btn {
-  background: #F9F9F8;
-  border-color: rgba(55, 53, 47, 0.09);
-  color: #787774;
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #000000;
 }
 
 body.light-theme .filters-toggle-btn:hover {
   background: #FFFFFF;
-  color: #0A0A0A;
-  border-color: rgba(55, 53, 47, 0.16);
+  color: #000000;
+  border-color: #EBB2C0;
 }
 
 body.light-theme #startTrainingFromDictBtn {
-  background: #D9534F !important;
-  color: #FFFFFF !important;
+  background: #EBB2C0 !important;
+  color: #000000 !important;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(235, 178, 192, 0.45) !important;
 }
 
 body.light-theme #startTrainingFromDictBtn:hover {
-  background: #c94743 !important;
+  background: #e3a2b2 !important;
+  box-shadow: 0 6px 22px rgba(235, 178, 192, 0.6) !important;
 }
 
 body.light-theme #addManualWordBtn,
 body.light-theme #addManualPhraseBtn {
   background: #FFFFFF !important;
-  border-color: rgba(55, 53, 47, 0.14) !important;
-  color: #0A0A0A !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #000000 !important;
+  font-weight: 700;
 }
 
 body.light-theme #addManualWordBtn:hover,
 body.light-theme #addManualPhraseBtn:hover {
-  background: #F9F9F8 !important;
-  border-color: rgba(55, 53, 47, 0.22) !important;
+  background: #FCF8F9 !important;
+  border-color: #EBB2C0 !important;
+  color: #000000 !important;
 }

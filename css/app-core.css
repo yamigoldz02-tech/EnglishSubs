@@ -444,7 +444,7 @@ body.gray-theme .dict-highlighted-word.speaking {
 }
 
 body.light-theme .video-course-progress-panel .progress-track {
-  background: rgba(55, 53, 47, 0.08);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .video-course-progress-panel .progress-bar-fill {
@@ -457,8 +457,8 @@ body.light-theme .video-course-progress-panel .progress-track {
 }
 
 body.light-theme .video-course-progress-panel .progress-bar-fill {
-  background: #D9534F;
-  box-shadow: none;
+  background: linear-gradient(90deg, #EBB2C0, #F0B6C0);
+  box-shadow: 0 0 10px rgba(235, 178, 192, 0.4);
 }
 
 .video-course-controls {
@@ -2015,13 +2015,13 @@ body.light-theme .header-menu-btn {
 
 body.light-theme .header-menu-btn:hover,
 body.light-theme .header-menu-btn.active {
-  background: #F9F9F8;
-  border-color: rgba(55, 53, 47, 0.16);
-  color: #0A0A0A;
+  background: #FCF8F9;
+  border-color: #EBB2C0;
+  color: #000000;
 }
 
 body.light-theme .header-menu-streak-dot {
-  background: #D9534F;
+  background: #EBB2C0;
 }
 
 .nav-dropdown-profile {

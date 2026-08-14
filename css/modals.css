@@ -269,27 +269,32 @@ body.light-theme .settings-btn {
   border-color: rgba(55, 53, 47, 0.09);
 }
 body.light-theme .form-group input {
-  background: #F9F9F8;
-  border-color: rgba(55, 53, 47, 0.09);
-  color: #0A0A0A;
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.09);
+  color: #000000;
 }
 body.light-theme .form-group input:focus {
   background: #FFFFFF;
-  border-color: #D9534F;
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.25);
 }
 body.light-theme .modal-btn.primary-btn {
-  background: #D9534F;
-  color: #FFFFFF;
+  background: #EBB2C0;
+  color: #000000;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(235, 178, 192, 0.45);
 }
 body.light-theme .modal-btn.primary-btn:hover {
-  background: #c94743;
+  background: #e3a2b2;
+  box-shadow: 0 6px 20px rgba(235, 178, 192, 0.6);
 }
 body.light-theme .modal-btn.secondary-btn {
   background: #FFFFFF;
-  border-color: rgba(55, 53, 47, 0.12);
-  color: #0A0A0A;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #000000;
+  font-weight: 700;
 }
 body.light-theme .modal-btn.secondary-btn:hover {
-  background: #F9F9F8;
-  border-color: rgba(55, 53, 47, 0.2);
+  background: #FCF8F9;
+  border-color: #EBB2C0;
 }
