@@ -1,36 +1,435 @@
-/* 25. Welcome Dashboard Styling Hub — Modern Minimalist */
-.dashboard-nav-card {
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition-smooth) !important;
-  border-radius: var(--radius-lg) !important;
-}
-.dashboard-nav-card:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: var(--border-glass-hover) !important;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md) !important;
+/* ==========================================================================
+   MODERN BENTO DASHBOARD & HERO SECTION
+   ========================================================================== */
+
+.welcome-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  animation: fadeInDash 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dash-song-recommendation {
-  transition: var(--transition-fast) !important;
-  border-radius: var(--radius-md) !important;
+@keyframes fadeInDash {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.dash-song-recommendation:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: var(--border-glass-hover) !important;
+
+/* ── Hero Section ── */
+.dash-hero {
+  text-align: center;
+  padding: 3rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dash-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  letter-spacing: 0.2px;
+  box-shadow: var(--shadow-sm);
+}
+
+.dash-hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-spotify);
+  box-shadow: 0 0 8px var(--accent-spotify);
+}
+
+.dash-hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 700px;
+}
+
+.dash-hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-sub);
+  font-weight: 400;
+  line-height: 1.55;
+  max-width: 580px;
+  margin: 0;
+}
+
+.dash-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dash-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  outline: none;
+  border: none;
+}
+
+.dash-action-btn.primary {
+  background: var(--accent-spotify);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+.dash-action-btn.primary:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.dash-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+}
+.dash-action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--border-glass-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Bento Grid ── */
+.dash-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glass-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.bento-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bento-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.bento-icon.emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+.bento-icon.amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+.bento-icon.indigo {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+.bento-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid;
+}
+.bento-tag.emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+.bento-tag.amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+.bento-tag.indigo {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.bento-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bento-stat-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.bento-stat-unit {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-sub);
+}
+
+.bento-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  line-height: 1.45;
+}
+
+.bento-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin: 4px 0;
+}
+
+.bento-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  border-radius: var(--radius-pill);
+  transition: width 0.4s ease;
+}
+
+.bento-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-glass);
+}
+.bento-card-footer.emerald { color: #10b981; }
+.bento-card-footer.amber { color: #f59e0b; }
+.bento-card-footer.indigo { color: #818cf8; }
+
+.bento-arrow {
+  transition: transform 0.2s ease;
+}
+.bento-card:hover .bento-arrow {
   transform: translateX(4px);
 }
 
-.nav-brand {
-  cursor: pointer;
-  transition: var(--transition-fast) !important;
-}
-.nav-brand:hover {
-  transform: scale(1.02);
-  color: var(--accent-spotify);
+/* ── Music & Quick Start Grid ── */
+.dash-music-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
 }
 
-@keyframes spin-cd {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.dash-music-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.dash-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dash-panel-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.dash-song-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.dash-song-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-glass-hover);
+  transform: translateX(4px);
+}
+
+.dash-song-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.dash-song-cover.scorpions {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.dash-song-cover.metallica {
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+.dash-song-cover.rhcp {
+  background: rgba(244, 63, 94, 0.12);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+.dash-song-cover.fav {
+  background: rgba(244, 63, 94, 0.1);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.dash-song-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-song-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-song-artist {
+  font-size: 0.76rem;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.dash-song-play-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--text-sub);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.dash-song-item:hover .dash-song-play-btn {
+  background: var(--accent-spotify);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* ── Light Theme Overrides ── */
+body.light-theme .dash-hero-title {
+  color: #0f172a;
+}
+body.light-theme .dash-action-btn.secondary {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-theme .dash-action-btn.secondary:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+body.light-theme .dash-song-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+body.light-theme .dash-song-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 900px) {
+  .dash-bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-music-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-hero-title {
+    font-size: 2rem;
+  }
 }

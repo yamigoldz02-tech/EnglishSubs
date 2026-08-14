@@ -31,6 +31,22 @@ function setupEventListeners() {
     });
   }
 
+  // Dashboard Hero Action buttons
+  const heroStartBtn = document.getElementById('heroStartFirstSongBtn');
+  if (heroStartBtn) {
+    heroStartBtn.addEventListener('click', () => {
+      pickSongFromSearch({id: 'scorpions', title: 'Wind of Change', artist: 'Scorpions', genre: 'Classic Rock', art: 'SC'});
+    });
+  }
+
+  const heroCourseBtn = document.getElementById('heroOpenCourseBtn');
+  if (heroCourseBtn) {
+    heroCourseBtn.addEventListener('click', () => {
+      const openVideoCourseBtn = document.getElementById('openVideoCourseBtn');
+      if (openVideoCourseBtn) openVideoCourseBtn.click();
+    });
+  }
+
   // Dashboard Quick-start recommendations
   const dashStartScorpions = document.getElementById('dashStartScorpions');
   if (dashStartScorpions) {

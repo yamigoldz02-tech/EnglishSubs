@@ -343,15 +343,15 @@ function renderDashboardFavorites() {
     if (!song) return;
 
     const row = document.createElement('div');
-    row.className = 'dash-song-recommendation';
-    row.style.cssText = 'display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; cursor: pointer; transition: all 0.2s;';
+    row.className = 'dash-song-item';
     
     row.innerHTML = `
-      <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;">❤️</div>
-      <div style="flex: 1; min-width: 0;">
-        <div style="font-weight: 700; font-size: 0.85rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${song.title}</div>
-        <div style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${song.artist}</div>
+      <div class="dash-song-cover fav">❤️</div>
+      <div class="dash-song-meta">
+        <div class="dash-song-title">${song.title}</div>
+        <div class="dash-song-artist">${song.artist}</div>
       </div>
+      <div class="dash-song-play-btn">▶</div>
     `;
 
     row.addEventListener('click', () => {

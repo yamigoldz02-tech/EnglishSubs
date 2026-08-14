@@ -9,59 +9,61 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10600 !important; /* In front of floating video (10500) when collapsed */
+  z-index: 10600 !important;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 16px 7px;
-  background: rgba(14, 14, 20, 0.92);
-  border: 1px solid rgba(251, 191, 36, 0.25);
+  justify-content: center;
+  width: 34px;
+  height: 48px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
   border-left: none;
-  border-radius: 0 14px 14px 0;
-  color: #fbbf24;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-sub);
   cursor: pointer;
-  transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.2s, box-shadow 0.2s;
-  box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+  transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.2s ease,
+              background 0.2s ease,
+              border-color 0.2s ease;
+  box-shadow: var(--shadow-sm);
   outline: none;
   user-select: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .notebook-drawer-tab:hover {
-  background: rgba(251, 191, 36, 0.12);
-  box-shadow: 3px 0 20px rgba(251, 191, 36, 0.15);
+  width: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-glass-hover);
+  color: #fbbf24;
+  box-shadow: var(--shadow-md);
 }
 .notebook-drawer-tab.drawer-open {
   left: 360px;
-  background: rgba(251, 191, 36, 0.14);
-  border-color: rgba(251, 191, 36, 0.35);
-  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
+  background: var(--bg-surface);
+  z-index: 10400 !important;
 }
 body.light-theme .notebook-drawer-tab {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(234, 179, 8, 0.3);
-  box-shadow: 3px 0 16px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
 }
 body.light-theme .notebook-drawer-tab:hover {
-  background: rgba(251, 191, 36, 0.08);
+  background: rgba(0, 0, 0, 0.04);
 }
 body.gray-theme .notebook-drawer-tab {
-  background: rgba(30, 32, 40, 0.95);
-  border-color: rgba(251, 191, 36, 0.2);
+  background: var(--bg-surface);
+  border-color: var(--border-glass);
 }
 
 .notebook-tab-emoji {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   line-height: 1;
-  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+  transition: transform 0.2s ease;
 }
-.notebook-tab-label {
-  font-size: 0.52rem;
-  font-weight: 800;
-  letter-spacing: 0.25em;
-  color: #fbbf24;
-  line-height: 1.6;
-  text-align: center;
+
+.notebook-drawer-tab:hover .notebook-tab-emoji {
+  transform: scale(1.15);
 }
 
 /* ── Drawer wrapper / overlay ── */

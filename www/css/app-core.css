@@ -1444,24 +1444,21 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
     gap: 1.25rem !important;
   }
 
-  /* Welcome Dashboard Layout Card */
-  #welcomeDashboardCard {
-    padding: 1.5rem 1rem !important;
-    border-radius: 16px !important;
-    gap: 1.25rem !important;
+  /* Welcome Dashboard Mobile Adaptations */
+  .welcome-dashboard {
+    gap: 1.5rem !important;
   }
   
-  #welcomeDashboardCard h1 {
-    font-size: 1.6rem !important;
+  .dash-hero {
+    padding: 1.5rem 0.5rem 0.5rem 0.5rem !important;
   }
   
-  #welcomeDashboardCard p {
-    font-size: 0.85rem !important;
+  .dash-hero-title {
+    font-size: 1.75rem !important;
   }
   
-  .dashboard-nav-card {
-    padding: 1rem !important;
-    border-radius: 16px !important;
+  .dash-hero-subtitle {
+    font-size: 0.9rem !important;
   }
 
   /* 10d. Lyrics Section & Individual Lines Sizing */
