@@ -426,27 +426,31 @@ body.light-theme .dash-action-btn.primary {
   background: #EBB2C0;
   color: #000000;
   font-weight: 800;
-  box-shadow: 0 4px 18px rgba(235, 178, 192, 0.45);
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 body.light-theme .dash-action-btn.primary:hover {
-  background: #e3a2b2;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(235, 178, 192, 0.6);
+  background: #e09fad;
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: none !important;
 }
 
 body.light-theme .dash-action-btn.secondary {
   background: #FFFFFF;
-  border-color: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #000000;
   font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none !important;
 }
 
 body.light-theme .dash-action-btn.secondary:hover {
   background: #FCF8F9;
   border-color: #EBB2C0;
   color: #000000;
+  transform: translateY(-1px);
+  box-shadow: none !important;
 }
 
 body.light-theme .bento-card {
@@ -615,27 +619,31 @@ body.warm-theme .dash-action-btn.primary {
   background: #F4A261;
   color: #3E2723;
   font-weight: 800;
-  box-shadow: 0 4px 18px rgba(244, 162, 97, 0.45);
+  box-shadow: none !important;
+  border: 1px solid rgba(62, 39, 35, 0.08);
 }
 
 body.warm-theme .dash-action-btn.primary:hover {
   background: #e8934f;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(244, 162, 97, 0.6);
+  color: #3E2723;
+  transform: translateY(-1px);
+  box-shadow: none !important;
 }
 
 body.warm-theme .dash-action-btn.secondary {
   background: #FFFFFF;
-  border-color: rgba(62, 39, 35, 0.12);
+  border: 1px solid rgba(62, 39, 35, 0.12);
   color: #3E2723;
   font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none !important;
 }
 
 body.warm-theme .dash-action-btn.secondary:hover {
   background: #FDF6E3;
   border-color: #F4A261;
   color: #3E2723;
+  transform: translateY(-1px);
+  box-shadow: none !important;
 }
 
 body.warm-theme .bento-card {
@@ -704,21 +712,36 @@ body.warm-theme .dash-panel-title svg {
   color: #3E2723;
 }
 
+body.warm-theme .dash-song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 body.warm-theme .dash-song-item {
-  background: #FDF6E3;
-  border-color: rgba(62, 39, 35, 0.08);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #F0EBE1;
+  border-radius: 0;
+  padding: 12px 6px;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+body.warm-theme .dash-song-item:last-child {
+  border-bottom: none;
 }
 
 body.warm-theme .dash-song-item:hover {
-  background: #FFFFFF;
-  border-color: rgba(244, 162, 97, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(62, 39, 35, 0.06);
+  background: rgba(244, 162, 97, 0.04);
+  border-bottom-color: #F0EBE1;
+  transform: translateX(4px);
+  box-shadow: none;
 }
 
 body.warm-theme .dash-song-cover {
-  background: #FFFFFF;
-  border-color: rgba(62, 39, 35, 0.12);
+  background: #FDF6E3;
+  border-color: #F0EBE1;
   color: #3E2723;
   font-weight: 700;
 }
@@ -754,7 +777,7 @@ body.warm-theme .dash-song-artist {
 
 body.warm-theme .dash-song-play-btn {
   background: #FFFFFF;
-  border: 1px solid rgba(62, 39, 35, 0.12);
+  border: 1px solid #F0EBE1;
   color: #3E2723;
 }
 
@@ -762,4 +785,5 @@ body.warm-theme .dash-song-item:hover .dash-song-play-btn {
   background: #3E2723;
   border-color: #3E2723;
   color: #FFFFFF;
+  transform: scale(1.08);
 }
