@@ -239,3 +239,60 @@ body.light-theme .roleplay-bubble.ai {
   border-color: rgba(0, 0, 0, 0.08);
   color: var(--text-main);
 }
+
+body.warm-theme .custom-chat-container {
+  background: #FFFFFF !important;
+  border-top-color: rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .chat-label {
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .chat-input {
+  background: #FFFFFF !important;
+  border-color: rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .chat-input:focus {
+  border-color: #F4A261 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25) !important;
+}
+
+body.warm-theme .chat-send-btn {
+  background: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+body.warm-theme .chat-send-btn:hover {
+  background: #e8934f !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .chat-send-btn svg {
+  stroke: #3E2723 !important;
+}
+
+body.warm-theme .chat-response {
+  background: #FDF6E3 !important;
+  border-color: rgba(62, 39, 35, 0.1) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .roleplay-bubble.ai {
+  background: #FDF6E3 !important;
+  border-color: rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .roleplay-bubble.user {
+  background: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(244, 162, 97, 0.25) !important;
+}

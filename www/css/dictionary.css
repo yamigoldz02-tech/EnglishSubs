@@ -620,3 +620,47 @@ body.warm-theme #addManualPhraseBtn:hover {
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
+
+body.warm-theme .word-card-popup {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.12) !important;
+}
+
+body.warm-theme .wcp-close-btn {
+  background: #FDF6E3 !important;
+  border-color: rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .wcp-close-btn:hover {
+  background: #FFFFFF !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .wcp-translation {
+  background: #FDF6E3 !important;
+  border-left: 3px solid #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .wcp-category-badge {
+  background: #FDF6E3 !important;
+  color: #5D4037 !important;
+  border-color: rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .wcp-btn {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .wcp-btn:hover {
+  background: #FDF6E3 !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}

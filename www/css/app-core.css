@@ -2692,3 +2692,178 @@ body.warm-theme .header-menu-btn:hover {
 body.warm-theme .header-menu-streak-dot {
   background: #F4A261;
 }
+
+/* ── Warm Theme Header Navigation Dropdown & Video Course ── */
+body.warm-theme .header-nav-dropdown {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.12) !important;
+}
+
+body.warm-theme .nav-dropdown-profile {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .nav-dropdown-profile:hover {
+  background: #FFFFFF !important;
+  border-color: #F4A261 !important;
+}
+
+body.warm-theme .nav-dropdown-avatar {
+  background: #FFFFFF !important;
+  color: #3E2723 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .nav-dropdown-profile-title {
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .nav-stat-streak {
+  color: #F4A261 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .nav-stat-xp {
+  color: #5D4037 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .nav-dropdown-sparks-link {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .nav-dropdown-sparks-link:hover {
+  background: #F4A261 !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .nav-dropdown-item {
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .nav-dropdown-item:hover {
+  background: #FDF6E3 !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .nav-dropdown-item svg {
+  color: #5D4037 !important;
+  stroke: #5D4037 !important;
+}
+
+body.warm-theme .nav-dropdown-item:hover svg {
+  color: #3E2723 !important;
+  stroke: #3E2723 !important;
+}
+
+body.warm-theme .nav-dropdown-pill {
+  background: #FDF6E3 !important;
+  color: #5D4037 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .nav-dropdown-divider {
+  background: rgba(62, 39, 35, 0.07) !important;
+}
+
+body.warm-theme .header-menu-btn {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .header-menu-btn:hover,
+body.warm-theme .header-menu-btn.active {
+  background: #FDF6E3 !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .header-menu-streak-dot {
+  background: #F4A261 !important;
+}
+
+body.warm-theme .video-player-wrapper {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  box-shadow: inset 0 0 20px rgba(62, 39, 35, 0.04) !important;
+}
+
+body.warm-theme .player-placeholder {
+  color: #5D4037 !important;
+}
+
+body.warm-theme .placeholder-vinyl-art {
+  background: #FFFFFF !important;
+  border: 2px solid rgba(244, 162, 97, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .player-placeholder h4 {
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .player-placeholder p {
+  color: #8D6E63 !important;
+}
+
+body.warm-theme .video-course-body .lessons-sidebar {
+  border-right-color: rgba(62, 39, 35, 0.08) !important;
+  background: #FFFFFF !important;
+}
+
+body.warm-theme .video-lesson-item {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .video-lesson-item:hover {
+  background: #FDF6E3 !important;
+  border-color: #F4A261 !important;
+}
+
+body.warm-theme .video-lesson-item.playing {
+  background: #FDF6E3 !important;
+  border-color: #F4A261 !important;
+  box-shadow: 0 0 10px rgba(244, 162, 97, 0.2) !important;
+}
+
+body.warm-theme .video-lesson-item.playing::before {
+  background: #F4A261 !important;
+}
+
+body.warm-theme .video-lesson-item .lesson-badge {
+  background: #FDF6E3 !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .video-lesson-item.playing .lesson-badge {
+  background: #F4A261 !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .active-video-details {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .active-video-details .active-badge {
+  background: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
