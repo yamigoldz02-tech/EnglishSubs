@@ -201,30 +201,30 @@ body.light-theme .wcp-close-btn {
    ========================================================================== */
 
 :root {
-  --flashcard-front-bg: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.95));
-  --flashcard-front-border: 1.5px solid rgba(16, 185, 129, 0.25);
-  --flashcard-back-bg: linear-gradient(135deg, rgba(20, 26, 38, 0.95), rgba(15, 20, 30, 0.95));
-  --flashcard-back-border: 1.5px solid var(--border-glass);
-  --flashcard-shadow: var(--shadow-lg);
-  --flashcard-glow: 0 4px 20px rgba(16, 185, 129, 0.12);
+  --flashcard-front-bg: #141417;
+  --flashcard-front-border: 1px solid var(--border-glass);
+  --flashcard-back-bg: #141417;
+  --flashcard-back-border: 1px solid var(--border-glass);
+  --flashcard-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --flashcard-glow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 body.light-theme {
-  --flashcard-front-bg: linear-gradient(135deg, #ffffff, #f8fafc);
-  --flashcard-front-border: 1.5px solid rgba(16, 185, 129, 0.25);
-  --flashcard-back-bg: linear-gradient(135deg, #ffffff, #f8fafc);
-  --flashcard-back-border: 1.5px solid rgba(0, 0, 0, 0.06);
+  --flashcard-front-bg: #ffffff;
+  --flashcard-front-border: 1px solid rgba(0, 0, 0, 0.08);
+  --flashcard-back-bg: #ffffff;
+  --flashcard-back-border: 1px solid rgba(0, 0, 0, 0.08);
   --flashcard-shadow: var(--shadow-md);
-  --flashcard-glow: 0 4px 16px rgba(16, 185, 129, 0.08);
+  --flashcard-glow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 body.gray-theme {
-  --flashcard-front-bg: linear-gradient(135deg, rgba(29, 34, 46, 0.95), rgba(21, 25, 34, 0.95));
-  --flashcard-front-border: 1.5px solid rgba(99, 102, 241, 0.25);
-  --flashcard-back-bg: linear-gradient(135deg, rgba(29, 34, 46, 0.95), rgba(21, 25, 34, 0.95));
-  --flashcard-back-border: 1.5px solid var(--border-glass);
+  --flashcard-front-bg: #1d222e;
+  --flashcard-front-border: 1px solid var(--border-glass);
+  --flashcard-back-bg: #1d222e;
+  --flashcard-back-border: 1px solid var(--border-glass);
   --flashcard-shadow: var(--shadow-lg);
-  --flashcard-glow: 0 4px 20px rgba(99, 102, 241, 0.12);
+  --flashcard-glow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .flashcard-container {
@@ -352,8 +352,8 @@ body.gray-theme {
 }
 
 .rules-tab.active {
-  color: #38bdf8 !important;
-  border-bottom: 2px solid #38bdf8 !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #ffffff !important;
   font-weight: 700 !important;
 }
 

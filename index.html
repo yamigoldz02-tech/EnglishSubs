@@ -755,7 +755,7 @@
 
       <!-- Premium Dictionary Tabs -->
       <div class="dict-tabs" style="display: flex; gap: 20px; padding: 0 1.5rem; border-bottom: 1px solid var(--border-glass); flex-shrink: 0; box-sizing: border-box; background: rgba(255,255,255,0.01);">
-        <button class="dict-tab active" id="dictTabPersonal" style="background: none; border: none; color: var(--accent-spotify); font-weight: 700; padding: 12px 0; border-bottom: 2px solid var(--accent-spotify); cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">Мой словарь</button>
+        <button class="dict-tab active" id="dictTabPersonal" style="background: none; border: none; color: #ffffff; font-weight: 700; padding: 12px 0; border-bottom: 2px solid #ffffff; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">Мой словарь</button>
         <button class="dict-tab" id="dictTabEssential" style="background: none; border: none; color: var(--text-muted); font-weight: 600; padding: 12px 0; border-bottom: 2px solid transparent; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; outline: none;">Частотный Топ-1000</button>
       </div>
 
@@ -789,7 +789,7 @@
                   <option value="Сленг и идиомы">Сленг и идиомы</option>
                   <option value="Социальные фразы">Социальные фразы</option>
                 </select>
-                <button id="addCustomCategoryBtn" title="Создать свою папку" style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); color: var(--accent-spotify); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
+                <button id="addCustomCategoryBtn" title="Создать свою папку" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: #ffffff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
                   <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </button>
                 <button id="manageFoldersBtn" title="Управление папками" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
@@ -803,7 +803,7 @@
                   <option value="All Categories">All Categories</option>
                   <option value="Без категории">Без категории</option>
                 </select>
-                <button id="addCustomCustomCategoryBtn" title="Создать свою категорию" style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.25); color: #818cf8; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
+                <button id="addCustomCustomCategoryBtn" title="Создать свою категорию" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: #ffffff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
                   <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </button>
               </div>
@@ -813,7 +813,7 @@
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; width: 100%;">
               <!-- Word type pills -->
               <div id="dictTypePills" style="display: flex; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 10px; padding: 3px;">
-                <button class="dict-type-pill active" data-type="all" style="background: rgba(16, 185, 129, 0.18); border: none; color: #10b981; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Все</button>
+                <button class="dict-type-pill active" data-type="all" style="background: rgba(255, 255, 255, 0.12); border: none; color: #ffffff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Все</button>
                 <button class="dict-type-pill" data-type="words" style="background: transparent; border: none; color: var(--text-sub); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Слова</button>
                 <button class="dict-type-pill" data-type="phrases" style="background: transparent; border: none; color: var(--text-sub); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Фразы</button>
               </div>
@@ -840,11 +840,11 @@
               </svg>
               <input type="text" id="dictSearchInput" placeholder="Поиск в словаре..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.82rem; outline: none; width: 100%;">
             </div>
-            <button id="startMatchGameBtn" title="Сыграть в Match" style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); color: var(--accent-spotify); font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">
+            <button id="startMatchGameBtn" title="Сыграть в Match" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: var(--text-main); font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">
               <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="6"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h2"/><path d="M8 11v2"/></svg>
               <span>Match</span>
             </button>
-            <button id="startLearnGameBtn" title="Тренировать эти 4 слова" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); color: #f59e0b; font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">
+            <button id="startLearnGameBtn" title="Тренировать эти 4 слова" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: var(--text-main); font-weight: 700; height: 36px; padding: 0 10px; border-radius: 10px; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap; outline: none; font-size: 0.78rem;">
               <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
               <span>Тест</span>
             </button>
@@ -867,16 +867,16 @@
               <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
               <span>Очистить</span>
             </button>
-            <button class="modal-btn" id="startTrainingFromDictBtn" style="background: #f59e0b; color: #ffffff; font-weight: 700; border: none; border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm); margin: 0;">
+            <button class="modal-btn" id="startTrainingFromDictBtn" style="background: #ffffff; color: #09090b; font-weight: 700; border: none; border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; box-shadow: var(--shadow-sm); margin: 0;">
               <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
               <span>Training</span>
             </button>
             <div style="display: flex; gap: 6px; align-items: center;">
-              <button id="addManualWordBtn" title="Add word manually" style="background: var(--accent-spotify); border: none; color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: var(--shadow-sm);">
+              <button id="addManualWordBtn" title="Add word manually" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: var(--shadow-sm);">
                 <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>Слово</span>
               </button>
-              <button id="addManualPhraseBtn" title="Add phrase manually" style="background: #6366f1; border: none; color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: var(--shadow-sm);">
+              <button id="addManualPhraseBtn" title="Add phrase manually" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: #ffffff; border-radius: 20px; padding: 0 12px; height: 32px; display: flex; align-items: center; gap: 5px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0; box-shadow: var(--shadow-sm);">
                 <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>Фразу</span>
               </button>

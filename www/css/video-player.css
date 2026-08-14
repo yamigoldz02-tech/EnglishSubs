@@ -122,11 +122,11 @@
   top: -4px;
   left: -4px;
   cursor: nwse-resize;
-  border-top: 3px solid var(--accent-spotify);
-  border-left: 3px solid var(--accent-spotify);
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
   border-top-left-radius: 8px;
   box-sizing: border-box;
-  background: rgba(16, 185, 129, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: var(--shadow-sm);
   opacity: 0.85;
   transition: transform 0.15s ease, opacity 0.15s ease;
@@ -138,11 +138,11 @@
   bottom: -4px;
   right: -4px;
   cursor: nwse-resize;
-  border-bottom: 3px solid var(--accent-spotify);
-  border-right: 3px solid var(--accent-spotify);
+  border-bottom: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
   border-bottom-right-radius: 8px;
   box-sizing: border-box;
-  background: rgba(16, 185, 129, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: var(--shadow-sm);
   opacity: 0.85;
   transition: transform 0.15s ease, opacity 0.15s ease;
@@ -154,7 +154,7 @@
 .floating-resize-handle.bottom-right-handle.active {
   opacity: 1;
   transform: scale(1.2);
-  background: rgba(16, 185, 129, 0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .floating-resize-handle.left-handle {

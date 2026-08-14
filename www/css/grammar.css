@@ -24,14 +24,14 @@
 }
 
 .rules-accordion-item.active {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: var(--shadow-sm);
 }
 
 .rules-accordion-item.active .rules-accordion-chevron {
   transform: rotate(180deg);
-  color: var(--accent-indigo);
+  color: #ffffff;
 }
 
 .rules-accordion-item.active .rules-accordion-content {
@@ -53,9 +53,9 @@
 }
 
 .rules-delete-btn {
-  background: rgba(244, 63, 94, 0.08);
-  border: 1px solid rgba(244, 63, 94, 0.2);
-  color: #f43f5e;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
   font-size: 0.72rem;
   padding: 4px 12px;
   border-radius: var(--radius-pill);
@@ -72,15 +72,16 @@
 }
 
 .rules-delete-btn:hover {
-  background: rgba(244, 63, 94, 0.16);
-  border-color: rgba(244, 63, 94, 0.35);
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
   transform: translateY(-1px);
 }
 
 .rules-edit-btn {
-  background: rgba(99, 102, 241, 0.08);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  color: #818cf8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
   font-size: 0.72rem;
   padding: 4px 12px;
   border-radius: var(--radius-pill);
@@ -97,8 +98,9 @@
 }
 
 .rules-edit-btn:hover {
-  background: rgba(99, 102, 241, 0.16);
-  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--border-glass-hover);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 

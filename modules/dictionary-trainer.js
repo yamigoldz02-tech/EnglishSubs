@@ -319,11 +319,11 @@ function populateCategorySelectors() {
       pill.textContent = `📁 ${cat}`;
       pill.style.cssText = `
         padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-        cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
+        cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: all 0.18s;
         outline: none; white-space: nowrap;
-        background: ${preSelected.includes(cat) ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)'};
-        color: ${preSelected.includes(cat) ? '#1db954' : 'var(--text-sub)'};
-        border-color: ${preSelected.includes(cat) ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)'};
+        background: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)'};
+        color: ${preSelected.includes(cat) ? '#ffffff' : 'var(--text-sub)'};
+        border-color: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)'};
       `;
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
@@ -332,9 +332,9 @@ function populateCategorySelectors() {
         const allSelected = multiCatContainer.querySelectorAll('.mcat-pill.selected');
         if (isOn && allSelected.length <= 1) return;
         pill.classList.toggle('selected', !isOn);
-        pill.style.background = !isOn ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)';
-        pill.style.color = !isOn ? '#1db954' : 'var(--text-sub)';
-        pill.style.borderColor = !isOn ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)';
+        pill.style.background = !isOn ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)';
+        pill.style.color = !isOn ? '#ffffff' : 'var(--text-sub)';
+        pill.style.borderColor = !isOn ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)';
       });
       multiCatContainer.appendChild(pill);
     });
@@ -353,14 +353,14 @@ function populateCategorySelectors() {
       padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
       cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
       outline: none; white-space: nowrap;
-      background: ${isSelected ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)'};
+      background: ${isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)'};
       color: ${isSelected ? '#a78bfa' : 'var(--text-sub)'};
-      border-color: ${isSelected ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)'};
+      border-color: ${isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)'};
     `;
     const setPillActiveStyle = (pill, isSelected) => {
-      pill.style.background = isSelected ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
+      pill.style.background = isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
       pill.style.color = isSelected ? '#a78bfa' : 'var(--text-sub)';
-      pill.style.borderColor = isSelected ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+      pill.style.borderColor = isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
     };
 
     const nonePill = document.createElement('button');
@@ -439,11 +439,11 @@ function populateCategorySelectors() {
       pill.textContent = `📁 ${cat}`;
       pill.style.cssText = `
         padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-        cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
+        cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: all 0.18s;
         outline: none; white-space: nowrap;
-        background: ${preSelected.includes(cat) ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)'};
-        color: ${preSelected.includes(cat) ? '#1db954' : 'var(--text-sub)'};
-        border-color: ${preSelected.includes(cat) ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)'};
+        background: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)'};
+        color: ${preSelected.includes(cat) ? '#ffffff' : 'var(--text-sub)'};
+        border-color: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)'};
       `;
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
@@ -452,9 +452,9 @@ function populateCategorySelectors() {
         const allSelected = phrasePillsContainer.querySelectorAll('.mcat-pill.selected');
         if (isOn && allSelected.length <= 1) return;
         pill.classList.toggle('selected', !isOn);
-        pill.style.background = !isOn ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)';
-        pill.style.color = !isOn ? '#1db954' : 'var(--text-sub)';
-        pill.style.borderColor = !isOn ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)';
+        pill.style.background = !isOn ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)';
+        pill.style.color = !isOn ? '#ffffff' : 'var(--text-sub)';
+        pill.style.borderColor = !isOn ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)';
       });
       phrasePillsContainer.appendChild(pill);
     });
@@ -473,14 +473,14 @@ function populateCategorySelectors() {
       padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
       cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
       outline: none; white-space: nowrap;
-      background: ${isSelected ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)'};
+      background: ${isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)'};
       color: ${isSelected ? '#a78bfa' : 'var(--text-sub)'};
-      border-color: ${isSelected ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)'};
+      border-color: ${isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)'};
     `;
     const setPillActiveStyle = (pill, isSelected) => {
-      pill.style.background = isSelected ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
+      pill.style.background = isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
       pill.style.color = isSelected ? '#a78bfa' : 'var(--text-sub)';
-      pill.style.borderColor = isSelected ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+      pill.style.borderColor = isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
     };
 
     const nonePill = document.createElement('button');
@@ -676,7 +676,7 @@ function toggleDictionaryItem(buttonElement, word, translation, category = 'Из
     buttonElement.innerHTML = `➕ В словарь`;
     buttonElement.style.color = 'var(--accent-spotify)';
     buttonElement.style.background = 'rgba(29, 185, 84, 0.1)';
-    buttonElement.style.borderColor = 'rgba(29, 185, 84, 0.2)';
+    buttonElement.style.borderColor = 'rgba(255, 255, 255, 0.12)';
   } else {
     // Add it!
     let actualType = type;
@@ -793,8 +793,8 @@ function setupDictTypeFilters() {
       });
       
       pill.classList.add('active');
-      pill.style.background = 'rgba(29,185,84,0.18)';
-      pill.style.color = '#1db954';
+      pill.style.background = 'rgba(255, 255, 255, 0.12)';
+      pill.style.color = '#ffffff';
       
       // Re-render the word list with new filter
       renderDictWordsList();
@@ -970,8 +970,8 @@ function setupDictionaryUI() {
       // Update UI classes
       if (tab === 'personal') {
         tabPersonal.classList.add('active');
-        tabPersonal.style.color = 'var(--accent-spotify)';
-        tabPersonal.style.borderBottomColor = 'var(--accent-spotify)';
+        tabPersonal.style.color = '#ffffff';
+        tabPersonal.style.borderBottomColor = '#ffffff';
         tabPersonal.style.fontWeight = '700';
         
         tabEssential.classList.remove('active');
@@ -985,8 +985,8 @@ function setupDictionaryUI() {
         if (progressBarContainer) progressBarContainer.style.display = 'none'; // Only show in frequency tab
       } else {
         tabEssential.classList.add('active');
-        tabEssential.style.color = 'var(--accent-spotify)';
-        tabEssential.style.borderBottomColor = 'var(--accent-spotify)';
+        tabEssential.style.color = '#ffffff';
+        tabEssential.style.borderBottomColor = '#ffffff';
         tabEssential.style.fontWeight = '700';
         
         tabPersonal.classList.remove('active');
@@ -1262,9 +1262,9 @@ function setupDictionaryUI() {
             customCont.querySelectorAll('.mcat-pill').forEach(p => {
               const isNone = p.dataset.cat === 'Без категории';
               p.classList.toggle('selected', isNone);
-              p.style.background = isNone ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
-              p.style.color = isNone ? '#a78bfa' : 'var(--text-sub)';
-              p.style.borderColor = isNone ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+              p.style.background = isNone ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+              p.style.color = isNone ? '#ffffff' : 'var(--text-sub)';
+              p.style.borderColor = isNone ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
             });
           }
           
@@ -1282,7 +1282,7 @@ function setupDictionaryUI() {
               p.style.color = 'var(--text-sub)';
             });
             const allP = pillsC.querySelector('[data-type="all"]');
-            if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(29,185,84,0.18)'; allP.style.color = '#1db954'; }
+            if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(255, 255, 255, 0.12)'; allP.style.color = '#ffffff'; }
           }
           renderDictWordsList();
           resetFlashcard();
@@ -1349,18 +1349,18 @@ function setupDictionaryUI() {
         pillsCont.querySelectorAll('.mcat-pill').forEach(p => {
           const isObe = p.dataset.cat === 'Общее';
           p.classList.toggle('selected', isObe);
-          p.style.background = isObe ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)';
-          p.style.color = isObe ? '#1db954' : 'var(--text-sub)';
-          p.style.borderColor = isObe ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)';
+          p.style.background = isObe ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+          p.style.color = isObe ? '#ffffff' : 'var(--text-sub)';
+          p.style.borderColor = isObe ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
         });
       }
       if (customCont) {
         customCont.querySelectorAll('.mcat-pill').forEach(p => {
           const isNone = p.dataset.cat === 'Без категории';
           p.classList.toggle('selected', isNone);
-          p.style.background = isNone ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
-          p.style.color = isNone ? '#a78bfa' : 'var(--text-sub)';
-          p.style.borderColor = isNone ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+          p.style.background = isNone ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+          p.style.color = isNone ? '#ffffff' : 'var(--text-sub)';
+          p.style.borderColor = isNone ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
         });
       }
       
@@ -1378,7 +1378,7 @@ function setupDictionaryUI() {
           p.style.color = 'var(--text-sub)';
         });
         const allP = pillsC.querySelector('[data-type="all"]');
-        if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(29,185,84,0.18)'; allP.style.color = '#1db954'; }
+        if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(255, 255, 255, 0.12)'; allP.style.color = '#ffffff'; }
       }
       
       renderDictWordsList();
@@ -1659,9 +1659,9 @@ function setupDictionaryUI() {
             customCont.querySelectorAll('.mcat-pill').forEach(p => {
               const isNone = p.dataset.cat === 'Без категории';
               p.classList.toggle('selected', isNone);
-              p.style.background = isNone ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
-              p.style.color = isNone ? '#a78bfa' : 'var(--text-sub)';
-              p.style.borderColor = isNone ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+              p.style.background = isNone ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+              p.style.color = isNone ? '#ffffff' : 'var(--text-sub)';
+              p.style.borderColor = isNone ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
             });
           }
           
@@ -1679,7 +1679,7 @@ function setupDictionaryUI() {
               p.style.color = 'var(--text-sub)';
             });
             const allP = pillsC.querySelector('[data-type="all"]');
-            if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(29,185,84,0.18)'; allP.style.color = '#1db954'; }
+            if (allP) { allP.classList.add('active'); allP.style.background = 'rgba(255, 255, 255, 0.12)'; allP.style.color = '#ffffff'; }
           }
           renderDictWordsList();
           resetFlashcard();
@@ -1756,18 +1756,18 @@ function setupDictionaryUI() {
         pillsCont.querySelectorAll('.mcat-pill').forEach(p => {
           const isObe = p.dataset.cat === 'Общее';
           p.classList.toggle('selected', isObe);
-          p.style.background = isObe ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)';
-          p.style.color = isObe ? '#1db954' : 'var(--text-sub)';
-          p.style.borderColor = isObe ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)';
+          p.style.background = isObe ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+          p.style.color = isObe ? '#ffffff' : 'var(--text-sub)';
+          p.style.borderColor = isObe ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
         });
       }
       if (customCont) {
         customCont.querySelectorAll('.mcat-pill').forEach(p => {
           const isNone = p.dataset.cat === 'Без категории';
           p.classList.toggle('selected', isNone);
-          p.style.background = isNone ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)';
-          p.style.color = isNone ? '#a78bfa' : 'var(--text-sub)';
-          p.style.borderColor = isNone ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.1)';
+          p.style.background = isNone ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
+          p.style.color = isNone ? '#ffffff' : 'var(--text-sub)';
+          p.style.borderColor = isNone ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
         });
       }
 
@@ -1791,8 +1791,8 @@ function setupDictionaryUI() {
         const allPillSave = pillsContainerSave.querySelector('[data-type="all"]');
         if (allPillSave) {
           allPillSave.classList.add('active');
-          allPillSave.style.background = 'rgba(29,185,84,0.18)';
-          allPillSave.style.color = '#1db954';
+          allPillSave.style.background = 'rgba(255, 255, 255, 0.12)';
+          allPillSave.style.color = '#ffffff';
         }
       }
 
@@ -2050,8 +2050,8 @@ function setupDictionaryUI() {
       const allPill = pillsContainer.querySelector('[data-type="all"]');
       if (allPill) {
         allPill.classList.add('active');
-        allPill.style.background = 'rgba(29,185,84,0.18)';
-        allPill.style.color = '#1db954';
+        allPill.style.background = 'rgba(255, 255, 255, 0.12)';
+        allPill.style.color = '#ffffff';
       }
     }
     
@@ -3480,7 +3480,7 @@ function startStudySession() {
       if (emptyText) {
         emptyText.innerHTML = `
           На сегодня новых слов для повторения нет — вы молодец! 🎉<br>
-          ${nextReviewText ? `<span style="display:inline-block;margin-top:8px;padding:6px 14px;background:rgba(29,185,84,0.1);border:1px solid rgba(29,185,84,0.2);border-radius:12px;font-weight:600;color:#1db954;">📅 ${nextReviewText}</span>` : ''}
+          ${nextReviewText ? `<span style="display:inline-block;margin-top:8px;padding:6px 14px;background:rgba(29,185,84,0.1);border:1px solid rgba(255, 255, 255, 0.12);border-radius:12px;font-weight:600;color:#1db954;">📅 ${nextReviewText}</span>` : ''}
         `;
       }
     }
@@ -3942,13 +3942,13 @@ function renderDictWordsList(filterQuery = "") {
     
     // Add small tag showing active interval
     const intervalDays = w.interval || 0;
-    const intervalBadge = intervalDays > 0 ? `<span style="font-size: 0.65rem; padding: 2px 6px; background: rgba(29,185,84,0.1); color: var(--accent-spotify); border-radius: 8px; margin-left: 6px;">${intervalDays}d</span>` : '';
+    const intervalBadge = intervalDays > 0 ? `<span style="font-size: 0.65rem; font-weight: 600; padding: 2px 6px; background: rgba(255,255,255,0.06); color: #a1a1aa; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; margin-left: 6px;">${intervalDays}d</span>` : '';
 
     // Build multi-category badges
     const wordCats = (w.categories && Array.isArray(w.categories) && w.categories.length > 0)
       ? w.categories : [w.category || 'Общее'];
     const catBadges = wordCats.map(c =>
-      `<span class="dict-cat-badge" style="font-size: 0.65rem; color: var(--text-muted); background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">📁 ${escapeHTML(c)}</span>`
+      `<span class="dict-cat-badge" style="font-size: 0.65rem; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">${escapeHTML(c)}</span>`
     ).join('');
 
     // Safely escape word and translation to prevent XSS vulnerabilities
@@ -3956,14 +3956,14 @@ function renderDictWordsList(filterQuery = "") {
       <div class="word-row-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
         <div style="text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
           <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); display: flex; align-items: center;">${escapeHTML(w.word)} ${intervalBadge}</div>
-          <div style="font-size: 0.8rem; color: var(--accent-spotify); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <div style="font-size: 0.8rem; color: #a1a1aa; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
             <span>${escapeHTML(w.translation)}</span>
             ${catBadges}
             ${(() => {
               const customCats = (w.customCategories && Array.isArray(w.customCategories) && w.customCategories.length > 0)
                 ? w.customCategories : [w.customCategory || 'Без категории'];
               return customCats.filter(c => c !== 'Без категории').map(c =>
-                `<span style="font-size: 0.65rem; color: #a78bfa; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">🏷️ ${escapeHTML(c)}</span>`
+                `<span style="font-size: 0.65rem; color: #a1a1aa; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">${escapeHTML(c)}</span>`
               ).join('');
             })()}
           </div>
@@ -3976,12 +3976,12 @@ function renderDictWordsList(filterQuery = "") {
         </button>
       </div>
       ${w.definition ? `
-      <div class="word-definition-block" style="font-size: 0.76rem; color: var(--text-sub); margin-top: 6px; font-style: italic; border-left: 2px solid rgba(167, 139, 250, 0.4); padding-left: 8px; white-space: normal; text-align: left; line-height: 1.3;">
+      <div class="word-definition-block" style="font-size: 0.76rem; color: var(--text-sub); margin-top: 6px; font-style: italic; border-left: 2px solid rgba(255, 255, 255, 0.15); padding-left: 8px; white-space: normal; text-align: left; line-height: 1.3;">
         ${escapeHTML(w.definition)}
       </div>
       ` : ''}
       ${w.rule ? `
-      <div class="word-rule-block" style="font-size: 0.74rem; color: #60a5fa; margin-top: 5px; border-left: 2px solid rgba(96,165,250,0.4); padding-left: 8px; white-space: normal; text-align: left; line-height: 1.3; display: flex; align-items: flex-start; gap: 4px;">
+      <div class="word-rule-block" style="font-size: 0.74rem; color: var(--text-muted); margin-top: 5px; border-left: 2px solid rgba(255, 255, 255, 0.15); padding-left: 8px; white-space: normal; text-align: left; line-height: 1.3; display: flex; align-items: flex-start; gap: 4px;">
         <span style="opacity:0.7; flex-shrink:0;">📐</span><span>${escapeHTML(w.rule)}</span>
       </div>
       ` : ''}

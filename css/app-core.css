@@ -208,12 +208,11 @@ body.light-theme.no-blur-mode .navbar {
   height: 245px;
 }
 
-/* Active state for expand buttons */
 .dict-expand-btn-active {
-  background: rgba(167, 139, 250, 0.15) !important;
-  border-color: rgba(167, 139, 250, 0.4) !important;
-  color: #a78bfa !important;
-  box-shadow: 0 0 8px rgba(167, 139, 250, 0.2);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  box-shadow: none;
 }
 
 #dictionaryModal .dict-modal-body,

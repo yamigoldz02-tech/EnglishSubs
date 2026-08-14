@@ -26,10 +26,10 @@
 }
 
 .match-tile.selected {
-  background: rgba(16, 185, 129, 0.12) !important;
-  border-color: rgba(16, 185, 129, 0.4) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   box-shadow: var(--shadow-sm) !important;
-  color: #10b981 !important;
+  color: #ffffff !important;
   transform: scale(1.02) translateY(-2px);
 }
 
@@ -97,9 +97,9 @@ body.light-theme .match-tile:hover {
 }
 
 .learn-choice-btn.correct {
-  background: rgba(16, 185, 129, 0.12) !important;
-  border-color: rgba(16, 185, 129, 0.4) !important;
-  color: #10b981 !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
   box-shadow: var(--shadow-sm) !important;
 }
 
