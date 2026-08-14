@@ -534,3 +534,80 @@ body.light-theme #addManualPhraseBtn:hover {
   border-color: #EBB2C0 !important;
   color: #000000 !important;
 }
+
+/* ── Warm Theme Dictionary Overrides ── */
+body.warm-theme .dict-tab:hover {
+  color: #3E2723;
+}
+
+body.warm-theme .dict-tab.active {
+  color: #3E2723 !important;
+  border-bottom: 2px solid #F4A261 !important;
+}
+
+body.warm-theme .dict-type-pill {
+  color: #8D6E63;
+}
+
+body.warm-theme .dict-type-pill:hover {
+  color: #3E2723;
+}
+
+body.warm-theme .dict-type-pill.active {
+  background: #FFFFFF !important;
+  color: #3E2723 !important;
+  box-shadow: 0 1px 3px rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .dict-word-row {
+  border-radius: 8px;
+}
+
+body.warm-theme .dict-word-row:hover {
+  background: #FDF6E3;
+}
+
+body.warm-theme .dict-cat-badge {
+  background: rgba(62, 39, 35, 0.05);
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+}
+
+body.warm-theme .filters-toggle-btn {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+}
+
+body.warm-theme .filters-toggle-btn:hover {
+  background: #FFFFFF;
+  color: #3E2723;
+  border-color: #F4A261;
+}
+
+body.warm-theme #startTrainingFromDictBtn {
+  background: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(244, 162, 97, 0.45) !important;
+}
+
+body.warm-theme #startTrainingFromDictBtn:hover {
+  background: #e8934f !important;
+  box-shadow: 0 6px 22px rgba(244, 162, 97, 0.6) !important;
+}
+
+body.warm-theme #addManualWordBtn,
+body.warm-theme #addManualPhraseBtn {
+  background: #FFFFFF !important;
+  border-color: rgba(62, 39, 35, 0.12) !important;
+  color: #3E2723 !important;
+  font-weight: 700;
+}
+
+body.warm-theme #addManualWordBtn:hover,
+body.warm-theme #addManualPhraseBtn:hover {
+  background: #FDF6E3 !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+}

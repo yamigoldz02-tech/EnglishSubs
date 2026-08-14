@@ -205,43 +205,44 @@ body.light-theme .notebook-wordcount {
 
 /* ── Unified Button Styles in Notebook ── */
 .notebook-action-btn {
-  background: #18181B;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #FAFAFA;
-  border-radius: 8px;
-  padding: 4px 9px;
+  border-radius: 20px;
+  padding: 4px 11px;
   font-size: 0.68rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   transition: all 0.2s;
   outline: none;
   white-space: nowrap;
 }
 .notebook-action-btn:hover {
-  background: #27272A;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
   color: #FFFFFF;
 }
 body.light-theme .notebook-action-btn {
-  background: #FCF8F9;
-  border: 1px solid rgba(0, 0, 0, 0.09);
-  color: #000000;
+  background: #F4F4F5;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #3F3F46;
   font-weight: 700;
+  border-radius: 20px;
 }
 body.light-theme .notebook-action-btn:hover {
-  background: #FFFFFF;
-  border-color: #EBB2C0;
+  background: #E4E4E7;
+  border-color: rgba(0, 0, 0, 0.18);
   color: #000000;
-  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .notebook-primary-btn {
   background: rgba(255, 69, 0, 0.15);
   border: 1px solid rgba(255, 69, 0, 0.35);
-  border-radius: 10px;
+  border-radius: 20px;
   color: #FF4500;
   font-size: 0.72rem;
   font-weight: 700;
@@ -249,7 +250,7 @@ body.light-theme .notebook-action-btn:hover {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 10px;
+  padding: 4px 12px;
   transition: all 0.2s;
   outline: none;
 }
@@ -259,26 +260,27 @@ body.light-theme .notebook-action-btn:hover {
   box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
 }
 body.light-theme .notebook-primary-btn {
-  background: #EBB2C0;
-  border: 1px solid #EBB2C0;
-  color: #000000;
-  font-weight: 800;
-  border-radius: 10px;
-  padding: 4px 10px;
+  background: #000000;
+  border: 1px solid #000000;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 4px 12px;
   font-size: 0.72rem;
-  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 body.light-theme .notebook-primary-btn:hover {
-  background: #e3a2b2;
-  box-shadow: 0 4px 12px rgba(235, 178, 192, 0.6);
+  background: #27272A;
+  border-color: #27272A;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .notebook-clear-btn {
-  background: #18181B;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-muted);
-  border-radius: 8px;
-  padding: 4px 9px;
+  border-radius: 20px;
+  padding: 4px 11px;
   font-size: 0.68rem;
   font-weight: 700;
   cursor: pointer;
@@ -295,10 +297,11 @@ body.light-theme .notebook-primary-btn:hover {
   color: #ef4444;
 }
 body.light-theme .notebook-clear-btn {
-  background: #FCF8F9;
-  border: 1px solid rgba(0, 0, 0, 0.09);
+  background: #F4F4F5;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   color: #71717A;
   font-weight: 700;
+  border-radius: 20px;
 }
 body.light-theme .notebook-clear-btn:hover {
   background: rgba(239, 68, 68, 0.08);
@@ -892,4 +895,265 @@ body.light-theme .lesson-note-dot {
   .notebook-drawer-tab.drawer-open {
     left: 88vw;
   }
+}
+
+/* ── Warm Theme Notebook Drawer Overrides ── */
+body.warm-theme .notebook-drawer-tab {
+  background: #ffffff;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+  box-shadow: 0 4px 16px rgba(62, 39, 35, 0.08);
+}
+body.warm-theme .notebook-drawer-tab:hover {
+  background: #FDF6E3;
+  border-color: #F4A261;
+  color: #3E2723;
+}
+body.warm-theme .notebook-drawer-tab.drawer-open {
+  background: #ffffff;
+}
+
+body.warm-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
+  background: rgba(62, 39, 35, 0.2);
+}
+
+body.warm-theme .notebook-modal-card {
+  background: #FFFFFF;
+  border-right-color: rgba(62, 39, 35, 0.08);
+  box-shadow: 8px 0 40px rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .notebook-header {
+  border-bottom-color: rgba(62, 39, 35, 0.06);
+}
+
+body.warm-theme .notebook-icon-big {
+  color: #3E2723;
+}
+
+body.warm-theme .notebook-title {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .notebook-subtitle {
+  color: #8D6E63;
+}
+
+body.warm-theme .notebook-wordcount {
+  color: #8D6E63;
+  font-weight: 700;
+}
+
+body.warm-theme .notebook-action-btn {
+  background: #FDF6E3;
+  border: 1px solid rgba(62, 39, 35, 0.09);
+  color: #3E2723;
+  font-weight: 700;
+}
+body.warm-theme .notebook-action-btn:hover {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  color: #3E2723;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.25);
+}
+
+body.warm-theme .notebook-primary-btn {
+  background: #F4A261;
+  border: 1px solid #F4A261;
+  color: #3E2723;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.4);
+}
+body.warm-theme .notebook-primary-btn:hover {
+  background: #e8934f;
+  box-shadow: 0 4px 12px rgba(244, 162, 97, 0.6);
+}
+
+body.warm-theme .notebook-clear-btn {
+  background: #FDF6E3;
+  border: 1px solid rgba(62, 39, 35, 0.09);
+  color: #8D6E63;
+  font-weight: 700;
+}
+body.warm-theme .notebook-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+body.warm-theme .notebook-close-btn {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.09);
+  color: #3E2723;
+  font-weight: 800;
+}
+body.warm-theme .notebook-close-btn:hover {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  color: #3E2723;
+}
+
+body.warm-theme .notebook-back-btn {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .notebook-toolbar {
+  border-bottom-color: rgba(62, 39, 35, 0.06);
+}
+
+body.warm-theme .notebook-status {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .notebook-tabs {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .notebook-tab {
+  color: #8D6E63;
+  font-weight: 700;
+}
+body.warm-theme .notebook-tab:hover {
+  color: #3E2723;
+  background: rgba(62, 39, 35, 0.04);
+}
+body.warm-theme .notebook-tab.active {
+  background: #FFFFFF !important;
+  color: #3E2723 !important;
+  font-weight: 800;
+  box-shadow: 0 1px 4px rgba(62, 39, 35, 0.08);
+  border: 1px solid rgba(62, 39, 35, 0.04);
+}
+
+body.warm-theme .notebook-search-container {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+body.warm-theme .notebook-search-container:focus-within {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+}
+
+body.warm-theme .notebook-search-input {
+  color: #3E2723;
+  font-weight: 600;
+}
+body.warm-theme .notebook-search-input::placeholder {
+  color: #8D6E63;
+}
+
+body.warm-theme .notebook-title-input {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+  font-weight: 800;
+}
+body.warm-theme .notebook-title-input:focus {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+}
+
+body.warm-theme .notebook-folder-item,
+body.warm-theme .notebook-note-item {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+body.warm-theme .notebook-folder-item:hover,
+body.warm-theme .notebook-note-item:hover {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.2);
+}
+
+body.warm-theme .notebook-textarea {
+  color: #3E2723;
+  font-weight: 500;
+  caret-color: #3E2723;
+}
+body.warm-theme .notebook-textarea::placeholder {
+  color: #8D6E63;
+}
+body.warm-theme .notebook-textarea::-webkit-scrollbar-thumb {
+  background: rgba(244, 162, 97, 0.6);
+}
+
+body.warm-theme .notebook-lessons-list::-webkit-scrollbar-thumb {
+  background: rgba(244, 162, 97, 0.6);
+}
+
+body.warm-theme .notebook-lesson-entry {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+body.warm-theme .notebook-lesson-entry:hover {
+  background: #FFFFFF;
+  border-color: #F4A261;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.2);
+}
+
+body.warm-theme .notebook-lesson-badge {
+  color: #3E2723;
+  background: rgba(244, 162, 97, 0.2);
+  border-color: #F4A261;
+  font-weight: 800;
+}
+
+body.warm-theme .notebook-lesson-title {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .notebook-lesson-note-textarea {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+  font-weight: 500;
+  caret-color: #3E2723;
+}
+body.warm-theme .notebook-lesson-note-textarea:focus {
+  border-color: #F4A261;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.2);
+}
+
+body.warm-theme .notebook-empty-state {
+  color: #8D6E63;
+}
+
+body.warm-theme .lesson-note-section {
+  border-top-color: rgba(62, 39, 35, 0.07);
+}
+
+body.warm-theme .lesson-note-label {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .lesson-note-textarea {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+  font-weight: 500;
+  caret-color: #3E2723;
+}
+body.warm-theme .lesson-note-textarea:focus {
+  border-color: #F4A261;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.2);
+}
+
+body.warm-theme .lesson-note-save-status {
+  color: #8D6E63;
+}
+
+body.warm-theme .lesson-note-dot {
+  background: #F4A261;
+  box-shadow: 0 0 5px rgba(244, 162, 97, 0.8);
 }

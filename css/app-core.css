@@ -2590,3 +2590,49 @@ body.no-notebook-line-numbers .editor-line-numbers {
 .modal-close-btn:hover {
   color: var(--accent-spotify, #1db954);
 }
+
+/* ── Warm Theme App Core Overrides ── */
+body.warm-theme .video-course-progress-panel .progress-track {
+  background: rgba(62, 39, 35, 0.06);
+}
+
+body.warm-theme .video-course-progress-panel .progress-bar-fill {
+  background: linear-gradient(90deg, #F4A261, #E9C46A);
+  box-shadow: 0 0 10px rgba(244, 162, 97, 0.4);
+}
+
+body.warm-theme .video-course-controls {
+  border-bottom-color: rgba(62, 39, 35, 0.05);
+}
+
+body.warm-theme .video-course-controls .filter-pill.active {
+  background: #FFFFFF !important;
+  color: #3E2723 !important;
+  font-weight: 800;
+  box-shadow: 0 1px 3px rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .editor-container {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .editor-container:focus-within {
+  border-color: #F4A261;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.25);
+}
+
+body.warm-theme .editor-line-numbers {
+  background: #FDF6E3;
+  border-right-color: rgba(62, 39, 35, 0.06);
+  color: #8D6E63;
+}
+
+body.warm-theme .header-menu-btn:hover {
+  border-color: #F4A261;
+  background: #FFFFFF;
+}
+
+body.warm-theme .header-menu-streak-dot {
+  background: #F4A261;
+}

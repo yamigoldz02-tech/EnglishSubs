@@ -879,7 +879,7 @@ function updateNotebookWordCount() {
   const textarea = document.getElementById('notebookTextarea');
   const el = document.getElementById('notebookWordCount');
   if (!el || !textarea) return;
-  el.textContent = `${textarea.value.length} characters`;
+  el.textContent = `${textarea.value.length} симв.`;
 }
 
 function renderNotebookLessonsTab() {

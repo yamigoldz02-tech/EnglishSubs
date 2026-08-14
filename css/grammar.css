@@ -170,3 +170,47 @@ body.gray-theme .rules-accordion-item.active {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(99, 102, 241, 0.3);
 }
+
+/* Warm Theme overrides for Rules Modal */
+body.warm-theme .rules-tabs {
+  background: rgba(62, 39, 35, 0.03) !important;
+}
+
+body.warm-theme .rules-tab:hover {
+  background: rgba(62, 39, 35, 0.05);
+}
+
+body.warm-theme .rules-tab.active {
+  color: #3E2723 !important;
+  border-bottom: 2px solid #F4A261 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .rules-accordion-item {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .rules-accordion-item.active {
+  border-color: rgba(244, 162, 97, 0.4);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .rules-accordion-item.active .rules-accordion-chevron {
+  color: #3E2723;
+}
+
+body.warm-theme #ruleTitleInput,
+body.warm-theme #ruleContentInput {
+  background: #FDF6E3 !important;
+  border-color: rgba(62, 39, 35, 0.1) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme #ruleTitleInput:focus,
+body.warm-theme #ruleContentInput:focus {
+  background: #FFFFFF !important;
+  border-color: #F4A261 !important;
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.2) !important;
+}

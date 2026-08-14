@@ -232,25 +232,36 @@ function setupEventListeners() {
     });
   }
 
-  // Three-Theme Switcher logic (Dark -> Light -> Gray -> Dark) with localStorage persistence
+  // Four-Theme Switcher logic (Dark -> Light -> Warm -> Gray -> Dark) with localStorage persistence
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       if (document.body.classList.contains('light-theme')) {
-        // Light -> Gray
-        document.body.classList.remove('light-theme');
+        // Light -> Warm
+        document.body.classList.remove('light-theme', 'gray-theme');
+        document.body.classList.add('warm-theme');
+        localStorage.setItem('theme', 'warm');
+        updateThemeIcons('warm');
+        if (window.showToast) window.showToast("Тема: Теплая бумага (#FDF6E3)", "info");
+      } else if (document.body.classList.contains('warm-theme')) {
+        // Warm -> Gray
+        document.body.classList.remove('light-theme', 'warm-theme');
         document.body.classList.add('gray-theme');
         localStorage.setItem('theme', 'gray');
         updateThemeIcons('gray');
+        if (window.showToast) window.showToast("Тема: Графитовая", "info");
       } else if (document.body.classList.contains('gray-theme')) {
         // Gray -> Dark
-        document.body.classList.remove('gray-theme');
+        document.body.classList.remove('light-theme', 'warm-theme', 'gray-theme');
         localStorage.setItem('theme', 'dark');
         updateThemeIcons('dark');
+        if (window.showToast) window.showToast("Тема: Черная (Dark Zinc)", "info");
       } else {
         // Dark -> Light
+        document.body.classList.remove('warm-theme', 'gray-theme');
         document.body.classList.add('light-theme');
         localStorage.setItem('theme', 'light');
         updateThemeIcons('light');
+        if (window.showToast) window.showToast("Тема: Светлая (IGOR)", "info");
       }
     });
   }

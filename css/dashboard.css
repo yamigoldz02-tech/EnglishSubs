@@ -589,3 +589,177 @@ body.light-theme .dash-song-item:hover .dash-song-play-btn {
     font-size: 2rem;
   }
 }
+
+/* ── Warm Paper / Solarized Theme Overrides ── */
+body.warm-theme .dash-hero-title {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .dash-hero-subtitle {
+  color: #5D4037;
+}
+
+body.warm-theme .dash-hero-badge {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .dash-hero-badge-dot {
+  background: #F4A261;
+}
+
+body.warm-theme .dash-action-btn.primary {
+  background: #F4A261;
+  color: #3E2723;
+  font-weight: 800;
+  box-shadow: 0 4px 18px rgba(244, 162, 97, 0.45);
+}
+
+body.warm-theme .dash-action-btn.primary:hover {
+  background: #e8934f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(244, 162, 97, 0.6);
+}
+
+body.warm-theme .dash-action-btn.secondary {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.12);
+  color: #3E2723;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .dash-action-btn.secondary:hover {
+  background: #FDF6E3;
+  border-color: #F4A261;
+  color: #3E2723;
+}
+
+body.warm-theme .bento-card {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .bento-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(244, 162, 97, 0.5);
+  box-shadow: 0 8px 24px rgba(244, 162, 97, 0.2);
+}
+
+body.warm-theme .bento-icon {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+  color: #3E2723;
+}
+
+body.warm-theme .bento-card:hover .bento-icon {
+  background: #F4A261;
+  border-color: #F4A261;
+  color: #3E2723;
+}
+
+body.warm-theme .bento-stat-num {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .bento-card-title {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .bento-card-desc {
+  color: #5D4037;
+}
+
+body.warm-theme .bento-progress-track {
+  background: rgba(62, 39, 35, 0.06);
+}
+
+body.warm-theme .bento-progress-fill {
+  background: linear-gradient(90deg, #F4A261 0%, #E9C46A 100%);
+}
+
+body.warm-theme .bento-card:hover .bento-card-footer {
+  color: #3E2723;
+}
+
+body.warm-theme .dash-music-panel {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.08);
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .dash-panel-title {
+  color: #3E2723;
+  font-weight: 800;
+}
+
+body.warm-theme .dash-panel-title svg {
+  stroke: #3E2723;
+  color: #3E2723;
+}
+
+body.warm-theme .dash-song-item {
+  background: #FDF6E3;
+  border-color: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .dash-song-item:hover {
+  background: #FFFFFF;
+  border-color: rgba(244, 162, 97, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(62, 39, 35, 0.06);
+}
+
+body.warm-theme .dash-song-cover {
+  background: #FFFFFF;
+  border-color: rgba(62, 39, 35, 0.12);
+  color: #3E2723;
+  font-weight: 700;
+}
+
+body.warm-theme .dash-song-cover.fav {
+  color: #3E2723;
+}
+
+body.warm-theme .dash-song-cover.fav svg {
+  fill: #3E2723;
+  stroke: #3E2723;
+}
+
+body.warm-theme .dash-song-item:hover .dash-song-cover {
+  background: #3E2723;
+  border-color: #3E2723;
+  color: #FFFFFF;
+}
+
+body.warm-theme .dash-song-item:hover .dash-song-cover.fav svg {
+  fill: #FFFFFF;
+  stroke: #FFFFFF;
+}
+
+body.warm-theme .dash-song-title {
+  color: #3E2723;
+  font-weight: 700;
+}
+
+body.warm-theme .dash-song-artist {
+  color: #8D6E63;
+}
+
+body.warm-theme .dash-song-play-btn {
+  background: #FFFFFF;
+  border: 1px solid rgba(62, 39, 35, 0.12);
+  color: #3E2723;
+}
+
+body.warm-theme .dash-song-item:hover .dash-song-play-btn {
+  background: #3E2723;
+  border-color: #3E2723;
+  color: #FFFFFF;
+}

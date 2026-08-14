@@ -597,12 +597,13 @@ body.light-theme .modal-status.error {
   color: #E11D48 !important;
 }
 
-/* Training Modal 3D Flashcards and Action Rating Buttons */
+/* Training Modal 3D Flashcards, Heatmap and Counters */
 body.light-theme #cardForgotBtn {
   background: #FFF1F2 !important;
   border: 1px solid rgba(225, 29, 72, 0.2) !important;
   color: #E11D48 !important;
   font-weight: 600 !important;
+  border-radius: 20px !important;
 }
 
 body.light-theme #cardHardBtn {
@@ -610,6 +611,7 @@ body.light-theme #cardHardBtn {
   border: 1px solid rgba(217, 119, 6, 0.2) !important;
   color: #D97706 !important;
   font-weight: 600 !important;
+  border-radius: 20px !important;
 }
 
 body.light-theme #cardEasyBtn {
@@ -617,14 +619,25 @@ body.light-theme #cardEasyBtn {
   border: 1px solid rgba(16, 185, 129, 0.2) !important;
   color: #059669 !important;
   font-weight: 600 !important;
+  border-radius: 20px !important;
 }
 
 body.light-theme #cardUndoBtn,
-body.light-theme #cardDeleteBtn {
+body.light-theme #cardDeleteBtn,
+body.light-theme #dictDeleteCardBtn {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border-radius: 20px !important;
+}
+
+body.light-theme #cardUndoBtn:hover,
+body.light-theme #cardDeleteBtn:hover,
+body.light-theme #dictDeleteCardBtn:hover {
   background: #F9F9F8 !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: #3F3F46 !important;
-  font-weight: 600 !important;
+  border-color: rgba(0, 0, 0, 0.22) !important;
+  color: #000000 !important;
 }
 
 body.light-theme .dict-heatmap-container,
@@ -633,6 +646,99 @@ body.light-theme #trainingSettingsBar {
   background: #F9F9F8 !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
   color: #000000 !important;
+}
+
+body.light-theme #dictStreakInfo {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme #cardFrontLabel,
+body.light-theme #cardBackLabel {
+  color: #71717A !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.8px !important;
+}
+
+body.light-theme #cardWord {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme #cardTranslation {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme #cardContext {
+  color: #52525B !important;
+}
+
+body.light-theme #cardSpeakBtn,
+body.light-theme #cardPracticeBtn,
+body.light-theme #cardEditBtnFront,
+body.light-theme #cardSpeakBtnBack,
+body.light-theme #cardPracticeBtnBack,
+body.light-theme #cardEditBtnBack {
+  background: #F9F9F8 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+}
+
+body.light-theme #cardSpeakBtn:hover,
+body.light-theme #cardPracticeBtn:hover,
+body.light-theme #cardEditBtnFront:hover,
+body.light-theme #cardSpeakBtnBack:hover,
+body.light-theme #cardPracticeBtnBack:hover,
+body.light-theme #cardEditBtnBack:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.25) !important;
+  color: #000000 !important;
+}
+
+body.light-theme .session-pill.remaining {
+  background: #FCF8F9 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme .session-pill.learned {
+  background: #FCF8F9 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme #sessionProgressCounterText {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme #sessionProgressBarFill {
+  background: #000000 !important;
+}
+
+body.light-theme #essentialProgressBar {
+  background: #000000 !important;
+}
+
+body.light-theme #essentialProgressText {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .heatmap-cell.intensity-0 {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+body.light-theme .heatmap-cell.intensity-1 {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+body.light-theme .heatmap-cell.intensity-2 {
+  background: rgba(0, 0, 0, 0.55) !important;
+}
+body.light-theme .heatmap-cell.intensity-3 {
+  background: #000000 !important;
 }
 
 /* Gamification Modal (XP, Streaks, Rank & Analytics) */
@@ -865,4 +971,54 @@ body.light-theme .learn-choice-btn.incorrect {
   background: #FFF1F2 !important;
   border-color: rgba(225, 29, 72, 0.3) !important;
   color: #E11D48 !important;
+}
+/* ── Warm Theme Modal Overrides ── */
+body.warm-theme .modal-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.1) !important;
+}
+
+body.warm-theme .modal-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.07) !important;
+  color: #3E2723 !important;
+}
+
+body.warm-theme .modal-header h3,
+body.warm-theme .modal-header h4,
+body.warm-theme .modal-title {
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+}
+
+body.warm-theme .modal-header svg {
+  stroke: #3E2723 !important;
+}
+
+body.warm-theme .modal-footer {
+  background: #FFFFFF !important;
+  border-top: 1px solid rgba(62, 39, 35, 0.07) !important;
+}
+
+body.warm-theme .modal-body {
+  color: #3E2723 !important;
+}
+
+body.warm-theme .modal-body p {
+  color: #5D4037 !important;
+}
+
+body.warm-theme .btn-primary,
+body.warm-theme .modal-footer .btn-primary {
+  background: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 800 !important;
+  border: 1px solid #F4A261 !important;
+  box-shadow: 0 4px 16px rgba(244, 162, 97, 0.35) !important;
+}
+
+body.warm-theme .btn-primary:hover,
+body.warm-theme .modal-footer .btn-primary:hover {
+  background: #e8934f !important;
 }

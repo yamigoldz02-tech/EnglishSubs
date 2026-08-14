@@ -250,3 +250,25 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(14px);
 }
+
+body.warm-theme .bg-blobs {
+  background: none;
+}
+
+body.warm-theme .nav-brand {
+  color: #3E2723;
+}
+
+body.warm-theme .brand-accent {
+  color: #8D6E63;
+}
+
+body.warm-theme .brand-icon {
+  background: #3E2723;
+  color: #FDF6E3;
+  box-shadow: var(--shadow-sm);
+}
+
+body.warm-theme .brand-icon svg {
+  stroke: #FDF6E3;
+}

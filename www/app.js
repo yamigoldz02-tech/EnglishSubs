@@ -509,6 +509,9 @@ function restoreSavedTheme() {
   if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     updateThemeIcons('light');
+  } else if (savedTheme === 'warm') {
+    document.body.classList.add('warm-theme');
+    updateThemeIcons('warm');
   } else if (savedTheme === 'gray') {
     document.body.classList.add('gray-theme');
     updateThemeIcons('gray');
@@ -521,22 +524,14 @@ function restoreSavedTheme() {
 function updateThemeIcons(theme) {
   if (!themeToggleBtn) return;
   const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+  const warmIcon = themeToggleBtn.querySelector('.warm-icon');
   const grayIcon = themeToggleBtn.querySelector('.gray-icon');
   const moonIcon = themeToggleBtn.querySelector('.moon-icon');
 
-  if (theme === 'light') {
-    sunIcon.style.display = 'none';
-    grayIcon.style.display = 'block';
-    moonIcon.style.display = 'none';
-  } else if (theme === 'gray') {
-    sunIcon.style.display = 'none';
-    grayIcon.style.display = 'none';
-    moonIcon.style.display = 'block';
-  } else {
-    sunIcon.style.display = 'block';
-    grayIcon.style.display = 'none';
-    moonIcon.style.display = 'none';
-  }
+  if (sunIcon) sunIcon.style.display = (theme === 'dark') ? 'block' : 'none';
+  if (warmIcon) warmIcon.style.display = (theme === 'light') ? 'block' : 'none';
+  if (grayIcon) grayIcon.style.display = (theme === 'warm') ? 'block' : 'none';
+  if (moonIcon) moonIcon.style.display = (theme === 'gray') ? 'block' : 'none';
 }
 
 // Warm up Speech Synthesis voices collection for Chrome/Safari compatibility
