@@ -2,7 +2,6 @@
    13. Notebook Module — Left Slide-in Drawer
    ========================================================================== */
 
-
 /* ── Left-edge persistent tab toggle ── */
 .notebook-drawer-tab {
   position: fixed;
@@ -15,17 +14,17 @@
   justify-content: center;
   width: 34px;
   height: 48px;
-  background: #121215;
-  border: 1px solid var(--border-glass);
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: none;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  color: var(--text-sub);
+  color: #FAFAFA;
   cursor: pointer;
   transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               width 0.2s ease,
               background 0.2s ease,
               border-color 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   outline: none;
   user-select: none;
   backdrop-filter: blur(12px);
@@ -33,26 +32,33 @@
 }
 .notebook-drawer-tab:hover {
   width: 40px;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-glass-hover);
+  background: #27272A;
+  border-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
-  box-shadow: var(--shadow-md);
 }
 .notebook-drawer-tab.drawer-open {
   left: 360px;
-  background: #121215;
+  background: #18181B;
   z-index: 10600 !important;
 }
+
 body.light-theme .notebook-drawer-tab {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: var(--shadow-sm);
+  color: #000000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 body.light-theme .notebook-drawer-tab:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: #FCF8F9;
+  border-color: #EBB2C0;
+  color: #000000;
 }
+body.light-theme .notebook-drawer-tab.drawer-open {
+  background: #ffffff;
+}
+
 body.gray-theme .notebook-drawer-tab {
-  background: #121215;
+  background: #18181B;
   border-color: var(--border-glass);
 }
 
@@ -70,8 +76,8 @@ body.gray-theme .notebook-drawer-tab {
 .notebook-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 10400 !important; /* Behind floating video (10500) when expanded */
-  pointer-events: none; /* only active when open */
+  z-index: 10400 !important;
+  pointer-events: none;
 }
 .notebook-modal-overlay.is-open {
   pointer-events: auto;
@@ -100,10 +106,10 @@ body.light-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
   width: 360px;
   max-width: 92vw;
   height: 100%;
-  background: #121215;
-  border-right: 1px solid var(--border-glass);
+  background: #09090B;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0 20px 20px 0;
-  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   display: flex;
@@ -118,9 +124,9 @@ body.light-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
 }
 
 body.light-theme .notebook-modal-card {
-  background: rgba(255, 255, 255, 0.99);
+  background: #FFFFFF;
   border-right-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.08);
 }
 body.gray-theme .notebook-modal-card {
   background: #121215;
@@ -133,12 +139,12 @@ body.gray-theme .notebook-modal-card {
   align-items: center;
   justify-content: space-between;
   padding: 18px 18px 12px 18px;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
   gap: 10px;
 }
 body.light-theme .notebook-header {
-  border-bottom-color: rgba(0, 0, 0, 0.07);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 .notebook-header-left {
@@ -151,20 +157,32 @@ body.light-theme .notebook-header {
   font-size: 1.7rem;
   line-height: 1;
   flex-shrink: 0;
+  color: var(--text-main);
+}
+body.light-theme .notebook-icon-big {
+  color: #000000;
 }
 
 .notebook-title {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--text-main);
   font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+body.light-theme .notebook-title {
+  color: #000000;
+  font-weight: 800;
 }
 
 .notebook-subtitle {
   margin: 0;
   font-size: 0.68rem;
   color: var(--text-muted);
+}
+body.light-theme .notebook-subtitle {
+  color: #71717A;
 }
 
 .notebook-header-right {
@@ -180,16 +198,93 @@ body.light-theme .notebook-header {
   font-weight: 600;
   white-space: nowrap;
 }
+body.light-theme .notebook-wordcount {
+  color: #71717A;
+  font-weight: 700;
+}
 
-.notebook-clear-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-muted);
-  border-radius: 10px;
+/* ── Unified Button Styles in Notebook ── */
+.notebook-action-btn {
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FAFAFA;
+  border-radius: 8px;
   padding: 4px 9px;
   font-size: 0.68rem;
   font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+.notebook-action-btn:hover {
+  background: #27272A;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+body.light-theme .notebook-action-btn {
+  background: #FCF8F9;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: #000000;
+  font-weight: 700;
+}
+body.light-theme .notebook-action-btn:hover {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.25);
+}
+
+.notebook-primary-btn {
+  background: rgba(255, 69, 0, 0.15);
+  border: 1px solid rgba(255, 69, 0, 0.35);
+  border-radius: 10px;
+  color: #FF4500;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  transition: all 0.2s;
+  outline: none;
+}
+.notebook-primary-btn:hover {
+  background: #FF4500;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(255, 69, 0, 0.4);
+}
+body.light-theme .notebook-primary-btn {
+  background: #EBB2C0;
+  border: 1px solid #EBB2C0;
+  color: #000000;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.4);
+}
+body.light-theme .notebook-primary-btn:hover {
+  background: #e3a2b2;
+  box-shadow: 0 4px 12px rgba(235, 178, 192, 0.6);
+}
+
+.notebook-clear-btn {
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 4px 9px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.2s;
   outline: none;
   white-space: nowrap;
@@ -199,21 +294,32 @@ body.light-theme .notebook-header {
   border-color: rgba(239, 68, 68, 0.35);
   color: #ef4444;
 }
+body.light-theme .notebook-clear-btn {
+  background: #FCF8F9;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: #71717A;
+  font-weight: 700;
+}
+body.light-theme .notebook-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
 
 .notebook-close-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass);
-  color: var(--text-sub);
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FAFAFA;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   transition: all 0.2s;
   outline: none;
@@ -221,13 +327,58 @@ body.light-theme .notebook-header {
   z-index: 10;
 }
 .notebook-close-btn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--border-glass-hover);
+  background: #27272A;
+  border-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 body.light-theme .notebook-close-btn {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.1);
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.09);
+  color: #000000;
+  font-weight: 800;
+}
+body.light-theme .notebook-close-btn:hover {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  color: #000000;
+}
+
+.notebook-back-btn {
+  background: none;
+  border: none;
+  color: #FAFAFA;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.2s;
+}
+.notebook-back-btn:hover {
+  opacity: 0.8;
+}
+body.light-theme .notebook-back-btn {
+  color: #000000;
+  font-weight: 800;
+}
+
+.notebook-delete-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.2s;
+}
+.notebook-delete-btn:hover {
+  opacity: 0.8;
 }
 
 /* ── Notebook Toolbar / Tabs ── */
@@ -236,62 +387,80 @@ body.light-theme .notebook-close-btn {
   align-items: center;
   justify-content: space-between;
   padding: 8px 18px;
-  border-bottom: 1px solid var(--border-glass);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
   gap: 12px;
 }
 body.light-theme .notebook-toolbar {
-  border-bottom-color: rgba(0, 0, 0, 0.05);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 .notebook-status {
   font-size: 0.67rem;
-  color: #a1a1aa;
-  font-weight: 600;
+  color: #A1A1AA;
+  font-weight: 700;
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
 .notebook-status.saving {
   color: #ffffff;
 }
+body.light-theme .notebook-status {
+  color: #000000;
+  font-weight: 800;
+}
 
 .notebook-tabs {
   display: flex;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass);
-  border-radius: 12px;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   padding: 3px;
 }
 body.light-theme .notebook-tabs {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.07);
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .notebook-tab {
   background: transparent;
   border: none;
-  color: var(--text-sub);
+  color: #A1A1AA;
   font-size: 0.72rem;
   font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 9px;
+  padding: 4px 10px;
+  border-radius: 7px;
   cursor: pointer;
   transition: all 0.2s;
   outline: none;
   white-space: nowrap;
 }
 .notebook-tab.active {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  box-shadow: none;
+  background: #27272A;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .notebook-tab:not(.active):hover {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--text-main);
+  color: #FFFFFF;
 }
-body.light-theme .notebook-tab:not(.active):hover {
-  background: rgba(0, 0, 0, 0.06);
+
+body.light-theme .notebook-tab {
+  color: #71717A;
+  font-weight: 700;
+}
+body.light-theme .notebook-tab:hover {
+  color: #000000;
+  background: rgba(0, 0, 0, 0.04);
+}
+body.light-theme .notebook-tab.active {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 800;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /* ── Notebook Body ── */
@@ -309,6 +478,127 @@ body.light-theme .notebook-tab:not(.active):hover {
   overflow: hidden;
 }
 
+/* ── Search Container & Inputs ── */
+.notebook-search-container {
+  display: flex;
+  align-items: center;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+body.light-theme .notebook-search-container {
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-theme .notebook-search-container:focus-within {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.25);
+}
+
+.notebook-search-input {
+  background: none;
+  border: none;
+  color: #FAFAFA;
+  font-size: 0.8rem;
+  width: 100%;
+  outline: none;
+}
+body.light-theme .notebook-search-input {
+  color: #000000;
+  font-weight: 600;
+}
+.notebook-search-input::placeholder {
+  color: var(--text-muted);
+}
+body.light-theme .notebook-search-input::placeholder {
+  color: #71717A;
+}
+
+.notebook-title-input {
+  width: 100%;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #FAFAFA;
+  font-size: 0.85rem;
+  font-weight: 700;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+body.light-theme .notebook-title-input {
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #000000;
+  font-weight: 800;
+}
+body.light-theme .notebook-title-input:focus {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.25);
+}
+
+/* ── Folder & Note List Items ── */
+.notebook-folder-item,
+.notebook-note-item {
+  display: flex;
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.notebook-folder-item {
+  justify-content: space-between;
+  align-items: center;
+}
+.notebook-note-item {
+  flex-direction: column;
+  gap: 4px;
+}
+.notebook-folder-item:hover,
+.notebook-note-item:hover {
+  background: #27272A;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+body.light-theme .notebook-folder-item,
+body.light-theme .notebook-note-item {
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-theme .notebook-folder-item:hover,
+body.light-theme .notebook-note-item:hover {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.2);
+}
+
+.notebook-folder-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.notebook-folder-delete-btn:hover {
+  color: #ef4444;
+}
+
 /* ── General Notes Textarea ── */
 .notebook-textarea {
   flex: 1;
@@ -318,23 +608,34 @@ body.light-theme .notebook-tab:not(.active):hover {
   border: none;
   resize: none;
   outline: none;
-  color: var(--text-main);
+  color: #FAFAFA;
   font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.7;
   padding: 16px 18px 20px 18px;
-  caret-color: #fbbf24;
+  caret-color: #FF4500;
+}
+body.light-theme .notebook-textarea {
+  color: #000000;
+  font-weight: 500;
+  caret-color: #000000;
 }
 .notebook-textarea::placeholder {
   color: var(--text-muted);
   font-style: italic;
 }
+body.light-theme .notebook-textarea::placeholder {
+  color: #71717A;
+}
 .notebook-textarea::-webkit-scrollbar {
   width: 4px;
 }
 .notebook-textarea::-webkit-scrollbar-thumb {
-  background: rgba(251, 191, 36, 0.3);
+  background: rgba(255, 69, 0, 0.3);
   border-radius: 2px;
+}
+body.light-theme .notebook-textarea::-webkit-scrollbar-thumb {
+  background: rgba(235, 178, 192, 0.6);
 }
 
 /* ── Lesson Notes Tab ── */
@@ -350,13 +651,16 @@ body.light-theme .notebook-tab:not(.active):hover {
   width: 4px;
 }
 .notebook-lessons-list::-webkit-scrollbar-thumb {
-  background: rgba(251, 191, 36, 0.25);
+  background: rgba(255, 69, 0, 0.25);
   border-radius: 2px;
+}
+body.light-theme .notebook-lessons-list::-webkit-scrollbar-thumb {
+  background: rgba(235, 178, 192, 0.6);
 }
 
 .notebook-lesson-entry {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   padding: 12px 14px;
   display: flex;
@@ -365,11 +669,16 @@ body.light-theme .notebook-tab:not(.active):hover {
   transition: border-color 0.2s;
 }
 .notebook-lesson-entry:hover {
-  border-color: rgba(251, 191, 36, 0.2);
+  border-color: rgba(255, 69, 0, 0.3);
 }
 body.light-theme .notebook-lesson-entry {
-  background: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-theme .notebook-lesson-entry:hover {
+  background: #FFFFFF;
+  border-color: #EBB2C0;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.2);
 }
 
 .notebook-lesson-entry-header {
@@ -382,21 +691,32 @@ body.light-theme .notebook-lesson-entry {
 .notebook-lesson-badge {
   font-size: 0.65rem;
   font-weight: 700;
-  color: #fbbf24;
-  background: rgba(251, 191, 36, 0.12);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  color: #FF4500;
+  background: rgba(255, 69, 0, 0.12);
+  border: 1px solid rgba(255, 69, 0, 0.25);
   border-radius: 6px;
   padding: 2px 7px;
   white-space: nowrap;
 }
+body.light-theme .notebook-lesson-badge {
+  color: #000000;
+  background: rgba(235, 178, 192, 0.25);
+  border-color: #EBB2C0;
+  font-weight: 800;
+}
 
 .notebook-lesson-title {
   font-size: 0.76rem;
-  color: var(--text-sub);
+  color: #FAFAFA;
+  font-weight: 700;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+body.light-theme .notebook-lesson-title {
+  color: #000000;
+  font-weight: 800;
 }
 
 .notebook-lesson-delete-btn {
@@ -418,33 +738,35 @@ body.light-theme .notebook-lesson-entry {
 .notebook-lesson-note-textarea {
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #121215;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  color: var(--text-main);
+  color: #FAFAFA;
   font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.5;
   padding: 8px 10px;
   resize: vertical;
-  min-height: 320px;
+  min-height: 200px;
   max-height: 520px;
   outline: none;
   transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
-  caret-color: #fbbf24;
+  caret-color: #FF4500;
 }
 .notebook-lesson-note-textarea:focus {
-  background: rgba(251, 191, 36, 0.03);
-  border-color: rgba(251, 191, 36, 0.35);
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.06);
+  border-color: rgba(255, 69, 0, 0.4);
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.1);
 }
 body.light-theme .notebook-lesson-note-textarea {
-  background: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.07);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #000000;
+  font-weight: 500;
+  caret-color: #000000;
 }
 body.light-theme .notebook-lesson-note-textarea:focus {
-  background: rgba(251, 191, 36, 0.02);
-  border-color: rgba(251, 191, 36, 0.3);
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.2);
 }
 
 .notebook-empty-state {
@@ -462,6 +784,9 @@ body.light-theme .notebook-lesson-note-textarea:focus {
 .notebook-empty-state span:first-child {
   font-size: 2.5rem;
   opacity: 0.5;
+}
+body.light-theme .notebook-empty-state {
+  color: #71717A;
 }
 
 /* ── Per-Lesson Note Section (in player panel) ── */
@@ -487,41 +812,46 @@ body.light-theme .lesson-note-section {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+body.light-theme .lesson-note-label {
+  color: #000000;
+  font-weight: 800;
+}
 
 .lesson-note-textarea {
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #18181B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 10px 12px;
-  color: var(--text-main);
+  color: #FAFAFA;
   font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.55;
   resize: vertical;
-  min-height: 320px;
+  min-height: 200px;
   max-height: 520px;
   outline: none;
-  caret-color: #a78bfa;
+  caret-color: #FF4500;
   transition: border-color 0.2s, background 0.2s;
 }
 .lesson-note-textarea:focus {
-  border-color: rgba(167, 139, 250, 0.4);
-  background: rgba(167, 139, 250, 0.04);
+  border-color: rgba(255, 69, 0, 0.4);
 }
 .lesson-note-textarea::placeholder {
   color: var(--text-muted);
   font-style: italic;
 }
 body.light-theme .lesson-note-textarea {
-  background: rgba(0, 0, 0, 0.03);
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.08);
-  color: var(--text-main);
+  color: #000000;
+  font-weight: 500;
+  caret-color: #000000;
 }
 body.light-theme .lesson-note-textarea:focus {
-  border-color: rgba(124, 58, 237, 0.3);
-  background: rgba(124, 58, 237, 0.03);
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.2);
 }
 
 .lesson-note-save-status {
@@ -533,6 +863,9 @@ body.light-theme .lesson-note-textarea:focus {
 .lesson-note-save-status.saved {
   color: #22c55e;
 }
+body.light-theme .lesson-note-save-status {
+  color: #71717A;
+}
 
 /* ── Note indicator dot on lesson cards ── */
 .lesson-note-dot {
@@ -540,10 +873,14 @@ body.light-theme .lesson-note-textarea:focus {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fbbf24;
-  box-shadow: 0 0 5px rgba(251, 191, 36, 0.6);
+  background: #FF4500;
+  box-shadow: 0 0 5px rgba(255, 69, 0, 0.6);
   flex-shrink: 0;
   margin-right: 2px;
+}
+body.light-theme .lesson-note-dot {
+  background: #EBB2C0;
+  box-shadow: 0 0 5px rgba(235, 178, 192, 0.8);
 }
 
 /* ── Responsive ── */
@@ -556,4 +893,3 @@ body.light-theme .lesson-note-textarea:focus {
     left: 88vw;
   }
 }
-/* ==========================================================================

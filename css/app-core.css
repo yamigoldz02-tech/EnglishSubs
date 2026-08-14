@@ -919,18 +919,19 @@ body.light-theme .active-video-details {
 
 /* Gray theme and Light theme adjustments */
 body.light-theme .video-course-progress-panel .activity-points-note {
-  color: #7c3aed !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
 }
 body.light-theme .video-course-controls .filter-pill.active {
-  color: #7c3aed !important;
-  background: rgba(124, 58, 237, 0.08) !important;
-  border-color: rgba(124, 58, 237, 0.3) !important;
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.1) !important;
+  color: #FFFFFF !important;
+  background: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 body.light-theme .active-video-details .active-badge {
-  color: #7c3aed !important;
-  background: rgba(124, 58, 237, 0.08) !important;
-  border-color: rgba(124, 58, 237, 0.3) !important;
+  color: #FFFFFF !important;
+  background: #000000 !important;
+  border-color: #000000 !important;
 }
 
 body.gray-theme .video-course-progress-panel .progress-bar-fill {
@@ -2514,24 +2515,42 @@ body.light-theme .filters-toggle-btn {
 /* Editor with line numbers */
 .editor-container {
   display: flex;
-  background: rgba(0,0,0,0.2);
+  background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   width: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.editor-container:focus-within {
+  border-color: var(--border-focus);
+}
+body.light-theme .editor-container {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-theme .editor-container:focus-within {
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.25);
 }
 .editor-line-numbers {
-  padding: 10px 8px;
-  background: rgba(0,0,0,0.3);
+  padding: 12px 10px;
+  background: rgba(0, 0, 0, 0.25);
   color: var(--text-sub);
   font-size: 0.82rem;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: right;
-  min-width: 25px;
+  min-width: 32px;
   user-select: none;
-  border-right: 1px solid rgba(255,255,255,0.05);
+  border-right: 1px solid var(--border-glass);
   font-family: monospace;
   overflow: hidden;
+}
+body.light-theme .editor-line-numbers {
+  background: #FCF8F9;
+  border-right-color: rgba(0, 0, 0, 0.06);
+  color: #71717A;
 }
 body.no-notebook-line-numbers .editor-line-numbers {
   display: none !important;
@@ -2541,10 +2560,10 @@ body.no-notebook-line-numbers .editor-line-numbers {
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
-  padding: 10px 12px !important;
+  padding: 12px 14px !important;
   color: var(--text-main);
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-size: 0.88rem;
+  line-height: 1.6;
   outline: none;
   box-sizing: border-box;
   resize: none;

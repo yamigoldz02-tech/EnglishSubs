@@ -516,16 +516,7 @@ function initNotebook() {
 
     matches.forEach(match => {
       const item = document.createElement('div');
-      item.style.cssText = 'display: flex; flex-direction: column; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: all 0.2s; text-align: left;';
-      
-      item.addEventListener('mouseenter', () => {
-        item.style.background = 'rgba(255,255,255,0.06)';
-        item.style.borderColor = 'var(--border-glass-hover)';
-      });
-      item.addEventListener('mouseleave', () => {
-        item.style.background = 'rgba(255,255,255,0.03)';
-        item.style.borderColor = 'var(--border-glass)';
-      });
+      item.className = 'notebook-note-item';
 
       item.addEventListener('click', () => {
         showNoteEditorView(match.folderId, match.note.id);
@@ -542,7 +533,7 @@ function initNotebook() {
       item.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; width: 100%;">
           <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;">${escapeHTML(match.note.title || 'Untitled')}</span>
-          <span style="font-size: 0.65rem; color: #fbbf24; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32%; background: rgba(251,191,36,0.1); padding: 2px 6px; border-radius: 6px; text-align: right;">📁 ${escapeHTML(match.folderName)}</span>
+          <span style="font-size: 0.65rem; color: var(--text-sub); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32%; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; text-align: right;">📁 ${escapeHTML(match.folderName)}</span>
         </div>
         <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(cleanSnippet)}</span>
         <span style="font-size: 0.65rem; color: var(--text-muted); align-self: flex-end; margin-top: 4px;">${formattedDate}</span>
@@ -790,19 +781,10 @@ function initNotebook() {
 
     customNoteFolders.forEach(folder => {
       const item = document.createElement('div');
-      item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: all 0.2s;';
-      
-      item.addEventListener('mouseenter', () => {
-        item.style.background = 'rgba(255,255,255,0.06)';
-        item.style.borderColor = 'var(--border-glass-hover)';
-      });
-      item.addEventListener('mouseleave', () => {
-        item.style.background = 'rgba(255,255,255,0.03)';
-        item.style.borderColor = 'var(--border-glass)';
-      });
+      item.className = 'notebook-folder-item';
 
       item.addEventListener('click', (e) => {
-        if (e.target.closest('.delete-folder-btn')) return;
+        if (e.target.closest('.notebook-folder-delete-btn')) return;
         showCustomNotesListView(folder.id);
       });
 
@@ -817,15 +799,13 @@ function initNotebook() {
             <span style="font-size: 0.7rem; color: var(--text-sub);">${noteCount} ${noteWord}</span>
           </div>
         </div>
-        <button class="delete-folder-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; font-size: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" title="Delete folder">
+        <button class="notebook-folder-delete-btn" title="Delete folder">
           🗑️
         </button>
       `;
 
-      const delBtn = item.querySelector('.delete-folder-btn');
+      const delBtn = item.querySelector('.notebook-folder-delete-btn');
       if (delBtn) {
-        delBtn.addEventListener('mouseenter', () => delBtn.style.color = '#ef4444');
-        delBtn.addEventListener('mouseleave', () => delBtn.style.color = 'var(--text-muted)');
         delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
           const confirmed = window.showCustomConfirm 
@@ -868,16 +848,7 @@ function initNotebook() {
 
     folder.notes.forEach(note => {
       const item = document.createElement('div');
-      item.style.cssText = 'display: flex; flex-direction: column; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: all 0.2s; text-align: left;';
-      
-      item.addEventListener('mouseenter', () => {
-        item.style.background = 'rgba(255,255,255,0.06)';
-        item.style.borderColor = 'var(--border-glass-hover)';
-      });
-      item.addEventListener('mouseleave', () => {
-        item.style.background = 'rgba(255,255,255,0.03)';
-        item.style.borderColor = 'var(--border-glass)';
-      });
+      item.className = 'notebook-note-item';
 
       item.addEventListener('click', () => {
         showNoteEditorView(folderId, note.id);
