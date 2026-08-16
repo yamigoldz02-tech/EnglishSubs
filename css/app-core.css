@@ -309,6 +309,9 @@ body.light-theme.no-blur-mode .navbar {
 .dict-word-row {
   flex-shrink: 0 !important;
   min-height: 52px;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 54px;
+  transform: translateZ(0);
 }
 
 #dictionaryModal .modal-body > div:last-child {

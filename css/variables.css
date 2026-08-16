@@ -67,9 +67,9 @@
   --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 3. IGOR Minimalist Light Theme (Micro-Grain Cotton Paper Texture + Dusty Pink #EBB2C0 + Deep Black #000000 + Soft Backdrop #FCF8F9) */
+/* 3. IGOR Minimalist Light Theme (Dusty Pink #EBB2C0 + Deep Black #000000 + Soft Backdrop #FCF8F9) */
 body.light-theme {
-  --texture-cotton-paper-white: url("data:image/svg+xml,%3Csvg%20width%3D%22240%22%20height%3D%22240%22%20viewBox%3D%220%200%20240%20240%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22microCottonPaper%22%20x%3D%220%25%22%20y%3D%220%25%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%224%22%20result%3D%22noise%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeDiffuseLighting%20in%3D%22noise%22%20lighting-color%3D%22%23ffffff%22%20surfaceScale%3D%220.4%22%20result%3D%22light%22%3E%3CfeDistantLight%20azimuth%3D%2255%22%20elevation%3D%2265%22%2F%3E%3C%2FfeDiffuseLighting%3E%3CfeComponentTransfer%20in%3D%22light%22%20result%3D%22brightened%22%3E%3CfeFuncR%20type%3D%22linear%22%20slope%3D%220.98%22%20intercept%3D%220.02%22%2F%3E%3CfeFuncG%20type%3D%22linear%22%20slope%3D%220.98%22%20intercept%3D%220.02%22%2F%3E%3CfeFuncB%20type%3D%22linear%22%20slope%3D%220.98%22%20intercept%3D%220.02%22%2F%3E%3C%2FfeComponentTransfer%3E%3CfeBlend%20mode%3D%22multiply%22%20in%3D%22SourceGraphic%22%20in2%3D%22brightened%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23FCF8F9%22%20filter%3D%22url(%23microCottonPaper)%22%2F%3E%3C%2Fsvg%3E");
+  --texture-cotton-paper-white: none;
   --bg-base: #FCF8F9;
   --bg-surface: #FFFFFF;
   --bg-card: #FFFFFF;
@@ -107,15 +107,13 @@ body.light-theme {
 
 body.light-theme {
   background-color: #FCF8F9 !important;
-  background-image: linear-gradient(rgba(252, 248, 249, 0.94), rgba(252, 248, 249, 0.94)), var(--texture-cotton-paper-white) !important;
-  background-repeat: repeat !important;
-  background-attachment: fixed !important;
+  background-image: none !important;
 }
 
 
-/* 4. Warm Cotton Paper Theme (Natural Cotton Rag Fiber Texture + Deep Coffee #3E2723 + Terracotta #F4A261 & Sand #E9C46A) */
+/* 4. Warm Cotton Paper Theme (Deep Coffee #3E2723 + Terracotta #F4A261 & Sand #E9C46A) */
 body.warm-theme {
-  --texture-cotton-paper: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.26  0 0 0 0 0.18  0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cottonFiber)'/%3E%3C/svg%3E");
+  --texture-cotton-paper: none;
   --bg-base: #F8F4EA;
   --bg-surface: #FCF9F2;
   --bg-card: #FCF9F2;
@@ -124,7 +122,7 @@ body.warm-theme {
   --bg-navbar: rgba(248, 244, 234, 0.94);
   --bg-sidebar: #FCF9F2;
   --bg-modal: #FCF9F2;
-  --bg-cotton-card: #FCF9F2 url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cottonFiber'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.055' numOctaves='5' result='noise' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.26  0 0 0 0 0.18  0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cottonFiber)'/%3E%3C/svg%3E");
+  --bg-cotton-card: #FCF9F2;
 
   --accent-spotify: #F4A261;
   --accent-warm-sand: #E9C46A;
@@ -153,7 +151,7 @@ body.warm-theme {
 
 body.warm-theme {
   background-color: #F8F4EA !important;
-  background-image: var(--texture-cotton-paper) !important;
+  background-image: none !important;
 }
 
 /* 5. Cool Slate Steel Theme (Gray Theme) */

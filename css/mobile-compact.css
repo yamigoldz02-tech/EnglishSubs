@@ -68,8 +68,8 @@
     padding: 0 10px !important;
     margin-bottom: 10px !important;
     background: var(--bg-navbar) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border-radius: 18px !important;
     border: 1px solid var(--border-glass) !important;
     display: flex !important;
@@ -79,6 +79,7 @@
     position: sticky !important;
     top: 6px !important;
     z-index: 1000 !important;
+    transform: translateZ(0) !important;
     box-shadow: var(--shadow-sm) !important;
   }
 
@@ -1111,12 +1112,13 @@
     right: 0 !important;
     height: 60px !important;
     background: var(--bg-navbar) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border-top: 1px solid var(--border-glass) !important;
     justify-content: space-around !important;
     align-items: center !important;
     z-index: 9990 !important;
+    transform: translateZ(0) !important;
     padding-bottom: env(safe-area-inset-bottom, 0px) !important;
     box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.45) !important;
   }
