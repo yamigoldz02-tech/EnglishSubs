@@ -107,6 +107,8 @@ export function openEditWordModal(w, onSaveSuccess) {
   if (engInput)  engInput.oninput  = () => applyLayoutFix(engInput,  'cyrToLat');
   if (rusInput)  rusInput.oninput  = () => applyLayoutFix(rusInput,  'latToCyr');
 
+  const deleteBtn     = document.getElementById('editWordDeleteModalBtn');
+
   // ── Open modal ─────────────────────────────────────────────────────
   if (typeof window.openModalEl === 'function') window.openModalEl(editModal);
   else editModal.style.display = 'flex';
@@ -116,12 +118,61 @@ export function openEditWordModal(w, onSaveSuccess) {
   const doClose = () => {
     if (typeof window.closeModalEl === 'function') window.closeModalEl(editModal);
     else editModal.style.display = 'none';
-    if (saveBtn) { saveBtn.textContent = '💾 Save Changes'; saveBtn.style.background = 'linear-gradient(135deg, #a78bfa, #7c3aed)'; saveBtn.disabled = false; }
+    if (saveBtn) { saveBtn.textContent = '💾 Сохранить изменения'; saveBtn.style.background = 'linear-gradient(135deg, #a78bfa, #7c3aed)'; saveBtn.disabled = false; }
     if (closeEditBtn) closeEditBtn.onclick = null;
     if (saveBtn) saveBtn.onclick = null;
+    if (deleteBtn) deleteBtn.onclick = null;
   };
   if (closeEditBtn) closeEditBtn.onclick = doClose;
   editModal.onclick = (ev) => { if (ev.target === editModal) doClose(); };
+
+  // ── Delete handler ──────────────────────────────────────────────────
+  if (deleteBtn) {
+    deleteBtn.onclick = async (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const activeWord = w.word;
+      const confirmed = window.showCustomConfirm
+        ? await window.showCustomConfirm(
+            '🗑️ Удаление слова',
+            `Вы уверены, что хотите удалить слово «${activeWord}» из словаря?`,
+            { okText: 'Удалить', cancelText: 'Отмена', isDestructive: true }
+          )
+        : confirm(`Удалить «${activeWord}» из словаря?`);
+      if (!confirmed) return;
+
+      personalDictionary = personalDictionary.filter(item => item.word.toLowerCase() !== activeWord.toLowerCase());
+      saveDictionaryToStorage();
+
+      if (window.sessionQueue && Array.isArray(window.sessionQueue)) {
+        const wasInQueue = window.sessionQueue.some(item => item.word.toLowerCase() === activeWord.toLowerCase());
+        window.sessionQueue = window.sessionQueue.filter(item => item.word.toLowerCase() !== activeWord.toLowerCase());
+        if (wasInQueue && window.sessionTotalInitialCount !== undefined) {
+          window.sessionTotalInitialCount = Math.max(0, window.sessionTotalInitialCount - 1);
+        }
+      }
+
+      if (typeof window.saveStudySession === 'function') {
+        window.saveStudySession();
+      }
+
+      const searchInput = document.getElementById('dictSearchInput');
+      if (typeof window.renderDictWordsList === 'function') {
+        window.renderDictWordsList(searchInput ? searchInput.value.trim() : '');
+      }
+
+      if (typeof window.resetFlashcard === 'function') {
+        window.resetFlashcard();
+      }
+
+      if (window.showToast) {
+        window.showToast(`«${activeWord}» удалено`, 'info');
+      }
+
+      doClose();
+      if (onSaveSuccess) onSaveSuccess({ deleted: true, word: activeWord });
+    };
+  }
 
   // ── Save handler ───────────────────────────────────────────────────
   if (saveBtn) {
@@ -164,14 +215,14 @@ export function openEditWordModal(w, onSaveSuccess) {
 
       saveDictionaryToStorage();
 
-      saveBtn.textContent = `✅ ${newEng.slice(0, 20)} saved!`;
+      saveBtn.textContent = `✅ Сохранено!`;
       saveBtn.style.background = 'linear-gradient(135deg, #1db954, #16a34a)';
       saveBtn.disabled = true;
 
       setTimeout(() => {
         doClose();
-        if (onSaveSuccess) onSaveSuccess();
-      }, 900);
+        if (onSaveSuccess) onSaveSuccess({ deleted: false, word: newEng });
+      }, 700);
     };
   }
 }

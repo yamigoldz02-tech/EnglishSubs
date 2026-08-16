@@ -1075,8 +1075,12 @@ function setupDictionaryUI() {
     cardEditBtnFront.addEventListener('click', (e) => {
       e.stopPropagation();
       if (activeTrainerWordObj) {
-        openEditWordModal(activeTrainerWordObj, () => {
-          renderTrainerCard(activeTrainerWordObj);
+        openEditWordModal(activeTrainerWordObj, (res) => {
+          if (res && res.deleted) {
+            resetFlashcard();
+          } else {
+            renderTrainerCard(activeTrainerWordObj);
+          }
         });
       }
     });
@@ -1087,8 +1091,12 @@ function setupDictionaryUI() {
     cardEditBtnBack.addEventListener('click', (e) => {
       e.stopPropagation();
       if (activeTrainerWordObj) {
-        openEditWordModal(activeTrainerWordObj, () => {
-          renderTrainerCard(activeTrainerWordObj);
+        openEditWordModal(activeTrainerWordObj, (res) => {
+          if (res && res.deleted) {
+            resetFlashcard();
+          } else {
+            renderTrainerCard(activeTrainerWordObj);
+          }
         });
       }
     });
