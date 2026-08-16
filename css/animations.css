@@ -1,18 +1,18 @@
 /* Modal animations for app.js */
 .modal-animate-in {
-  animation: modalOverlayFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modalOverlayFadeIn 0.28s ease-out forwards;
 }
 .modal-animate-in .modal-card,
 .modal-animate-in .dict-modal-card {
-  animation: modalScaleUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: modalScaleUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .modal-animate-out {
-  animation: modalOverlayFadeOut 0.18s ease-in forwards;
+  animation: modalOverlayFadeOut 0.2s ease-in forwards;
 }
 .modal-animate-out .modal-card,
 .modal-animate-out .dict-modal-card {
-  animation: modalScaleDown 0.18s ease-in forwards;
+  animation: modalScaleDown 0.2s ease-in forwards;
 }
 
 @keyframes modalOverlayFadeIn {
