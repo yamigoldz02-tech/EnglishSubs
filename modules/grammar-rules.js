@@ -372,7 +372,7 @@ function setupRulesUI() {
   const notebookModal = document.getElementById('notebookModal');
   const rulesModal = document.getElementById('rulesModal');
 
-  const navItems = [homeBtn, dictBtn, rulesBtn, trainBtn, videoBtn, notesBtn];
+  const navItems = [homeBtn, dictBtn, trainBtn, videoBtn].filter(Boolean);
 
   function setActiveTab(activeBtn) {
     navItems.forEach(btn => {
