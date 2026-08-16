@@ -927,7 +927,11 @@
   #dictionaryModalCard::before,
   #trainingModalCard::before,
   #rulesModalCard::before,
-  #videoCourseModalCard::before {
+  #videoCourseModalCard::before,
+  #dictExpandWidthBtn,
+  #dictExpandHeightBtn,
+  #trainingExpandWidthBtn,
+  .modal-expand-btn {
     display: none !important;
   }
 

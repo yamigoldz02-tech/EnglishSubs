@@ -27,10 +27,10 @@
   <link rel="stylesheet" href="css/video-player.css">
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
-  <link rel="stylesheet" href="css/animations.css?v=3.2.5">
-  <link rel="stylesheet" href="css/app-core.css?v=3.2.5">
+  <link rel="stylesheet" href="css/animations.css?v=3.2.6">
+  <link rel="stylesheet" href="css/app-core.css?v=3.2.6">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.2.5">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.2.6">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -842,13 +842,13 @@
           <span>Мой словарь</span>
         </h3>
         <div style="display: flex; align-items: center; gap: 6px;">
-          <button id="dictExpandWidthBtn" title="Расширить по ширине" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">
+          <button id="dictExpandWidthBtn" class="modal-expand-btn" title="Расширить по ширине" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">
             <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
           </button>
-          <button id="dictExpandHeightBtn" title="Расширить по высоте" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">
+          <button id="dictExpandHeightBtn" class="modal-expand-btn" title="Расширить по высоте" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: var(--text-sub); border-radius: 8px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; outline: none;">
             <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 3 12 3 16 3"/><polyline points="8 21 12 21 16 21"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
           </button>
-          <button class="modal-close-btn" id="closeDictionaryBtn" >✕</button>
+          <button class="modal-close-btn" id="closeDictionaryBtn" title="Закрыть">✕</button>
         </div>
       </div>
 
@@ -2102,26 +2102,26 @@
   <script defer src="modules/gemini-ai.js"></script>
   <script defer src="modules/phrase-builder-game.js"></script>
   <script type="module" src="modules/lyrics-api.js"></script>
-  <script type="module" src="modules/modal-helpers.js?v=3.2.5"></script>
+  <script type="module" src="modules/modal-helpers.js?v=3.2.6"></script>
   <script type="module" src="modules/shadowing-dictation.js"></script>
   <script type="module" src="modules/word-edit-modal.js"></script>
-  <script type="module" src="modules/events-manager.js?v=3.2.5"></script>
-  <script type="module" src="modules/store.js?v=3.2.5"></script>
-  <script defer src="modules/dict-stats.js?v=3.2.5"></script>
-  <script defer src="modules/daily-tracker.js?v=3.2.5"></script>
-  <script defer src="modules/dict-word-card.js?v=3.2.5"></script>
-  <script defer src="modules/dict-song-examples.js?v=3.2.5"></script>
-  <script defer src="modules/dict-games.js?v=3.2.5"></script>
-  <script defer src="modules/dict-modals-manual.js?v=3.2.5"></script>
-  <script defer src="modules/dictionary-trainer.js?v=3.2.5"></script>
-  <script type="module" src="modules/spotify-controller.js?v=3.2.5"></script>
-  <script type="module" src="modules/grammar-rules.js?v=3.2.5"></script>
-  <script defer src="modules/notebook-module.js?v=3.2.5"></script>
-  <script defer src="modules/galaxy-course.js?v=3.2.5"></script>
-  <script type="module" src="modules/gamification.js?v=3.2.5"></script>
-  <script defer src="modules/playlist-manager.js?v=3.2.5"></script>
-  <script defer src="modules/subtitles-engine.js?v=3.2.5"></script>
-  <script defer src="app.js?v=3.2.5"></script>
+  <script type="module" src="modules/events-manager.js?v=3.2.6"></script>
+  <script type="module" src="modules/store.js?v=3.2.6"></script>
+  <script defer src="modules/dict-stats.js?v=3.2.6"></script>
+  <script defer src="modules/daily-tracker.js?v=3.2.6"></script>
+  <script defer src="modules/dict-word-card.js?v=3.2.6"></script>
+  <script defer src="modules/dict-song-examples.js?v=3.2.6"></script>
+  <script defer src="modules/dict-games.js?v=3.2.6"></script>
+  <script defer src="modules/dict-modals-manual.js?v=3.2.6"></script>
+  <script defer src="modules/dictionary-trainer.js?v=3.2.6"></script>
+  <script type="module" src="modules/spotify-controller.js?v=3.2.6"></script>
+  <script type="module" src="modules/grammar-rules.js?v=3.2.6"></script>
+  <script defer src="modules/notebook-module.js?v=3.2.6"></script>
+  <script defer src="modules/galaxy-course.js?v=3.2.6"></script>
+  <script type="module" src="modules/gamification.js?v=3.2.6"></script>
+  <script defer src="modules/playlist-manager.js?v=3.2.6"></script>
+  <script defer src="modules/subtitles-engine.js?v=3.2.6"></script>
+  <script defer src="app.js?v=3.2.6"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const syncBtn = document.getElementById('forceSyncDataBtn');
