@@ -2045,6 +2045,25 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   background: #FF4500;
 }
 
+.header-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1045;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+body.light-theme .header-nav-backdrop {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 .header-nav-dropdown {
   position: absolute;
   top: calc(100% + 8px);

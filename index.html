@@ -28,9 +28,9 @@
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/app-core.css?v=3.0.2">
+  <link rel="stylesheet" href="css/app-core.css?v=3.0.3">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.2">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.3">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -122,8 +122,17 @@
             <span class="header-menu-streak-dot" title="Активность"></span>
           </button>
 
+          <!-- Backdrop overlay for mobile touch closing -->
+          <div id="headerNavBackdrop" class="header-nav-backdrop" style="display: none;"></div>
+
           <!-- Floating Glassmorphic Dropdown Menu -->
           <div id="headerNavMenu" class="header-nav-dropdown" style="display: none;">
+            <!-- Top bar with title and close button -->
+            <div class="header-nav-top-bar" style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px 6px 4px; margin-bottom: 2px;">
+              <span style="font-size: 0.82rem; font-weight: 800; color: var(--text-muted);">Меню и навигация</span>
+              <button id="closeHeaderNavBtn" class="header-nav-close-btn" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-glass); color: var(--text-main); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.85rem;" title="Закрыть">✕</button>
+            </div>
+
             <!-- Profile / Gamification Card (Click opens stats modal) -->
             <div id="userProgressBadge" class="nav-dropdown-profile" title="Открыть профиль и достижения">
               <div class="nav-dropdown-profile-left">
