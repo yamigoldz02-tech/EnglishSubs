@@ -396,6 +396,9 @@ function setupRulesUI() {
   if (homeBtn) {
     homeBtn.addEventListener('click', () => {
       closeAllModals();
+      if (typeof window.showDashboard === 'function') {
+        window.showDashboard();
+      }
       setActiveTab(homeBtn);
     });
   }

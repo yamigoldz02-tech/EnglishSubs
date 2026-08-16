@@ -287,6 +287,26 @@ function convertRuLayoutToEn(text) {
 window.showDashboard = showDashboard;
 
 function showDashboard() {
+  // Close any open modals
+  const modals = document.querySelectorAll('.modal-overlay');
+  modals.forEach(m => {
+    if (typeof window.closeModalEl === 'function') window.closeModalEl(m);
+    else m.style.display = 'none';
+  });
+  const nbModal = document.getElementById('notebookModal');
+  if (nbModal) {
+    if (typeof window.closeNotebook === 'function') window.closeNotebook();
+    else nbModal.classList.remove('is-open');
+  }
+
+  // Update bottom navigation bar active tab to "Главная"
+  const homeBtn = document.getElementById('mobileNavHomeBtn');
+  if (homeBtn) {
+    const navItems = document.querySelectorAll('.mobile-nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+    homeBtn.classList.add('active');
+  }
+
   // Hide active song elements
   const songHeader = document.getElementById('songHeaderCard');
   const lyricsCard = document.getElementById('lyricsBoardCard');
@@ -320,6 +340,9 @@ function showDashboard() {
 
   // Render Dashboard Favorites list
   renderDashboardFavorites();
+
+  // Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderDashboardFavorites() {
