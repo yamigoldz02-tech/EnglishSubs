@@ -1,23 +1,66 @@
 /* ==========================================================================
-   FLOATING VIDEO PLAYER CSS — MODERN MINIMALIST
+   FLOATING VIDEO PLAYER CSS (PICTURE-IN-PICTURE) — MODERN MINIMALIST
+   @AI-SECTION: FLOATING_VIDEO_PLAYER
    ========================================================================== */
-.video-modal-minimized {
-  z-index: 10500 !important;
+
+/* ── 1. Root Modal Overlay in Minimized Mode (All Themes & Screen Sizes) ── */
+#videoCourseModal.video-modal-minimized,
+.modal-overlay.video-modal-minimized,
+body.light-theme #videoCourseModal.video-modal-minimized,
+body.warm-theme #videoCourseModal.video-modal-minimized,
+body.gray-theme #videoCourseModal.video-modal-minimized,
+body.light-theme .modal-overlay.video-modal-minimized,
+body.warm-theme .modal-overlay.video-modal-minimized,
+body.gray-theme .modal-overlay.video-modal-minimized {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
   background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
   pointer-events: none !important;
+  overflow: visible !important;
+  z-index: 10500 !important;
 }
-.video-modal-minimized .video-course-modal-card {
+
+/* ── 2. Modal Card in Minimized Mode ── */
+#videoCourseModal.video-modal-minimized .video-course-modal-card,
+.video-modal-minimized .video-course-modal-card,
+body.light-theme #videoCourseModal.video-modal-minimized .video-course-modal-card,
+body.warm-theme #videoCourseModal.video-modal-minimized .video-course-modal-card,
+body.gray-theme #videoCourseModal.video-modal-minimized .video-course-modal-card {
+  position: static !important;
   background: transparent !important;
+  background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   max-width: none !important;
   max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
   transform: none !important;
   pointer-events: none !important;
+  overflow: visible !important;
 }
+
+/* ── 3. Hidden Elements in Minimized Mode ── */
 .video-modal-minimized .modal-header,
 .video-modal-minimized .video-course-progress-panel,
 .video-modal-minimized .lessons-sidebar,
@@ -27,14 +70,25 @@
 .video-modal-minimized .mobile-course-tabs {
   display: none !important;
 }
+
+/* ── 4. Video Course Body in Minimized Mode ── */
 .video-modal-minimized .video-course-body {
   border: none !important;
   background: transparent !important;
+  background-color: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow: visible !important;
   overflow-x: visible !important;
   overflow-y: visible !important;
   pointer-events: none !important;
 }
+
+/* ── 5. Floating Player Container Pane (Picture-in-Picture) ── */
 .video-modal-minimized .player-container-pane {
   pointer-events: auto !important;
   position: fixed !important;
@@ -43,33 +97,50 @@
   top: auto !important;
   left: auto !important;
   width: 360px;
+  max-width: calc(100vw - 32px);
   padding: 0 !important;
-  background: var(--bg-surface, #111622);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  z-index: 100000;
+  background: var(--bg-surface, #111622) !important;
+  border: 1px solid var(--border-glass) !important;
+  border-radius: var(--radius-lg, 12px) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
+  z-index: 100000 !important;
   overflow: visible !important;
   overflow-x: visible !important;
   overflow-y: visible !important;
   cursor: grab;
   transition: none !important;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   order: unset !important;
   will-change: width, bottom, right, top, left;
 }
+
+body.light-theme .video-modal-minimized .player-container-pane {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.warm-theme .video-modal-minimized .player-container-pane {
+  background: #25201C !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4) !important;
+}
+
 .video-modal-minimized .player-container-pane.floating-dragged {
   transition: none !important;
   cursor: grabbing !important;
 }
+
 .video-modal-minimized .video-player-wrapper {
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+  border-radius: 0 0 var(--radius-lg, 12px) var(--radius-lg, 12px) !important;
   border: none !important;
   min-height: 0 !important;
   height: auto !important;
+  overflow: hidden !important;
 }
 
+/* ── 6. Floating Video Header ── */
 .floating-video-header {
   display: flex;
   align-items: center;
@@ -77,9 +148,15 @@
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-radius: var(--radius-lg, 12px) var(--radius-lg, 12px) 0 0;
   user-select: none;
 }
+
+body.light-theme .floating-video-header {
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
 .floating-video-title {
   font-size: 0.85rem;
   font-weight: 700;
@@ -88,10 +165,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .floating-video-controls {
   display: flex;
   gap: 8px;
 }
+
 .floating-video-controls button {
   background: none;
   border: none;
@@ -104,11 +183,12 @@
   justify-content: center;
   transition: color 0.2s;
 }
+
 .floating-video-controls button:hover {
   color: var(--text-main);
 }
 
-/* Handles */
+/* ── 7. Resize Handles ── */
 .floating-resize-handle {
   position: absolute;
   z-index: 100005 !important;
@@ -127,7 +207,7 @@
   border-top-left-radius: 8px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.1));
   opacity: 0.85;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
@@ -143,7 +223,7 @@
   border-bottom-right-radius: 8px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.1));
   opacity: 0.85;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
@@ -196,9 +276,7 @@ body.floating-resizing .player-container-pane iframe {
   pointer-events: none !important;
 }
 
-/* ==========================================================================
-   MOBILE: Floating Video Player Adaptations
-   ========================================================================== */
+/* ── 8. Mobile Viewport Adaptations ── */
 @media (max-width: 768px) {
   .video-modal-minimized .player-container-pane {
     width: calc(100vw - 16px) !important;
@@ -206,15 +284,15 @@ body.floating-resizing .player-container-pane iframe {
     right: 8px !important;
     bottom: 72px !important;
     left: auto !important;
-    border-radius: var(--radius-md) !important;
+    border-radius: var(--radius-md, 8px) !important;
   }
 
   .video-modal-minimized .video-player-wrapper {
-    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    border-radius: 0 0 var(--radius-md, 8px) var(--radius-md, 8px) !important;
   }
 
   .video-modal-minimized .floating-video-header {
-    border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+    border-radius: var(--radius-md, 8px) var(--radius-md, 8px) 0 0 !important;
     padding: 6px 10px !important;
   }
 
