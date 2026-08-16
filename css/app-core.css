@@ -1738,8 +1738,8 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   }
 
   /* Training Modal specific Mobile layout */
-  #trainingSettingsBar {
-    padding: 4px 1.25rem 10px 1.25rem !important;
+  #trainingSettingsBar.expanded {
+    padding: 8px 1.25rem 12px 1.25rem !important;
     gap: 6px !important;
     flex-wrap: wrap !important;
   }
@@ -2506,12 +2506,26 @@ body.light-theme .filters-toggle-btn {
    RESTORED TRAINING SETTINGS COLLAPSE
    ========================================================================== */
 .training-settings-collapse {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
 }
 .training-settings-collapse.expanded {
-  max-height: 500px;
+  max-height: 500px !important;
+  padding: 10px 1.5rem 12px 1.5rem !important;
+  border-bottom: 1px solid var(--border-glass) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 /* ==========================================================================
@@ -2519,15 +2533,23 @@ body.light-theme .filters-toggle-btn {
    ========================================================================== */
 .dict-heatmap-container {
   overflow: hidden;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s ease, opacity 0.3s ease;
-  max-height: 200px; /* enough to show heatmap */
+  transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+  max-height: 200px;
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 .dict-heatmap-container.collapsed {
-  max-height: 0;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  opacity: 0;
+  border-top: none !important;
+  border-bottom: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Hide mobile bottom nav on PC */
