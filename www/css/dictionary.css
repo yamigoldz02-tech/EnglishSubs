@@ -819,3 +819,148 @@ body.warm-theme .wcp-btn:hover {
   border-color: #F4A261 !important;
   color: #3E2723 !important;
 }
+
+
+/* ==========================================================================
+   RESTORED COLLAPSIBLE FILTERS
+   ========================================================================== */
+.dict-filters-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dict-filters-collapse.expanded {
+  max-height: 800px;
+}
+
+.filters-toggle-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.filters-toggle-btn:active {
+  transform: scale(0.97);
+}
+.filters-toggle-btn .toggle-arrow {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+.filters-toggle-btn.active .toggle-arrow {
+  transform: rotate(-180deg);
+}
+body.light-theme .filters-toggle-btn {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.08);
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   RESTORED DICTIONARY SCROLL TO TOP BUTTON
+   ========================================================================== */
+#dictScrollTopBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+#dictScrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#dictScrollTopBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+#dictScrollTopBtn:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   RESTORED TRAINING SETTINGS COLLAPSE
+   ========================================================================== */
+.training-settings-collapse {
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+}
+.training-settings-collapse.expanded {
+  max-height: 500px !important;
+  padding: 10px 1.5rem 12px 1.5rem !important;
+  border-bottom: 1px solid var(--border-glass) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   RESTORED HEATMAP COLLAPSE
+   ========================================================================== */
+.dict-heatmap-container {
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+  max-height: 200px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.dict-heatmap-container.collapsed {
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide mobile bottom nav on PC */
+@media (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
