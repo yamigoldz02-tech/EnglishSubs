@@ -17,15 +17,14 @@ function openModalEl(el) {
   if (!el) return;
   
   // NOTE: history.pushState is handled by the MutationObserver in initModalHistoryAPI()
-  // to avoid double-push causing stray popstate events
+  // Clean up any previous animation classes
+  el.classList.remove('modal-animate-out');
   
   document.documentElement.classList.add('modal-open');
   document.body.classList.add('modal-open');
-  el.classList.remove('modal-animate-out');
-  el.style.display = 'flex';
-  el.classList.remove('modal-animate-in');
-  void el.offsetWidth; // Force CSS reflow
+  
   el.classList.add('modal-animate-in');
+  el.style.display = 'flex';
 }
 
 /**
@@ -33,7 +32,8 @@ function openModalEl(el) {
  */
 function closeModalEl(el) {
   if (!el) return;
-  if (el.style.display === 'none' || el.classList.contains('modal-animate-out')) return;
+  if (el.style.display === 'none' || !el.style.display) return;
+  if (el.classList.contains('modal-animate-out')) return;
   
   el.classList.remove('modal-animate-in');
   el.classList.add('modal-animate-out');
@@ -47,11 +47,9 @@ function closeModalEl(el) {
       if (!anyOpen) {
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
-        // NOTE: history.back() is handled by the MutationObserver in initModalHistoryAPI()
-        // to avoid double-back causing stray popstate events that hide close buttons
       }
     }
-  }, 200);
+  }, 180);
 }
 
 // Intercept popstate to close top-most modal safely

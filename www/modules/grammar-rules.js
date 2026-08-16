@@ -380,15 +380,17 @@ function setupRulesUI() {
     });
   }
 
-  function closeAllModals() {
+  function closeAllModals(exceptModal = null) {
     [dictionaryModal, rulesModal, trainingModal, videoCourseModal, notebookModal].forEach(m => {
-      if (m) {
+      if (m && m !== exceptModal && m.style.display && m.style.display !== 'none') {
         closeModalEl(m);
         m.classList.remove('open');
       }
     });
-    document.body.classList.remove('modal-open');
-    document.documentElement.classList.remove('modal-open');
+    if (!exceptModal) {
+      document.body.classList.remove('modal-open');
+      document.documentElement.classList.remove('modal-open');
+    }
   }
 
   if (homeBtn) {
@@ -399,41 +401,66 @@ function setupRulesUI() {
   }
 
   if (dictBtn && openDictEl) {
-    dictBtn.addEventListener('click', () => { if (dictionaryModal && dictionaryModal.style.display !== 'none') return;
-      closeAllModals();
-      openDictEl.click();
+    dictBtn.addEventListener('click', () => {
+      if (dictionaryModal && dictionaryModal.style.display && dictionaryModal.style.display !== 'none') return;
+      closeAllModals(dictionaryModal);
+      if (typeof window.openDictionaryModal === 'function') {
+        window.openDictionaryModal();
+      } else {
+        openDictEl.click();
+      }
       setActiveTab(dictBtn);
     });
   }
 
   if (trainBtn && openTrainEl) {
-    trainBtn.addEventListener('click', () => { if (trainingModal && trainingModal.style.display !== 'none') return;
-      closeAllModals();
-      openTrainEl.click();
+    trainBtn.addEventListener('click', () => {
+      if (trainingModal && trainingModal.style.display && trainingModal.style.display !== 'none') return;
+      closeAllModals(trainingModal);
+      if (typeof window.openTrainingModal === 'function') {
+        window.openTrainingModal();
+      } else {
+        openTrainEl.click();
+      }
       setActiveTab(trainBtn);
     });
   }
 
   if (videoBtn && openVideoEl) {
-    videoBtn.addEventListener('click', () => { if (videoCourseModal && videoCourseModal.style.display !== 'none') return;
-      closeAllModals();
-      openVideoEl.click();
+    videoBtn.addEventListener('click', () => {
+      if (videoCourseModal && videoCourseModal.style.display && videoCourseModal.style.display !== 'none') return;
+      closeAllModals(videoCourseModal);
+      if (typeof window.openGalaxyCourse === 'function') {
+        window.openGalaxyCourse();
+      } else {
+        openVideoEl.click();
+      }
       setActiveTab(videoBtn);
     });
   }
 
   if (notesBtn && openNotebookEl) {
-    notesBtn.addEventListener('click', () => { if (notebookModal && notebookModal.style.display !== 'none') return;
-      closeAllModals();
-      openNotebookEl.click();
+    notesBtn.addEventListener('click', () => {
+      if (notebookModal && (notebookModal.classList.contains('is-open') || (notebookModal.style.display && notebookModal.style.display !== 'none'))) return;
+      closeAllModals(notebookModal);
+      if (typeof window.openNotebook === 'function') {
+        window.openNotebook();
+      } else {
+        openNotebookEl.click();
+      }
       setActiveTab(notesBtn);
     });
   }
 
   if (rulesBtn && openRulesEl) {
-    rulesBtn.addEventListener('click', () => { if (rulesModal && rulesModal.style.display !== 'none') return;
-      closeAllModals();
-      openRulesEl.click();
+    rulesBtn.addEventListener('click', () => {
+      if (rulesModal && rulesModal.style.display && rulesModal.style.display !== 'none') return;
+      closeAllModals(rulesModal);
+      if (typeof window.openRulesModal === 'function') {
+        window.openRulesModal();
+      } else {
+        openRulesEl.click();
+      }
       setActiveTab(rulesBtn);
     });
   }

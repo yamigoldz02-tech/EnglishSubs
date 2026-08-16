@@ -30,7 +30,6 @@
   touch-action: pan-y !important;
   pointer-events: auto !important;
   position: relative;
-  animation: modalScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-body {
