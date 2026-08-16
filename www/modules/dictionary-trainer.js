@@ -2343,10 +2343,15 @@ function showRandomFlashcard() {
             summaryListEl.appendChild(tag);
           });
         } else {
-          summaryListEl.textContent = 'No изученных слов.';
+          summaryListEl.textContent = 'Все слова успешно повторены!';
         }
       }
       
+      // Refresh streak & habit tracker heatmap on celebration screen
+      if (typeof renderHeatmap === 'function') {
+        renderHeatmap();
+      }
+
       // Trigger CSS Confetti particle pop!
       triggerConfettiCelebration();
     }
