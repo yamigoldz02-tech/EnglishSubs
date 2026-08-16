@@ -1217,10 +1217,6 @@ function setupDictionaryUI() {
       if (arrow) arrow.textContent = '▼';
     }
 
-    openModalEl(modal);
-    document.documentElement.classList.add('modal-open');
-    document.body.classList.add('modal-open');
-    
     // Reset type filter to 'all' when opening
     dictTypeFilter = 'all';
     dictSortOption = 'default';
@@ -1266,10 +1262,14 @@ function setupDictionaryUI() {
     if (addWordBtn) addWordBtn.style.display = 'flex';
     if (progressBarContainer) progressBarContainer.style.display = 'none';
     
+    // Populate DOM first while invisible so animation runs at full 60fps
     populateCategorySelectors();
     renderDictWordsList();
     resetFlashcard();
     renderHeatmap();
+
+    // Now trigger the clean sheet animation
+    openModalEl(modal);
   };
   window.openDictionaryModal = openDictionaryModal;
 
@@ -1299,9 +1299,6 @@ function setupDictionaryUI() {
     window.dictForceStudyAll = false;
     if (modal && modal.style.display && modal.style.display !== 'none') {
       closeModalEl(modal); // Close dictionary if open
-    }
-    if (trainingModal) {
-      openModalEl(trainingModal);
     }
     
     // Ensure training settings are collapsed on open
@@ -1358,6 +1355,10 @@ function setupDictionaryUI() {
     resetFlashcard();
     renderHeatmap();
     updateEssentialProgress();
+
+    if (trainingModal) {
+      openModalEl(trainingModal);
+    }
   };
   window.openTrainingModal = openTrainingModal;
 

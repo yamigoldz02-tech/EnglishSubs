@@ -52,13 +52,6 @@ function closeModalEl(el) {
   }, 180);
 }
 
-// Intercept popstate to close top-most modal safely
-window.addEventListener('popstate', (e) => {
-  if (typeof window.closeTopmostModal === 'function') {
-    window.closeTopmostModal();
-  }
-});
-
 // Backward compatibility
 window.openModalEl = openModalEl;
 window.closeModalEl = closeModalEl;
