@@ -28,9 +28,9 @@
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/app-core.css?v=3.0.6">
+  <link rel="stylesheet" href="css/app-core.css?v=3.0.7">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.6">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.7">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -118,7 +118,7 @@
               var menu = document.getElementById('headerNavMenu');
               var bd = document.getElementById('headerNavBackdrop');
               var btn = document.getElementById('headerMenuBtn');
-              if (menu) menu.style.display = 'flex';
+              if (menu) { menu.style.display = 'flex'; menu.style.flexDirection = 'column'; }
               if (bd) bd.style.display = 'block';
               if (btn) btn.classList.add('active');
             };
@@ -131,9 +131,9 @@
               if (btn) btn.classList.remove('active');
             };
             window.toggleHeaderNav = function(e) {
-              if (e) { e.stopPropagation(); }
+              if (e) { e.stopPropagation(); e.preventDefault(); }
               var menu = document.getElementById('headerNavMenu');
-              if (menu && menu.style.display !== 'none') {
+              if (menu && menu.style.display !== 'none' && menu.style.display !== '') {
                 window.closeHeaderNav();
               } else {
                 window.openHeaderNav();
