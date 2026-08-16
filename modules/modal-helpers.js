@@ -56,3 +56,15 @@ function closeModalEl(el) {
 // Backward compatibility
 window.openModalEl = openModalEl;
 window.closeModalEl = closeModalEl;
+// Prevent background scrolling when dragging on modal backdrop overlay
+if (typeof document !== 'undefined') {
+  document.addEventListener('touchmove', function(e) {
+    if (document.body.classList.contains('modal-open')) {
+      const target = /** @type {HTMLElement} */ (e.target);
+      // If touch target is the backdrop overlay itself, prevent background scroll
+      if (target && target.classList && target.classList.contains('modal-overlay')) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+}

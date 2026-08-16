@@ -13,9 +13,22 @@ html, body {
   padding: 0;
 }
 
+html.modal-open,
 body.modal-open {
   overflow: hidden !important;
+  height: 100% !important;
+  max-height: 100vh !important;
+  max-height: 100dvh !important;
   overscroll-behavior: none !important;
+  touch-action: none !important;
+}
+
+body.modal-open .main-container,
+body.modal-open .bento-grid,
+body.modal-open .navbar,
+body.modal-open .hero-section {
+  pointer-events: none !important;
+  user-select: none !important;
 }
 
 body {

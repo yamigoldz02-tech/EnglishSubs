@@ -16,7 +16,7 @@
   padding-top: env(safe-area-inset-top, 24px);
   box-sizing: border-box;
   pointer-events: auto !important;
-  touch-action: pan-y !important;
+  touch-action: none !important;
 }
 
 .modal-card {
