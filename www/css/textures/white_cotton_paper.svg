@@ -1,36 +1,20 @@
-<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Paper Grain & Fiber Bump Filter -->
-    <filter id="paperFiberRelief" x="0%" y="0%" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" stitchTiles="stitch"/>
-      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="1.2" result="light">
+    <!-- Micro-Grain Fine Art Cotton Rag Paper Filter -->
+    <filter id="microCottonPaper" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" result="noise" stitchTiles="stitch"/>
+      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="0.4" result="light">
         <feDistantLight azimuth="55" elevation="65" />
       </feDiffuseLighting>
       <feComponentTransfer in="light" result="brightened">
-        <feFuncR type="linear" slope="0.99" intercept="0.01"/>
-        <feFuncG type="linear" slope="0.99" intercept="0.01"/>
-        <feFuncB type="linear" slope="0.99" intercept="0.01"/>
+        <feFuncR type="linear" slope="0.98" intercept="0.02"/>
+        <feFuncG type="linear" slope="0.98" intercept="0.02"/>
+        <feFuncB type="linear" slope="0.98" intercept="0.02"/>
       </feComponentTransfer>
       <feBlend mode="multiply" in="SourceGraphic" in2="brightened" />
     </filter>
   </defs>
 
-  <!-- Clean White Fine-Art Cotton Rag Paper Base -->
-  <rect width="100%" height="100%" fill="#FCF9F9" filter="url(#paperFiberRelief)" />
-
-  <!-- Subtle Microscopic Cotton Fibers & Strands Overlay -->
-  <g stroke="#3A2820" stroke-opacity="0.035" fill="none" stroke-linecap="round">
-    <path d="M 24,45 Q 38,40 52,48" stroke-width="0.7"/>
-    <path d="M 120,80 Q 135,92 150,85" stroke-width="0.6"/>
-    <path d="M 210,30 Q 225,22 240,36" stroke-width="0.8"/>
-    <path d="M 75,160 Q 90,175 105,168" stroke-width="0.6"/>
-    <path d="M 180,210 Q 195,200 215,218" stroke-width="0.7"/>
-    <path d="M 260,140 Q 275,155 290,145" stroke-width="0.6"/>
-    <path d="M 30,250 Q 45,260 60,248" stroke-width="0.8"/>
-    <path d="M 140,270 Q 155,260 170,275" stroke-width="0.6"/>
-    <path d="M 240,260 Q 255,272 270,265" stroke-width="0.7"/>
-    <path d="M 90,60 Q 105,52 118,65" stroke-width="0.5"/>
-    <path d="M 160,130 Q 172,142 188,135" stroke-width="0.6"/>
-    <path d="M 15,110 Q 28,122 42,115" stroke-width="0.7"/>
-  </g>
+  <!-- Clean Fine-Art Cotton Rag Paper Base -->
+  <rect width="100%" height="100%" fill="#FCF8F9" filter="url(#microCottonPaper)" />
 </svg>

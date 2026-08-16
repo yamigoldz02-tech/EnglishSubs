@@ -104,7 +104,69 @@
   transition: var(--transition-fast);
 }
 
-/* Light Theme Component Specific Overrides */
+/* Light Theme Component Specific Overrides & High-Contrast Typography */
+body.light-theme {
+  color: #000000;
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6,
+body.light-theme .song-title,
+body.light-theme .modal-title,
+body.light-theme .section-title,
+body.light-theme .dash-panel-title,
+body.light-theme .bento-card-title,
+body.light-theme .dash-song-title,
+body.light-theme .video-lesson-title,
+body.light-theme .rules-accordion-title,
+body.light-theme .nav-brand {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+body.light-theme .stat-value,
+body.light-theme .bento-stat-num,
+body.light-theme .nav-stat-streak,
+body.light-theme .nav-stat-xp,
+body.light-theme .stat-number,
+body.light-theme .streak-count,
+body.light-theme .badge-count,
+body.light-theme .vocab-count,
+body.light-theme .counter-num,
+body.light-theme .fc-counter,
+body.light-theme .timer-display,
+body.light-theme .dash-hero-badge {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.light-theme .lyric-line {
+  color: #18181b;
+  font-weight: 600;
+}
+
+body.light-theme .line-number {
+  color: #52525b !important;
+  font-weight: 700;
+}
+
+body.light-theme .lyrics-row-wrapper.active .lyric-line {
+  color: #000000 !important;
+  font-weight: 700;
+  background: rgba(235, 178, 192, 0.22);
+  border-left-color: #EBB2C0;
+}
+
+body.light-theme .lyrics-row-wrapper.active .line-number {
+  color: #000000 !important;
+  font-weight: 800;
+}
+
 body.light-theme .theme-toggle-btn {
   background: rgba(0, 0, 0, 0.04);
 }
@@ -116,7 +178,10 @@ body.light-theme .theme-toggle-btn:hover {
 }
 
 body.light-theme .song-select {
-  background: rgba(0, 0, 0, 0.04);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #000000;
+  font-weight: 600;
 }
 
 body.light-theme .perf-switch {
@@ -125,21 +190,25 @@ body.light-theme .perf-switch {
 
 body.light-theme .song-header,
 body.light-theme .lyrics-board-card {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.01);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 body.light-theme .analysis-card {
-  background: rgba(0, 0, 0, 0.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 body.light-theme .analysis-card:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 body.light-theme .lyrics-row-wrapper:hover .lyric-line {
-  background: rgba(0, 0, 0, 0.03);
-  border-left-color: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.04);
+  border-left-color: rgba(0, 0, 0, 0.2);
 }
 
 body.light-theme .brand-icon svg {

@@ -43,7 +43,7 @@
 }
 
 body.light-theme .notebook-drawer-tab {
-  background: #FFFFFF var(--texture-cotton-paper-white);
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.08);
   color: #000000;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -124,7 +124,7 @@ body.light-theme .notebook-modal-overlay.is-open .notebook-drawer-backdrop {
 }
 
 body.light-theme .notebook-modal-card {
-  background: #FFFFFF var(--texture-cotton-paper-white);
+  background: #FFFFFF;
   border-right-color: rgba(0, 0, 0, 0.08);
   box-shadow: 8px 0 40px rgba(0, 0, 0, 0.08);
 }

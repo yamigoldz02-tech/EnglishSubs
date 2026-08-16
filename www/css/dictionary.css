@@ -30,7 +30,7 @@
 }
 
 body.light-theme .word-card-popup {
-  background: #FFFFFF var(--texture-cotton-paper-white);
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: var(--shadow-lg);
 }

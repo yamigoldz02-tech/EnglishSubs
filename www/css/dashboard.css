@@ -408,11 +408,12 @@ body.light-theme .dash-hero-title {
 }
 
 body.light-theme .dash-hero-subtitle {
-  color: #3F3F46;
+  color: #18181b;
+  font-weight: 500;
 }
 
 body.light-theme .dash-hero-badge {
-  background: var(--bg-cotton-white);
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.08);
   color: #000000;
   box-shadow: var(--shadow-sm);
@@ -438,7 +439,7 @@ body.light-theme .dash-action-btn.primary:hover {
 }
 
 body.light-theme .dash-action-btn.secondary {
-  background: var(--bg-cotton-white);
+  background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.12);
   color: #000000;
   font-weight: 700;
@@ -446,25 +447,25 @@ body.light-theme .dash-action-btn.secondary {
 }
 
 body.light-theme .dash-action-btn.secondary:hover {
-  background: #FCF8F9 var(--texture-cotton-paper-white);
+  background: #FCF8F9;
   border-color: #EBB2C0;
   color: #000000;
 }
 
 body.light-theme .bento-card {
-  background: var(--bg-cotton-white);
+  background: #FFFFFF;
   border-color: rgba(0, 0, 0, 0.07);
   box-shadow: var(--shadow-sm);
 }
 
 body.light-theme .bento-card:hover {
-  background: #FFFFFF var(--texture-cotton-paper-white);
+  background: #FFFFFF;
   border-color: rgba(235, 178, 192, 0.5);
   box-shadow: 0 8px 24px rgba(235, 178, 192, 0.2);
 }
 
 body.light-theme .bento-icon {
-  background: #FCF8F9 var(--texture-cotton-paper-white);
+  background: #FCF8F9;
   border-color: rgba(0, 0, 0, 0.08);
   color: #000000;
 }
@@ -486,7 +487,8 @@ body.light-theme .bento-card-title {
 }
 
 body.light-theme .bento-card-desc {
-  color: #3F3F46;
+  color: #18181b;
+  font-weight: 500;
 }
 
 body.light-theme .bento-progress-track {
@@ -502,51 +504,52 @@ body.light-theme .bento-card:hover .bento-card-footer {
 }
 
 body.light-theme .dash-music-panel {
-  background: var(--bg-cotton-white);
-  border-color: rgba(55, 53, 47, 0.09);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
   box-shadow: var(--shadow-sm);
 }
 
 body.light-theme .dash-panel-title {
-  color: #0A0A0A;
+  color: #000000;
+  font-weight: 800;
 }
 
 body.light-theme .dash-panel-title svg {
-  stroke: #0A0A0A;
-  color: #0A0A0A;
+  stroke: #000000;
+  color: #000000;
 }
 
 body.light-theme .dash-song-item {
-  background: #FCF8F9 var(--texture-cotton-paper-white);
-  border-color: rgba(10, 10, 10, 0.08);
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.07);
 }
 
 body.light-theme .dash-song-item:hover {
-  background: #FFFFFF var(--texture-cotton-paper-white);
-  border-color: rgba(10, 10, 10, 0.22);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 body.light-theme .dash-song-cover {
-  background: #FFFFFF var(--texture-cotton-paper-white);
-  border-color: rgba(10, 10, 10, 0.12);
-  color: #0A0A0A;
+  background: #FCF8F9;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #000000;
   font-weight: 700;
 }
 
 body.light-theme .dash-song-cover.fav {
-  color: #0A0A0A;
+  color: #000000;
 }
 
 body.light-theme .dash-song-cover.fav svg {
-  fill: #0A0A0A;
-  stroke: #0A0A0A;
+  fill: #000000;
+  stroke: #000000;
 }
 
 body.light-theme .dash-song-item:hover .dash-song-cover {
-  background: #0A0A0A;
-  border-color: #0A0A0A;
+  background: #000000;
+  border-color: #000000;
   color: #FFFFFF;
 }
 
@@ -556,25 +559,24 @@ body.light-theme .dash-song-item:hover .dash-song-cover.fav svg {
 }
 
 body.light-theme .dash-song-title {
-  color: #0A0A0A;
+  color: #000000;
   font-weight: 700;
 }
 
 body.light-theme .dash-song-artist {
-  color: #0A0A0A;
-  font-weight: 500;
-  opacity: 0.85;
+  color: #3f3f46;
+  font-weight: 600;
 }
 
 body.light-theme .dash-song-play-btn {
-  background: #FFFFFF var(--texture-cotton-paper-white);
-  border-color: rgba(10, 10, 10, 0.14);
-  color: #0A0A0A;
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #000000;
 }
 
 body.light-theme .dash-song-item:hover .dash-song-play-btn {
-  background: #0A0A0A;
-  border-color: #0A0A0A;
+  background: #000000;
+  border-color: #000000;
   color: #FFFFFF;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
