@@ -1,0 +1,116 @@
+/* ==========================================================================
+   CODE & NOTES EDITOR — MODULAR STYLESHEET
+   @AI-SECTION: CODE_EDITOR_STYLES
+   ========================================================================== */
+
+/* ── 1. Per-Lesson Note Section ── */
+.lesson-note-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.lesson-note-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lesson-note-save-status {
+  font-size: 0.7rem;
+  color: var(--text-muted, #9ca3af);
+  align-self: flex-end;
+  transition: opacity 0.3s ease;
+}
+
+.lesson-note-save-status.saved {
+  color: #10b981;
+}
+
+/* ── 2. Editor Container with Line Numbers ── */
+.editor-container {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.editor-container:focus-within {
+  border-color: var(--border-focus);
+}
+
+body.light-theme .editor-container {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .editor-container:focus-within {
+  border-color: #EBB2C0;
+  box-shadow: 0 0 0 3px rgba(235, 178, 192, 0.25);
+}
+
+body.warm-theme .editor-container {
+  background: #FAF6ED var(--texture-cotton-paper);
+  border-color: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .editor-container:focus-within {
+  border-color: #F4A261;
+  box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
+}
+
+.editor-line-numbers {
+  padding: 12px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-sub);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  text-align: right;
+  min-width: 32px;
+  user-select: none;
+  border-right: 1px solid var(--border-glass);
+  font-family: monospace;
+  overflow: hidden;
+}
+
+body.light-theme .editor-line-numbers {
+  background: #FCF8F9;
+  border-right-color: rgba(0, 0, 0, 0.06);
+  color: #71717A;
+}
+
+body.warm-theme .editor-line-numbers {
+  background: #F4EEDB var(--texture-cotton-paper);
+  border-right-color: rgba(62, 39, 35, 0.06);
+  color: #8D6E63;
+}
+
+body.no-notebook-line-numbers .editor-line-numbers {
+  display: none !important;
+}
+
+.editor-textarea {
+  flex-grow: 1;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 12px 14px !important;
+  color: var(--text-main);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  outline: none;
+  box-sizing: border-box;
+  resize: none;
+  white-space: pre-wrap !important; 
+  overflow-x: hidden !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}

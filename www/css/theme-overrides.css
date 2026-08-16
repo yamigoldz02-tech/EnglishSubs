@@ -1,0 +1,133 @@
+/* ==========================================================================
+   THEME OVERRIDES & PALETTES (LIGHT / WARM / GRAY) — MODULAR STYLESHEET
+   @AI-SECTION: THEME_OVERRIDES
+   ========================================================================== */
+
+/* ── 1. Light Theme Component Overrides & High-Contrast Typography ── */
+body.light-theme {
+  --text-main: #111827;
+  --text-sub: #4b5563;
+  --text-muted: #6b7280;
+  --bg-main: #f9fafb;
+  --bg-card: #ffffff;
+  --border-glass: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .navbar {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .bento-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .dict-highlighted-word {
+  background: rgba(26, 163, 74, 0.1);
+  border-bottom-color: rgba(26, 163, 74, 0.6);
+  color: #1aa34a;
+}
+
+body.light-theme .dict-highlighted-word:hover {
+  background: rgba(26, 163, 74, 0.2);
+  border-bottom-color: #1aa34a;
+  box-shadow: 0 4px 10px rgba(26, 163, 74, 0.2);
+}
+
+body.light-theme .artist-song-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--accent-spotify);
+}
+
+/* ── 2. Gray Theme Component Overrides (Electric Indigo) ── */
+body.gray-theme {
+  --text-main: #f3f4f6;
+  --text-sub: #9ca3af;
+  --text-muted: #6b7280;
+  --bg-main: #111827;
+  --bg-card: #1f2937;
+  --border-glass: rgba(255, 255, 255, 0.08);
+}
+
+body.gray-theme .dict-highlighted-word {
+  background: rgba(99, 102, 241, 0.12);
+  border-bottom-color: rgba(99, 102, 241, 0.7);
+  color: #818cf8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.gray-theme .dict-highlighted-word:hover {
+  background: rgba(99, 102, 241, 0.25);
+  border-bottom-color: #6366f1;
+  color: #a5b4fc;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+/* ── 3. Warm Theme Component Overrides (Warm Editorial Paper) ── */
+body.warm-theme {
+  --text-main: #2D2424;
+  --text-sub: #5C4B4B;
+  --text-muted: #8D7B7B;
+  --bg-main: #F4EEDB;
+  --bg-card: #FAF6ED;
+  --border-glass: rgba(62, 39, 35, 0.08);
+}
+
+body.warm-theme .header-menu-btn:hover {
+  border-color: #F4A261;
+  background: #FFFDF9 var(--texture-cotton-paper);
+}
+
+body.warm-theme .header-menu-streak-dot {
+  background: #F4A261;
+}
+
+body.warm-theme .header-nav-dropdown {
+  background: #FCF9F2 var(--texture-cotton-paper) !important;
+  border: 1px solid rgba(62, 39, 35, 0.09) !important;
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.12) !important;
+}
+
+body.warm-theme .nav-dropdown-profile {
+  background: #F4EEDB var(--texture-cotton-paper) !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .nav-dropdown-profile:hover {
+  background: #FFFDF9 var(--texture-cotton-paper) !important;
+  border-color: #F4A261 !important;
+}
+
+/* ── 4. System-Wide Inputs & Textareas Contrast ── */
+body.light-theme input[type="text"],
+body.light-theme input[type="search"],
+body.light-theme input[type="password"],
+body.light-theme textarea,
+body.light-theme select {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #111827 !important;
+}
+
+body.warm-theme input[type="text"],
+body.warm-theme input[type="search"],
+body.warm-theme input[type="password"],
+body.warm-theme textarea,
+body.warm-theme select {
+  background: #FAF6ED !important;
+  border-color: rgba(62, 39, 35, 0.12) !important;
+  color: #2D2424 !important;
+}
+
+body.gray-theme input[type="text"],
+body.gray-theme input[type="search"],
+body.gray-theme input[type="password"],
+body.gray-theme textarea,
+body.gray-theme select {
+  background: #1f2937 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f3f4f6 !important;
+}

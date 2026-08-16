@@ -1,0 +1,618 @@
+/* ==========================================================================
+   VIDEO COURSE (ENGLISH GALAXY) — MODULAR STYLESHEET
+   @AI-SECTION: VIDEO_COURSE_STYLES
+   ========================================================================== */
+
+/* ── 1. Video Course Modal Card & Base Layout ── */
+.video-course-modal-card {
+  max-width: 900px !important;
+  width: 95% !important;
+  height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.video-course-modal-card .modal-header {
+  padding: 0.8rem 1.25rem;
+}
+
+/* ── 2. Video Course Progress Panel ── */
+.video-course-progress-panel {
+  padding: 0.65rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+body.light-theme .video-course-progress-panel {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.video-course-progress-panel .progress-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.video-course-progress-panel .progress-percent {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  font-weight: 600;
+}
+
+.video-course-progress-panel .progress-percent strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.video-course-progress-panel .progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+body.light-theme .video-course-progress-panel .progress-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.video-course-progress-panel .progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+}
+
+body.light-theme .video-course-progress-panel .progress-bar-fill {
+  background: linear-gradient(90deg, #10b981, #059669);
+  box-shadow: none;
+}
+
+/* ── 3. Attached Search & Filter Controls ── */
+.video-course-controls {
+  padding: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.video-course-controls .filter-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.video-course-controls .filter-pill {
+  flex: 1;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video-course-controls .filter-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.video-course-controls .filter-pill.active {
+  background: #ffffff;
+  color: #111827;
+  border-color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+body:not(.light-theme):not(.warm-theme) .video-course-controls .filter-pill.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.video-course-controls .search-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.video-course-controls .search-box-icon {
+  position: absolute;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted, #9ca3af);
+  pointer-events: none;
+}
+
+.video-course-controls #videoSearchInput {
+  width: 100%;
+  padding: 7px 28px 7px 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.video-course-controls #videoSearchInput:focus {
+  border-color: #a78bfa;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.2);
+}
+
+.video-course-controls .clear-video-search {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #9ca3af);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.video-course-controls .clear-video-search:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── 4. Main Body & Sidebar Layout ── */
+.video-course-body {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  padding: 1.25rem;
+  gap: 1.25rem;
+  box-sizing: border-box;
+}
+
+.lessons-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 0.75rem;
+  border-right: 1px solid var(--border-glass);
+  box-sizing: border-box;
+}
+
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.video-lesson-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  user-select: none;
+}
+
+.video-lesson-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
+}
+
+.video-lesson-item.playing {
+  background: rgba(167, 139, 250, 0.1) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.15);
+}
+
+.video-lesson-item.playing::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #a78bfa;
+  border-radius: 10px 0 0 10px;
+}
+
+.video-lesson-item.watched {
+  opacity: 0.65;
+}
+
+.video-lesson-item.watched:hover {
+  opacity: 0.9;
+}
+
+.lesson-watch-checkbox-container {
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+  cursor: pointer;
+}
+
+.lesson-watch-checkbox-container input {
+  display: none;
+}
+
+.lesson-custom-checkmark {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-glass);
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lesson-watch-checkbox-container input:checked ~ .lesson-custom-checkmark {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.lesson-custom-checkmark::after {
+  content: '✓';
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: none;
+}
+
+.lesson-watch-checkbox-container input:checked ~ .lesson-custom-checkmark::after {
+  display: block;
+}
+
+.lesson-card-header {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.lesson-index-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.lesson-duration-badge {
+  font-size: 0.68rem;
+  color: var(--text-muted, #9ca3af);
+}
+
+.lesson-item-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin: 0;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* ── 5. Player Container Pane & Video Player Wrapper ── */
+.player-container-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.video-player-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-player-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.player-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-sub);
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.placeholder-vinyl-art {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.player-placeholder h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.player-placeholder p {
+  margin: 0;
+  font-size: 0.8rem;
+  max-width: 280px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ── 6. Active Video Details & Notes Section ── */
+.active-video-details {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-sizing: border-box;
+}
+
+body.light-theme .active-video-details {
+  background: rgba(0, 0, 0, 0.015);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.active-video-details .details-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.active-video-details .active-badge {
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #c084fc;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.premium-watched-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  cursor: pointer;
+  user-select: none;
+}
+
+.premium-watched-toggle input {
+  width: 15px;
+  height: 15px;
+  accent-color: #a78bfa;
+  cursor: pointer;
+}
+
+.premium-watched-toggle:hover {
+  color: var(--text-main);
+}
+
+.active-external-link-btn:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* ── 7. Mobile Course Tabs (iOS Segmented Control Style) ── */
+@media (max-width: 768px) {
+  .mobile-course-tabs {
+    display: flex !important;
+    padding: 3px !important;
+    margin: 8px 16px 4px 16px !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    gap: 3px !important;
+    box-sizing: border-box !important;
+  }
+
+  body:not(.light-theme):not(.warm-theme) .mobile-course-tabs {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  body.warm-theme .mobile-course-tabs {
+    background: rgba(45, 36, 36, 0.06) !important;
+    border-color: rgba(45, 36, 36, 0.08) !important;
+  }
+
+  .course-tab-btn {
+    flex: 1;
+    padding: 7px 12px !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-sub) !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  body.light-theme .course-tab-btn {
+    color: #6b7280 !important;
+  }
+
+  .course-tab-btn.active {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  body:not(.light-theme):not(.warm-theme) .course-tab-btn.active {
+    background: rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  body.warm-theme .course-tab-btn.active {
+    background: #FAF8F5 !important;
+    color: #2D2424 !important;
+    box-shadow: 0 1px 4px rgba(45, 36, 36, 0.12) !important;
+  }
+  
+  /* Tab Switching Logic on Mobile */
+  #videoCourseModal.active-tab-lessons .lessons-sidebar,
+  .video-course-modal-card.active-tab-lessons .lessons-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #videoCourseModal.active-tab-lessons .player-container-pane,
+  .video-course-modal-card.active-tab-lessons .player-container-pane {
+    display: none !important;
+  }
+  
+  #videoCourseModal.active-tab-notes .lessons-sidebar,
+  .video-course-modal-card.active-tab-notes .lessons-sidebar {
+    display: none !important;
+  }
+  #videoCourseModal.active-tab-notes .player-container-pane,
+  .video-course-modal-card.active-tab-notes .player-container-pane {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #videoCourseModal.active-tab-notes .active-video-details,
+  .video-course-modal-card.active-tab-notes .active-video-details {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Full Screen Mobile Stacking for Video Course */
+  .video-course-modal-card {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  .video-course-modal-card .modal-header {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--border-glass) !important;
+  }
+  
+  .video-course-progress-panel {
+    padding: 8px 16px !important;
+    gap: 6px !important;
+  }
+  
+  .video-course-body {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+  
+  .lessons-sidebar {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    padding: 12px 16px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .player-container-pane {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    z-index: 10 !important;
+    background: transparent !important;
+    padding: 12px 16px !important;
+    border-bottom: none !important;
+    box-sizing: border-box !important;
+  }
+  
+  .lessons-list {
+    height: auto !important;
+    overflow-y: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+}
