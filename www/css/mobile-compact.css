@@ -1,219 +1,853 @@
 /* ==========================================================================
-   SPOTIFY MOBILE EXACT CLONE (Ultra-Compact)
+   AI LYRIC-TRAINER — MODERN MOBILE NATIVE EXPERIENCE (RESPONSIVE SYSTEM)
+   Tailored for iOS / Android WebViews (Capacitor), Safari & Chrome Mobile
    ========================================================================== */
+
 @media (max-width: 1024px) and (orientation: portrait), (max-width: 768px) {
-  
-  /* 1. Hide the huge central Hero block */
-  .hero-main-title-block {
-    display: none !important;
+
+  /* ── 1. Universal Mobile Base & Viewport Ergonomics ─────────────────────── */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    font-size: 15px !important;
   }
-  
-  /* 2. Container Padding */
-  .container {
-    padding: 0 8px !important;
+
+  body {
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
   }
-  
-  /* 3. Header & Top Bar */
-  .header {
-    padding: 8px 12px !important;
+
+  .app-container {
+    padding: 0 10px 16px 10px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Micro-interactions: Satisfying native touch press feedback */
+  button, 
+  .dash-action-btn, 
+  .bento-card, 
+  .dashboard-nav-card, 
+  .dict-word-item, 
+  .mobile-nav-item, 
+  .flashcard-rating-btn, 
+  .word-pill, 
+  .word-chip,
+  .song-row,
+  .dash-song-recommendation,
+  .match-tile,
+  .learn-choice-btn,
+  .course-tab-btn {
+    transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.12s ease !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+
+  button:active, 
+  .dash-action-btn:active, 
+  .bento-card:active, 
+  .dashboard-nav-card:active,
+  .dict-word-item:active, 
+  .mobile-nav-item:active, 
+  .flashcard-rating-btn:active, 
+  .word-pill:active,
+  .word-chip:active,
+  .song-row:active,
+  .dash-song-recommendation:active,
+  .match-tile:active,
+  .learn-choice-btn:active,
+  .course-tab-btn:active {
+    transform: scale(0.96) !important;
+  }
+
+  /* ── 2. Glassmorphic Header & Top Controls ──────────────────────────────── */
+  .navbar, #appNavbar {
     height: 52px !important;
-    gap: 12px !important;
-    justify-content: space-between !important;
-  }
-  
-  /* Logo */
-  .logo {
-    gap: 8px !important;
-  }
-  .logo-icon {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    flex-shrink: 0 !important;
-  }
-  .logo-icon svg {
-    width: 20px !important;
-    height: 20px !important;
-  }
-  .logo h1 {
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.5px !important;
-  }
-  
-  /* Top Right Buttons (Sync, Theme, Settings) */
-  .header > div, .header > button {
+    padding: 0 10px !important;
+    margin-bottom: 10px !important;
+    background: var(--bg-navbar) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--border-glass) !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: space-between !important;
     gap: 8px !important;
+    position: sticky !important;
+    top: 6px !important;
+    z-index: 1000 !important;
+    box-shadow: var(--shadow-sm) !important;
   }
-  
-  /* Make all top bar buttons compact pills/circles */
-  #forceSyncDataBtn, .theme-toggle-btn, #openSettingsBtn {
-    height: 32px !important;
-    min-height: 32px !important;
-    padding: 0 10px !important;
-    border-radius: 16px !important;
-    background: rgba(255,255,255,0.1) !important;
-    border: none !important;
-    color: #fff !important;
-    box-shadow: none !important;
-    font-size: 0.75rem !important;
+
+  body.light-theme .navbar, 
+  body.light-theme #appNavbar {
+    background: rgba(252, 248, 249, 0.94) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
   }
-  
-  /* Hide the text in Sync button on mobile, keep the SVG or first character if no SVG */
-  #forceSyncDataBtn span {
-    font-size: 0 !important; /* Hides text while keeping emojis/SVGs */
-    display: inline-block !important; /* Required for ::first-letter to work */
+
+  body.warm-theme .navbar, 
+  body.warm-theme #appNavbar {
+    background: rgba(248, 244, 234, 0.94) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
   }
-  #forceSyncDataBtn span::first-letter {
-    font-size: 0.9rem !important; /* Keep the emoji visible */
+
+  /* Brand Logo */
+  .nav-brand {
+    gap: 7px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
   }
-  
-  /* Theme toggle switch constraints */
-  .theme-toggle-btn svg {
-    width: 16px !important;
-    height: 16px !important;
+
+  .brand-icon {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+    background: var(--accent-gradient) !important;
+    box-shadow: var(--accent-glow) !important;
+  }
+
+  .brand-icon svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .brand-text {
+    font-size: 1.02rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.4px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Search Bar */
+  .song-selector-container {
+    flex: 1 !important;
+    max-width: none !important;
     margin: 0 !important;
   }
-  
-  /* 4. Search Input */
-  .search-input-container {
-    background: rgba(255,255,255,0.1) !important;
-    border: none !important;
-    border-radius: 12px !important;
-    height: 38px !important;
-    padding: 0 12px !important;
-    margin-bottom: 16px !important;
+
+  .search-input-wrapper {
+    height: 34px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 18px !important;
+    padding: 0 10px !important;
+    box-sizing: border-box !important;
   }
-  .search-input-container svg {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
+
+  body.light-theme .search-input-wrapper {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
   }
-  .search-input-container input {
-    font-size: 0.85rem !important;
-    font-weight: 500 !important;
-    padding-left: 8px !important;
+
+  .search-input-wrapper input {
+    font-size: 0.8rem !important;
+    color: var(--text-main) !important;
+    padding-left: 6px !important;
   }
-  
-  /* 5. Dashboard Grid (Spotify Recent Playlists style) */
-  div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
+
+  .search-icon {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    opacity: 0.7 !important;
   }
-  
-  .dashboard-nav-card {
+
+  /* Header Icon Buttons (Theme & Menu) */
+  .nav-controls {
+    gap: 6px !important;
+    flex-shrink: 0 !important;
     display: flex !important;
-    flex-direction: row !important;
     align-items: center !important;
-    padding: 0 !important;
-    height: 56px !important;
-    background: rgba(255,255,255,0.08) !important;
-    border: none !important;
-    border-radius: 16px !important;
-    overflow: hidden !important;
   }
-  
-  /* Left image block in card */
-  .dashboard-nav-card > div:first-child {
-    width: 56px !important;
-    height: 56px !important;
-    min-width: 56px !important;
-    background: rgba(255,255,255,0.1) !important;
+
+  .theme-toggle-btn, 
+  .header-menu-btn, 
+  #forceSyncDataBtn, 
+  #openSettingsBtn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid var(--border-glass) !important;
+    color: var(--text-main) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin-right: 8px !important;
+    box-shadow: none !important;
   }
-  .dashboard-nav-card > div:first-child span {
-    font-size: 1.4rem !important;
+
+  body.light-theme .theme-toggle-btn, 
+  body.light-theme .header-menu-btn, 
+  body.light-theme #forceSyncDataBtn, 
+  body.light-theme #openSettingsBtn {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-main) !important;
   }
-  .dashboard-nav-card > div:first-child span:last-child {
-    display: none !important;
+
+  .theme-toggle-btn svg, 
+  .header-menu-btn svg {
+    width: 15px !important;
+    height: 15px !important;
   }
-  
-  /* Title of card */
-  .dashboard-nav-card h3 {
-    font-size: 0.75rem !important;
+
+  /* Profile Dropdown Sheet on Mobile */
+  .header-nav-dropdown {
+    position: fixed !important;
+    top: 60px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    border-radius: 20px !important;
+    padding: 14px !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-glass) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+    z-index: 1050 !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+  }
+
+  body.light-theme .header-nav-dropdown {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* ── 3. Dashboard (Home Screen) Modern Styling ──────────────────────────── */
+  .dash-hero-section {
+    padding: 14px 16px !important;
+    border-radius: 20px !important;
+    margin-bottom: 14px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glass) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+
+  body.light-theme .dash-hero-section {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .dash-hero-title {
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 4px !important;
+    color: var(--text-main) !important;
+  }
+
+  .dash-hero-subtitle {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+    color: var(--text-sub) !important;
+    margin-bottom: 10px !important;
+  }
+
+  .dash-hero-stats-row {
+    display: flex !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .dash-hero-badge {
+    padding: 5px 10px !important;
+    border-radius: 12px !important;
+    font-size: 0.72rem !important;
     font-weight: 700 !important;
-    margin: 0 !important;
-    color: #fff !important;
-    line-height: 1.2 !important;
   }
-  
-  /* Hide description and lower block */
-  .dashboard-nav-card p, .dashboard-nav-card > div:not(:first-child) {
+
+  /* 2-Column Bento Grid on Phones */
+  .dash-bento-grid, 
+  div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bento-card, 
+  .dashboard-nav-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 18px !important;
+    padding: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    min-height: 98px !important;
+    height: auto !important;
+    box-shadow: var(--shadow-sm) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    text-decoration: none !important;
+  }
+
+  body.light-theme .bento-card, 
+  body.light-theme .dashboard-nav-card {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  body.warm-theme .bento-card, 
+  body.warm-theme .dashboard-nav-card {
+    background: var(--bg-cotton-card) !important;
+    border-color: rgba(62, 39, 35, 0.09) !important;
+  }
+
+  /* Bento Icon Container */
+  .bento-icon-wrapper, 
+  .dashboard-nav-card > div:first-child {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 11px !important;
+    background: rgba(255, 69, 0, 0.12) !important;
+    color: var(--accent-spotify) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  body.light-theme .bento-icon-wrapper, 
+  body.light-theme .dashboard-nav-card > div:first-child {
+    background: rgba(235, 178, 192, 0.25) !important;
+    color: #EBB2C0 !important;
+  }
+
+  .bento-card h3, 
+  .dashboard-nav-card h3 {
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+    margin: 0 0 2px 0 !important;
+    line-height: 1.25 !important;
+  }
+
+  .bento-card p {
+    font-size: 0.7rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+  }
+
+  /* Song Recommendation Rows */
+  .dash-music-section {
+    margin-top: 10px !important;
+  }
+
+  .dash-section-header {
+    margin-bottom: 8px !important;
+  }
+
+  .dash-section-title {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: var(--text-main) !important;
+  }
+
+  .dash-song-recommendation, 
+  .song-row {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 16px !important;
+    padding: 9px 11px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+
+  body.light-theme .dash-song-recommendation, 
+  body.light-theme .song-row {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+  }
+
+  .dash-song-cover, 
+  .song-row-cover {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .dash-song-info strong, 
+  .song-row-title {
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+    display: block !important;
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .dash-song-info span, 
+  .song-row-artist {
+    font-size: 0.74rem !important;
+    color: var(--text-sub) !important;
+  }
+
+  /* ── 4. Player & Interactive Karaoke Subtitles ──────────────────────────── */
+  .player-main-layout {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .video-player-wrapper {
+    width: 100% !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--border-glass) !important;
+    aspect-ratio: 16 / 9 !important;
+    background: #000 !important;
+  }
+
+  /* Lyrics Board & Active Subtitle Line */
+  .lyrics-board-container {
+    border-radius: 18px !important;
+    padding: 12px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-glass) !important;
+  }
+
+  body.light-theme .lyrics-board-container {
+    background: #FFFFFF !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .current-active-subtitle-card {
+    padding: 12px 14px !important;
+    border-radius: 16px !important;
+    background: rgba(255, 69, 0, 0.06) !important;
+    border: 1px solid rgba(255, 69, 0, 0.2) !important;
+    margin-bottom: 10px !important;
+  }
+
+  body.light-theme .current-active-subtitle-card {
+    background: rgba(235, 178, 192, 0.12) !important;
+    border-color: rgba(235, 178, 192, 0.4) !important;
+  }
+
+  .active-english-line {
+    font-size: 1.12rem !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+    color: var(--text-main) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .active-russian-line {
+    font-size: 0.85rem !important;
+    color: var(--text-sub) !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Clickable Word Chips in Lyrics */
+  .word-chip {
+    padding: 4px 8px !important;
+    border-radius: 8px !important;
+    margin: 2px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    display: inline-block !important;
+  }
+
+  /* Player Action Controls (Thumb-friendly dock) */
+  .player-controls-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    padding: 8px 0 !important;
+  }
+
+  .btn-play-large {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    border-radius: 50% !important;
+    background: var(--accent-gradient) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: var(--accent-glow) !important;
+  }
+
+  .btn-player-secondary {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid var(--border-glass) !important;
+    color: var(--text-main) !important;
+  }
+
+  body.light-theme .btn-player-secondary {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* ── 5. Phrase Builder & Shadowing Dictation ────────────────────────────── */
+  .phrase-builder-card, 
+  #phrase-builder {
+    border-radius: 18px !important;
+    padding: 12px 14px !important;
+  }
+
+  .build-zone, .pool-zone {
+    min-height: 48px !important;
+    border-radius: 14px !important;
+    padding: 8px !important;
+    gap: 6px !important;
+  }
+
+  .word-pill {
+    padding: 7px 12px !important;
+    border-radius: 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+  }
+
+  .check-phrase-btn {
+    width: 100% !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    margin-top: 6px !important;
+  }
+
+  /* ── 6. Native iOS/Android Bottom Sheet Modals on Mobile ────────────────── */
+  .modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  .modal-card, 
+  #dictionaryModalCard, 
+  #trainingModalCard, 
+  #rulesModalCard, 
+  #roleplayModalCard, 
+  #videoCourseModalCard, 
+  #apiSettingsModalCard, 
+  #syncModalCard, 
+  #editWordModalCard, 
+  #addWordModalCard, 
+  #addPhraseModalCard {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    max-height: 92vh !important;
+    height: 92vh !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.6) !important;
+    animation: sheetSlideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  body.light-theme .modal-card,
+  body.light-theme #dictionaryModalCard,
+  body.light-theme #trainingModalCard,
+  body.light-theme #rulesModalCard,
+  body.light-theme #videoCourseModalCard {
+    background: #FFFFFF !important;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  @keyframes sheetSlideUp {
+    from { transform: translateY(100%); opacity: 0.5; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Sheet Top Drag Grab Handle */
+  .modal-card::before,
+  #dictionaryModalCard::before,
+  #trainingModalCard::before,
+  #rulesModalCard::before,
+  #videoCourseModalCard::before {
+    content: '' !important;
+    display: block !important;
+    width: 36px !important;
+    height: 5px !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 3px !important;
+    margin: 8px auto 2px auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  body.light-theme .modal-card::before,
+  body.light-theme #dictionaryModalCard::before,
+  body.light-theme #trainingModalCard::before,
+  body.light-theme #rulesModalCard::before,
+  body.light-theme #videoCourseModalCard::before {
+    background: rgba(0, 0, 0, 0.18) !important;
+  }
+
+  .modal-header {
+    padding: 8px 14px 10px 14px !important;
+    border-bottom: 1px solid var(--border-glass) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .modal-header h2 {
+    font-size: 1.08rem !important;
+    font-weight: 800 !important;
+    color: var(--text-main) !important;
+  }
+
+  .modal-close-btn, 
+  .modal-btn-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+  }
+
+  .modal-body {
+    padding: 12px 14px calc(14px + env(safe-area-inset-bottom, 0px)) 14px !important;
+    max-height: calc(92vh - 75px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* 3D Flashcard Trainer on Mobile */
+  #dictFlashcard, 
+  .trainer-flashcard-3d {
+    width: 100% !important;
+    min-height: 220px !important;
+    max-height: 280px !important;
+    margin: 8px 0 14px 0 !important;
+    border-radius: 20px !important;
+  }
+
+  .flashcard-face {
+    border-radius: 20px !important;
+    padding: 16px !important;
+  }
+
+  .flashcard-face h3, 
+  #cardWord {
+    font-size: 1.45rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  #cardTranslation {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+  }
+
+  /* Leitner 4 Rating Buttons (2x2 Grid for one-hand thumb reach) */
+  .card-action-buttons-group, 
+  .flashcard-rating-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .flashcard-rating-btn {
+    height: 46px !important;
+    border-radius: 14px !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  /* Dictionary Word List Items */
+  .dict-word-item {
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+    margin-bottom: 6px !important;
+    gap: 8px !important;
+  }
+
+  .dict-word-main {
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+  }
+
+  .dict-word-trans {
+    font-size: 0.8rem !important;
+  }
+
+  /* Match Game 3-column tiles on mobile */
+  #matchGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .match-tile {
+    min-height: 48px !important;
+    padding: 6px 8px !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+  }
+
+  /* Learn Mode multiple choice grid */
+  #learnChoicesGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .learn-choice-btn {
+    min-height: 44px !important;
+    padding: 8px 10px !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+  }
+
+  /* Hide persistent notebook left tab on phone */
+  #notebookDrawerTab, 
+  .notebook-drawer-tab {
     display: none !important;
   }
-  #dashGoVideoCourse {
-    grid-column: 1 / -1 !important;
+
+  /* ── 7. Glassmorphic Bottom Navigation Bar ──────────────────────────────── */
+  .mobile-bottom-nav, 
+  #mobileBottomNav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 56px !important;
+    background: var(--bg-navbar) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-top: 1px solid var(--border-glass) !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    z-index: 9990 !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.45) !important;
   }
-  
-  /* 6. Song Lists (Like Spotify tracks) */
-  .dash-song-recommendation {
+
+  body.light-theme .mobile-bottom-nav, 
+  body.light-theme #mobileBottomNav {
+    background: rgba(252, 248, 249, 0.96) !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  body.warm-theme .mobile-bottom-nav, 
+  body.warm-theme #mobileBottomNav {
+    background: rgba(248, 244, 234, 0.96) !important;
+    border-top: 1px solid rgba(62, 39, 35, 0.1) !important;
+  }
+
+  .mobile-nav-item {
     background: transparent !important;
     border: none !important;
-    padding: 6px 0 !important;
-    gap: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    color: var(--text-muted) !important;
+    cursor: pointer !important;
+    flex: 1 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    outline: none !important;
   }
-  .dash-song-recommendation > div:first-child {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    border-radius: 8px !important;
-  }
-  .dash-song-recommendation strong {
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    color: #fff !important;
-  }
-  .dash-song-recommendation span {
-    font-size: 0.8rem !important;
-    color: #b3b3b3 !important;
-  }
-  
-  /* 7. Bottom Navigation TabBar */
-  .mobile-nav {
-    background: rgba(0,0,0,0.95) !important;
-    border-top: none !important;
-    height: 64px !important;
-    padding-bottom: env(safe-area-inset-bottom, 0) !important;
-  }
-  .mobile-nav-item {
-    color: #b3b3b3 !important;
-    gap: 4px !important;
-  }
+
   .mobile-nav-item.active {
-    color: #fff !important;
+    color: var(--accent-spotify) !important;
   }
-  .mobile-nav-item svg {
-    width: 24px !important;
-    height: 24px !important;
+
+  body.light-theme .mobile-nav-item.active {
+    color: #000000 !important;
   }
-  .mobile-nav-item span {
+
+  .mobile-nav-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .mobile-nav-item.active .mobile-nav-icon svg {
+    transform: scale(1.18) translateY(-1px) !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .mobile-nav-label {
     font-size: 0.65rem !important;
-    font-weight: 500 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.1px !important;
   }
-  
-  /* 8. Player Widget floating above TabBar */
+
+  /* ── 8. Spotify Mini-Player Floating Widget ─────────────────────────────── */
   #spotifyNowPlayingWidget {
-    bottom: 66px !important;
-    background: #181818 !important;
-    border: none !important;
+    position: fixed !important;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    margin: 0 !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-glass) !important;
     border-radius: 16px !important;
-    margin: 0 8px !important;
-    width: calc(100% - 16px) !important;
-    padding: 8px !important;
-    box-sizing: border-box !important;
+    padding: 7px 10px !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    z-index: 9980 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
+
+  body.light-theme #spotifyNowPlayingWidget {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  }
+
   #spotifyNowPlayingWidget img {
-    border-radius: 12px !important;
-    width: 40px !important;
-    height: 40px !important;
+    border-radius: 10px !important;
+    width: 38px !important;
+    height: 38px !important;
   }
-  
-  /* Global constraints to prevent massive elements */
-  svg { max-width: 100% !important; max-height: 100% !important; }
+
+  /* Global SVG constraint */
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
