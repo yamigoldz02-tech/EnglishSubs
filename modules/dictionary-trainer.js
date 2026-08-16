@@ -2607,7 +2607,7 @@ function renderDictWordsList(filterQuery = "") {
     const wordCats = (w.categories && Array.isArray(w.categories) && w.categories.length > 0)
       ? w.categories : [w.category || 'Общее'];
     const catBadges = wordCats.map(c =>
-      `<span class="dict-cat-badge" style="font-size: 0.65rem; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">${escapeHTML(c)}</span>`
+      `<span class="dict-cat-badge">${escapeHTML(c)}</span>`
     ).join('');
 
     // Safely escape word and translation to prevent XSS vulnerabilities
@@ -2615,14 +2615,14 @@ function renderDictWordsList(filterQuery = "") {
       <div class="word-row-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
         <div style="text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
           <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); display: flex; align-items: center;">${escapeHTML(w.word)} ${intervalBadge}</div>
-          <div style="font-size: 0.8rem; color: #a1a1aa; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <div style="font-size: 0.8rem; color: #a1a1aa; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
             <span>${escapeHTML(w.translation)}</span>
             ${catBadges}
             ${(() => {
               const customCats = (w.customCategories && Array.isArray(w.customCategories) && w.customCategories.length > 0)
                 ? w.customCategories : [w.customCategory || 'Без категории'];
               return customCats.filter(c => c !== 'Без категории').map(c =>
-                `<span style="font-size: 0.65rem; color: #a1a1aa; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;">${escapeHTML(c)}</span>`
+                `<span class="dict-cat-badge dict-custom-cat-badge">${escapeHTML(c)}</span>`
               ).join('');
             })()}
           </div>
