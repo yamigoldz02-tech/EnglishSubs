@@ -1035,30 +1035,7 @@ body.gray-theme .lesson-watch-checkbox-container input:checked ~ .lesson-custom-
   border-color: #6366f1;
 }
 
-/* Responsive grid for course tracker */
-@media (max-width: 768px) {
-  .video-course-body {
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  .video-course-body .lessons-sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-right: 0;
-    padding-bottom: 1.25rem;
-    max-height: 220px;
-  }
-  body.light-theme .video-course-body .lessons-sidebar {
-    border-bottom-color: rgba(0, 0, 0, 0.06);
-  }
-  .player-container-pane {
-    width: 100%;
-  }
-  .video-course-modal-card {
-    height: 90vh !important;
-  }
-}
+
 
 /* Light Theme overrides for Word/Phrase Addition Modals */
 body.light-theme #manualWordEng,
@@ -1849,14 +1826,20 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
     flex-direction: column !important;
     overflow: hidden !important;
     padding: 0 !important;
-    height: calc(100% - 135px) !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
   }
   
   .lessons-sidebar {
     width: 100% !important;
     height: 100% !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
     overflow-y: auto !important;
     border-right: none !important;
+    border-bottom: none !important;
     padding: 12px 16px !important;
     box-sizing: border-box !important;
   }
@@ -1864,12 +1847,15 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   .player-container-pane {
     width: 100% !important;
     height: 100% !important;
+    max-height: none !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
     overflow-y: auto !important;
     flex-shrink: 0 !important;
     position: relative !important;
     top: auto !important;
     z-index: 10 !important;
-    background: var(--bg-modal) !important;
+    background: transparent !important;
     padding: 12px 16px !important;
     border-bottom: none !important;
     box-sizing: border-box !important;
