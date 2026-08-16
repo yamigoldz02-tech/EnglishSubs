@@ -396,6 +396,9 @@ function initAutocomplete() {
     input.value = '';
     dropdown.style.display = 'none';
     clearBtn.style.display = 'none';
+    if (typeof window.closeMobileSearch === 'function') {
+      window.closeMobileSearch();
+    }
     
     // Hide welcome dashboard card and show active song card wrappers
     const dashboardCard = document.getElementById('welcomeDashboardCard');

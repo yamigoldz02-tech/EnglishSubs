@@ -992,6 +992,57 @@ function setupEventListeners() {
       });
     });
   }
+
+  // ── Mobile Search Controller ──
+  const searchToggleBtn = document.getElementById('headerSearchToggleBtn');
+  const closeMobileSearchBtn = document.getElementById('closeMobileSearchBtn');
+  const appNavbar = document.getElementById('appNavbar');
+  const songSelectorContainer = document.getElementById('songSelectorContainer');
+
+  if (searchToggleBtn) {
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (typeof window.toggleMobileSearch === 'function') {
+        window.toggleMobileSearch(e);
+      }
+    });
+  }
+
+  if (closeMobileSearchBtn) {
+    closeMobileSearchBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (typeof window.closeMobileSearch === 'function') {
+        window.closeMobileSearch(e);
+      }
+    });
+  }
+
+  // Close mobile search on click outside
+  document.addEventListener('click', (e) => {
+    if (appNavbar && appNavbar.classList.contains('search-active')) {
+      const isInsideSearch = songSelectorContainer && songSelectorContainer.contains(/** @type {Node} */ (e.target));
+      const isSearchToggle = searchToggleBtn && searchToggleBtn.contains(/** @type {Node} */ (e.target));
+      if (!isInsideSearch && !isSearchToggle) {
+        if (typeof window.closeMobileSearch === 'function') {
+          window.closeMobileSearch();
+        }
+      }
+    }
+  });
+
+  // ESC key closes mobile search or header menu
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (typeof window.closeMobileSearch === 'function') {
+        window.closeMobileSearch();
+      }
+      if (typeof window.closeHeaderNav === 'function') {
+        window.closeHeaderNav();
+      }
+    }
+  });
 }
 
 

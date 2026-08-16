@@ -28,9 +28,9 @@
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/app-core.css?v=3.0.7">
+  <link rel="stylesheet" href="css/app-core.css?v=3.0.8">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.7">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.0.8">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Centered Interactive Custom Autocomplete Selector -->
-      <div class="song-selector-container">
+      <div class="song-selector-container" id="songSelectorContainer">
         <div class="autocomplete-wrapper" id="autocompleteWrapper">
           <div class="search-input-wrapper">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -68,12 +68,20 @@
             </svg>
             <input type="text" id="songSearchInput" placeholder="Search song or artist..." autocomplete="off" aria-label="Search song or artist">
             <button id="clearSearchBtn" class="clear-btn" title="Clear search" style="display: none;">✕</button>
+            <button id="closeMobileSearchBtn" class="mobile-search-close-btn" aria-label="Закрыть поиск" title="Закрыть поиск" onclick="window.closeMobileSearch(event)">✕</button>
           </div>
           <div class="autocomplete-dropdown" id="songSearchDropdown" style="display: none;"></div>
         </div>
       </div>
 
       <div class="nav-controls">
+        <!-- Mobile Search Toggle (visible only on mobile, replaces full search bar) -->
+        <button class="header-search-toggle-btn" id="headerSearchToggleBtn" aria-label="Поиск" title="Поиск песни" onclick="window.toggleMobileSearch(event)">
+          <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
         <!-- Theme Toggle Switch (Sun/Moon Switcher) -->
         <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Переключить тему">
           <!-- Sun Icon -->
@@ -114,6 +122,38 @@
         <!-- Minimalist Profile / Navigation Dropdown Trigger -->
         <div class="nav-menu-wrapper" id="navMenuWrapper">
           <script>
+            window.openMobileSearch = function() {
+              var navbar = document.getElementById('appNavbar');
+              var container = document.getElementById('songSelectorContainer');
+              var input = document.getElementById('songSearchInput');
+              if (navbar) navbar.classList.add('search-active');
+              if (container) container.classList.add('active');
+              if (input) {
+                setTimeout(function() {
+                  input.focus();
+                  input.dispatchEvent(new Event('input'));
+                }, 50);
+              }
+            };
+            window.closeMobileSearch = function(e) {
+              if (e) { e.stopPropagation(); }
+              var navbar = document.getElementById('appNavbar');
+              var container = document.getElementById('songSelectorContainer');
+              var dropdown = document.getElementById('songSearchDropdown');
+              if (navbar) navbar.classList.remove('search-active');
+              if (container) container.classList.remove('active');
+              if (dropdown) dropdown.style.display = 'none';
+            };
+            window.toggleMobileSearch = function(e) {
+              if (e) { e.stopPropagation(); e.preventDefault(); }
+              var navbar = document.getElementById('appNavbar');
+              if (navbar && navbar.classList.contains('search-active')) {
+                window.closeMobileSearch();
+              } else {
+                window.openMobileSearch();
+              }
+            };
+
             window.openHeaderNav = function() {
               var menu = document.getElementById('headerNavMenu');
               var bd = document.getElementById('headerNavBackdrop');
@@ -2051,23 +2091,23 @@
   <script type="module" src="modules/modal-helpers.js"></script>
   <script type="module" src="modules/shadowing-dictation.js"></script>
   <script type="module" src="modules/word-edit-modal.js"></script>
-  <script type="module" src="modules/events-manager.js?v=3.0.5"></script>
-  <script type="module" src="modules/store.js?v=3.0.5"></script>
-  <script defer src="modules/dict-stats.js?v=3.0.5"></script>
-  <script defer src="modules/daily-tracker.js?v=3.0.5"></script>
-  <script defer src="modules/dict-word-card.js?v=3.0.5"></script>
-  <script defer src="modules/dict-song-examples.js?v=3.0.5"></script>
-  <script defer src="modules/dict-games.js?v=3.0.5"></script>
-  <script defer src="modules/dict-modals-manual.js?v=3.0.5"></script>
-  <script defer src="modules/dictionary-trainer.js?v=3.0.5"></script>
-  <script type="module" src="modules/spotify-controller.js?v=3.0.5"></script>
-  <script type="module" src="modules/grammar-rules.js?v=3.0.5"></script>
-  <script defer src="modules/notebook-module.js?v=3.0.5"></script>
-  <script defer src="modules/galaxy-course.js?v=3.0.5"></script>
-  <script type="module" src="modules/gamification.js?v=3.0.5"></script>
-  <script defer src="modules/playlist-manager.js?v=3.0.5"></script>
-  <script defer src="modules/subtitles-engine.js?v=3.0.5"></script>
-  <script defer src="app.js?v=3.0.5"></script>
+  <script type="module" src="modules/events-manager.js?v=3.0.8"></script>
+  <script type="module" src="modules/store.js?v=3.0.8"></script>
+  <script defer src="modules/dict-stats.js?v=3.0.8"></script>
+  <script defer src="modules/daily-tracker.js?v=3.0.8"></script>
+  <script defer src="modules/dict-word-card.js?v=3.0.8"></script>
+  <script defer src="modules/dict-song-examples.js?v=3.0.8"></script>
+  <script defer src="modules/dict-games.js?v=3.0.8"></script>
+  <script defer src="modules/dict-modals-manual.js?v=3.0.8"></script>
+  <script defer src="modules/dictionary-trainer.js?v=3.0.8"></script>
+  <script type="module" src="modules/spotify-controller.js?v=3.0.8"></script>
+  <script type="module" src="modules/grammar-rules.js?v=3.0.8"></script>
+  <script defer src="modules/notebook-module.js?v=3.0.8"></script>
+  <script defer src="modules/galaxy-course.js?v=3.0.8"></script>
+  <script type="module" src="modules/gamification.js?v=3.0.8"></script>
+  <script defer src="modules/playlist-manager.js?v=3.0.8"></script>
+  <script defer src="modules/subtitles-engine.js?v=3.0.8"></script>
+  <script defer src="app.js?v=3.0.8"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const syncBtn = document.getElementById('forceSyncDataBtn');
@@ -2075,8 +2115,8 @@
         syncBtn.addEventListener('click', () => {
           if (window.SyncManager && window.SyncManager.forceSync) {
             window.SyncManager.forceSync();
-          } else {
-            alert('Менеджер синхронизации не загружен.');
+          } else if (typeof window.showToast === 'function') {
+            window.showToast('Менеджер синхронизации загружается...', 'info');
           }
         });
       }

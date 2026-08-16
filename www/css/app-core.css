@@ -1530,52 +1530,7 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
     display: none !important;
   }
 
-  /* 10b. Responsive Two-Row Navbar Layout */
-  .navbar {
-    flex-wrap: wrap !important;
-    padding: 0.6rem 1rem !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 8px !important;
-    height: auto !important;
-  }
-  
-  .nav-brand {
-    order: 1 !important;
-    font-size: 1.15rem !important;
-    max-width: 60%;
-  }
-  
-  .navbar .nav-controls {
-    order: 2 !important;
-    display: flex !important;
-    gap: 8px !important;
-  }
-  
-  .song-selector-container {
-    order: 3 !important;
-    width: 100% !important;
-    margin: 4px 0 2px 0 !important;
-  }
-  
-  .autocomplete-wrapper {
-    width: 100% !important;
-  }
-  
-  .search-input-wrapper {
-    width: 100% !important;
-  }
-  
-  #songSearchInput {
-    height: 38px !important;
-    font-size: 0.85rem !important;
-    padding-left: 2.25rem !important;
-  }
-  
-  .search-icon {
-    width: 16px !important;
-    height: 16px !important;
-  }
+  /* 10b. Responsive Navbar Layout on Mobile handled by mobile-compact.css */
 
   /* 10c. Mobile Layout Base Workspaces */
   .main-layout {
@@ -1999,6 +1954,14 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
 }
 
 /* Modern Minimalist Navigation Controls */
+.header-search-toggle-btn {
+  display: none;
+}
+
+.mobile-search-close-btn {
+  display: none;
+}
+
 .nav-controls {
   display: flex;
   align-items: center;
@@ -2402,32 +2365,6 @@ body.light-theme .dict-word-row:hover {
 /* ==========================================================================
    RESTORED VIDEO COURSE MOBILE TABS
    ========================================================================== */
-@media (max-width: 1200px) {
-  .navbar {
-    flex-wrap: wrap !important;
-    padding: 0.6rem 1rem !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 10px !important;
-    height: auto !important;
-  }
-  .nav-brand {
-    order: 1 !important;
-  }
-  .navbar .nav-controls {
-    order: 2 !important;
-    flex-wrap: wrap !important;
-    justify-content: flex-end !important;
-    gap: 6px !important;
-  }
-  .song-selector-container {
-    order: 3 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 6px 0 2px 0 !important;
-  }
-}
-
 @media (max-width: 768px) {
   .mobile-course-tabs {
     display: flex !important;
