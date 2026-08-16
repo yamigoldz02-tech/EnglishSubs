@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: SUBTITLES_ENGINE
 /// <reference path="./types.js" />
 /**
  * ============================================================================

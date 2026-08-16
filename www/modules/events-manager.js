@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: EVENTS_MANAGER
 /// <reference path="./types.js" />
 // UI Event Listeners Manager
 function setupEventListeners() {

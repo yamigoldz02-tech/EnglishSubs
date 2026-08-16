@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: APP_STORE
 /// <reference path="./types.js" />
 // Централизованное хранилище данных (Store)
 export const store = {

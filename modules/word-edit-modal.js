@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: WORD_EDIT_MODAL
 /// <reference path="./types.js" />
 export function openEditWordModal(w, onSaveSuccess) {
   const editModal     = document.getElementById('editWordModal');

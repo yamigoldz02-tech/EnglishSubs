@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: MODAL_HELPERS
 /// <reference path="./types.js" />
 /* ==========================================================================
    AI LYRIC-TRAINER — MODERN INTERACTIVE CONTROLLER (VANILLA JS)

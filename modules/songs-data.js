@@ -1,3 +1,4 @@
+// @AI-SECTION: SONGS_DATA
 export const songsData = {
   scorpions: {
     title: "Wind of Change",

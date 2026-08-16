@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: LYRICS_API
 /// <reference path="./types.js" />
 export const csvSongs = [];
 // RFC-compliant safe CSV parser

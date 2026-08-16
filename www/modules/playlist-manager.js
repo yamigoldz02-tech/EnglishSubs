@@ -1,4 +1,5 @@
 // @ts-check
+// @AI-SECTION: PLAYLIST_MANAGER
 /// <reference path="./types.js" />
 /**
  * ============================================================================
