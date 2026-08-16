@@ -27,10 +27,10 @@
   <link rel="stylesheet" href="css/video-player.css">
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
-  <link rel="stylesheet" href="css/animations.css?v=3.3.0">
-  <link rel="stylesheet" href="css/app-core.css?v=3.3.0">
+  <link rel="stylesheet" href="css/animations.css?v=3.3.1">
+  <link rel="stylesheet" href="css/app-core.css?v=3.3.1">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.3.0">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.3.1">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -1119,13 +1119,13 @@
         
         <!-- Session Progress Bar Container -->
         <div id="sessionProgressContainer" style="width: 100%; max-width: 340px; display: none; flex-direction: column; gap: 8px; margin-bottom: 5px; flex-shrink: 0; box-sizing: border-box;">
-          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-            <!-- Missed/Remaining pill -->
-            <div id="sessionCountRemaining" class="session-pill remaining" title="Осталось выучить">0</div>
-            <!-- Progress text -->
-            <span id="sessionProgressCounterText" style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); font-family: monospace;">0 / 0</span>
-            <!-- Learned pill -->
-            <div id="sessionCountLearned" class="session-pill learned" title="Выучено в этой сессии">0</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; position: relative; min-height: 24px;">
+            <!-- Missed/Remaining pill (hidden on front, revealed after flip) -->
+            <div id="sessionCountRemaining" class="session-pill remaining" title="Осталось выучить" style="opacity: 0; visibility: hidden; transition: opacity 0.25s ease;">0</div>
+            <!-- Centered Progress text -->
+            <span id="sessionProgressCounterText" style="font-size: 0.82rem; font-weight: 700; color: var(--text-main); font-family: monospace; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap;">0 / 0</span>
+            <!-- Learned pill (hidden on front, revealed after flip) -->
+            <div id="sessionCountLearned" class="session-pill learned" title="Выучено в этой сессии" style="opacity: 0; visibility: hidden; transition: opacity 0.25s ease;">0</div>
           </div>
           <!-- Progress line track -->
           <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; border: 1px solid rgba(255,255,255,0.02);">
@@ -2087,26 +2087,26 @@
   <script defer src="modules/gemini-ai.js"></script>
   <script defer src="modules/phrase-builder-game.js"></script>
   <script type="module" src="modules/lyrics-api.js"></script>
-  <script type="module" src="modules/modal-helpers.js?v=3.3.0"></script>
+  <script type="module" src="modules/modal-helpers.js?v=3.3.1"></script>
   <script type="module" src="modules/shadowing-dictation.js"></script>
-  <script type="module" src="modules/word-edit-modal.js?v=3.3.0"></script>
-  <script type="module" src="modules/events-manager.js?v=3.3.0"></script>
-  <script type="module" src="modules/store.js?v=3.3.0"></script>
-  <script defer src="modules/dict-stats.js?v=3.3.0"></script>
-  <script defer src="modules/daily-tracker.js?v=3.3.0"></script>
-  <script defer src="modules/dict-word-card.js?v=3.3.0"></script>
-  <script defer src="modules/dict-song-examples.js?v=3.3.0"></script>
-  <script defer src="modules/dict-games.js?v=3.3.0"></script>
-  <script defer src="modules/dict-modals-manual.js?v=3.3.0"></script>
-  <script defer src="modules/dictionary-trainer.js?v=3.3.0"></script>
-  <script type="module" src="modules/spotify-controller.js?v=3.3.0"></script>
-  <script type="module" src="modules/grammar-rules.js?v=3.3.0"></script>
-  <script defer src="modules/notebook-module.js?v=3.3.0"></script>
-  <script defer src="modules/galaxy-course.js?v=3.3.0"></script>
-  <script type="module" src="modules/gamification.js?v=3.3.0"></script>
-  <script defer src="modules/playlist-manager.js?v=3.3.0"></script>
-  <script defer src="modules/subtitles-engine.js?v=3.3.0"></script>
-  <script defer src="app.js?v=3.3.0"></script>
+  <script type="module" src="modules/word-edit-modal.js?v=3.3.1"></script>
+  <script type="module" src="modules/events-manager.js?v=3.3.1"></script>
+  <script type="module" src="modules/store.js?v=3.3.1"></script>
+  <script defer src="modules/dict-stats.js?v=3.3.1"></script>
+  <script defer src="modules/daily-tracker.js?v=3.3.1"></script>
+  <script defer src="modules/dict-word-card.js?v=3.3.1"></script>
+  <script defer src="modules/dict-song-examples.js?v=3.3.1"></script>
+  <script defer src="modules/dict-games.js?v=3.3.1"></script>
+  <script defer src="modules/dict-modals-manual.js?v=3.3.1"></script>
+  <script defer src="modules/dictionary-trainer.js?v=3.3.1"></script>
+  <script type="module" src="modules/spotify-controller.js?v=3.3.1"></script>
+  <script type="module" src="modules/grammar-rules.js?v=3.3.1"></script>
+  <script defer src="modules/notebook-module.js?v=3.3.1"></script>
+  <script defer src="modules/galaxy-course.js?v=3.3.1"></script>
+  <script type="module" src="modules/gamification.js?v=3.3.1"></script>
+  <script defer src="modules/playlist-manager.js?v=3.3.1"></script>
+  <script defer src="modules/subtitles-engine.js?v=3.3.1"></script>
+  <script defer src="app.js?v=3.3.1"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const syncBtn = document.getElementById('forceSyncDataBtn');

@@ -1405,8 +1405,11 @@ function setupDictionaryUI() {
       if (flashcardInner) {
         const isFlipped = flashcardInner.classList.toggle('is-flipped');
         
-        // Also show Spaced Repetition control buttons when flipped to back side
+        // Also show Spaced Repetition control buttons and side score pills when flipped to back side
         const pills = document.getElementById('spacedRepetitionPills');
+        const remainingPill = document.getElementById('sessionCountRemaining');
+        const learnedPill = document.getElementById('sessionCountLearned');
+
         if (pills) {
           if (isFlipped) {
             pills.style.visibility = 'visible';
@@ -1416,6 +1419,15 @@ function setupDictionaryUI() {
             pills.style.visibility = 'hidden';
             pills.style.opacity = '0';
           }
+        }
+
+        if (remainingPill) {
+          remainingPill.style.visibility = isFlipped ? 'visible' : 'hidden';
+          remainingPill.style.opacity = isFlipped ? '1' : '0';
+        }
+        if (learnedPill) {
+          learnedPill.style.visibility = isFlipped ? 'visible' : 'hidden';
+          learnedPill.style.opacity = isFlipped ? '1' : '0';
         }
         
         // If flipped to back and is essential word with placeholder translation, trigger load!
@@ -2255,10 +2267,20 @@ function resetFlashcard() {
     flashcardInner.style.transform = '';
   }
 
-  // Ensure Spaced Repetition control buttons are hidden initially
+  // Ensure Spaced Repetition control buttons and score pills are hidden initially
   if (pills) {
     pills.style.visibility = 'hidden';
     pills.style.opacity = '0';
+  }
+  const remainingPill = document.getElementById('sessionCountRemaining');
+  if (remainingPill) {
+    remainingPill.style.visibility = 'hidden';
+    remainingPill.style.opacity = '0';
+  }
+  const learnedPill = document.getElementById('sessionCountLearned');
+  if (learnedPill) {
+    learnedPill.style.visibility = 'hidden';
+    learnedPill.style.opacity = '0';
   }
 
   // Safely grab filtered dictionary words
@@ -2362,11 +2384,21 @@ function showRandomFlashcard() {
   flashcardInner.classList.remove('is-flipped');
   flashcardInner.style.transform = '';
 
-  // Ensure Spaced Repetition pills are hidden initially
+  // Ensure Spaced Repetition pills and score badges are hidden initially on front face
   const pills = document.getElementById('spacedRepetitionPills');
   if (pills) {
     pills.style.visibility = 'hidden';
     pills.style.opacity = '0';
+  }
+  const remainingPill = document.getElementById('sessionCountRemaining');
+  if (remainingPill) {
+    remainingPill.style.visibility = 'hidden';
+    remainingPill.style.opacity = '0';
+  }
+  const learnedPill = document.getElementById('sessionCountLearned');
+  if (learnedPill) {
+    learnedPill.style.visibility = 'hidden';
+    learnedPill.style.opacity = '0';
   }
   
   if (flashcard) flashcard.style.display = 'block';
