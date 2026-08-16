@@ -186,8 +186,14 @@ function setupEventListeners() {
   }
 
   // Close sidebar buttons
-  closeBtn.addEventListener('click', closeSidebar);
-  scrimOverlay.addEventListener('click', closeSidebar);
+  const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+  const scrimOverlay = document.getElementById('scrimOverlay');
+  if (closeSidebarBtn && typeof closeSidebar === 'function') {
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+  }
+  if (scrimOverlay && typeof closeSidebar === 'function') {
+    scrimOverlay.addEventListener('click', closeSidebar);
+  }
 
   // Hierarchical Esc key closure for all modals and drawers
   document.addEventListener('keydown', (e) => {
@@ -233,6 +239,7 @@ function setupEventListeners() {
   }
 
   // Four-Theme Switcher logic (Dark -> Light -> Warm -> Gray -> Dark) with localStorage persistence
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       if (document.body.classList.contains('light-theme')) {

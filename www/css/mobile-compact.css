@@ -169,9 +169,9 @@
   .header-menu-btn, 
   #forceSyncDataBtn, 
   #openSettingsBtn {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
     padding: 0 !important;
     border-radius: 50% !important;
     background: rgba(255, 255, 255, 0.06) !important;
@@ -181,21 +181,23 @@
     align-items: center !important;
     justify-content: center !important;
     box-shadow: none !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1002 !important;
   }
 
-  body.light-theme .theme-toggle-btn, 
-  body.light-theme .header-menu-btn, 
-  body.light-theme #forceSyncDataBtn, 
-  body.light-theme #openSettingsBtn {
-    background: rgba(0, 0, 0, 0.04) !important;
-    border-color: rgba(0, 0, 0, 0.08) !important;
-    color: var(--text-main) !important;
+  .theme-toggle-btn svg, 
+  .header-menu-btn svg,
+  .header-menu-btn span {
+    pointer-events: none !important;
   }
 
   .theme-toggle-btn svg, 
   .header-menu-btn svg {
-    width: 15px !important;
-    height: 15px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   /* Profile Dropdown Sheet on Mobile */
