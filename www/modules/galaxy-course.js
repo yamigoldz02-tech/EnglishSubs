@@ -438,12 +438,18 @@ function initVideoCourse() {
   const videoCard = modal; // videoCourseModal
 
   if (videoTabLessonsBtn && videoTabNotesBtn && videoCard) {
+    const cardEl = videoCard.querySelector('.video-course-modal-card');
     // Default class
     videoCard.classList.add('active-tab-lessons');
+    if (cardEl) cardEl.classList.add('active-tab-lessons');
 
     videoTabLessonsBtn.onclick = () => {
       videoCard.classList.remove('active-tab-notes');
       videoCard.classList.add('active-tab-lessons');
+      if (cardEl) {
+        cardEl.classList.remove('active-tab-notes');
+        cardEl.classList.add('active-tab-lessons');
+      }
       videoTabLessonsBtn.classList.add('active');
       videoTabNotesBtn.classList.remove('active');
     };
@@ -451,6 +457,10 @@ function initVideoCourse() {
     videoTabNotesBtn.onclick = () => {
       videoCard.classList.remove('active-tab-lessons');
       videoCard.classList.add('active-tab-notes');
+      if (cardEl) {
+        cardEl.classList.remove('active-tab-lessons');
+        cardEl.classList.add('active-tab-notes');
+      }
       videoTabNotesBtn.classList.add('active');
       videoTabLessonsBtn.classList.remove('active');
     };

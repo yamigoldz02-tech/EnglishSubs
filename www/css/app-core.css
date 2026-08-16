@@ -534,31 +534,34 @@ body.light-theme .video-course-progress-panel .progress-bar-fill {
 }
 
 .video-course-controls {
-  padding: 0.5rem 1.25rem;
+  padding: 0 0 10px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 8px;
+  box-sizing: border-box;
 }
 
 body.light-theme .video-course-controls {
-  border-bottom-color: rgba(0, 0, 0, 0.04);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 .video-course-controls .filter-pills {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .video-course-controls .filter-pill {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
   color: var(--text-sub);
-  padding: 6px 14px;
-  font-size: 0.8rem;
+  padding: 5px 12px;
+  font-size: 0.76rem;
   font-weight: 600;
   border-radius: 20px;
   cursor: pointer;
@@ -594,9 +597,9 @@ body.light-theme .video-course-controls .filter-pill:hover {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
   padding: 6px 12px;
-  border-radius: 20px;
-  width: 260px;
-  max-width: 100%;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
@@ -1847,38 +1850,31 @@ body.light-theme #notebookNotesSearchContainer:focus-within {
   .video-course-body {
     display: flex !important;
     flex-direction: column !important;
-    overflow-y: auto !important;
+    overflow: hidden !important;
     padding: 0 !important;
-    height: calc(100% - 160px) !important;
-  }
-  
-  .player-container-pane {
-    width: 100% !important;
-    order: -1 !important; /* Move video player to the top above lessons */
-    flex-shrink: 0 !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 100 !important;
-    background: var(--bg-modal) !important;
-    padding: 10px 16px !important;
-    border-bottom: 1.5px solid var(--border-glass) !important;
-    box-sizing: border-box !important;
-  }
-  
-  .video-player-wrapper {
-    aspect-ratio: 16/9 !important;
-    height: auto !important;
-    flex-shrink: 0 !important;
-    min-height: 200px !important;
-    border-radius: 12px !important;
+    height: calc(100% - 135px) !important;
   }
   
   .lessons-sidebar {
     width: 100% !important;
-    height: auto !important;
-    overflow-y: visible !important;
+    height: 100% !important;
+    overflow-y: auto !important;
     border-right: none !important;
     padding: 12px 16px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .player-container-pane {
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    z-index: 10 !important;
+    background: var(--bg-modal) !important;
+    padding: 12px 16px !important;
+    border-bottom: none !important;
     box-sizing: border-box !important;
   }
   
@@ -2393,18 +2389,29 @@ body.light-theme .dict-word-row:hover {
   }
   
   /* Tab Switching Logic */
+  #videoCourseModal.active-tab-lessons .lessons-sidebar,
   .video-course-modal-card.active-tab-lessons .lessons-sidebar {
     display: flex !important;
+    flex-direction: column !important;
   }
-  .video-course-modal-card.active-tab-lessons .active-video-details {
+  #videoCourseModal.active-tab-lessons .player-container-pane,
+  .video-course-modal-card.active-tab-lessons .player-container-pane {
     display: none !important;
   }
   
+  #videoCourseModal.active-tab-notes .lessons-sidebar,
   .video-course-modal-card.active-tab-notes .lessons-sidebar {
     display: none !important;
   }
+  #videoCourseModal.active-tab-notes .player-container-pane,
+  .video-course-modal-card.active-tab-notes .player-container-pane {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #videoCourseModal.active-tab-notes .active-video-details,
   .video-course-modal-card.active-tab-notes .active-video-details {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 }
 
