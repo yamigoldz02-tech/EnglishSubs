@@ -477,11 +477,16 @@ body.gray-theme .dict-highlighted-word.speaking {
 
 .video-course-progress-panel {
   padding: 0.65rem 1.25rem;
-  background: rgba(167, 139, 250, 0.03);
-  border-bottom: 1px solid rgba(167, 139, 250, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-glass);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.4rem;
+}
+
+body.light-theme .video-course-progress-panel {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
 }
 
 .video-course-progress-panel .progress-details {
@@ -493,24 +498,21 @@ body.gray-theme .dict-highlighted-word.speaking {
 }
 
 .video-course-progress-panel .progress-percent {
-  font-size: 0.85rem;
-  color: var(--text-main);
+  font-size: 0.82rem;
+  color: var(--text-sub);
   font-weight: 600;
 }
 
-.video-course-progress-panel .activity-points-note {
-  font-size: 0.75rem;
+.video-course-progress-panel .progress-percent strong {
+  color: var(--text-main);
   font-weight: 700;
-  color: #FF4500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .video-course-progress-panel .progress-track {
   width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
   overflow: hidden;
   position: relative;
 }
@@ -522,15 +524,15 @@ body.light-theme .video-course-progress-panel .progress-track {
 .video-course-progress-panel .progress-bar-fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #FF4500, #F97316);
-  border-radius: 4px;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 3px;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 12px rgba(255, 69, 0, 0.4);
+  box-shadow: none;
 }
 
 body.light-theme .video-course-progress-panel .progress-bar-fill {
-  background: linear-gradient(90deg, #EBB2C0, #F0B6C0);
-  box-shadow: 0 0 10px rgba(235, 178, 192, 0.4);
+  background: linear-gradient(90deg, #10b981, #059669);
+  box-shadow: none;
 }
 
 .video-course-controls {
@@ -993,10 +995,6 @@ body.light-theme .active-video-details {
 }
 
 /* Gray theme and Light theme adjustments */
-body.light-theme .video-course-progress-panel .activity-points-note {
-  color: #000000 !important;
-  font-weight: 700 !important;
-}
 body.light-theme .video-course-controls .filter-pill.active {
   color: #FFFFFF !important;
   background: #000000 !important;
@@ -1010,10 +1008,9 @@ body.light-theme .active-video-details .active-badge {
 }
 
 body.gray-theme .video-course-progress-panel .progress-bar-fill {
-  background: linear-gradient(90deg, #6366f1, #818cf8);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+  background: linear-gradient(90deg, #10b981, #059669);
+  box-shadow: none;
 }
-body.gray-theme .video-course-progress-panel .activity-points-note,
 body.gray-theme .video-course-controls .filter-pill.active,
 body.gray-theme .active-video-details .active-badge {
   color: #818cf8;
