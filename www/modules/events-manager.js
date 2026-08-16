@@ -21,6 +21,41 @@ function setupEventListeners() {
     });
   }
 
+  // Dictionary FAB (+) Floating Add Button & Menu Toggle
+  const dictFabToggleBtn = document.getElementById('dictFabToggleBtn');
+  const dictFabMenu = document.getElementById('dictFabMenu');
+  if (dictFabToggleBtn && dictFabMenu) {
+    dictFabToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = dictFabMenu.style.display === 'none' || dictFabMenu.style.display === '';
+      dictFabMenu.style.display = isHidden ? 'flex' : 'none';
+      dictFabToggleBtn.classList.toggle('active', isHidden);
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = /** @type {Node} */ (e.target);
+      if (!dictFabToggleBtn.contains(target) && !dictFabMenu.contains(target)) {
+        dictFabMenu.style.display = 'none';
+        dictFabToggleBtn.classList.remove('active');
+      }
+    });
+
+    const addWordBtn = document.getElementById('addManualWordBtn');
+    const addPhraseBtn = document.getElementById('addManualPhraseBtn');
+    if (addWordBtn) {
+      addWordBtn.addEventListener('click', () => {
+        dictFabMenu.style.display = 'none';
+        dictFabToggleBtn.classList.remove('active');
+      });
+    }
+    if (addPhraseBtn) {
+      addPhraseBtn.addEventListener('click', () => {
+        dictFabMenu.style.display = 'none';
+        dictFabToggleBtn.classList.remove('active');
+      });
+    }
+  }
+
   // Dashboard Training card trigger
   const dashGoTrain = document.getElementById('dashGoTrain');
   if (dashGoTrain) {

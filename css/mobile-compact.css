@@ -1037,6 +1037,32 @@
     font-size: 0.8rem !important;
   }
 
+  /* Floating Action Button (FAB) on Mobile */
+  .dict-fab-container {
+    position: absolute !important;
+    bottom: 12px !important;
+    right: 12px !important;
+    z-index: 60 !important;
+  }
+
+  .dict-fab-btn {
+    width: 50px !important;
+    height: 50px !important;
+    box-shadow: 0 6px 22px rgba(29, 185, 84, 0.5) !important;
+  }
+
+  /* Full-width Training Button on Mobile */
+  .dict-bottom-actions {
+    padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px)) 0 !important;
+  }
+
+  #startTrainingFromDictBtn {
+    width: 100% !important;
+    height: 48px !important;
+    font-size: 0.95rem !important;
+    border-radius: 14px !important;
+  }
+
   /* Match Game 3-column tiles on mobile */
   #matchGrid {
     grid-template-columns: repeat(3, 1fr) !important;

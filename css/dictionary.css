@@ -447,16 +447,134 @@ body.gray-theme {
   font-weight: 700;
 }
 
+/* Dictionary Floating Action Button (FAB) */
+.dict-fab-container {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.dict-fab-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-spotify, #1db954);
+  color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.45);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, color 0.2s;
+  outline: none;
+}
+
+.dict-fab-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(29, 185, 84, 0.55);
+}
+
+.dict-fab-btn:active {
+  transform: scale(0.92);
+}
+
+.dict-fab-btn.active {
+  transform: rotate(45deg);
+  background: #333338;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.dict-fab-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #18181c;
+  border: 1px solid var(--border-glass, rgba(255,255,255,0.12));
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+  animation: modalWindowFadeIn 0.15s ease-out;
+}
+
+body.light-theme .dict-fab-menu {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body.warm-theme .dict-fab-menu {
+  background: #25201c;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dict-fab-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dict-fab-menu-item:hover,
+.dict-fab-menu-item:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.light-theme .dict-fab-menu-item:hover,
+body.light-theme .dict-fab-menu-item:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Full-width bottom training bar in dictionary */
+.dict-bottom-actions {
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 6px;
+  box-sizing: border-box;
+}
+
 #startTrainingFromDictBtn {
+  width: 100% !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
   background: #FF4500 !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(255, 69, 0, 0.35) !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 18px rgba(255, 69, 0, 0.38) !important;
+  transition: transform 0.15s, box-shadow 0.15s !important;
 }
 
 #startTrainingFromDictBtn:hover {
   background: #ff5722 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5) !important;
+  box-shadow: 0 6px 22px rgba(255, 69, 0, 0.5) !important;
+}
+
+#startTrainingFromDictBtn:active {
+  transform: scale(0.98);
 }
 
 /* Light Theme Dictionary Overrides */

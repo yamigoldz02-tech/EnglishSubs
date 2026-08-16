@@ -961,6 +961,7 @@ function setupDictionaryUI() {
   const tabEssential = document.getElementById('dictTabEssential');
   const addCategoryBtn = document.getElementById('addCustomCategoryBtn');
   const addWordBtn = document.getElementById('addManualWordBtn');
+  const dictFabContainer = document.getElementById('dictFabContainer');
   const progressBarContainer = document.querySelector('.essential-progress-container');
   
   if (tabPersonal && tabEssential) {
@@ -979,6 +980,7 @@ function setupDictionaryUI() {
         // Show/Hide controls
         if (addCategoryBtn) addCategoryBtn.style.display = 'flex';
         if (addWordBtn) addWordBtn.style.display = 'flex';
+        if (dictFabContainer) dictFabContainer.style.display = 'flex';
         if (progressBarContainer) /** @type {HTMLElement} */ (progressBarContainer).style.display = 'none';
       } else {
         tabEssential.classList.add('active');
@@ -991,6 +993,7 @@ function setupDictionaryUI() {
         // Show/Hide controls
         if (addCategoryBtn) addCategoryBtn.style.display = 'none';
         if (addWordBtn) addWordBtn.style.display = 'none';
+        if (dictFabContainer) dictFabContainer.style.display = 'none';
         if (progressBarContainer) /** @type {HTMLElement} */ (progressBarContainer).style.display = 'flex';
       }
       
