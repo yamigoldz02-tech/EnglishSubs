@@ -824,9 +824,11 @@
   .modal-overlay {
     padding: 0 !important;
     align-items: flex-end !important;
-    background: rgba(0, 0, 0, 0.75) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
   }
 
   .modal-card, 
@@ -851,9 +853,39 @@
     border-left: none !important;
     border-right: none !important;
     box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.6) !important;
-    animation: sheetSlideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: flex !important;
     flex-direction: column !important;
+    transform: translateY(0);
+  }
+
+  .modal-animate-in .modal-card, 
+  .modal-animate-in #dictionaryModalCard, 
+  .modal-animate-in #trainingModalCard, 
+  .modal-animate-in #rulesModalCard, 
+  .modal-animate-in #roleplayModalCard, 
+  .modal-animate-in #videoCourseModalCard, 
+  .modal-animate-in #apiSettingsModalCard, 
+  .modal-animate-in #syncModalCard, 
+  .modal-animate-in #editWordModalCard, 
+  .modal-animate-in #addWordModalCard, 
+  .modal-animate-in #addPhraseModalCard {
+    animation: mobileSheetSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    will-change: transform, opacity;
+  }
+
+  .modal-animate-out .modal-card, 
+  .modal-animate-out #dictionaryModalCard, 
+  .modal-animate-out #trainingModalCard, 
+  .modal-animate-out #rulesModalCard, 
+  .modal-animate-out #roleplayModalCard, 
+  .modal-animate-out #videoCourseModalCard, 
+  .modal-animate-out #apiSettingsModalCard, 
+  .modal-animate-out #syncModalCard, 
+  .modal-animate-out #editWordModalCard, 
+  .modal-animate-out #addWordModalCard, 
+  .modal-animate-out #addPhraseModalCard {
+    animation: mobileSheetSlideDown 0.18s cubic-bezier(0.4, 0, 1, 1) forwards !important;
+    will-change: transform, opacity;
   }
 
   body.light-theme .modal-card,
@@ -865,9 +897,14 @@
     box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.12) !important;
   }
 
-  @keyframes sheetSlideUp {
-    from { transform: translateY(100%); opacity: 0.5; }
+  @keyframes mobileSheetSlideUp {
+    from { transform: translateY(100%); opacity: 0; }
     to   { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes mobileSheetSlideDown {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(100%); opacity: 0; }
   }
 
   /* Sheet Top Drag Grab Handle */

@@ -1192,7 +1192,9 @@ function setupDictionaryUI() {
   // Open dictionary modal
   const openDictionaryModal = () => {
     window.dictForceStudyAll = false; // Reset force-study on new modal session
-    if (trainingModal) closeModalEl(trainingModal); // Close training if open
+    if (trainingModal && trainingModal.style.display && trainingModal.style.display !== 'none') {
+      closeModalEl(trainingModal);
+    }
     const dictListEl = document.getElementById('dictWordsList');
     if (dictListEl) {
       dictListEl.style.flex = '1 1 0';
@@ -1295,7 +1297,9 @@ function setupDictionaryUI() {
   // Open training modal helper
   const openTrainingModal = () => {
     window.dictForceStudyAll = false;
-    closeModalEl(modal); // Close dictionary if open
+    if (modal && modal.style.display && modal.style.display !== 'none') {
+      closeModalEl(modal); // Close dictionary if open
+    }
     if (trainingModal) {
       openModalEl(trainingModal);
     }

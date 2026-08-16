@@ -13,7 +13,6 @@ html, body {
   padding: 0;
 }
 
-html.modal-open,
 body.modal-open {
   overflow: hidden !important;
   overscroll-behavior: none !important;
