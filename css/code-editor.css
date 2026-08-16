@@ -67,18 +67,35 @@ body.warm-theme .editor-container:focus-within {
   box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.25);
 }
 
+/* ── 3. Line Numbers & Textarea Pixel-Perfect Alignment ── */
+.editor-line-numbers,
+.editor-textarea {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+  font-size: 13.5px !important;
+  line-height: 22px !important;
+  box-sizing: border-box !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin: 0 !important;
+}
+
 .editor-line-numbers {
-  padding: 12px 10px;
+  padding-left: 10px !important;
+  padding-right: 8px !important;
   background: rgba(0, 0, 0, 0.25);
   color: var(--text-sub);
-  font-size: 0.82rem;
-  line-height: 1.6;
   text-align: right;
-  min-width: 32px;
+  min-width: 38px;
   user-select: none;
   border-right: 1px solid var(--border-glass);
-  font-family: monospace;
   overflow: hidden;
+  white-space: nowrap;
+}
+
+.editor-line-numbers .line-num {
+  height: 22px !important;
+  line-height: 22px !important;
+  display: block;
 }
 
 body.light-theme .editor-line-numbers {
@@ -102,12 +119,10 @@ body.no-notebook-line-numbers .editor-line-numbers {
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
-  padding: 12px 14px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
   color: var(--text-main);
-  font-size: 0.88rem;
-  line-height: 1.6;
   outline: none;
-  box-sizing: border-box;
   resize: none;
   white-space: pre-wrap !important; 
   overflow-x: hidden !important;

@@ -1032,7 +1032,7 @@ function setupEditorLineNumbers() {
             const lines = ta.value.split('\n').length;
             let numbersHtml = '';
             for (let i = 1; i <= lines; i++) {
-                numbersHtml += i + '<br>';
+                numbersHtml += '<div class="line-num">' + i + '</div>';
             }
             lineNumbersDiv.innerHTML = numbersHtml;
         }
