@@ -2367,25 +2367,64 @@ body.light-theme .dict-word-row:hover {
 @media (max-width: 768px) {
   .mobile-course-tabs {
     display: flex !important;
-    padding: 8px 16px;
-    background: rgba(0,0,0,0.2);
-    border-bottom: 1px solid var(--border-glass);
-    gap: 8px;
+    padding: 3px !important;
+    margin: 8px 16px 4px 16px !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    gap: 3px !important;
+    box-sizing: border-box !important;
   }
+
+  body:not(.light-theme):not(.warm-theme) .mobile-course-tabs {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  body.warm-theme .mobile-course-tabs {
+    background: rgba(45, 36, 36, 0.06) !important;
+    border-color: rgba(45, 36, 36, 0.08) !important;
+  }
+
   .course-tab-btn {
     flex: 1;
-    padding: 8px;
-    border-radius: 8px;
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-sub);
-    font-size: 0.8rem;
-    font-weight: 600;
+    padding: 7px 12px !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-sub) !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
   }
+
+  body.light-theme .course-tab-btn {
+    color: #6b7280 !important;
+  }
+
   .course-tab-btn.active {
-    background: rgba(167, 139, 250, 0.15);
-    border-color: rgba(167, 139, 250, 0.3);
-    color: #a78bfa;
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  body:not(.light-theme):not(.warm-theme) .course-tab-btn.active {
+    background: rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  body.warm-theme .course-tab-btn.active {
+    background: #FAF8F5 !important;
+    color: #2D2424 !important;
+    box-shadow: 0 1px 4px rgba(45, 36, 36, 0.12) !important;
   }
   
   /* Tab Switching Logic */
