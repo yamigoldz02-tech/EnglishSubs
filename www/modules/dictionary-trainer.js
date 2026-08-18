@@ -3088,9 +3088,13 @@ function handleWordReview(rating) {
 
   // Daily Tracker (Gemini Sparks)
   if (typeof window.DailyTracker !== 'undefined' && window.DailyTracker.recordFlashcardReview) {
-    const isCorrect = (result === 'know' || result === 'easy');
+    const isCorrect = (rating === 'know' || rating === 'easy');
     const xpAmt = isCorrect ? (item.level === 5 ? 50 : 2) : 0;
-    window.DailyTracker.recordFlashcardReview(item, isCorrect ? 'correct' : 'forgot', xpAmt);
+    try {
+      window.DailyTracker.recordFlashcardReview(item, isCorrect ? 'correct' : 'forgot', xpAmt);
+    } catch (e) {
+      console.warn('Failed to record flashcard review in DailyTracker:', e);
+    }
   }
 
   // Snappy visual transformation feedback via premium CSS transitions
