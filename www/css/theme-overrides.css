@@ -14,7 +14,7 @@ body.light-theme {
 }
 
 body.light-theme .navbar {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
@@ -25,48 +25,78 @@ body.light-theme .bento-card {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 
-body.light-theme .dict-highlighted-word {
-  background: rgba(26, 163, 74, 0.1);
-  border-bottom-color: rgba(26, 163, 74, 0.6);
-  color: #1aa34a;
+body.light-theme .modal-card,
+body.light-theme .notebook-modal-card,
+body.light-theme #dictionaryModalCard,
+body.light-theme #trainingModalCard,
+body.light-theme #rulesModalCard,
+body.light-theme #videoCourseModalCard,
+body.light-theme #apiSettingsModalCard,
+body.light-theme #editLyricsModalCard,
+body.light-theme #gamificationModalCard,
+body.light-theme .modal-body,
+body.light-theme .dict-modal-body {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  color: #111827 !important;
 }
 
-body.light-theme .dict-highlighted-word:hover {
-  background: rgba(26, 163, 74, 0.2);
-  border-bottom-color: #1aa34a;
-  box-shadow: 0 4px 10px rgba(26, 163, 74, 0.2);
+body.light-theme .modal-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #111827 !important;
 }
 
-body.light-theme .artist-song-item:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: var(--accent-spotify);
+body.light-theme .modal-header h3 {
+  color: #111827 !important;
 }
 
-/* ── 2. Gray Theme Component Overrides (Electric Indigo) ── */
-body.gray-theme {
-  --text-main: #f3f4f6;
-  --text-sub: #9ca3af;
-  --text-muted: #6b7280;
-  --bg-main: #111827;
-  --bg-card: #1f2937;
-  --border-glass: rgba(255, 255, 255, 0.08);
+body.light-theme .modal-close-btn {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #4B5563 !important;
+  border-radius: 8px !important;
 }
 
-body.gray-theme .dict-highlighted-word {
-  background: rgba(99, 102, 241, 0.12);
-  border-bottom-color: rgba(99, 102, 241, 0.7);
-  color: #818cf8;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+body.light-theme .dict-tabs {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
-body.gray-theme .dict-highlighted-word:hover {
-  background: rgba(99, 102, 241, 0.25);
-  border-bottom-color: #6366f1;
-  color: #a5b4fc;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+body.light-theme .dict-tab {
+  color: #6B7280 !important;
 }
 
-/* ── 3. Warm Theme Component Overrides (Warm Editorial Paper) ── */
+body.light-theme .dict-tab.active {
+  color: #111827 !important;
+  border-bottom: 2px solid #EBB2C0 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .dict-word-row {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+body.light-theme .dict-word-row:hover {
+  background: #F9FAFB !important;
+}
+
+body.light-theme .dict-word-row .word-row-header span,
+body.light-theme .dict-word-row .word-text,
+body.light-theme .dict-word-row b,
+body.light-theme .dict-word-row strong {
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+body.light-theme .dict-word-row .word-translation {
+  color: #4B5563 !important;
+}
+
+/* ── 2. Warm Theme Component Overrides (Harmonious Cotton Paper) ── */
 body.warm-theme {
   --text-main: #2D2424;
   --text-sub: #5C4B4B;
@@ -76,29 +106,163 @@ body.warm-theme {
   --border-glass: rgba(62, 39, 35, 0.08);
 }
 
-body.warm-theme .header-menu-btn:hover {
-  border-color: #F4A261;
-  background: #FFFDF9 var(--texture-cotton-paper);
+body.warm-theme .navbar {
+  background: rgba(250, 246, 237, 0.95) !important;
+  border-color: rgba(62, 39, 35, 0.08) !important;
 }
 
-body.warm-theme .header-menu-streak-dot {
-  background: #F4A261;
+body.warm-theme .bento-card {
+  background: #FAF6ED !important;
+  border-color: rgba(62, 39, 35, 0.08) !important;
 }
 
-body.warm-theme .header-nav-dropdown {
-  background: #FCF9F2 var(--texture-cotton-paper) !important;
-  border: 1px solid rgba(62, 39, 35, 0.09) !important;
-  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.12) !important;
+body.warm-theme .modal-card,
+body.warm-theme .notebook-modal-card,
+body.warm-theme #dictionaryModalCard,
+body.warm-theme #trainingModalCard,
+body.warm-theme #rulesModalCard,
+body.warm-theme #videoCourseModalCard,
+body.warm-theme #apiSettingsModalCard,
+body.warm-theme #editLyricsModalCard,
+body.warm-theme #gamificationModalCard,
+body.warm-theme .modal-body,
+body.warm-theme .dict-modal-body,
+body.warm-theme .training-settings-collapse {
+  background: #FAF6ED !important;
+  background-color: #FAF6ED !important;
+  color: #2D2424 !important;
 }
 
-body.warm-theme .nav-dropdown-profile {
-  background: #F4EEDB var(--texture-cotton-paper) !important;
+body.warm-theme .modal-header {
+  background: #FAF6ED !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-header h3 {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-close-btn {
+  background: rgba(62, 39, 35, 0.05) !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #5C4B4B !important;
+  border-radius: 8px !important;
 }
 
-body.warm-theme .nav-dropdown-profile:hover {
-  background: #FFFDF9 var(--texture-cotton-paper) !important;
+body.warm-theme .dict-tabs {
+  background: #FAF6ED !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .dict-tab {
+  color: #8D7B7B !important;
+}
+
+body.warm-theme .dict-tab.active {
+  color: #2D2424 !important;
+  border-bottom: 2px solid #F4A261 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .dict-word-row {
+  background: #FFFDF9 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  border-radius: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+body.warm-theme .dict-word-row:hover {
+  background: #F4EEDB !important;
+}
+
+body.warm-theme .dict-word-row .word-row-header span,
+body.warm-theme .dict-word-row .word-text,
+body.warm-theme .dict-word-row b,
+body.warm-theme .dict-word-row strong {
+  color: #2D2424 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .dict-word-row .word-translation {
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .dict-cat-badge {
+  background: rgba(62, 39, 35, 0.06) !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .dict-custom-cat-badge {
+  background: rgba(244, 162, 97, 0.15) !important;
+  border: 1px solid rgba(244, 162, 97, 0.25) !important;
+  color: #B45309 !important;
+}
+
+body.warm-theme .filters-toggle-btn {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .filters-toggle-btn:hover {
+  background: #FFFDF9 !important;
   border-color: #F4A261 !important;
+}
+
+body.warm-theme .flashcard {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .flashcard-front,
+body.warm-theme .flashcard-back {
+  background: #FAF6ED !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .flashcard-title,
+body.warm-theme .flashcard-word,
+body.warm-theme .flashcard-translation {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .session-progress-counter {
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .premium-select-filter,
+body.warm-theme .premium-micro-select,
+body.warm-theme .premium-search-box {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #2D2424 !important;
+}
+
+/* ── 3. Gray Theme Component Overrides (Electric Indigo) ── */
+body.gray-theme {
+  --text-main: #f3f4f6;
+  --text-sub: #9ca3af;
+  --text-muted: #6b7280;
+  --bg-main: #111827;
+  --bg-card: #1f2937;
+  --border-glass: rgba(255, 255, 255, 0.08);
+}
+
+body.gray-theme .modal-card,
+body.gray-theme .notebook-modal-card,
+body.gray-theme #dictionaryModalCard,
+body.gray-theme #trainingModalCard,
+body.gray-theme #rulesModalCard,
+body.gray-theme #videoCourseModalCard,
+body.gray-theme .modal-body,
+body.gray-theme .dict-modal-body,
+body.gray-theme .modal-header,
+body.gray-theme .dict-tabs {
+  background: #1f2937 !important;
+  color: #f3f4f6 !important;
 }
 
 /* ── 4. System-Wide Inputs & Textareas Contrast ── */
@@ -130,84 +294,4 @@ body.gray-theme select {
   background: #1f2937 !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: #f3f4f6 !important;
-}
-
-
-/* ── 5. Warm Theme Modal Typography & High-Contrast Overrides ── */
-body.warm-theme .modal-card,
-body.warm-theme .notebook-modal-card,
-body.warm-theme #dictionaryModalCard,
-body.warm-theme #trainingModalCard,
-body.warm-theme #rulesModalCard,
-body.warm-theme #videoCourseModalCard {
-  background: #FCF9F2 !important;
-  color: #2D2424 !important;
-}
-
-body.warm-theme .modal-header {
-  background: #F4EEDB !important;
-  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
-  color: #2D2424 !important;
-}
-
-body.warm-theme .modal-header h3 {
-  color: #2D2424 !important;
-}
-
-body.warm-theme .dict-word-row {
-  background: rgba(62, 39, 35, 0.03) !important;
-  border: 1px solid rgba(62, 39, 35, 0.06) !important;
-  border-radius: 10px !important;
-  margin-bottom: 6px !important;
-}
-
-body.warm-theme .dict-word-row:hover {
-  background: rgba(62, 39, 35, 0.07) !important;
-}
-
-body.warm-theme .dict-word-row .word-text,
-body.warm-theme .dict-word-row .word-row-header span,
-body.warm-theme .dict-word-row b,
-body.warm-theme .dict-word-row strong {
-  color: #2D2424 !important;
-  font-weight: 700 !important;
-}
-
-body.warm-theme .dict-word-row .word-translation {
-  color: #5C4B4B !important;
-}
-
-body.warm-theme .dict-card-pill,
-body.warm-theme .dict-tab-pill {
-  background: rgba(62, 39, 35, 0.05) !important;
-  color: #5C4B4B !important;
-  border: 1px solid rgba(62, 39, 35, 0.08) !important;
-}
-
-body.warm-theme .dict-tab-pill.active {
-  background: #FAF6ED !important;
-  color: #2D2424 !important;
-  border-color: #F4A261 !important;
-}
-
-body.warm-theme .flashcard {
-  background: #FAF6ED !important;
-  border: 1px solid rgba(62, 39, 35, 0.1) !important;
-  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.08) !important;
-}
-
-body.warm-theme .flashcard-front,
-body.warm-theme .flashcard-back {
-  background: #FAF6ED !important;
-  color: #2D2424 !important;
-}
-
-body.warm-theme .flashcard-title,
-body.warm-theme .flashcard-word,
-body.warm-theme .flashcard-translation {
-  color: #2D2424 !important;
-}
-
-body.warm-theme .session-progress-counter {
-  color: #5C4B4B !important;
 }
