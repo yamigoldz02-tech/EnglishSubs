@@ -718,11 +718,26 @@ body.warm-theme .dict-type-pill.active {
 }
 
 body.warm-theme .dict-word-row {
-  border-radius: 8px;
+  background: rgba(62, 39, 35, 0.03) !important;
+  border: 1px solid rgba(62, 39, 35, 0.06) !important;
+  border-radius: 10px !important;
+  margin-bottom: 6px !important;
 }
 
 body.warm-theme .dict-word-row:hover {
-  background: #FAF6ED var(--texture-cotton-paper);
+  background: rgba(62, 39, 35, 0.07) !important;
+}
+
+body.warm-theme .dict-word-row .word-row-header span,
+body.warm-theme .dict-word-row .word-text,
+body.warm-theme .dict-word-row b,
+body.warm-theme .dict-word-row strong {
+  color: #2D2424 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .dict-word-row .word-translation {
+  color: #5C4B4B !important;
 }
 
 body.warm-theme .dict-cat-badge {

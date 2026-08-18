@@ -1795,3 +1795,31 @@ body.warm-theme #sessionSuccessView > div:last-of-type {
   background: #FDF6E3 !important;
   border: 1px solid rgba(62, 39, 35, 0.08) !important;
 }
+
+
+/* ── Warm Theme Direct Overrides (Bulletproof Paper Modal Card) ── */
+body.warm-theme .modal-card,
+body.warm-theme .notebook-modal-card,
+body.warm-theme #dictionaryModalCard,
+body.warm-theme #trainingModalCard,
+body.warm-theme #rulesModalCard,
+body.warm-theme #videoCourseModalCard {
+  background: #FCF9F2 !important;
+  background-color: #FCF9F2 !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-header {
+  background: #F4EEDB !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .modal-header h3 {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-body {
+  background: #FCF9F2 !important;
+  background-color: #FCF9F2 !important;
+  color: #2D2424 !important;
+}
