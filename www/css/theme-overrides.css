@@ -131,3 +131,83 @@ body.gray-theme select {
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: #f3f4f6 !important;
 }
+
+
+/* ── 5. Warm Theme Modal Typography & High-Contrast Overrides ── */
+body.warm-theme .modal-card,
+body.warm-theme .notebook-modal-card,
+body.warm-theme #dictionaryModalCard,
+body.warm-theme #trainingModalCard,
+body.warm-theme #rulesModalCard,
+body.warm-theme #videoCourseModalCard {
+  background: #FCF9F2 !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-header {
+  background: #F4EEDB !important;
+  border-bottom: 1px solid rgba(62, 39, 35, 0.08) !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .modal-header h3 {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .dict-word-row {
+  background: rgba(62, 39, 35, 0.03) !important;
+  border: 1px solid rgba(62, 39, 35, 0.06) !important;
+  border-radius: 10px !important;
+  margin-bottom: 6px !important;
+}
+
+body.warm-theme .dict-word-row:hover {
+  background: rgba(62, 39, 35, 0.07) !important;
+}
+
+body.warm-theme .dict-word-row .word-text,
+body.warm-theme .dict-word-row .word-row-header span,
+body.warm-theme .dict-word-row b,
+body.warm-theme .dict-word-row strong {
+  color: #2D2424 !important;
+  font-weight: 700 !important;
+}
+
+body.warm-theme .dict-word-row .word-translation {
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .dict-card-pill,
+body.warm-theme .dict-tab-pill {
+  background: rgba(62, 39, 35, 0.05) !important;
+  color: #5C4B4B !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .dict-tab-pill.active {
+  background: #FAF6ED !important;
+  color: #2D2424 !important;
+  border-color: #F4A261 !important;
+}
+
+body.warm-theme .flashcard {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .flashcard-front,
+body.warm-theme .flashcard-back {
+  background: #FAF6ED !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .flashcard-title,
+body.warm-theme .flashcard-word,
+body.warm-theme .flashcard-translation {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .session-progress-counter {
+  color: #5C4B4B !important;
+}

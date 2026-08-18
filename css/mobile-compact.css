@@ -862,7 +862,7 @@
 
   body.warm-theme .modal-overlay,
   body.warm-theme .notebook-modal-overlay {
-    background: #1C1815 !important;
+    background: #F8F4EA !important;
   }
 
   .modal-card, 
@@ -917,7 +917,7 @@
   body.warm-theme #trainingModalCard,
   body.warm-theme #rulesModalCard,
   body.warm-theme #videoCourseModalCard {
-    background: #1C1815 !important;
+    background: #FCF9F2 !important;
     box-shadow: none !important;
   }
 
