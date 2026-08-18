@@ -156,18 +156,14 @@ function archiveCurrentDictionaryToOldWords(manual = false) {
 window.archiveCurrentDictionaryToOldWords = archiveCurrentDictionaryToOldWords;
 
 function runOldWordsMigration() {
-  const migratedFlagV1 = localStorage.getItem('galaxy_migrated_old_words_v1');
-  const migratedFlagV2 = localStorage.getItem('galaxy_migrated_old_words_v2');
+  const migratedFlagV3 = localStorage.getItem('galaxy_migrated_old_words_v3');
 
-  if (!migratedFlagV1 && personalDictionary && personalDictionary.length > 0) {
-    console.debug('Running one-time migration v1 to move all existing words to "Старые"...');
+  if (!migratedFlagV3 && personalDictionary && personalDictionary.length > 0) {
+    console.log('Running automatic migration v3 to archive active dictionary into "Старые"...');
     _doArchiveCurrentDictionary(false);
     localStorage.setItem('galaxy_migrated_old_words_v1', 'true');
     localStorage.setItem('galaxy_migrated_old_words_v2', 'true');
-  } else if (!migratedFlagV2 && personalDictionary && personalDictionary.length > 0) {
-    console.debug('Running migration v2 to archive current dictionary into "Старые"...');
-    _doArchiveCurrentDictionary(false);
-    localStorage.setItem('galaxy_migrated_old_words_v2', 'true');
+    localStorage.setItem('galaxy_migrated_old_words_v3', 'true');
   }
 }
 
@@ -633,6 +629,7 @@ function updateSavedWordsCount() {
 
 function saveDictionaryToStorage() {
   localStorage.setItem('personal_dictionary', JSON.stringify(personalDictionary));
+  localStorage.setItem('my_personal_dictionary', JSON.stringify(personalDictionary));
   updateSavedWordsCount();
   updateEssentialProgress();
   renderDictWeekChart();
