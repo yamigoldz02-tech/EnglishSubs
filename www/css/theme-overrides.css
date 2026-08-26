@@ -301,7 +301,7 @@ body.gray-theme select {
 body.light-theme .dict-fab-btn {
   background: #EBB2C0 !important;
   color: #111827 !important;
-  box-shadow: 0 6px 20px rgba(235, 178, 192, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }
 
 body.light-theme .dict-fab-btn.active {
@@ -328,7 +328,7 @@ body.light-theme .dict-fab-menu-item:hover {
 body.warm-theme .dict-fab-btn {
   background: #F4A261 !important;
   color: #2D2424 !important;
-  box-shadow: 0 6px 20px rgba(244, 162, 97, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(62, 39, 35, 0.15) !important;
 }
 
 body.warm-theme .dict-fab-btn.active {
@@ -558,4 +558,16 @@ body.gray-theme .modal-overlay.video-modal-minimized {
 
 .notebook-modal-overlay.is-open {
   z-index: 10400 !important;
+}
+
+
+#dictScrollTopBtn:not(.visible) {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+#dictScrollTopBtn.visible {
+  display: flex !important;
+  bottom: 68px !important;
+  right: 16px !important;
 }

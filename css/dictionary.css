@@ -494,7 +494,7 @@ body.gray-theme {
 body.light-theme .dict-fab-btn {
   background: #EBB2C0 !important;
   color: #111827 !important;
-  box-shadow: 0 6px 20px rgba(235, 178, 192, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }
 
 body.light-theme .dict-fab-btn.active {
@@ -507,7 +507,7 @@ body.light-theme .dict-fab-btn.active {
 body.warm-theme .dict-fab-btn {
   background: #F4A261 !important;
   color: #2D2424 !important;
-  box-shadow: 0 6px 20px rgba(244, 162, 97, 0.45) !important;
+  box-shadow: 0 4px 14px rgba(62, 39, 35, 0.15) !important;
 }
 
 body.warm-theme .dict-fab-btn.active {
@@ -936,28 +936,29 @@ body.light-theme .filters-toggle-btn {
    ========================================================================== */
 #dictScrollTopBtn {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 68px;
+  right: 16px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--text-main);
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 40;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 #dictScrollTopBtn.visible {
+  display: flex !important;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
