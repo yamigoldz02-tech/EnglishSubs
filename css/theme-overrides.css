@@ -459,3 +459,52 @@ body.warm-theme #editWordCustomCategoryPillsContainer {
 .modal-card .mcat-pill {
   font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
 }
+
+
+/* ── Modal Accordion Styles ── */
+.modal-accordion-wrapper {
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.modal-accordion-toggle {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--text-sub) !important;
+}
+
+.modal-accordion-toggle:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--text-main) !important;
+}
+
+body.light-theme .modal-accordion-wrapper {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: #F9FAFB !important;
+}
+
+body.light-theme .modal-accordion-toggle {
+  background: #F3F4F6 !important;
+  color: #4B5563 !important;
+}
+
+body.light-theme .modal-accordion-toggle:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+
+body.warm-theme .modal-accordion-wrapper {
+  border-color: rgba(62, 39, 35, 0.1) !important;
+  background: #FAF6ED !important;
+}
+
+body.warm-theme .modal-accordion-toggle {
+  background: #F4EEDB !important;
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .modal-accordion-toggle:hover {
+  background: #EFE6D0 !important;
+  color: #2D2424 !important;
+}

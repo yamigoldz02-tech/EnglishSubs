@@ -202,6 +202,26 @@ function setupManualAddModals() {
   if (wordRusInput) wordRusInput.addEventListener('input', () => handleSmartInput(wordRusInput, 'latToCyr'));
 
   // ── 4. Smart Input Settings Panel ────────────────────────────────────────
+  
+  // ── Folders & Categories Accordion Toggles ──
+  const setupAccordionToggle = (toggleId, panelId, chevronId) => {
+    const toggleBtn = document.getElementById(toggleId);
+    const panel = document.getElementById(panelId);
+    const chevron = document.getElementById(chevronId);
+    if (toggleBtn && panel) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const isOpen = panel.style.display === 'flex';
+        panel.style.display = isOpen ? 'none' : 'flex';
+        if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+      });
+    }
+  };
+
+  setupAccordionToggle('addWordFoldersToggle', 'addWordFoldersPanel', 'addWordFoldersChevron');
+  setupAccordionToggle('addPhraseFoldersToggle', 'addPhraseFoldersPanel', 'addPhraseFoldersChevron');
+  setupAccordionToggle('editWordFoldersToggle', 'editWordFoldersPanel', 'editWordFoldersChevron');
+
   const settingsToggleBtn = document.getElementById('addWordSettingsToggle');
   const settingsPanel = document.getElementById('addWordSettingsPanel');
   const settingsChevron = document.getElementById('addWordSettingsChevron');

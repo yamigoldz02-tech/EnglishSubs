@@ -704,17 +704,21 @@ export const ALL_MODALS_HTML = `
           <textarea id="manualWordRule" placeholder="например, Используется с герундием: I enjoy playing..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
         </div>
         
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
-          <div id="manualCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;">
-            <!-- Dynamically filled by populateCategorySelectors() -->
-          </div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
-          <div id="manualWordCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;">
-            <!-- Dynamically filled by populateCategorySelectors() -->
+        <!-- Collapsible Folders & Categories Spoiler -->
+        <div class="modal-accordion-wrapper" style="border: 1px solid var(--border-glass, rgba(255,255,255,0.08)); border-radius: 12px; overflow: hidden; width: 100%; box-sizing: border-box;">
+          <button id="addWordFoldersToggle" type="button" class="modal-accordion-toggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.76rem; font-weight: 700; text-transform: uppercase; transition: background 0.2s;">
+            <span style="display: flex; align-items: center; gap: 6px;">📁 Папки и категории</span>
+            <span id="addWordFoldersChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
+          </button>
+          <div id="addWordFoldersPanel" style="display: none; padding: 10px 12px 12px; flex-direction: column; gap: 10px; box-sizing: border-box;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
+              <div id="manualCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
+              <div id="manualWordCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
           </div>
         </div>
         
@@ -775,17 +779,21 @@ export const ALL_MODALS_HTML = `
           <textarea id="manualPhraseRule" placeholder="например, Часто употребляется в неформальной речи..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
         </div>
         
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
-          <div id="manualPhraseCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;">
-            <!-- Dynamically filled by populateCategorySelectors() -->
-          </div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
-          <div id="manualPhraseCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;">
-            <!-- Dynamically filled by populateCategorySelectors() -->
+        <!-- Collapsible Folders & Categories Spoiler -->
+        <div class="modal-accordion-wrapper" style="border: 1px solid var(--border-glass, rgba(255,255,255,0.08)); border-radius: 12px; overflow: hidden; width: 100%; box-sizing: border-box;">
+          <button id="addPhraseFoldersToggle" type="button" class="modal-accordion-toggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.76rem; font-weight: 700; text-transform: uppercase; transition: background 0.2s;">
+            <span style="display: flex; align-items: center; gap: 6px;">📁 Папки и категории</span>
+            <span id="addPhraseFoldersChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
+          </button>
+          <div id="addPhraseFoldersPanel" style="display: none; padding: 10px 12px 12px; flex-direction: column; gap: 10px; box-sizing: border-box;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
+              <div id="manualPhraseCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
+              <div id="manualPhraseCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
           </div>
         </div>
         
@@ -830,14 +838,22 @@ export const ALL_MODALS_HTML = `
             style="background: rgba(0,0,0,0.25); border: 1px solid rgba(96,165,250,0.2); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
-          <div id="editWordCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
-          <div id="editWordCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+        <!-- Collapsible Folders & Categories Spoiler -->
+        <div class="modal-accordion-wrapper" style="border: 1px solid var(--border-glass, rgba(255,255,255,0.08)); border-radius: 12px; overflow: hidden; width: 100%; box-sizing: border-box;">
+          <button id="editWordFoldersToggle" type="button" class="modal-accordion-toggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.76rem; font-weight: 700; text-transform: uppercase; transition: background 0.2s;">
+            <span style="display: flex; align-items: center; gap: 6px;">📁 Папки и категории</span>
+            <span id="editWordFoldersChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
+          </button>
+          <div id="editWordFoldersPanel" style="display: none; padding: 10px 12px 12px; flex-direction: column; gap: 10px; box-sizing: border-box;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
+              <div id="editWordCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
+              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
+              <div id="editWordCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
+            </div>
+          </div>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px;">
