@@ -905,3 +905,85 @@ body.light-theme .manage-folder-switch input:checked + .manage-folder-slider {
   background-color: #EBB2C0 !important;
   box-shadow: 0 2px 8px rgba(235, 178, 192, 0.35) !important;
 }
+
+
+/* ── Universal Select & Option Dropdown Theme Styling ── */
+body.warm-theme {
+  color-scheme: light !important;
+}
+
+body.light-theme {
+  color-scheme: light !important;
+}
+
+body.gray-theme {
+  color-scheme: dark !important;
+}
+
+body.warm-theme select,
+body.warm-theme .premium-select-filter,
+body.warm-theme .premium-micro-select,
+body.warm-theme #dictCategoryFilter,
+body.warm-theme #dictCustomCategoryFilter,
+body.warm-theme #dictSortSelect,
+body.warm-theme #trainingFolderSelect,
+body.warm-theme #trainingTypeSelect {
+  color-scheme: light !important;
+  background-color: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.18) !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme select option,
+body.warm-theme .premium-select-filter option,
+body.warm-theme .premium-micro-select option,
+body.warm-theme #dictCategoryFilter option,
+body.warm-theme #dictCustomCategoryFilter option,
+body.warm-theme #dictSortSelect option,
+body.warm-theme #trainingFolderSelect option,
+body.warm-theme #trainingTypeSelect option {
+  background-color: #FAF6ED !important;
+  color: #2D2424 !important;
+}
+
+body.light-theme select,
+body.light-theme .premium-select-filter,
+body.light-theme .premium-micro-select,
+body.light-theme #dictCategoryFilter,
+body.light-theme #dictCustomCategoryFilter,
+body.light-theme #dictSortSelect,
+body.light-theme #trainingFolderSelect,
+body.light-theme #trainingTypeSelect {
+  color-scheme: light !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #111827 !important;
+}
+
+body.light-theme select option,
+body.light-theme .premium-select-filter option,
+body.light-theme .premium-micro-select option,
+body.light-theme #dictCategoryFilter option,
+body.light-theme #dictCustomCategoryFilter option,
+body.light-theme #dictSortSelect option,
+body.light-theme #trainingFolderSelect option,
+body.light-theme #trainingTypeSelect option {
+  background-color: #FFFFFF !important;
+  color: #111827 !important;
+}
+
+body.gray-theme select,
+body.gray-theme .premium-select-filter,
+body.gray-theme .premium-micro-select {
+  color-scheme: dark !important;
+  background-color: #1F2937 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F3F4F6 !important;
+}
+
+body.gray-theme select option,
+body.gray-theme .premium-select-filter option,
+body.gray-theme .premium-micro-select option {
+  background-color: #1F2937 !important;
+  color: #F3F4F6 !important;
+}
