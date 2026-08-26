@@ -34,7 +34,7 @@ export function openEditWordModal(w, onSaveSuccess) {
       pill.type = 'button';
       pill.className = 'mcat-pill' + (isSelected ? ' selected' : '');
       pill.dataset.cat = cat;
-      pill.textContent = `📁 ${cat}`;
+      pill.innerHTML = `<svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><span>${escapeHTML(cat)}</span>`;
       // Pure class-based styling
       pill.classList.toggle('selected', isSelected);
       pill.addEventListener('click', (ev) => {
@@ -59,7 +59,7 @@ export function openEditWordModal(w, onSaveSuccess) {
       pill.type = 'button';
       pill.className = 'mcat-pill' + (isSelected ? ' selected' : '');
       pill.dataset.cat = cat;
-      pill.textContent = cat === 'Без категории' ? '🏷️ Без категории' : `🏷️ ${cat}`;
+      pill.innerHTML = cat === 'Без категории' ? `<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg><span>Без категории</span>` : `<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg><span>${escapeHTML(cat)}</span>`;
       const applyStyle = (sel) => {
         pill.style.cssText = `
           padding: 4px 10px; border-radius: 15px; font-size: 0.72rem; font-weight: 600;
