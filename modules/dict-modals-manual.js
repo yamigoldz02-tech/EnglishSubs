@@ -486,6 +486,7 @@ function setupManualAddModals() {
       
       personalDict.push(newPhrase);
       if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
+      if (typeof window.triggerWordAddedPCAnimation === 'function') window.triggerWordAddedPCAnimation(eng, 'phrase', saveManualPhraseBtn);
       
       engEl.value = '';
       rusEl.value = '';
@@ -770,6 +771,7 @@ function setupManualAddModals() {
       
       personalDict.push(newWord);
       if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
+      if (typeof window.triggerWordAddedPCAnimation === 'function') window.triggerWordAddedPCAnimation(eng, actualType, saveManualWordBtn);
       
       wordEngEl.value = '';
       wordRusEl.value = '';

@@ -639,6 +639,88 @@ function toggleDictionaryItem(buttonElement, word, translation, category = 'Из
   }
 }
 
+
+/**
+ * Triggers a sleek particle burst and floating badge on PC when a new word/phrase is added.
+ * @param {string} text - The word or phrase text
+ * @param {'word'|'phrase'} [type='word'] - Type of item added
+ * @param {HTMLElement|{x:number,y:number}|null} [anchor=null] - Anchor element or point
+ */
+function triggerWordAddedPCAnimation(text, type = 'word', anchor = null) {
+  // Strict desktop / PC check (>= 900px and fine pointer/mouse)
+  const isPC = window.innerWidth >= 900 && (!('ontouchstart' in window) || window.matchMedia('(pointer: fine)').matches);
+  if (!isPC) return;
+
+  try {
+    const isPhrase = type === 'phrase' || (typeof text === 'string' && text.trim().split(/\s+/).length >= 3);
+    const badgeText = isPhrase ? '+1 Фраза' : '+1 Слово';
+    const displayWord = typeof text === 'string' ? text.trim() : '';
+
+    // 1. Floating Capsule Toast
+    const toast = document.createElement('div');
+    toast.className = 'pc-word-added-toast';
+    toast.innerHTML = `
+      <div class="toast-icon">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <span class="toast-badge">${badgeText}</span>
+      <span class="toast-word">«${escapeHTML(displayWord)}»</span>
+    `;
+
+    document.body.appendChild(toast);
+
+    // 2. Particle Sparks Burst
+    const colors = ['#F4A261', '#E9C46A', '#2A9D8F', '#E76F51', '#38BDF8', '#A78BFA'];
+    let originX = window.innerWidth / 2;
+    let originY = 60;
+
+    if (anchor && typeof anchor.getBoundingClientRect === 'function') {
+      const rect = anchor.getBoundingClientRect();
+      originX = rect.left + rect.width / 2;
+      originY = rect.top + rect.height / 2;
+    } else if (anchor && typeof anchor.x === 'number' && typeof anchor.y === 'number') {
+      originX = anchor.x;
+      originY = anchor.y;
+    }
+
+    const particleCount = 18;
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.className = 'pc-spark-particle';
+      const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.5;
+      const distance = 40 + Math.random() * 70;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - 18;
+      const rot = (Math.random() * 360 - 180) + 'deg';
+      const size = 4 + Math.random() * 4;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      p.style.cssText = `
+        left: ${originX}px;
+        top: ${originY}px;
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color};
+        --dx: ${dx}px;
+        --dy: ${dy}px;
+        --rot: ${rot};
+        box-shadow: 0 0 8px ${color};
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 800);
+    }
+
+    setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 2100);
+  } catch (err) {
+    console.warn('[PC Animation] Notice:', err);
+  }
+}
+window.triggerWordAddedPCAnimation = triggerWordAddedPCAnimation;
+
 function addWordToPersonalDictionary(word, translation, category = 'Из песен', type = 'word') {
   const rawEng = word.trim();
   const eng = formatDictionaryWord(rawEng);
@@ -673,6 +755,7 @@ function addWordToPersonalDictionary(word, translation, category = 'Из пес�
 
   personalDictionary.push(newWord);
   saveDictionaryToStorage();
+  triggerWordAddedPCAnimation(eng, actualType);
 
   if (typeof window.DailyTracker !== 'undefined' && window.DailyTracker.recordWordAdded) {
     window.DailyTracker.recordWordAdded(newWord);

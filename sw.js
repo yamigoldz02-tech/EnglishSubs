@@ -4,7 +4,7 @@
  * Automatically caches HTML, CSS, JavaScript, and datasets for instant offline playback.
  */
 
-const CACHE_NAME = 'ai-lyric-trainer-v3.5.9';
+const CACHE_NAME = 'ai-lyric-trainer-v3.6.0';
 
 const PRECACHE_ASSETS = [
   './',

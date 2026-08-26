@@ -19,3 +19,157 @@
 
 
 
+
+
+/* ==========================================================================
+   DESKTOP PC CELEBRATION ANIMATION FOR NEW WORDS & PHRASES
+   ========================================================================== */
+.pc-word-added-toast {
+  position: fixed;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px) scale(0.85);
+  z-index: 100050;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 40px;
+  background: rgba(24, 24, 27, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 25px rgba(244, 162, 97, 0.2);
+  pointer-events: none;
+  opacity: 0;
+  animation: pcToastEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             pcToastShimmer 1.5s ease-in-out infinite,
+             pcToastExit 0.35s ease-in forwards 1.7s;
+  overflow: hidden;
+}
+
+body.light-theme .pc-word-added-toast {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: #111827 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 25px rgba(235, 178, 192, 0.3) !important;
+}
+
+body.warm-theme .pc-word-added-toast {
+  background: rgba(250, 246, 237, 0.96) !important;
+  border: 1px solid rgba(62, 39, 35, 0.15) !important;
+  color: #2D2424 !important;
+  box-shadow: 0 16px 40px rgba(62, 39, 35, 0.18), 0 0 25px rgba(244, 162, 97, 0.35) !important;
+}
+
+.pc-word-added-toast .toast-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+.pc-word-added-toast .toast-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(244, 162, 97, 0.15);
+  color: #F4A261;
+}
+
+body.light-theme .pc-word-added-toast .toast-badge {
+  background: rgba(235, 178, 192, 0.25) !important;
+  color: #be185d !important;
+}
+
+body.warm-theme .pc-word-added-toast .toast-badge {
+  background: rgba(244, 162, 97, 0.2) !important;
+  color: #E76F51 !important;
+}
+
+.pc-word-added-toast .toast-word {
+  font-weight: 700;
+  color: var(--text-main, #ffffff);
+}
+
+body.light-theme .pc-word-added-toast .toast-word {
+  color: #111827 !important;
+}
+
+body.warm-theme .pc-word-added-toast .toast-word {
+  color: #2D2424 !important;
+}
+
+@keyframes pcToastEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-25px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes pcToastExit {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-15px) scale(0.95);
+  }
+}
+
+@keyframes pcToastShimmer {
+  0%, 100% {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), 0 0 15px rgba(244, 162, 97, 0.2);
+  }
+  50% {
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3), 0 0 30px rgba(244, 162, 97, 0.45);
+  }
+}
+
+/* Micro particle sparks */
+:root {
+  --dx: 0px;
+  --dy: 0px;
+  --rot: 0deg;
+}
+
+.pc-spark-particle {
+  --dx: 0px;
+  --dy: 0px;
+  --rot: 0deg;
+  position: fixed;
+  pointer-events: none;
+  z-index: 100055;
+  border-radius: 50%;
+  opacity: 1;
+  animation: pcParticleFly 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes pcParticleFly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0) rotate(var(--rot));
+  }
+}
