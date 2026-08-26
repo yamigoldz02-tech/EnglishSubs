@@ -491,6 +491,32 @@ body.gray-theme {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
+body.light-theme .dict-fab-btn {
+  background: #EBB2C0 !important;
+  color: #111827 !important;
+  box-shadow: 0 6px 20px rgba(235, 178, 192, 0.45) !important;
+}
+
+body.light-theme .dict-fab-btn.active {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.warm-theme .dict-fab-btn {
+  background: #F4A261 !important;
+  color: #2D2424 !important;
+  box-shadow: 0 6px 20px rgba(244, 162, 97, 0.45) !important;
+}
+
+body.warm-theme .dict-fab-btn.active {
+  background: #E8DEC8 !important;
+  color: #2D2424 !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(62, 39, 35, 0.15) !important;
+}
+
 .dict-fab-menu {
   display: flex;
   flex-direction: column;
@@ -504,14 +530,36 @@ body.gray-theme {
 }
 
 body.light-theme .dict-fab-menu {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
 }
 
 body.warm-theme .dict-fab-menu {
-  background: #25201c;
-  border-color: rgba(255, 255, 255, 0.1);
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15) !important;
+}
+
+body.warm-theme .dict-fab-menu-item {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .dict-fab-menu-item:hover,
+body.warm-theme .dict-fab-menu-item:active {
+  background: rgba(62, 39, 35, 0.08) !important;
+}
+
+body.light-theme #dictScrollTopBtn {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #111827 !important;
+}
+
+body.warm-theme #dictScrollTopBtn {
+  background: rgba(62, 39, 35, 0.08) !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #2D2424 !important;
 }
 
 .dict-fab-menu-item {

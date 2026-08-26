@@ -295,3 +295,59 @@ body.gray-theme select {
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: #f3f4f6 !important;
 }
+
+
+/* ── Theme Overrides: Floating Action Button & Menu ── */
+body.light-theme .dict-fab-btn {
+  background: #EBB2C0 !important;
+  color: #111827 !important;
+  box-shadow: 0 6px 20px rgba(235, 178, 192, 0.45) !important;
+}
+
+body.light-theme .dict-fab-btn.active {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-theme .dict-fab-menu {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+body.light-theme .dict-fab-menu-item {
+  color: #111827 !important;
+}
+
+body.light-theme .dict-fab-menu-item:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.warm-theme .dict-fab-btn {
+  background: #F4A261 !important;
+  color: #2D2424 !important;
+  box-shadow: 0 6px 20px rgba(244, 162, 97, 0.45) !important;
+}
+
+body.warm-theme .dict-fab-btn.active {
+  background: #E8DEC8 !important;
+  color: #2D2424 !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(62, 39, 35, 0.15) !important;
+}
+
+body.warm-theme .dict-fab-menu {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15) !important;
+}
+
+body.warm-theme .dict-fab-menu-item {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .dict-fab-menu-item:hover {
+  background: rgba(62, 39, 35, 0.08) !important;
+}
