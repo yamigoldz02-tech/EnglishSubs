@@ -351,3 +351,92 @@ body.warm-theme .dict-fab-menu-item {
 body.warm-theme .dict-fab-menu-item:hover {
   background: rgba(62, 39, 35, 0.08) !important;
 }
+
+
+/* ── Category & Folder Multi-Select Pills (.mcat-pill) ── */
+.mcat-pill {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-sub);
+  transition: all 0.18s ease;
+  outline: none;
+  white-space: nowrap;
+}
+
+.mcat-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.mcat-pill.selected {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Light Theme Pills */
+body.light-theme .mcat-pill {
+  background: #F3F4F6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #4B5563 !important;
+}
+
+body.light-theme .mcat-pill:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+
+body.light-theme .mcat-pill.selected {
+  background: #EBB2C0 !important;
+  border-color: #EBB2C0 !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.35) !important;
+}
+
+/* Warm Theme Pills */
+body.warm-theme .mcat-pill {
+  background: #F4EEDB !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .mcat-pill:hover {
+  background: #EFE6D0 !important;
+  color: #2D2424 !important;
+}
+
+body.warm-theme .mcat-pill.selected {
+  background: #F4A261 !important;
+  border-color: #F4A261 !important;
+  color: #2D2424 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.35) !important;
+}
+
+/* Pill Containers */
+body.light-theme #manualCategoryPillsContainer,
+body.light-theme #manualWordCustomCategoryPillsContainer,
+body.light-theme #manualPhraseCategoryPillsContainer,
+body.light-theme #manualPhraseCustomCategoryPillsContainer,
+body.light-theme #editWordCategoryPillsContainer,
+body.light-theme #editWordCustomCategoryPillsContainer {
+  background: #F9FAFB !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body.warm-theme #manualCategoryPillsContainer,
+body.warm-theme #manualWordCustomCategoryPillsContainer,
+body.warm-theme #manualPhraseCategoryPillsContainer,
+body.warm-theme #manualPhraseCustomCategoryPillsContainer,
+body.warm-theme #editWordCategoryPillsContainer,
+body.warm-theme #editWordCustomCategoryPillsContainer {
+  background: #FCF9F2 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}

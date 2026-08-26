@@ -35,16 +35,8 @@ export function openEditWordModal(w, onSaveSuccess) {
       pill.className = 'mcat-pill' + (isSelected ? ' selected' : '');
       pill.dataset.cat = cat;
       pill.textContent = `📁 ${cat}`;
-      const applyStyle = (sel) => {
-        pill.style.cssText = `
-          padding: 4px 10px; border-radius: 15px; font-size: 0.72rem; font-weight: 600;
-          cursor: pointer; border: 1px solid; transition: all 0.18s; outline: none; white-space: nowrap;
-          background: ${sel ? 'rgba(29,185,84,0.2)' : 'rgba(255,255,255,0.04)'};
-          color: ${sel ? '#1db954' : 'var(--text-sub)'};
-          border-color: ${sel ? 'rgba(29,185,84,0.4)' : 'rgba(255,255,255,0.1)'};
-        `;
-      };
-      applyStyle(isSelected);
+      // Pure class-based styling
+      pill.classList.toggle('selected', isSelected);
       pill.addEventListener('click', (ev) => {
         ev.preventDefault(); ev.stopPropagation();
         const isOn = pill.classList.contains('selected');

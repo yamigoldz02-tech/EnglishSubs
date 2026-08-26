@@ -301,7 +301,6 @@ function populateCategorySelectors() {
   // 3. Populate manualWordCategory multi-pill container in manual add modal
   const multiCatContainer = document.getElementById('manualCategoryPillsContainer');
   if (multiCatContainer) {
-    // Collect currently selected categories from existing pills
     const currentSelected = Array.from(multiCatContainer.querySelectorAll('.mcat-pill.selected'))
       .map(p => p.dataset.cat);
     const preSelected = currentSelected.length > 0 ? currentSelected : ['Общее'];
@@ -313,24 +312,12 @@ function populateCategorySelectors() {
       pill.className = 'mcat-pill' + (preSelected.includes(cat) ? ' selected' : '');
       pill.dataset.cat = cat;
       pill.textContent = `📁 ${cat}`;
-      pill.style.cssText = `
-        padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-        cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: all 0.18s;
-        outline: none; white-space: nowrap;
-        background: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)'};
-        color: ${preSelected.includes(cat) ? '#ffffff' : 'var(--text-sub)'};
-        border-color: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)'};
-      `;
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
         const isOn = pill.classList.contains('selected');
-        // Require at least one selected
         const allSelected = multiCatContainer.querySelectorAll('.mcat-pill.selected');
         if (isOn && allSelected.length <= 1) return;
         pill.classList.toggle('selected', !isOn);
-        pill.style.background = !isOn ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)';
-        pill.style.color = !isOn ? '#ffffff' : 'var(--text-sub)';
-        pill.style.borderColor = !isOn ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)';
       });
       multiCatContainer.appendChild(pill);
     });
@@ -344,27 +331,12 @@ function populateCategorySelectors() {
     const preSelected = currentSelected.length > 0 ? currentSelected : ['Без категории'];
 
     wordCustomCont.innerHTML = '';
-    
-    const getPillStyle = (isSelected) => `
-      padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-      cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
-      outline: none; white-space: nowrap;
-      background: ${isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)'};
-      color: ${isSelected ? '#a78bfa' : 'var(--text-sub)'};
-      border-color: ${isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)'};
-    `;
-    const setPillActiveStyle = (pill, isSelected) => {
-      pill.style.background = isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
-      pill.style.color = isSelected ? '#a78bfa' : 'var(--text-sub)';
-      pill.style.borderColor = isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
-    };
 
     const nonePill = document.createElement('button');
     nonePill.type = 'button';
     nonePill.className = 'mcat-pill' + (preSelected.includes('Без категории') ? ' selected' : '');
     nonePill.dataset.cat = 'Без категории';
     nonePill.textContent = '🏷️ Без категории';
-    nonePill.style.cssText = getPillStyle(preSelected.includes('Без категории'));
     nonePill.addEventListener('click', (e) => {
       e.preventDefault(); e.stopPropagation();
       const isOn = nonePill.classList.contains('selected');
@@ -372,16 +344,13 @@ function populateCategorySelectors() {
         const allSelected = wordCustomCont.querySelectorAll('.mcat-pill.selected');
         if (allSelected.length <= 1) return;
         nonePill.classList.remove('selected');
-        setPillActiveStyle(nonePill, false);
       } else {
         wordCustomCont.querySelectorAll('.mcat-pill.selected').forEach(p => {
           if (p.dataset.cat !== 'Без категории') {
             p.classList.remove('selected');
-            setPillActiveStyle(p, false);
           }
         });
         nonePill.classList.add('selected');
-        setPillActiveStyle(nonePill, true);
       }
     });
     wordCustomCont.appendChild(nonePill);
@@ -392,7 +361,6 @@ function populateCategorySelectors() {
       pill.className = 'mcat-pill' + (preSelected.includes(cat) ? ' selected' : '');
       pill.dataset.cat = cat;
       pill.textContent = `🏷️ ${cat}`;
-      pill.style.cssText = getPillStyle(preSelected.includes(cat));
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
         const isOn = pill.classList.contains('selected');
@@ -400,18 +368,13 @@ function populateCategorySelectors() {
           const allSelected = wordCustomCont.querySelectorAll('.mcat-pill.selected');
           if (allSelected.length <= 1) {
             pill.classList.remove('selected');
-            setPillActiveStyle(pill, false);
             nonePill.classList.add('selected');
-            setPillActiveStyle(nonePill, true);
           } else {
             pill.classList.remove('selected');
-            setPillActiveStyle(pill, false);
           }
         } else {
           nonePill.classList.remove('selected');
-          setPillActiveStyle(nonePill, false);
           pill.classList.add('selected');
-          setPillActiveStyle(pill, true);
         }
       });
       wordCustomCont.appendChild(pill);
@@ -421,7 +384,6 @@ function populateCategorySelectors() {
   // 4. Populate manualPhraseCategory multi-pill container in manual add phrase modal
   const phrasePillsContainer = document.getElementById('manualPhraseCategoryPillsContainer');
   if (phrasePillsContainer) {
-    // Collect currently selected categories from existing pills
     const currentSelected = Array.from(phrasePillsContainer.querySelectorAll('.mcat-pill.selected'))
       .map(p => p.dataset.cat);
     const preSelected = currentSelected.length > 0 ? currentSelected : ['Общее'];
@@ -433,24 +395,12 @@ function populateCategorySelectors() {
       pill.className = 'mcat-pill' + (preSelected.includes(cat) ? ' selected' : '');
       pill.dataset.cat = cat;
       pill.textContent = `📁 ${cat}`;
-      pill.style.cssText = `
-        padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-        cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: all 0.18s;
-        outline: none; white-space: nowrap;
-        background: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)'};
-        color: ${preSelected.includes(cat) ? '#ffffff' : 'var(--text-sub)'};
-        border-color: ${preSelected.includes(cat) ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)'};
-      `;
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
         const isOn = pill.classList.contains('selected');
-        // Require at least one selected
         const allSelected = phrasePillsContainer.querySelectorAll('.mcat-pill.selected');
         if (isOn && allSelected.length <= 1) return;
         pill.classList.toggle('selected', !isOn);
-        pill.style.background = !isOn ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.04)';
-        pill.style.color = !isOn ? '#ffffff' : 'var(--text-sub)';
-        pill.style.borderColor = !isOn ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.08)';
       });
       phrasePillsContainer.appendChild(pill);
     });
@@ -464,27 +414,12 @@ function populateCategorySelectors() {
     const preSelected = currentSelected.length > 0 ? currentSelected : ['Без категории'];
 
     phraseCustomCont.innerHTML = '';
-    
-    const getPillStyle = (isSelected) => `
-      padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-      cursor: pointer; border: 1px solid rgba(255,255,255,0.12); transition: all 0.18s;
-      outline: none; white-space: nowrap;
-      background: ${isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)'};
-      color: ${isSelected ? '#a78bfa' : 'var(--text-sub)'};
-      border-color: ${isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)'};
-    `;
-    const setPillActiveStyle = (pill, isSelected) => {
-      pill.style.background = isSelected ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
-      pill.style.color = isSelected ? '#a78bfa' : 'var(--text-sub)';
-      pill.style.borderColor = isSelected ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
-    };
 
     const nonePill = document.createElement('button');
     nonePill.type = 'button';
     nonePill.className = 'mcat-pill' + (preSelected.includes('Без категории') ? ' selected' : '');
     nonePill.dataset.cat = 'Без категории';
     nonePill.textContent = '🏷️ Без категории';
-    nonePill.style.cssText = getPillStyle(preSelected.includes('Без категории'));
     nonePill.addEventListener('click', (e) => {
       e.preventDefault(); e.stopPropagation();
       const isOn = nonePill.classList.contains('selected');
@@ -492,16 +427,13 @@ function populateCategorySelectors() {
         const allSelected = phraseCustomCont.querySelectorAll('.mcat-pill.selected');
         if (allSelected.length <= 1) return;
         nonePill.classList.remove('selected');
-        setPillActiveStyle(nonePill, false);
       } else {
         phraseCustomCont.querySelectorAll('.mcat-pill.selected').forEach(p => {
           if (p.dataset.cat !== 'Без категории') {
             p.classList.remove('selected');
-            setPillActiveStyle(p, false);
           }
         });
         nonePill.classList.add('selected');
-        setPillActiveStyle(nonePill, true);
       }
     });
     phraseCustomCont.appendChild(nonePill);
@@ -512,7 +444,6 @@ function populateCategorySelectors() {
       pill.className = 'mcat-pill' + (preSelected.includes(cat) ? ' selected' : '');
       pill.dataset.cat = cat;
       pill.textContent = `🏷️ ${cat}`;
-      pill.style.cssText = getPillStyle(preSelected.includes(cat));
       pill.addEventListener('click', (e) => {
         e.preventDefault(); e.stopPropagation();
         const isOn = pill.classList.contains('selected');
@@ -520,18 +451,13 @@ function populateCategorySelectors() {
           const allSelected = phraseCustomCont.querySelectorAll('.mcat-pill.selected');
           if (allSelected.length <= 1) {
             pill.classList.remove('selected');
-            setPillActiveStyle(pill, false);
             nonePill.classList.add('selected');
-            setPillActiveStyle(nonePill, true);
           } else {
             pill.classList.remove('selected');
-            setPillActiveStyle(pill, false);
           }
         } else {
           nonePill.classList.remove('selected');
-          setPillActiveStyle(nonePill, false);
           pill.classList.add('selected');
-          setPillActiveStyle(pill, true);
         }
       });
       phraseCustomCont.appendChild(pill);
