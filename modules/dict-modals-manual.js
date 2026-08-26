@@ -773,49 +773,71 @@ function setupManualAddModals() {
       if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
       if (typeof window.triggerWordAddedPCAnimation === 'function') window.triggerWordAddedPCAnimation(eng, actualType, saveManualWordBtn);
       
-      wordEngEl.value = '';
-      wordRusEl.value = '';
-      if (definitionEl) definitionEl.value = '';
-      if (ruleEl) ruleEl.value = '';
-      
-      if (pillsCont) {
-        pillsCont.querySelectorAll('.mcat-pill').forEach(p => {
-          const el = /** @type {HTMLElement} */ (p);
-          const isObe = el.dataset.cat === 'Общее';
-          el.classList.toggle('selected', isObe);
-          el.style.background = isObe ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
-          el.style.color = isObe ? '#ffffff' : 'var(--text-sub)';
-          el.style.borderColor = isObe ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
-        });
-      }
-      if (customCont) {
-        customCont.querySelectorAll('.mcat-pill').forEach(p => {
-          const el = /** @type {HTMLElement} */ (p);
-          const isNone = el.dataset.cat === 'Без категории';
-          el.classList.toggle('selected', isNone);
-          el.style.background = isNone ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255,255,255,0.04)';
-          el.style.color = isNone ? '#ffffff' : 'var(--text-sub)';
-          el.style.borderColor = isNone ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255,255,255,0.1)';
-        });
-      }
+      const isPC = window.innerWidth >= 900 && (!('ontouchstart' in window) || window.matchMedia('(pointer: fine)').matches);
+      const formBody = document.getElementById('manualWordFormBody');
+      const modalCard = addWordModal ? addWordModal.querySelector('.modal-card') : null;
 
-      if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
-      if (typeof window.resetFlashcard === 'function') window.resetFlashcard();
-      if (typeof window.recordActivity === 'function') window.recordActivity();
+      const resetFormValues = () => {
+        wordEngEl.value = '';
+        wordRusEl.value = '';
+        if (definitionEl) definitionEl.value = '';
+        if (ruleEl) ruleEl.value = '';
+        
+        if (pillsCont) {
+          pillsCont.querySelectorAll('.mcat-pill').forEach(p => {
+            const el = /** @type {HTMLElement} */ (p);
+            el.classList.toggle('selected', el.dataset.cat === 'Общее');
+          });
+        }
+        if (customCont) {
+          customCont.querySelectorAll('.mcat-pill').forEach(p => {
+            const el = /** @type {HTMLElement} */ (p);
+            el.classList.toggle('selected', el.dataset.cat === 'Без категории');
+          });
+        }
+
+        if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
+        if (typeof window.resetFlashcard === 'function') window.resetFlashcard();
+        if (typeof window.recordActivity === 'function') window.recordActivity();
+      };
+
+      if (isPC && formBody) {
+        // ── Smooth PC transition ──
+        if (modalCard) {
+          modalCard.classList.remove('modal-saved-glow');
+          void modalCard.offsetWidth;
+          modalCard.classList.add('modal-saved-glow');
+          setTimeout(() => modalCard.classList.remove('modal-saved-glow'), 850);
+        }
+
+        formBody.classList.add('form-save-swipe-out');
+        setTimeout(() => {
+          resetFormValues();
+          formBody.classList.remove('form-save-swipe-out');
+          formBody.classList.add('form-save-swipe-in');
+          setTimeout(() => formBody.classList.remove('form-save-swipe-in'), 300);
+
+          wordEngEl.focus();
+          wordEngEl.classList.add('input-ready-pulse');
+          setTimeout(() => wordEngEl.classList.remove('input-ready-pulse'), 600);
+        }, 160);
+      } else {
+        resetFormValues();
+        wordEngEl.focus();
+      }
 
       const saveBtn = document.getElementById('saveManualWordBtn');
       if (saveBtn) {
         const origText = saveBtn.textContent;
         const origBg = saveBtn.style.background;
-        saveBtn.textContent = `✓ «${eng}» сохранено!`;
+        saveBtn.textContent = `✓ «${eng.slice(0, 16)}${eng.length > 16 ? '…' : ''}» сохранено!`;
         saveBtn.style.background = 'linear-gradient(135deg, #1db954, #16a34a)';
-        saveBtn.disabled = true;
+        /** @type {HTMLButtonElement} */ (saveBtn).disabled = true;
         setTimeout(() => {
           saveBtn.textContent = origText;
           saveBtn.style.background = origBg;
-          saveBtn.disabled = false;
-          wordEngEl.focus();
-        }, 1400);
+          /** @type {HTMLButtonElement} */ (saveBtn).disabled = false;
+        }, 1200);
       }
     });
   }

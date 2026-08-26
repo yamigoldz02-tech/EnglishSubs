@@ -173,3 +173,75 @@ body.warm-theme .pc-word-added-toast .toast-word {
     transform: translate(var(--dx), var(--dy)) scale(0) rotate(var(--rot));
   }
 }
+
+
+/* ── PC Modal Form Save & Reset Transition ── */
+.form-save-swipe-out {
+  opacity: 0 !important;
+  transform: translateY(-10px) scale(0.98) !important;
+  transition: opacity 0.16s ease-out, transform 0.16s ease-out !important;
+  pointer-events: none !important;
+}
+
+.form-save-swipe-in {
+  animation: formSaveSwipeIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+@keyframes formSaveSwipeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-card.modal-saved-glow {
+  animation: modalSavedGlow 0.8s ease-out forwards;
+}
+
+@keyframes modalSavedGlow {
+  0% {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 0 rgba(244, 162, 97, 0.6);
+  }
+  40% {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px 4px rgba(244, 162, 97, 0.45);
+  }
+  100% {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 0 rgba(244, 162, 97, 0);
+  }
+}
+
+body.warm-theme .modal-card.modal-saved-glow {
+  animation: modalSavedGlowWarm 0.8s ease-out forwards;
+}
+
+@keyframes modalSavedGlowWarm {
+  0% {
+    box-shadow: 0 20px 50px rgba(62, 39, 35, 0.2), 0 0 0 0 rgba(244, 162, 97, 0.6);
+  }
+  40% {
+    box-shadow: 0 20px 50px rgba(62, 39, 35, 0.2), 0 0 30px 4px rgba(244, 162, 97, 0.5);
+  }
+  100% {
+    box-shadow: 0 20px 50px rgba(62, 39, 35, 0.2), 0 0 0 0 rgba(244, 162, 97, 0);
+  }
+}
+
+.input-ready-pulse {
+  animation: inputReadyPulse 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes inputReadyPulse {
+  0% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

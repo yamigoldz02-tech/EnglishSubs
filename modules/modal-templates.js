@@ -670,7 +670,7 @@ export const ALL_MODALS_HTML = `
         <button class="modal-close-btn" id="closeAddWordBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
       </div>
       
-      <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
+      <div id="manualWordFormBody" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; transition: opacity 0.16s ease, transform 0.16s ease;">
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
           <label id="manualWordEngLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Слово или фраза (EN):</label>
           <input type="text" id="manualWordEng" lang="en" placeholder="например, apple или break the ice" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
