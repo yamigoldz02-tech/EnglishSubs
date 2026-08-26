@@ -286,7 +286,7 @@ export const ALL_MODALS_HTML = `
               <div style="display: flex; align-items: center; gap: 4px; flex-grow: 1; min-width: 140px;">
                 <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap;">Папка:</span>
                 <select id="dictCategoryFilter" class="premium-select-filter" style="width: 100%; min-width: 0;">
-                  <option value="Все слова">All Folders</option>
+                  <option value="Все слова">Все папки</option>
                   <option value="Общее">Общее</option>
                   <option value="Базовые глаголы">Базовые глаголы</option>
                   <option value="Сленг и идиомы">Сленг и идиомы</option>
@@ -303,7 +303,7 @@ export const ALL_MODALS_HTML = `
               <div style="display: flex; align-items: center; gap: 4px; flex-grow: 1; min-width: 140px;">
                 <span style="font-size: 0.75rem; color: var(--text-sub); white-space: nowrap;">Категория:</span>
                 <select id="dictCustomCategoryFilter" class="premium-select-filter" style="width: 100%; min-width: 0;">
-                  <option value="All Categories">All Categories</option>
+                  <option value="All Categories">Все категории</option>
                   <option value="Без категории">Без категории</option>
                 </select>
                 <button id="addCustomCustomCategoryBtn" title="Создать свою категорию" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); color: #ffffff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;">
@@ -312,22 +312,15 @@ export const ALL_MODALS_HTML = `
               </div>
             </div>
 
-            <!-- Row 2: Type sub-tabs + Sort dropdown -->
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; width: 100%;">
-              <!-- Word type pills -->
-              <div id="dictTypePills" style="display: flex; gap: 4px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 10px; padding: 3px;">
-                <button class="dict-type-pill active" data-type="all" style="background: rgba(255, 255, 255, 0.12); border: none; color: #ffffff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Все</button>
-                <button class="dict-type-pill" data-type="words" style="background: transparent; border: none; color: var(--text-sub); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Слова</button>
-                <button class="dict-type-pill" data-type="phrases" style="background: transparent; border: none; color: var(--text-sub); font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 7px; cursor: pointer; transition: all 0.2s; outline: none; white-space: nowrap;">Фразы</button>
-              </div>
-              <!-- Sort select -->
-              <select id="dictSortSelect" class="premium-select-filter" style="height: 30px; font-size: 0.72rem; padding: 0 8px; min-width: 0; flex-shrink: 0;">
-                <option value="default">↕ Порядок добавления</option>
+            <!-- Row 2: Sort dropdown -->
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-shrink: 0; width: 100%;">
+              <select id="dictSortSelect" class="premium-select-filter" style="height: 32px; font-size: 0.75rem; padding: 0 10px; width: 100%;">
+                <option value="default">Порядок добавления</option>
                 <option value="az">А → Я</option>
                 <option value="za">Я → А</option>
-                <option value="newest">⬆ Новые первые</option>
-                <option value="level_asc">Уровень ↑</option>
-                <option value="level_desc">Уровень ↓</option>
+                <option value="newest">Новые первые</option>
+                <option value="level_asc">Уровень (по возрастанию)</option>
+                <option value="level_desc">Уровень (по убыванию)</option>
               </select>
             </div>
             <!-- Mini 7-day chart -->

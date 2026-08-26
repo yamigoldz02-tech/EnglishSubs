@@ -178,14 +178,14 @@ function populateCategorySelectors() {
       // Add default "All folders"
       const allOpt = document.createElement('option');
       allOpt.value = 'Все слова';
-      allOpt.textContent = '📚 All Folders';
+      allOpt.textContent = 'Все папки';
       dictFilter.appendChild(allOpt);
       
       // Add custom folders
       personalCategories.forEach(cat => {
         const option = document.createElement('option');
         option.value = cat;
-        option.textContent = `📁 ${cat}`;
+        option.textContent = cat;
         dictFilter.appendChild(option);
       });
       
@@ -198,17 +198,17 @@ function populateCategorySelectors() {
       // Add 3 preloaded essential packs
       const p1 = document.createElement('option');
       p1.value = '«Топ-300 Первых слов»';
-      p1.textContent = '🎓 «Топ-300 Первых слов»';
+      p1.textContent = '«Топ-300 Первых слов»';
       dictFilter.appendChild(p1);
       
       const p2 = document.createElement('option');
       p2.value = '«Топ-600 Базовых слов»';
-      p2.textContent = '🎓 «Топ-600 Базовых слов»';
+      p2.textContent = '«Топ-600 Базовых слов»';
       dictFilter.appendChild(p2);
       
       const p3 = document.createElement('option');
       p3.value = '«Топ-1000 Продвинутых слов»';
-      p3.textContent = '🎓 «Топ-1000 Продвинутых слов»';
+      p3.textContent = '«Топ-1000 Продвинутых слов»';
       dictFilter.appendChild(p3);
       
       if (currentValue.startsWith('«Топ-')) {
@@ -234,18 +234,18 @@ function populateCategorySelectors() {
     
     const allOpt = document.createElement('option');
     allOpt.value = 'All Categories';
-    allOpt.textContent = '🏷️ All Categories';
+    allOpt.textContent = 'Все категории';
     dictCustomFilter.appendChild(allOpt);
     
     const noneOpt = document.createElement('option');
     noneOpt.value = 'Без категории';
-    noneOpt.textContent = '🏷️ Без категории';
+    noneOpt.textContent = 'Без категории';
     dictCustomFilter.appendChild(noneOpt);
     
     personalCustomCategories.forEach(cat => {
       const option = document.createElement('option');
       option.value = cat;
-      option.textContent = `🏷️ ${cat}`;
+      option.textContent = cat;
       dictCustomFilter.appendChild(option);
     });
     

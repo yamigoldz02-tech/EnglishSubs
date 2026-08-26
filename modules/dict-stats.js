@@ -174,9 +174,10 @@ function renderDictWeekChart() {
   header.className = 'dwc-header';
   const title = document.createElement('span');
   title.className = 'dwc-title';
-  title.textContent = 'Added за 7 дней';
+  title.textContent = 'Добавлено за 7 дней';
   header.appendChild(title);
   chartContainer.appendChild(header);
+  
   // Calculate counts for last 7 days
   const now = Date.now();
   const dayMs = 24 * 60 * 60 * 1000;
@@ -188,34 +189,44 @@ function renderDictWeekChart() {
     labels.push(new Date(dayStart).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
     counts[6 - i] = personalDictionary.filter(w => w.addedAt && w.addedAt >= dayStart && w.addedAt < dayEnd).length;
   }
+  
   // Bars wrapper
   const barWrapper = document.createElement('div');
-  barWrapper.style.display = 'flex';
-  barWrapper.style.alignItems = 'flex-end';
-  barWrapper.style.height = '44px';
-  barWrapper.style.gap = '4px';
+  barWrapper.className = 'dwc-bars-wrapper';
   const maxCount = Math.max(...counts, 1);
   counts.forEach((cnt, idx) => {
+    const barCol = document.createElement('div');
+    barCol.className = 'dwc-bar-col';
+    
     const bar = document.createElement('div');
-    const heightPct = (cnt / maxCount) * 100;
-    bar.style.width = '12px';
+    bar.className = 'dwc-bar';
+    const heightPct = Math.max((cnt / maxCount) * 100, cnt > 0 ? 12 : 6);
     bar.style.height = `${heightPct}%`;
-    bar.style.background = 'linear-gradient(180deg, #1db954, #0a7d3e)';
-    bar.title = `${labels[idx]}: ${cnt} слово${cnt !== 1 ? 'а' : ''}`;
-    barWrapper.appendChild(bar);
+    if (cnt === 0) bar.classList.add('dwc-bar-empty');
+    bar.title = `${labels[idx]}: ${cnt} ${getDeclension(cnt, ['слово', 'слова', 'слов'])}`;
+    
+    barCol.appendChild(bar);
+    barWrapper.appendChild(barCol);
   });
   chartContainer.appendChild(barWrapper);
+  
   // Labels
   const labelWrapper = document.createElement('div');
-  labelWrapper.style.display = 'flex';
-  labelWrapper.style.justifyContent = 'space-between';
-  labelWrapper.style.marginTop = '4px';
+  labelWrapper.className = 'dwc-labels-wrapper';
   labels.forEach(lbl => {
     const span = document.createElement('span');
-    span.style.fontSize = '10px';
-    span.style.color = '#666';
+    span.className = 'dwc-label';
     span.textContent = lbl;
     labelWrapper.appendChild(span);
   });
   chartContainer.appendChild(labelWrapper);
+}
+
+function getDeclension(count, forms) {
+  const n = Math.abs(count) % 100;
+  const n1 = n % 10;
+  if (n > 10 && n < 20) return forms[2];
+  if (n1 > 1 && n1 < 5) return forms[1];
+  if (n1 === 1) return forms[0];
+  return forms[2];
 }

@@ -1111,3 +1111,120 @@ body.warm-theme .word-actions-grid button.row-del-btn:hover {
   color: #E76F51 !important;
   border-color: rgba(231, 111, 81, 0.3) !important;
 }
+
+
+/* ── 7-Day Stats Chart Theme Styling ── */
+.dwc-header {
+  margin-bottom: 8px;
+}
+
+.dwc-title {
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-sub, #a1a1aa);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dwc-bars-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 52px;
+  gap: 8px;
+  padding: 6px 10px 4px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.06));
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.dwc-bar-col {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+}
+
+.dwc-bar {
+  width: 100%;
+  max-width: 18px;
+  background: linear-gradient(180deg, var(--accent-spotify, #1db954), rgba(29, 185, 84, 0.7));
+  border-radius: 4px 4px 2px 2px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.dwc-bar:hover {
+  filter: brightness(1.2);
+  transform: scaleY(1.05);
+}
+
+.dwc-bar.dwc-bar-empty {
+  background: rgba(255, 255, 255, 0.06) !important;
+  height: 3px !important;
+  border-radius: 2px;
+}
+
+.dwc-labels-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+
+.dwc-label {
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.68rem;
+  color: var(--text-muted, #71717a);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Warm Theme Chart Bars */
+body.warm-theme .dwc-title {
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .dwc-bars-wrapper {
+  background: #F4EEDB !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+
+body.warm-theme .dwc-bar {
+  background: linear-gradient(180deg, #F4A261, #E76F51) !important;
+  box-shadow: 0 2px 6px rgba(244, 162, 97, 0.25) !important;
+}
+
+body.warm-theme .dwc-bar.dwc-bar-empty {
+  background: rgba(62, 39, 35, 0.12) !important;
+}
+
+body.warm-theme .dwc-label {
+  color: #8C7B7B !important;
+}
+
+/* Light Theme Chart Bars */
+body.light-theme .dwc-title {
+  color: #4B5563 !important;
+}
+
+body.light-theme .dwc-bars-wrapper {
+  background: #F3F4F6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .dwc-bar {
+  background: linear-gradient(180deg, #EBB2C0, #DB2777) !important;
+  box-shadow: 0 2px 6px rgba(235, 178, 192, 0.3) !important;
+}
+
+body.light-theme .dwc-bar.dwc-bar-empty {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .dwc-label {
+  color: #9CA3AF !important;
+}
