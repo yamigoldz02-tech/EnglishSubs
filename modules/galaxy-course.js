@@ -526,8 +526,7 @@ function renderVideoLessons() {
       item.dataset.id = v.id;
 
       item.innerHTML = `
-        <span class="lesson-badge">Lesson ${v.num}</span>
-        <div class="lesson-info-col">
+        <div class="lesson-info-col" style="flex: 1; min-width: 0;">
           <h4 class="lesson-item-title">${escapeHTML(v.shortTitle)}</h4>
           <p class="lesson-item-subtitle">Level A0 • Practice</p>
         </div>
