@@ -2753,11 +2753,26 @@ function renderDictWordsList(filterQuery = "") {
         </div>
         ${examplesHTML}
         <div class="word-actions-grid">
-          <button class="row-copy-btn" style="background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.25); color: #60a5fa;" title="Копировать слово в буфер обмена">📋 Копировать</button>
-          <button class="row-edit-btn" style="background: rgba(167, 139, 250, 0.12); border: 1px solid rgba(167, 139, 250, 0.25); color: #a78bfa;">✏️ Править</button>
-          <button class="row-practice-btn" style="background: rgba(29, 185, 84, 0.12); border: 1px solid rgba(29, 185, 84, 0.25); color: var(--accent-spotify);">💬 Практика</button>
-          <button class="row-reset-btn" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); color: #f59e0b;" title="Сбросить прогресс заучивания">🔄 Сбросить</button>
-          <button class="row-del-btn" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.25); color: #ef4444;">🗑️ Delete</button>
+          <button class="row-copy-btn" title="Копировать в буфер обмена">
+            <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Копировать</span>
+          </button>
+          <button class="row-edit-btn" title="Редактировать">
+            <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Изменить</span>
+          </button>
+          <button class="row-practice-btn" title="Практика">
+            <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Практика</span>
+          </button>
+          <button class="row-reset-btn" title="Сбросить прогресс заучивания">
+            <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>Сбросить</span>
+          </button>
+          <button class="row-del-btn" title="Удалить из словаря">
+            <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <span>Удалить</span>
+          </button>
         </div>
       `;
 
@@ -2773,10 +2788,10 @@ function renderDictWordsList(filterQuery = "") {
           e.stopPropagation();
           navigator.clipboard.writeText(w.word).then(() => {
             copyBtn.classList.add('success-copy');
-            copyBtn.innerHTML = '✓ Скопировано!';
+            copyBtn.innerHTML = '<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Скопировано!</span>';
             setTimeout(() => {
               copyBtn.classList.remove('success-copy');
-              copyBtn.innerHTML = '📋 Копировать';
+              copyBtn.innerHTML = '<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><span>Копировать</span>';
             }, 1500);
           }).catch(err => {
             console.error('Failed to copy via navigator.clipboard: ', err);
@@ -2789,10 +2804,10 @@ function renderDictWordsList(filterQuery = "") {
               document.execCommand('copy');
               document.body.removeChild(el);
               copyBtn.classList.add('success-copy');
-              copyBtn.innerHTML = '✓ Скопировано!';
+              copyBtn.innerHTML = '<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Скопировано!</span>';
               setTimeout(() => {
                 copyBtn.classList.remove('success-copy');
-                copyBtn.innerHTML = '📋 Копировать';
+                copyBtn.innerHTML = '<svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><span>Копировать</span>';
               }, 1500);
             } catch (fallbackErr) {
               alert('Не удалось скопировать слово: ' + w.word);

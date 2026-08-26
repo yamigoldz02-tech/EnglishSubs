@@ -571,3 +571,86 @@ body.gray-theme .modal-overlay.video-modal-minimized {
   bottom: 68px !important;
   right: 16px !important;
 }
+
+
+/* ── Expanded Word Card Action Buttons ── */
+.word-actions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.word-actions-grid button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-sub, #a1a1aa);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.word-actions-grid button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main, #ffffff);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.word-actions-grid button:active {
+  transform: translateY(0);
+}
+
+.word-actions-grid button.row-del-btn:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #ef4444 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Light Theme */
+body.light-theme .word-actions-grid button {
+  background: #F3F4F6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #4B5563 !important;
+}
+
+body.light-theme .word-actions-grid button:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+  border-color: rgba(0, 0, 0, 0.16) !important;
+}
+
+body.light-theme .word-actions-grid button.row-del-btn:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #dc2626 !important;
+  border-color: rgba(239, 68, 68, 0.25) !important;
+}
+
+/* Warm Theme */
+body.warm-theme .word-actions-grid button {
+  background: #F4EEDB !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .word-actions-grid button:hover {
+  background: #EFE6D0 !important;
+  color: #2D2424 !important;
+  border-color: rgba(62, 39, 35, 0.2) !important;
+}
+
+body.warm-theme .word-actions-grid button.row-del-btn:hover {
+  background: rgba(231, 111, 81, 0.15) !important;
+  color: #E76F51 !important;
+  border-color: rgba(231, 111, 81, 0.3) !important;
+}
