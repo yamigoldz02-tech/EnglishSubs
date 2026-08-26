@@ -358,20 +358,9 @@ export const ALL_MODALS_HTML = `
               <!-- Words dynamically injected here -->
             </div>
 
-            <!-- Floating Action Button (FAB) + Menu -->
+            <!-- Floating Add Button (Direct Click) -->
             <div class="dict-fab-container" id="dictFabContainer">
-              <div class="dict-fab-menu" id="dictFabMenu" style="display: none;">
-                <button class="dict-fab-menu-item" id="addManualWordBtn" title="Добавить слово">
-                  <svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                  <span>+ Слово</span>
-                </button>
-                <button class="dict-fab-menu-item" id="addManualPhraseBtn" title="Добавить фразу">
-                  <svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                  <span>+ Фраза</span>
-                </button>
-              </div>
-
-              <button class="dict-fab-btn" id="dictFabToggleBtn" title="Добавить слово или фразу" aria-label="Добавить слово или фразу">
+              <button class="dict-fab-btn" id="dictFabToggleBtn" title="Добавить в словарь" aria-label="Добавить в словарь">
                 <svg class="dict-fab-plus-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </button>
             </div>
@@ -670,38 +659,38 @@ export const ALL_MODALS_HTML = `
     </div>
   </div>
 
-  <!-- Manual Add Word Modal -->
+  <!-- Manual Add Word / Phrase Modal (Unified) -->
   <div class="modal-overlay" id="addWordModal" style="display: none; z-index: 10100;">
     <div class="modal-card" style="max-width: 400px; width: 95%; height: auto; max-height: 80vh; overflow-y: auto; padding: 2rem; box-sizing: border-box;">
       <div class="modal-header" style="border-bottom: 1px solid var(--border-glass); padding-bottom: 12px; margin-bottom: 20px; box-sizing: border-box; width: 100%;">
-        <h3 id="manualWordTitle" style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700; display: flex; align-items: center; gap: 6px;">
-          <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          <span>Добавить слово</span>
+        <h3 id="manualWordTitle" style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>Добавить в словарь</span>
         </h3>
         <button class="modal-close-btn" id="closeAddWordBtn" style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
       </div>
       
       <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label id="manualWordEngLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">English Word:</label>
-          <input type="text" id="manualWordEng" lang="en" placeholder="например, apple" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
-          <span id="addWordEngHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg> Если вы наберёте кириллицу — раскладка исправится автоматически</span>
+          <label id="manualWordEngLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Слово или фраза (EN):</label>
+          <input type="text" id="manualWordEng" lang="en" placeholder="например, apple или break the ice" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
+          <span id="addWordEngHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg>Если вы наберёте кириллицу — раскладка исправится автоматически</span>
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label id="manualWordRusLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Translation:</label>
-          <input type="text" id="manualWordRus" lang="ru" placeholder="например, яблоко" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
-          <span id="addWordRusHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg> Если вы наберёте латиницу — раскладка исправится автоматически</span>
+          <label id="manualWordRusLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Перевод (RU):</label>
+          <input type="text" id="manualWordRus" lang="ru" placeholder="например, яблоко или растопить лёд" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
+          <span id="addWordRusHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg>Если вы наберёте латиницу — раскладка исправится автоматически</span>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
           <label id="manualWordDefinitionLabel" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Значение / Толкование (опционально):</label>
-          <textarea id="manualWordDefinition" placeholder="например, Идиома, означающая 'увидеться позже'" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 60px; max-height: 120px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
+          <textarea id="manualWordDefinition" placeholder="например, Значение или контекст употребления..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 60px; max-height: 120px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg> Правило / Грамматика (опционально):</label>
-          <textarea id="manualWordRule" placeholder="например, Используется с герундием: I enjoy playing..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg><span>Правило / Грамматика (опционально):</span></label>
+          <textarea id="manualWordRule" placeholder="например, Грамматическая заметка или пример фразы..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
         </div>
         
         <!-- Collapsible Folders & Categories Spoiler -->
@@ -725,7 +714,7 @@ export const ALL_MODALS_HTML = `
         <!-- Smart Input Settings -->
         <div style="border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; overflow: hidden;">
           <button id="addWordSettingsToggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 9px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.75rem; font-weight: 600; transition: background 0.2s;">
-            <span style="display: flex; align-items: center; gap: 6px;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Settings умного ввода</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Settings умного ввода</span></span>
             <span id="addWordSettingsChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
           </button>
           <div id="addWordSettingsPanel" style="display: none; padding: 10px 14px 12px; background: rgba(0,0,0,0.15); flex-direction: column; gap: 10px;">
@@ -741,64 +730,7 @@ export const ALL_MODALS_HTML = `
         </div>
 
         <button id="saveManualWordBtn" style="background: var(--accent-spotify); color: #000000; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 20px; padding: 12px 0; margin-top: 10px; cursor: pointer; transition: all 0.2s; outline: none; box-shadow: 0 4px 15px rgba(29,185,84,0.3); width: 100%;">
-          Save слово
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Manual Add Phrase Modal -->
-  <div class="modal-overlay" id="addPhraseModal" style="display: none; z-index: 10100;">
-    <div class="modal-card" style="max-width: 400px; width: 95%; height: auto; max-height: 80vh; overflow-y: auto; padding: 2rem; box-sizing: border-box;">
-      <div class="modal-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; margin-bottom: 20px; box-sizing: border-box; width: 100%;">
-        <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-main); font-weight: 700; display: flex; align-items: center;"><svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 6px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Add phrase manually</span></h3>
-        <button class="modal-close-btn" id="closeAddPhraseBtn"  style="background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; outline: none;">✕</button>
-      </div>
-      
-      <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
-        
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Фраза на английском (от 3 слов):</label>
-          <input type="text" id="manualPhraseEng" lang="en" placeholder="например, break the ice" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
-          <span id="addPhraseEngHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg> Если вы наберёте кириллицу — раскладка исправится автоматически</span>
-        </div>
-        
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Translation:</label>
-          <input type="text" id="manualPhraseRus" lang="ru" placeholder="например, растопить лед" autocorrect="off" autocapitalize="off" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; transition: border-color 0.3s, box-shadow 0.3s;">
-          <span id="addPhraseRusHint" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M7 16h10"/></svg> Если вы наберёте латиницу — раскладка исправится автоматически</span>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Значение / Толкование (опционально):</label>
-          <textarea id="manualPhraseDefinition" placeholder="например, Сделать обстановку менее напряженной" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 60px; max-height: 120px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg> Правило / Грамматика (опционально):</label>
-          <textarea id="manualPhraseRule" placeholder="например, Часто употребляется в неформальной речи..." style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 12px; color: var(--text-main); font-size: 0.9rem; outline: none; box-sizing: border-box; width: 100%; min-height: 55px; max-height: 110px; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; font-family: inherit;"></textarea>
-        </div>
-        
-        <!-- Collapsible Folders & Categories Spoiler -->
-        <div class="modal-accordion-wrapper" style="border: 1px solid var(--border-glass, rgba(255,255,255,0.08)); border-radius: 12px; overflow: hidden; width: 100%; box-sizing: border-box;">
-          <button id="addPhraseFoldersToggle" type="button" class="modal-accordion-toggle" style="width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; outline: none; color: var(--text-sub); font-size: 0.76rem; font-weight: 700; text-transform: uppercase; transition: background 0.2s;">
-            <span style="display: flex; align-items: center; gap: 6px;"><svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><span>Папки и категории</span></span>
-            <span id="addPhraseFoldersChevron" style="font-size: 0.65rem; transition: transform 0.25s;">▼</span>
-          </button>
-          <div id="addPhraseFoldersPanel" style="display: none; padding: 10px 12px 12px; flex-direction: column; gap: 10px; box-sizing: border-box;">
-            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
-              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Папки (выберите одну или несколько):</label>
-              <div id="manualPhraseCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box;">
-              <label style="font-size: 0.72rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase;">Категории (выберите одну или несколько):</label>
-              <div id="manualPhraseCustomCategoryPillsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; min-height: 38px; box-sizing: border-box;"></div>
-            </div>
-          </div>
-        </div>
-        
-        <button id="saveManualPhraseBtn" style="background: #3b82f6; color: #ffffff; font-weight: 700; font-size: 0.9rem; border: none; border-radius: 20px; padding: 12px 0; margin-top: 10px; cursor: pointer; transition: all 0.2s; outline: none; box-shadow: 0 4px 15px rgba(59,130,246,0.3); width: 100%;">
-          Save фразу
+          Сохранить
         </button>
       </div>
     </div>

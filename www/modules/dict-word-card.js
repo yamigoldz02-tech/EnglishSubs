@@ -49,7 +49,7 @@ window.showWordCard = function(event, word) {
     <div class="wcp-header">
       <div class="wcp-word-row">
         <span class="wcp-word">${escapeHTML(entry.word)}</span>
-        <span class="wcp-type-badge">${typeIcon}</span>
+        
       </div>
       <button class="wcp-close-btn" onclick="dismissWordCard()">✕</button>
     </div>

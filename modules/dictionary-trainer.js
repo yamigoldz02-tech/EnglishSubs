@@ -653,7 +653,7 @@ function triggerWordAddedPCAnimation(text, type = 'word', anchor = null) {
 
   try {
     const isPhrase = type === 'phrase' || (typeof text === 'string' && text.trim().split(/\s+/).length >= 3);
-    const badgeText = isPhrase ? '+1 Фраза' : '+1 Слово';
+    const badgeText = '+1 Добавлено';
     const displayWord = typeof text === 'string' ? text.trim() : '';
 
     // 1. Floating Capsule Toast
@@ -2463,7 +2463,7 @@ function renderTrainerCard(wordObj) {
         if (hasDefinition) {
           parts += `
             <div style="margin-top: 4px; padding: 8px 12px; background: rgba(167,139,250,0.08); border-left: 2px solid rgba(167,139,250,0.5); border-radius: 0 8px 8px 0; text-align: left; box-sizing: border-box; width: 100%;">
-              <div style="font-size: 0.65rem; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">💡 ${wordObj.type === 'phrase' ? 'Идиома / Значение' : 'Значение'}</div>
+              <div style="font-size: 0.65rem; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">💡 Значение</div>
               <div style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.45; font-style: italic;">${escapeHTML(wordObj.definition)}</div>
             </div>
           `;

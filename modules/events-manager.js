@@ -22,39 +22,21 @@ function setupEventListeners() {
     });
   }
 
-  // Dictionary FAB (+) Floating Add Button & Menu Toggle
+  // Dictionary FAB (+) Direct Open Unified Add Modal
   const dictFabToggleBtn = document.getElementById('dictFabToggleBtn');
-  const dictFabMenu = document.getElementById('dictFabMenu');
-  if (dictFabToggleBtn && dictFabMenu) {
+  if (dictFabToggleBtn) {
     dictFabToggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isHidden = dictFabMenu.style.display === 'none' || dictFabMenu.style.display === '';
-      dictFabMenu.style.display = isHidden ? 'flex' : 'none';
-      dictFabToggleBtn.classList.toggle('active', isHidden);
-    });
-
-    document.addEventListener('click', (e) => {
-      const target = /** @type {Node} */ (e.target);
-      if (!dictFabToggleBtn.contains(target) && !dictFabMenu.contains(target)) {
-        dictFabMenu.style.display = 'none';
-        dictFabToggleBtn.classList.remove('active');
+      const addWordModal = document.getElementById('addWordModal');
+      if (addWordModal && typeof window.openModalEl === 'function') {
+        if (typeof window.populateCategorySelectors === 'function') {
+          window.populateCategorySelectors();
+        }
+        window.openModalEl(addWordModal);
+        const inputEngEl = document.getElementById('manualWordEng');
+        if (inputEngEl) setTimeout(() => inputEngEl.focus(), 120);
       }
     });
-
-    const addWordBtn = document.getElementById('addManualWordBtn');
-    const addPhraseBtn = document.getElementById('addManualPhraseBtn');
-    if (addWordBtn) {
-      addWordBtn.addEventListener('click', () => {
-        dictFabMenu.style.display = 'none';
-        dictFabToggleBtn.classList.remove('active');
-      });
-    }
-    if (addPhraseBtn) {
-      addPhraseBtn.addEventListener('click', () => {
-        dictFabMenu.style.display = 'none';
-        dictFabToggleBtn.classList.remove('active');
-      });
-    }
   }
 
   // Dashboard Training card trigger
