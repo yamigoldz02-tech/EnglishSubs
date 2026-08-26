@@ -508,3 +508,42 @@ body.warm-theme .modal-accordion-toggle:hover {
   background: #EFE6D0 !important;
   color: #2D2424 !important;
 }
+
+
+/* ── Minimized Floating Video Modal Isolation ── */
+#videoCourseModal.video-modal-minimized,
+.modal-overlay.video-modal-minimized,
+body.light-theme #videoCourseModal.video-modal-minimized,
+body.warm-theme #videoCourseModal.video-modal-minimized,
+body.gray-theme #videoCourseModal.video-modal-minimized,
+body.light-theme .modal-overlay.video-modal-minimized,
+body.warm-theme .modal-overlay.video-modal-minimized,
+body.gray-theme .modal-overlay.video-modal-minimized {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+  z-index: 1000 !important;
+}
+
+#videoCourseModal.video-modal-minimized .player-container-pane {
+  pointer-events: auto !important;
+  z-index: 10000 !important;
+}

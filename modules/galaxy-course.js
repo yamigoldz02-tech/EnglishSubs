@@ -64,6 +64,7 @@ function initVideoCourse() {
   const showModal = () => {
     if (modal) {
       modal.classList.remove('video-modal-minimized');
+      modal.style.removeProperty('pointer-events');
       const header = document.getElementById('floatingPlayerHeader');
       if (header) header.style.display = 'none';
       ['floatingResizeHandleTopLeft', 'floatingResizeHandleBottomRight', 'floatingResizeHandleLeft', 'floatingResizeHandleTop', 'floatingResizeHandleRight', 'floatingResizeHandleBottom'].forEach(id => {
@@ -92,6 +93,7 @@ function initVideoCourse() {
     if (modal) {
       if (galaxyActiveVideoId) {
         modal.classList.add('video-modal-minimized');
+        modal.style.pointerEvents = 'none';
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
         const header = document.getElementById('floatingPlayerHeader');

@@ -478,7 +478,7 @@ function setupRulesUI() {
       setActiveTab(rulesBtn);
     } else if (trainingModal && trainingModal.style.display !== 'none') {
       setActiveTab(trainBtn);
-    } else if (videoCourseModal && videoCourseModal.style.display !== 'none') {
+    } else if (videoCourseModal && videoCourseModal.style.display !== 'none' && !videoCourseModal.classList.contains('video-modal-minimized')) {
       setActiveTab(videoBtn);
     } else if (notebookModal && (notebookModal.style.display !== 'none' || notebookModal.classList.contains('notebook-drawer-open') || notebookModal.classList.contains('open'))) {
       setActiveTab(notesBtn);
