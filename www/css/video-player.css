@@ -103,7 +103,7 @@ body.gray-theme #videoCourseModal.video-modal-minimized .video-course-modal-card
   border: 1px solid var(--border-glass) !important;
   border-radius: var(--radius-lg, 12px) !important;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
-  z-index: 100000 !important;
+  z-index: 1500 !important;
   overflow: visible !important;
   overflow-x: visible !important;
   overflow-y: visible !important;
@@ -241,7 +241,7 @@ body.warm-theme .floating-video-controls button:hover {
 /* ── 7. Resize Handles (Invisible Clean Drag Zones) ── */
 .floating-resize-handle {
   position: absolute;
-  z-index: 100005 !important;
+  z-index: 1550 !important;
   pointer-events: auto !important;
   touch-action: none;
   background: transparent !important;

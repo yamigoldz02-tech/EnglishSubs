@@ -8,7 +8,7 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10600 !important;
+  z-index: 2100 !important;
   display: flex;
   align-items: center;
   justify-content: center;

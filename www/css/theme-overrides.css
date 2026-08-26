@@ -545,5 +545,17 @@ body.gray-theme .modal-overlay.video-modal-minimized {
 
 #videoCourseModal.video-modal-minimized .player-container-pane {
   pointer-events: auto !important;
-  z-index: 10000 !important;
+  z-index: 1500 !important;
+}
+
+.notebook-drawer-tab {
+  z-index: 2100 !important;
+}
+
+.notebook-drawer-tab.drawer-open {
+  z-index: 10600 !important;
+}
+
+.notebook-modal-overlay.is-open {
+  z-index: 10400 !important;
 }
