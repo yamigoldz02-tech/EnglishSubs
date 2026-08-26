@@ -771,3 +771,137 @@ body.light-theme .dwc-bar.dwc-bar-empty {
 body.light-theme .dwc-label {
   color: #9CA3AF !important;
 }
+
+
+/* ── Manage Folders Modal Styling ── */
+.manage-folder-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.1));
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.manage-folder-row:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.manage-folder-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main, #ffffff);
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.manage-folder-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.manage-folder-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.manage-folder-slider {
+  position: absolute;
+  inset: 0;
+  background-color: #3f3f46;
+  transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
+}
+
+.manage-folder-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.manage-folder-switch input:checked + .manage-folder-slider {
+  background-color: var(--accent-spotify, #1db954);
+}
+
+.manage-folder-switch input:checked + .manage-folder-slider::before {
+  transform: translateX(20px);
+}
+
+/* Warm Theme */
+body.warm-theme .manage-folder-row {
+  background: #FCF9F2 !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(62, 39, 35, 0.04) !important;
+}
+
+body.warm-theme .manage-folder-row:hover {
+  background: #F8F4EA !important;
+}
+
+body.warm-theme .manage-folder-name {
+  color: #2D2424 !important;
+}
+
+body.warm-theme .manage-folder-name svg {
+  color: #5C4B4B !important;
+}
+
+body.warm-theme .manage-folder-slider {
+  background-color: #D5CBB9 !important;
+}
+
+body.warm-theme .manage-folder-switch input:checked + .manage-folder-slider {
+  background-color: #F4A261 !important;
+  box-shadow: 0 2px 8px rgba(244, 162, 97, 0.35) !important;
+}
+
+/* Light Theme */
+body.light-theme .manage-folder-row {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .manage-folder-row:hover {
+  background: #F9FAFB !important;
+}
+
+body.light-theme .manage-folder-name {
+  color: #111827 !important;
+}
+
+body.light-theme .manage-folder-name svg {
+  color: #6B7280 !important;
+}
+
+body.light-theme .manage-folder-slider {
+  background-color: #E5E7EB !important;
+}
+
+body.light-theme .manage-folder-switch input:checked + .manage-folder-slider {
+  background-color: #EBB2C0 !important;
+  box-shadow: 0 2px 8px rgba(235, 178, 192, 0.35) !important;
+}

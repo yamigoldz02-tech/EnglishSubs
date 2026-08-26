@@ -1768,41 +1768,33 @@ function setupDictionaryUI() {
     catsToRender.forEach(cat => {
       const isHidden = personalHiddenCategories.includes(cat);
       const row = document.createElement('div');
-      row.style.cssText = `display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);`;
+      row.className = 'manage-folder-row';
       
-      const nameSpan = document.createElement('span');
-      nameSpan.style.cssText = `color: #fff; font-size: 0.9rem; font-weight: 600; flex-grow: 1;`;
-      nameSpan.textContent = '📁 ' + cat;
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'manage-folder-name';
+      nameDiv.innerHTML = `
+        <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; opacity: 0.75;"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+        <span>${escapeHTML(cat)}</span>
+      `;
       
       const toggleWrapper = document.createElement('label');
-      toggleWrapper.style.cssText = `position: relative; display: inline-block; width: 44px; height: 24px;`;
+      toggleWrapper.className = 'manage-folder-switch';
       
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = !isHidden; // checked = active, unchecked = hidden
-      checkbox.style.cssText = `opacity: 0; width: 0; height: 0; position: absolute;`;
       
       const slider = document.createElement('span');
-      slider.className = 'toggle-slider'; // assuming toggle-slider CSS exists, otherwise fallback
-      slider.style.cssText = `position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: ${checkbox.checked ? '#1db954' : '#4b5563'}; transition: .4s; border-radius: 24px;`;
+      slider.className = 'manage-folder-slider';
       
-      const knob = document.createElement('span');
-      knob.style.cssText = `position: absolute; content: ""; height: 18px; width: 18px; left: ${checkbox.checked ? '22px' : '3px'}; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;`;
-      
-      slider.appendChild(knob);
       toggleWrapper.appendChild(checkbox);
       toggleWrapper.appendChild(slider);
       
       checkbox.addEventListener('change', () => {
         const checked = checkbox.checked;
-        slider.style.backgroundColor = checked ? '#1db954' : '#4b5563';
-        knob.style.left = checked ? '22px' : '3px';
-        
         if (checked) {
-          // Remove from hidden
           personalHiddenCategories = personalHiddenCategories.filter(c => c !== cat);
         } else {
-          // Add to hidden
           if (!personalHiddenCategories.includes(cat)) {
             personalHiddenCategories.push(cat);
           }
@@ -1810,7 +1802,7 @@ function setupDictionaryUI() {
         saveCategories();
       });
       
-      row.appendChild(nameSpan);
+      row.appendChild(nameDiv);
       row.appendChild(toggleWrapper);
       list.appendChild(row);
     });
