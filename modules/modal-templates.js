@@ -994,7 +994,7 @@ export const ALL_MODALS_HTML = `
             </div>
             <div>
               <h3 class="notebook-title">Заметки</h3>
-              <p class="notebook-subtitle">Автосохранение в браузере</p>
+              
             </div>
           </div>
           <button class="notebook-close-btn" id="closeNotebookBtn" title="Закрыть заметки" aria-label="Закрыть заметки">✕</button>
