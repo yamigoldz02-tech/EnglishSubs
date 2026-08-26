@@ -20,6 +20,7 @@
 }
 
 .modal-card {
+  font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
   background: #121215;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);
@@ -1822,4 +1823,22 @@ body.warm-theme .modal-body {
   background: #FCF9F2 !important;
   background-color: #FCF9F2 !important;
   color: #2D2424 !important;
+}
+
+
+/* Universal Modal Typography */
+.modal-card,
+.notebook-modal-card,
+.modal-card input,
+.modal-card textarea,
+.modal-card select,
+.modal-card button,
+.modal-card label,
+.modal-card h1,
+.modal-card h2,
+.modal-card h3,
+.modal-card h4,
+.modal-card span,
+.modal-card p {
+  font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
 }
