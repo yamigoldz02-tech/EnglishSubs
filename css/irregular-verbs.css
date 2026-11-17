@@ -1,0 +1,543 @@
+/* ==========================================================================
+   AI LYRIC-TRAINER — IRREGULAR VERBS HUB STYLES
+   ========================================================================== */
+
+/* ── Filter Pills ── */
+.irreg-filter-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  user-select: none;
+}
+.irreg-filter-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+}
+.irreg-filter-pill.active {
+  background: rgba(29, 185, 84, 0.12);
+  border-color: rgba(29, 185, 84, 0.35);
+  color: var(--accent-spotify);
+}
+
+/* ── Verb Card ── */
+.irreg-verb-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-glass);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.irreg-verb-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.irreg-verb-card.in-dict {
+  border-color: rgba(29, 185, 84, 0.2);
+  background: rgba(29, 185, 84, 0.03);
+}
+
+.irreg-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── V1 → V2 → V3 Row ── */
+.irreg-forms-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.irreg-form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 60px;
+}
+.irreg-form-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+.irreg-form-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.irreg-form-item.v1 .irreg-form-val { color: #60a5fa; }
+.irreg-form-item.v2 .irreg-form-val { color: #eab308; }
+.irreg-form-item.v3 .irreg-form-val { color: #22c55e; }
+
+.irreg-arrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin: 0 2px;
+}
+
+.irreg-trans-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.irreg-trans-text {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+.irreg-example-text {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Card Actions ── */
+.irreg-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.irreg-btn-speak {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  flex-shrink: 0;
+}
+.irreg-btn-speak:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.irreg-btn-dict {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.irreg-btn-dict:hover {
+  background: rgba(29, 185, 84, 0.1);
+  border-color: rgba(29, 185, 84, 0.3);
+  color: var(--accent-spotify);
+}
+.irreg-btn-dict.active {
+  background: rgba(29, 185, 84, 0.12);
+  border-color: rgba(29, 185, 84, 0.35);
+  color: var(--accent-spotify);
+}
+
+/* ── Generic Buttons ── */
+.irreg-btn-primary {
+  background: var(--accent-spotify);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.irreg-btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+.irreg-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  border-radius: 12px;
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.irreg-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TRAINER STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Exercise Box ── */
+.irreg-exercise-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+}
+.irreg-ex-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.irreg-ex-type-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-spotify);
+}
+.irreg-ex-speak-v1 {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-sub);
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.irreg-ex-speak-v1:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.irreg-ex-prompt {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.irreg-ex-translation {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+.irreg-ex-v1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.irreg-v1-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.irreg-v1-word {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #60a5fa;
+}
+
+/* ── Input Grid ── */
+.irreg-ex-inputs-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.irreg-input-group {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.irreg-input-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.irreg-text-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-body, sans-serif);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+.irreg-text-input:focus {
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+.irreg-text-input.is-correct {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.08);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+.irreg-text-input.is-error {
+  border-color: rgba(239, 68, 68, 0.6);
+  background: rgba(239, 68, 68, 0.06);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  animation: headShake 0.4s ease;
+}
+
+/* ── Feedback Message ── */
+.irreg-feedback-msg {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+  animation: fadeIn 0.25s ease;
+}
+.irreg-feedback-msg.is-success {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #22c55e;
+}
+.irreg-feedback-msg.is-error {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+.irreg-feedback-msg.is-info {
+  background: rgba(96, 165, 250, 0.06);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  color: #60a5fa;
+}
+
+/* ── Exercise Controls ── */
+.irreg-ex-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FLASHCARD TRAINER
+   ══════════════════════════════════════════════════════════════════════════ */
+.irreg-flashcard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.irreg-flashcard {
+  width: 100%;
+  max-width: 400px;
+  height: 240px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+}
+.irreg-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  text-align: center;
+}
+.irreg-card-front {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08), rgba(96, 165, 250, 0.02));
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  transform: rotateY(0deg);
+}
+.irreg-card-back {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(234, 179, 8, 0.04));
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  transform: rotateY(180deg);
+}
+.irreg-flashcard.flipped .irreg-card-front { transform: rotateY(-180deg); }
+.irreg-flashcard.flipped .irreg-card-back { transform: rotateY(0deg); }
+
+.irreg-card-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+}
+.irreg-front-word {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #60a5fa;
+}
+.irreg-front-translation {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+.irreg-card-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.irreg-back-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.irreg-back-translation {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+.irreg-back-example {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ── Rating Bar ── */
+.irreg-rating-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+.irreg-rate-btn {
+  padding: 7px 14px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.irreg-rate-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+.irreg-rate-btn.rate-again:hover { border-color: rgba(239, 68, 68, 0.4); color: #ef4444; }
+.irreg-rate-btn.rate-hard:hover { border-color: rgba(234, 179, 8, 0.4); color: #eab308; }
+.irreg-rate-btn.rate-good:hover { border-color: rgba(34, 197, 94, 0.4); color: #22c55e; }
+.irreg-rate-btn.rate-easy:hover { border-color: rgba(96, 165, 250, 0.4); color: #60a5fa; }
+
+.irreg-flip-trigger-row {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   QUIZ STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+.irreg-quiz-question {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+.irreg-quiz-target-word {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #60a5fa;
+  margin: 4px 0;
+}
+.irreg-quiz-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.irreg-quiz-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.irreg-quiz-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.irreg-quiz-btn.is-correct {
+  background: rgba(34, 197, 94, 0.15) !important;
+  border-color: rgba(34, 197, 94, 0.5) !important;
+  color: #22c55e !important;
+}
+.irreg-quiz-btn.is-error {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #ef4444 !important;
+  animation: headShake 0.4s ease;
+}
+
+/* ── Head Shake Animation ── */
+@keyframes headShake {
+  0% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 500px) {
+  .irreg-forms-row { gap: 4px; }
+  .irreg-form-val { font-size: 0.82rem; }
+  .irreg-form-item { min-width: 50px; }
+  .irreg-quiz-grid { grid-template-columns: 1fr; }
+  .irreg-flashcard { height: 220px; }
+  .irreg-front-word { font-size: 1.4rem; }
+  .irreg-ex-inputs-grid { flex-direction: column; }
+  .irreg-ex-controls { justify-content: center; }
+  .irreg-rating-bar { gap: 4px; }
+  .irreg-rate-btn { padding: 6px 10px; font-size: 0.7rem; }
+}

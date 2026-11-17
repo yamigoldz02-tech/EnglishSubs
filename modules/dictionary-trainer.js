@@ -1589,10 +1589,7 @@ function setupDictionaryUI() {
       });
 
       confirmBtn.addEventListener('click', () => {
-        personalDictionary = [];
-        saveDictionaryToStorage();
-        renderDictWordsList();
-        resetFlashcard();
+        clearPersonalDictionary();
         banner.remove();
       });
 
@@ -3226,7 +3223,19 @@ function getFilteredDictionaryWords() {
   return list;
 }
 
+function clearPersonalDictionary() {
+  personalDictionary = [];
+  saveDictionaryToStorage();
+  if (typeof clearStudySession === 'function') clearStudySession();
+  renderDictWordsList();
+  resetFlashcard();
+  if (typeof showToast === 'function') showToast('Словарь полностью обнулён');
+}
+
 // Global window exposure for modular interoperability
+window.clearPersonalDictionary = clearPersonalDictionary;
+window.clearDictionary = clearPersonalDictionary;
+window.resetDictionary = clearPersonalDictionary;
 window.saveDictionaryToStorage = saveDictionaryToStorage;
 window.renderDictWordsList = renderDictWordsList;
 window.resetFlashcard = resetFlashcard;
