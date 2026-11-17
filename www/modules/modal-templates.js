@@ -1439,16 +1439,43 @@ export const ALL_MODALS_HTML = `
             <button class="irreg-filter-pill" data-filter="top60">📘 Топ-60</button>
             <button class="irreg-filter-pill" data-filter="all">📚 Все (134)</button>
             <button class="irreg-filter-pill" data-filter="in_dict">✅ В моём словаре</button>
+            <button class="irreg-filter-pill" data-filter="custom">⭐ Свои глаголы</button>
           </div>
 
           <!-- Action row -->
-          <div style="display: flex; gap: 8px; flex-shrink: 0; align-items: center; justify-content: space-between;">
-            <button id="irregBulkAddTop30Btn" class="irreg-btn-secondary" style="font-size: 0.75rem;">
-              + Добавить Топ-30 в словарь
-            </button>
+          <div style="display: flex; gap: 8px; flex-shrink: 0; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+              <button id="irregAddCustomVerbBtn" class="irreg-btn-secondary" style="font-size: 0.75rem;">
+                ➕ Добавить свой глагол
+              </button>
+              <button id="irregBulkAddTop30Btn" class="irreg-btn-secondary" style="font-size: 0.75rem;">
+                + Топ-30 в словарь
+              </button>
+            </div>
             <button id="irregLaunchTrainFromCatBtn" class="irreg-btn-primary" style="font-size: 0.75rem;">
               🎯 Начать тренировку
             </button>
+          </div>
+
+          <!-- Form to add custom verb (collapsible) -->
+          <div id="irregAddCustomForm" style="display: none; flex-direction: column; gap: 10px; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 14px; flex-shrink: 0; animation: fadeIn 0.2s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">➕ Добавление своего неправильного глагола</span>
+              <button id="irregCloseCustomFormBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; line-height: 1;">✕</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+              <input type="text" id="irregCustomV1" class="irreg-text-input" placeholder="V1 (Infinitive), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV2" class="irreg-text-input" placeholder="V2 (Past Simple), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV3" class="irreg-text-input" placeholder="V3 (Participle), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <input type="text" id="irregCustomTrans" class="irreg-text-input" placeholder="Перевод (русский), напр: бросать" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomExample" class="irreg-text-input" placeholder="Пример предложения (опционально)" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 8px;">
+              <button id="irregCancelCustomBtn" class="irreg-btn-secondary" style="font-size: 0.75rem; padding: 6px 14px;">Отмена</button>
+              <button id="irregSaveCustomBtn" class="irreg-btn-primary" style="font-size: 0.75rem; padding: 6px 14px;">Сохранить глагол</button>
+            </div>
           </div>
 
           <!-- Verbs List (Scrollable) -->

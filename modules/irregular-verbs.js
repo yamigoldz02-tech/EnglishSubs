@@ -54,6 +54,74 @@
   }
 
   /**
+   * Load user-defined custom irregular verbs from localStorage
+   */
+  function loadCustomVerbs() {
+    try {
+      const saved = localStorage.getItem('custom_irregular_verbs');
+      if (saved) {
+        const customs = JSON.parse(saved);
+        if (Array.isArray(customs)) {
+          if (!window.irregularVerbsData) window.irregularVerbsData = [];
+          customs.forEach(c => {
+            const exists = window.irregularVerbsData.some(v => v.v1.toLowerCase() === c.v1.toLowerCase());
+            if (!exists) {
+              window.irregularVerbsData.unshift({
+                v1: c.v1,
+                v2: c.v2,
+                v3: c.v3,
+                translation: c.translation,
+                example: c.example || '',
+                group: 'custom',
+                isCustom: true
+              });
+            }
+          });
+        }
+      }
+    } catch(e) {
+      console.warn('Failed to load custom irregular verbs:', e);
+    }
+  }
+
+  /**
+   * Delete custom irregular verb
+   * @param {string} v1
+   */
+  function deleteCustomVerb(v1) {
+    if (!v1) return;
+    try {
+      const saved = localStorage.getItem('custom_irregular_verbs');
+      if (saved) {
+        let customs = JSON.parse(saved);
+        if (Array.isArray(customs)) {
+          customs = customs.filter(c => c.v1.toLowerCase() !== v1.toLowerCase());
+          localStorage.setItem('custom_irregular_verbs', JSON.stringify(customs));
+        }
+      }
+      if (window.irregularVerbsData) {
+        window.irregularVerbsData = window.irregularVerbsData.filter(v => !(v.isCustom && v.v1.toLowerCase() === v1.toLowerCase()));
+      }
+      // Also remove from personal dictionary if present
+      if (typeof window.personalDictionary !== 'undefined') {
+        const inDict = getDictEntry(v1);
+        if (inDict) {
+          window.personalDictionary = window.personalDictionary.filter(w => w !== inDict);
+          if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
+          if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
+        }
+      }
+      renderCatalog();
+      updateHeaderStats();
+      if (typeof window.showToast === 'function') {
+        window.showToast(`Глагол ${v1} удалён.`);
+      }
+    } catch(e) {
+      console.warn('Failed to delete custom verb:', e);
+    }
+  }
+
+  /**
    * Toggle irregular verb in Personal Dictionary
    * @param {any} verbObj
    */
@@ -227,6 +295,7 @@
       if (catalogFilter === 'top30') return item.group === 'top30';
       if (catalogFilter === 'top60') return item.group === 'top30' || item.group === 'top60';
       if (catalogFilter === 'in_dict') return !!getDictEntry(item.v1);
+      if (catalogFilter === 'custom') return !!item.isCustom;
       return true; // 'all'
     });
 
@@ -285,6 +354,11 @@
         </div>
 
         <div class="irreg-card-actions">
+          ${item.isCustom ? `
+            <button class="irreg-btn-del-custom" style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #ef4444; width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; outline: none; flex-shrink: 0;" title="Удалить свой глагол">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
+          ` : ''}
           <button class="irreg-btn-speak" title="Озвучить 3 формы" aria-label="Озвучить">
             <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
@@ -295,6 +369,16 @@
       `;
 
       // Event handlers
+      if (item.isCustom) {
+        const delBtn = card.querySelector('.irreg-btn-del-custom');
+        if (delBtn) {
+          delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteCustomVerb(item.v1);
+          });
+        }
+      }
+
       const speakBtn = card.querySelector('.irreg-btn-speak');
       if (speakBtn) {
         speakBtn.addEventListener('click', (e) => {
@@ -1011,6 +1095,107 @@
       });
     }
 
+    // Custom Verb Form Toggle & Handlers
+    const addCustomBtn = document.getElementById('irregAddCustomVerbBtn');
+    const customForm = document.getElementById('irregAddCustomForm');
+    const closeCustomBtn = document.getElementById('irregCloseCustomFormBtn');
+    const cancelCustomBtn = document.getElementById('irregCancelCustomBtn');
+    const saveCustomBtn = document.getElementById('irregSaveCustomBtn');
+
+    if (addCustomBtn && customForm) {
+      addCustomBtn.addEventListener('click', () => {
+        const isHidden = customForm.style.display === 'none' || !customForm.style.display;
+        customForm.style.display = isHidden ? 'flex' : 'none';
+        if (isHidden) {
+          const v1Inp = document.getElementById('irregCustomV1');
+          if (v1Inp) v1Inp.focus();
+        }
+      });
+    }
+
+    const hideCustomForm = () => {
+      if (customForm) customForm.style.display = 'none';
+    };
+    if (closeCustomBtn) closeCustomBtn.addEventListener('click', hideCustomForm);
+    if (cancelCustomBtn) cancelCustomBtn.addEventListener('click', hideCustomForm);
+
+    if (saveCustomBtn) {
+      saveCustomBtn.addEventListener('click', () => {
+        const v1Inp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomV1'));
+        const v2Inp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomV2'));
+        const v3Inp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomV3'));
+        const transInp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomTrans'));
+        const exInp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomExample'));
+
+        const v1 = v1Inp ? v1Inp.value.trim().toLowerCase() : '';
+        const v2 = v2Inp ? v2Inp.value.trim().toLowerCase() : '';
+        const v3 = v3Inp ? v3Inp.value.trim().toLowerCase() : '';
+        const trans = transInp ? transInp.value.trim() : '';
+        const ex = exInp ? exInp.value.trim() : '';
+
+        if (!v1 || !v2 || !v3 || !trans) {
+          if (typeof window.showToast === 'function') {
+            window.showToast('Заполните V1, V2, V3 и перевод глагола!');
+          }
+          return;
+        }
+
+        const newVerb = {
+          v1: v1,
+          v2: v2,
+          v3: v3,
+          translation: trans,
+          example: ex,
+          group: 'custom',
+          isCustom: true
+        };
+
+        // Save to localStorage
+        try {
+          const saved = localStorage.getItem('custom_irregular_verbs');
+          let customs = saved ? JSON.parse(saved) : [];
+          if (!Array.isArray(customs)) customs = [];
+          customs = customs.filter(c => c.v1.toLowerCase() !== v1);
+          customs.unshift(newVerb);
+          localStorage.setItem('custom_irregular_verbs', JSON.stringify(customs));
+        } catch(e) {}
+
+        // Add to active dataset
+        if (!window.irregularVerbsData) window.irregularVerbsData = [];
+        window.irregularVerbsData = window.irregularVerbsData.filter(v => !(v.isCustom && v.v1.toLowerCase() === v1));
+        window.irregularVerbsData.unshift(newVerb);
+
+        // Add to personalDictionary
+        if (!getDictEntry(v1)) {
+          toggleVerbInDict(newVerb);
+        }
+
+        // Reset inputs & hide form
+        if (v1Inp) v1Inp.value = '';
+        if (v2Inp) v2Inp.value = '';
+        if (v3Inp) v3Inp.value = '';
+        if (transInp) transInp.value = '';
+        if (exInp) exInp.value = '';
+        hideCustomForm();
+
+        // Switch to custom filter to see the new verb
+        catalogFilter = 'custom';
+        filterPills.forEach(p => {
+          if (/** @type {HTMLElement} */ (p).dataset.filter === 'custom') {
+            p.classList.add('active');
+          } else {
+            p.classList.remove('active');
+          }
+        });
+
+        renderCatalog();
+        updateHeaderStats();
+        if (typeof window.showToast === 'function') {
+          window.showToast(`⚡ Свой глагол ${v1} успешно добавлен!`);
+        }
+      });
+    }
+
     // Return to catalog from completion screen
     const returnCatBtn = document.getElementById('irregTrainerReturnCatBtn');
     if (returnCatBtn) {
@@ -1046,8 +1231,12 @@
   // Auto-init on DOM ready
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initListeners);
+      document.addEventListener('DOMContentLoaded', () => {
+        loadCustomVerbs();
+        initListeners();
+      });
     } else {
+      loadCustomVerbs();
       initListeners();
     }
   }
