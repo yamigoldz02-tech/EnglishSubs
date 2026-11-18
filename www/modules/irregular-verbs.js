@@ -495,7 +495,7 @@
   }
 
   /**
-   * Render Mode 1: Interactive Input (Fill in V2 and V3)
+   * Render Mode 1: Interactive Input (Fill in all 3 forms V1, V2, V3 given translation)
    * @param {any} verb
    */
   function renderInputTrainerCard(verb) {
@@ -505,28 +505,27 @@
     cardEl.innerHTML = `
       <div class="irreg-exercise-box">
         <div class="irreg-ex-header">
-          <span class="irreg-ex-type-badge">✏️ Тренажёр ввода</span>
-          <button class="irreg-ex-speak-v1" id="irregExSpeakBtn" title="Озвучить инфинитив">
-            🔊 Прослушать V1
-          </button>
+          <span class="irreg-ex-type-badge">✏️ Напишите все 3 формы</span>
         </div>
 
-        <div class="irreg-ex-prompt">
-          <div class="irreg-ex-translation">${escapeHTML(verb.translation)}</div>
-          <div class="irreg-ex-v1">
-            <span class="irreg-v1-label">Инфинитив (V1):</span>
-            <strong class="irreg-v1-word">${escapeHTML(verb.v1)}</strong>
-          </div>
+        <div class="irreg-ex-prompt" style="text-align: center; margin: 12px 0;">
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 6px;">Перевод глагола:</div>
+          <div class="irreg-ex-translation" style="font-size: 1.45rem; font-weight: 800; color: #60a5fa;">«${escapeHTML(verb.translation)}»</div>
+          ${verb.example ? `<div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-top: 6px;">Контекст: «${escapeHTML(verb.example)}»</div>` : ''}
         </div>
 
-        <div class="irreg-ex-inputs-grid">
+        <div class="irreg-ex-inputs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
           <div class="irreg-input-group">
-            <label for="irregInputV2" class="irreg-input-label">Форма V2 (Past Simple):</label>
-            <input type="text" id="irregInputV2" class="irreg-text-input" placeholder="Введите форму V2..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <label for="irregInputV1" class="irreg-input-label">V1 (Infinitive):</label>
+            <input type="text" id="irregInputV1" class="irreg-text-input" placeholder="Форма V1..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           </div>
           <div class="irreg-input-group">
-            <label for="irregInputV3" class="irreg-input-label">Форма V3 (Past Participle):</label>
-            <input type="text" id="irregInputV3" class="irreg-text-input" placeholder="Введите форму V3..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <label for="irregInputV2" class="irreg-input-label">V2 (Past Simple):</label>
+            <input type="text" id="irregInputV2" class="irreg-text-input" placeholder="Форма V2..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="irreg-input-group">
+            <label for="irregInputV3" class="irreg-input-label">V3 (Past Participle):</label>
+            <input type="text" id="irregInputV3" class="irreg-text-input" placeholder="Форма V3..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           </div>
         </div>
 
@@ -546,25 +545,28 @@
       </div>
     `;
 
+    const inputV1 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV1'));
     const inputV2 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV2'));
     const inputV3 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV3'));
     const checkBtn = document.getElementById('irregCheckBtn');
     const hintBtn = document.getElementById('irregHintBtn');
     const skipBtn = document.getElementById('irregSkipBtn');
-    const speakBtn = document.getElementById('irregExSpeakBtn');
-
-    if (speakBtn) {
-      speakBtn.addEventListener('click', () => {
-        speakForms(verb.v1, '', '');
-      });
-    }
 
     setTimeout(() => {
-      if (inputV2) inputV2.focus();
+      if (inputV1) inputV1.focus();
     }, 80);
 
     // Enter navigation between inputs
-    if (inputV2 && inputV3) {
+    if (inputV1 && inputV2 && inputV3) {
+      inputV1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (inputV1.value.trim().length > 0) {
+            inputV2.focus();
+          }
+        }
+      });
+
       inputV2.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -589,6 +591,9 @@
     if (hintBtn) {
       hintBtn.addEventListener('click', () => {
         hasUsedHint = true;
+        if (inputV1 && verb.v1) {
+          inputV1.value = verb.v1.slice(0, 2);
+        }
         if (inputV2 && verb.v2) {
           inputV2.value = verb.v2.slice(0, 2);
         }
@@ -621,31 +626,40 @@
    * @param {any} verb
    */
   function checkInputAnswer(verb) {
+    const inputV1 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV1'));
     const inputV2 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV2'));
     const inputV3 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV3'));
     const feedback = document.getElementById('irregFeedbackMsg');
     const checkBtn = document.getElementById('irregCheckBtn');
 
-    if (!inputV2 || !inputV3 || !feedback) return;
+    if (!inputV1 || !inputV2 || !inputV3 || !feedback) return;
 
+    const userV1 = inputV1.value.trim().toLowerCase();
     const userV2 = inputV2.value.trim().toLowerCase();
     const userV3 = inputV3.value.trim().toLowerCase();
 
-    if (!userV2 && !userV3) {
-      inputV2.focus();
+    if (!userV1 && !userV2 && !userV3) {
+      inputV1.focus();
       return;
     }
 
+    const acceptedV1 = parseAcceptedVariants(verb.v1);
     const acceptedV2 = parseAcceptedVariants(verb.v2);
     const acceptedV3 = parseAcceptedVariants(verb.v3);
 
+    const isV1Correct = acceptedV1.includes(userV1);
     const isV2Correct = acceptedV2.includes(userV2);
     const isV3Correct = acceptedV3.includes(userV3);
 
-    if (isV2Correct && isV3Correct) {
+    if (isV1Correct && isV2Correct && isV3Correct) {
       // Correct!
+      inputV1.classList.remove('is-error');
+      inputV2.classList.remove('is-error');
+      inputV3.classList.remove('is-error');
+      inputV1.classList.add('is-correct');
       inputV2.classList.add('is-correct');
       inputV3.classList.add('is-correct');
+
       feedback.className = 'irreg-feedback-msg is-success';
       feedback.style.display = 'block';
       feedback.innerHTML = `🎉 Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
@@ -672,14 +686,15 @@
 
     } else {
       // Incorrect
-      if (!isV2Correct) inputV2.classList.add('is-error');
-      if (!isV3Correct) inputV3.classList.add('is-error');
+      if (!isV1Correct) { inputV1.classList.add('is-error'); inputV1.classList.remove('is-correct'); } else { inputV1.classList.add('is-correct'); inputV1.classList.remove('is-error'); }
+      if (!isV2Correct) { inputV2.classList.add('is-error'); inputV2.classList.remove('is-correct'); } else { inputV2.classList.add('is-correct'); inputV2.classList.remove('is-error'); }
+      if (!isV3Correct) { inputV3.classList.add('is-error'); inputV3.classList.remove('is-correct'); } else { inputV3.classList.add('is-correct'); inputV3.classList.remove('is-error'); }
 
       feedback.className = 'irreg-feedback-msg is-error';
       feedback.style.display = 'block';
       feedback.innerHTML = `
         ❌ Не совсем точно.<br>
-        Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong style="color:#eab308;">${escapeHTML(verb.v2)}</strong> → <strong style="color:#eab308;">${escapeHTML(verb.v3)}</strong>
+        Правильно: <strong style="color:#60a5fa;">${escapeHTML(verb.v1)}</strong> → <strong style="color:#eab308;">${escapeHTML(verb.v2)}</strong> → <strong style="color:#22c55e;">${escapeHTML(verb.v3)}</strong>
       `;
 
       // Re-queue the verb for reinforcement at end of session
@@ -702,11 +717,13 @@
    * @param {boolean} isCorrect
    */
   function showInputAnswerAndAdvance(verb, isCorrect) {
+    const inputV1 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV1'));
     const inputV2 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV2'));
     const inputV3 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV3'));
     const feedback = document.getElementById('irregFeedbackMsg');
     const checkBtn = document.getElementById('irregCheckBtn');
 
+    if (inputV1) inputV1.value = verb.v1;
     if (inputV2) inputV2.value = verb.v2;
     if (inputV3) inputV3.value = verb.v3;
 
@@ -969,10 +986,26 @@
    * @param {'catalog'|'trainer'} [tab]
    */
   function openModal(tab = 'catalog') {
-    const modal = document.getElementById('irregularVerbsModal');
-    if (!modal) return;
+    let modal = document.getElementById('irregularVerbsModal');
+    if (!modal) {
+      if (typeof window.injectModalTemplates === 'function') {
+        window.injectModalTemplates();
+      }
+      modal = document.getElementById('irregularVerbsModal');
+    }
+    if (!modal) {
+      console.error('[IrregularVerbs] irregularVerbsModal element not found in DOM.');
+      return;
+    }
 
-    modal.style.display = 'flex';
+    loadCustomVerbs();
+    initListeners();
+
+    if (typeof window.openModalEl === 'function') {
+      window.openModalEl(modal);
+    } else {
+      modal.style.display = 'flex';
+    }
     switchTab(tab);
     updateHeaderStats();
   }
@@ -982,7 +1015,12 @@
    */
   function closeModal() {
     const modal = document.getElementById('irregularVerbsModal');
-    if (modal) modal.style.display = 'none';
+    if (!modal) return;
+    if (typeof window.closeModalEl === 'function') {
+      window.closeModalEl(modal);
+    } else {
+      modal.style.display = 'none';
+    }
   }
 
   /**
