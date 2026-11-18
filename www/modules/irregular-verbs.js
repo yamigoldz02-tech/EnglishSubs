@@ -29,6 +29,62 @@
    * @param {string} str
    * @returns {string}
    */
+  
+  // ── Keyboard Layout Auto-Correction Maps ──────────────────────────────────
+  const CYR_TO_LAT_MAP = {
+    'й':'q','ц':'w','у':'e','к':'r','е':'t','н':'y','г':'u','ш':'i','щ':'o','з':'p',
+    'х':'[','ъ':']','ф':'a','ы':'s','в':'d','а':'f','п':'g','р':'h','о':'j','л':'k',
+    'д':'l','ж':';','э':"'",'я':'z','ч':'x','с':'c','м':'v','и':'b','т':'n','ь':'m',
+    'б':',','ю':'.','ё':'`',
+    'Й':'Q','Ц':'W','У':'E','К':'R','Е':'T','Н':'Y','Г':'U','Ш':'I','Щ':'O','З':'P',
+    'Х':'{','Ъ':'}','Ф':'A','Ы':'S','В':'D','А':'F','П':'G','Р':'H','О':'J','Л':'K',
+    'Д':'L','Ж':':','Э':'"','Я':'Z','Ч':'X','С':'C','М':'V','И':'B','Т':'N','Ь':'M',
+    'Б':'<','Ю':'>','Ё':'~'
+  };
+
+  const LAT_TO_CYR_MAP = {
+    'q':'й','w':'ц','e':'у','r':'к','t':'е','y':'н','u':'г','i':'ш','o':'щ','p':'з',
+    '[':'х',']':'ъ','a':'ф','s':'ы','d':'в','f':'а','g':'п','h':'р','j':'о','k':'л',
+    'l':'д',';':'ж',"'":'э','z':'я','x':'ч','c':'с','v':'м','b':'и','n':'т','m':'ь',
+    ',':'б','.':'ю','`':'ё',
+    'Q':'Й','W':'Ц','E':'У','R':'К','T':'Е','Y':'Н','U':'Г','I':'Ш','O':'Щ','P':'З',
+    '{':'Х','}':'Ъ','A':'Ф','S':'Ы','D':'В','F':'А','G':'П','H':'Р','J':'О','K':'Л',
+    'L':'Д',':':'Ж','"':'Э','Z':'Я','X':'Ч','C':'С','V':'М','B':'И','N':'Т','M':'Ь',
+    '<':'Б','>':'Ю','~':'Ё'
+  };
+
+  /**
+   * Real-time keyboard layout auto-correction (Cyrillic <-> Latin)
+   * @param {HTMLInputElement|null} inputEl
+   * @param {'cyrToLat'|'latToCyr'} direction
+   */
+  function convertLayout(inputEl, direction) {
+    if (!inputEl) return;
+    const map = direction === 'cyrToLat' ? CYR_TO_LAT_MAP : LAT_TO_CYR_MAP;
+    const origVal = inputEl.value;
+    if (!origVal) return;
+
+    let hasMatch = false;
+    for (let i = 0; i < origVal.length; i++) {
+      if (map[origVal[i]] !== undefined) {
+        hasMatch = true;
+        break;
+      }
+    }
+    if (!hasMatch) return;
+
+    const selStart = inputEl.selectionStart;
+    const selEnd = inputEl.selectionEnd;
+    const newVal = origVal.split('').map(ch => map[ch] !== undefined ? map[ch] : ch).join('');
+
+    if (newVal !== origVal) {
+      inputEl.value = newVal;
+      try {
+        inputEl.setSelectionRange(selStart, selEnd);
+      } catch(e) {}
+    }
+  }
+
   function escapeHTML(str) {
     if (!str) return '';
     return str
@@ -725,6 +781,11 @@
       if (inputV1) inputV1.focus();
     }, 80);
 
+    // Real-time layout auto-correction (Cyrillic -> Latin for English forms)
+    if (inputV1) inputV1.addEventListener('input', () => convertLayout(inputV1, 'cyrToLat'));
+    if (inputV2) inputV2.addEventListener('input', () => convertLayout(inputV2, 'cyrToLat'));
+    if (inputV3) inputV3.addEventListener('input', () => convertLayout(inputV3, 'cyrToLat'));
+
     // Enter navigation between inputs
     if (inputV1 && inputV2 && inputV3) {
       inputV1.addEventListener('keydown', (e) => {
@@ -802,6 +863,10 @@
     const checkBtn = document.getElementById('irregCheckBtn');
 
     if (!inputV1 || !inputV2 || !inputV3 || !feedback) return;
+
+    convertLayout(inputV1, 'cyrToLat');
+    convertLayout(inputV2, 'cyrToLat');
+    convertLayout(inputV3, 'cyrToLat');
 
     const userV1 = inputV1.value.trim().toLowerCase();
     const userV2 = inputV2.value.trim().toLowerCase();
@@ -1326,6 +1391,19 @@
     if (closeCustomBtn) closeCustomBtn.addEventListener('click', hideCustomForm);
     if (cancelCustomBtn) cancelCustomBtn.addEventListener('click', hideCustomForm);
 
+    // Real-time layout conversion for Custom Verb form
+    const customV1El = /** @type {HTMLInputElement|null} */ (document.getElementById('irregCustomV1'));
+    const customV2El = /** @type {HTMLInputElement|null} */ (document.getElementById('irregCustomV2'));
+    const customV3El = /** @type {HTMLInputElement|null} */ (document.getElementById('irregCustomV3'));
+    const customTransEl = /** @type {HTMLInputElement|null} */ (document.getElementById('irregCustomTrans'));
+    const customExEl = /** @type {HTMLInputElement|null} */ (document.getElementById('irregCustomExample'));
+
+    if (customV1El) customV1El.addEventListener('input', () => convertLayout(customV1El, 'cyrToLat'));
+    if (customV2El) customV2El.addEventListener('input', () => convertLayout(customV2El, 'cyrToLat'));
+    if (customV3El) customV3El.addEventListener('input', () => convertLayout(customV3El, 'cyrToLat'));
+    if (customTransEl) customTransEl.addEventListener('input', () => convertLayout(customTransEl, 'latToCyr'));
+    if (customExEl) customExEl.addEventListener('input', () => convertLayout(customExEl, 'cyrToLat'));
+
     if (saveCustomBtn) {
       saveCustomBtn.addEventListener('click', () => {
         const v1Inp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomV1'));
@@ -1333,6 +1411,12 @@
         const v3Inp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomV3'));
         const transInp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomTrans'));
         const exInp = /** @type {HTMLInputElement} */ (document.getElementById('irregCustomExample'));
+
+        if (v1Inp) convertLayout(v1Inp, 'cyrToLat');
+        if (v2Inp) convertLayout(v2Inp, 'cyrToLat');
+        if (v3Inp) convertLayout(v3Inp, 'cyrToLat');
+        if (transInp) convertLayout(transInp, 'latToCyr');
+        if (exInp) convertLayout(exInp, 'cyrToLat');
 
         const v1 = v1Inp ? v1Inp.value.trim().toLowerCase() : '';
         const v2 = v2Inp ? v2Inp.value.trim().toLowerCase() : '';
@@ -1434,6 +1518,7 @@
   window.closeIrregularVerbsModal = closeModal;
   window.speakIrregularForms = speakForms;
   window.toggleIrregularVerbInDict = toggleVerbInDict;
+  window.convertKeyboardLayout = convertLayout;
 
   // Auto-init on DOM ready
   if (typeof document !== 'undefined') {
