@@ -23,6 +23,21 @@
   let trainerScore = { correct: 0, total: 0 };
   let isCardFlipped = false;
   let hasUsedHint = false;
+  /** @type {any} */
+  let trainerAutoAdvanceTimer = null;
+
+  function clearTrainerTimer() {
+    if (trainerAutoAdvanceTimer) {
+      clearTimeout(trainerAutoAdvanceTimer);
+      trainerAutoAdvanceTimer = null;
+    }
+  }
+
+  function advanceToNextTrainerStep() {
+    clearTrainerTimer();
+    trainerCurrentIndex++;
+    renderTrainerStep();
+  }
 
   /**
    * Escape HTML entities to prevent XSS
@@ -614,6 +629,7 @@
    * @param {'input'|'flashcard'|'quiz'} [mode]
    */
   function startTrainer(scope, mode) {
+    clearTrainerTimer();
     if (scope) trainerScope = scope;
     if (mode) trainerMode = mode;
 
@@ -680,6 +696,7 @@
    * Render the current step in the trainer view
    */
   function renderTrainerStep() {
+    clearTrainerTimer();
     const cardEl = document.getElementById('irregTrainerCardContainer');
     const completeView = document.getElementById('irregTrainerCompleteView');
     const progressText = document.getElementById('irregTrainerProgressText');
@@ -726,6 +743,8 @@
   function renderInputTrainerCard(verb) {
     const cardEl = document.getElementById('irregTrainerCardContainer');
     if (!cardEl) return;
+
+    let isChecked = false;
 
     cardEl.innerHTML = `
       <div class="irreg-exercise-box">
@@ -786,12 +805,18 @@
     if (inputV2) inputV2.addEventListener('input', () => convertLayout(inputV2, 'cyrToLat'));
     if (inputV3) inputV3.addEventListener('input', () => convertLayout(inputV3, 'cyrToLat'));
 
+    const handleAdvance = () => {
+      advanceToNextTrainerStep();
+    };
+
     // Enter navigation between inputs
     if (inputV1 && inputV2 && inputV3) {
       inputV1.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          if (inputV1.value.trim().length > 0) {
+          if (isChecked) {
+            handleAdvance();
+          } else if (inputV1.value.trim().length > 0) {
             inputV2.focus();
           }
         }
@@ -800,7 +825,9 @@
       inputV2.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          if (inputV2.value.trim().length > 0) {
+          if (isChecked) {
+            handleAdvance();
+          } else if (inputV2.value.trim().length > 0) {
             inputV3.focus();
           }
         }
@@ -809,13 +836,110 @@
       inputV3.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          checkInputAnswer(verb);
+          if (isChecked) {
+            handleAdvance();
+          } else {
+            doCheck();
+          }
         }
       });
     }
 
     if (checkBtn) {
-      checkBtn.addEventListener('click', () => checkInputAnswer(verb));
+      checkBtn.onclick = () => {
+        if (isChecked) {
+          handleAdvance();
+        } else {
+          doCheck();
+        }
+      };
+    }
+
+    function doCheck() {
+      if (isChecked) return;
+
+      if (!inputV1 || !inputV2 || !inputV3) return;
+      convertLayout(inputV1, 'cyrToLat');
+      convertLayout(inputV2, 'cyrToLat');
+      convertLayout(inputV3, 'cyrToLat');
+
+      const userV1 = inputV1.value.trim().toLowerCase();
+      const userV2 = inputV2.value.trim().toLowerCase();
+      const userV3 = inputV3.value.trim().toLowerCase();
+
+      if (!userV1 && !userV2 && !userV3) {
+        inputV1.focus();
+        return;
+      }
+
+      const feedback = document.getElementById('irregFeedbackMsg');
+      if (!feedback) return;
+
+      const acceptedV1 = parseAcceptedVariants(verb.v1);
+      const acceptedV2 = parseAcceptedVariants(verb.v2);
+      const acceptedV3 = parseAcceptedVariants(verb.v3);
+
+      const isV1Correct = acceptedV1.includes(userV1);
+      const isV2Correct = acceptedV2.includes(userV2);
+      const isV3Correct = acceptedV3.includes(userV3);
+
+      isChecked = true;
+
+      if (isV1Correct && isV2Correct && isV3Correct) {
+        // Correct!
+        inputV1.classList.remove('is-error');
+        inputV2.classList.remove('is-error');
+        inputV3.classList.remove('is-error');
+        inputV1.classList.add('is-correct');
+        inputV2.classList.add('is-correct');
+        inputV3.classList.add('is-correct');
+
+        feedback.className = 'irreg-feedback-msg is-success';
+        feedback.style.display = 'block';
+        feedback.innerHTML = `Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
+
+        if (!hasUsedHint) trainerScore.correct++;
+
+        // Pronounce
+        speakForms(verb.v1, verb.v2, verb.v3);
+
+        if (checkBtn) {
+          checkBtn.textContent = 'Следующий (Enter)';
+          checkBtn.focus();
+        }
+
+        // Auto-advance only once with clearable timer
+        clearTrainerTimer();
+        trainerAutoAdvanceTimer = setTimeout(() => {
+          trainerAutoAdvanceTimer = null;
+          if (trainerCurrentIndex < trainerQueue.length) {
+            advanceToNextTrainerStep();
+          }
+        }, 1600);
+
+      } else {
+        // Incorrect
+        if (!isV1Correct) { inputV1.classList.add('is-error'); inputV1.classList.remove('is-correct'); } else { inputV1.classList.add('is-correct'); inputV1.classList.remove('is-error'); }
+        if (!isV2Correct) { inputV2.classList.add('is-error'); inputV2.classList.remove('is-correct'); } else { inputV2.classList.add('is-correct'); inputV2.classList.remove('is-error'); }
+        if (!isV3Correct) { inputV3.classList.add('is-error'); inputV3.classList.remove('is-correct'); } else { inputV3.classList.add('is-correct'); inputV3.classList.remove('is-error'); }
+
+        feedback.className = 'irreg-feedback-msg is-error';
+        feedback.style.display = 'block';
+        feedback.innerHTML = `
+          Неверно.<br>
+          Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>
+        `;
+
+        // Re-queue the verb for reinforcement at end of session
+        trainerQueue.push(verb);
+        trainerScore.total = trainerQueue.length;
+
+        clearTrainerTimer();
+        if (checkBtn) {
+          checkBtn.textContent = 'Далее (Enter)';
+          checkBtn.focus();
+        }
+      }
     }
 
     if (hintBtn) {
@@ -836,7 +960,30 @@
 
     if (skipBtn) {
       skipBtn.addEventListener('click', () => {
-        showInputAnswerAndAdvance(verb, false);
+        if (isChecked) return;
+        isChecked = true;
+
+        if (inputV1) inputV1.value = verb.v1;
+        if (inputV2) inputV2.value = verb.v2;
+        if (inputV3) inputV3.value = verb.v3;
+
+        const feedback = document.getElementById('irregFeedbackMsg');
+        if (feedback) {
+          feedback.className = 'irreg-feedback-msg is-info';
+          feedback.style.display = 'block';
+          feedback.innerHTML = `Ответ: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
+        }
+
+        speakForms(verb.v1, verb.v2, verb.v3);
+
+        trainerQueue.push(verb);
+        trainerScore.total = trainerQueue.length;
+
+        clearTrainerTimer();
+        if (checkBtn) {
+          checkBtn.textContent = 'Далее (Enter)';
+          checkBtn.focus();
+        }
       });
     }
   }
@@ -851,142 +998,6 @@
     return val.toLowerCase().split(/\s*\/\s*/).map(s => s.trim()).filter(Boolean);
   }
 
-  /**
-   * Check inputs for Mode 1
-   * @param {any} verb
-   */
-  function checkInputAnswer(verb) {
-    const inputV1 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV1'));
-    const inputV2 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV2'));
-    const inputV3 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV3'));
-    const feedback = document.getElementById('irregFeedbackMsg');
-    const checkBtn = document.getElementById('irregCheckBtn');
-
-    if (!inputV1 || !inputV2 || !inputV3 || !feedback) return;
-
-    convertLayout(inputV1, 'cyrToLat');
-    convertLayout(inputV2, 'cyrToLat');
-    convertLayout(inputV3, 'cyrToLat');
-
-    const userV1 = inputV1.value.trim().toLowerCase();
-    const userV2 = inputV2.value.trim().toLowerCase();
-    const userV3 = inputV3.value.trim().toLowerCase();
-
-    if (!userV1 && !userV2 && !userV3) {
-      inputV1.focus();
-      return;
-    }
-
-    const acceptedV1 = parseAcceptedVariants(verb.v1);
-    const acceptedV2 = parseAcceptedVariants(verb.v2);
-    const acceptedV3 = parseAcceptedVariants(verb.v3);
-
-    const isV1Correct = acceptedV1.includes(userV1);
-    const isV2Correct = acceptedV2.includes(userV2);
-    const isV3Correct = acceptedV3.includes(userV3);
-
-    if (isV1Correct && isV2Correct && isV3Correct) {
-      // Correct!
-      inputV1.classList.remove('is-error');
-      inputV2.classList.remove('is-error');
-      inputV3.classList.remove('is-error');
-      inputV1.classList.add('is-correct');
-      inputV2.classList.add('is-correct');
-      inputV3.classList.add('is-correct');
-
-      feedback.className = 'irreg-feedback-msg is-success';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
-
-      if (!hasUsedHint) trainerScore.correct++;
-
-      // Pronounce
-      speakForms(verb.v1, verb.v2, verb.v3);
-
-      if (checkBtn) {
-        checkBtn.textContent = 'Следующий';
-        checkBtn.onclick = () => {
-          trainerCurrentIndex++;
-          renderTrainerStep();
-        };
-      }
-
-      setTimeout(() => {
-        if (trainerCurrentIndex < trainerQueue.length) {
-          trainerCurrentIndex++;
-          renderTrainerStep();
-        }
-      }, 1500);
-
-    } else {
-      // Incorrect
-      if (!isV1Correct) { inputV1.classList.add('is-error'); inputV1.classList.remove('is-correct'); } else { inputV1.classList.add('is-correct'); inputV1.classList.remove('is-error'); }
-      if (!isV2Correct) { inputV2.classList.add('is-error'); inputV2.classList.remove('is-correct'); } else { inputV2.classList.add('is-correct'); inputV2.classList.remove('is-error'); }
-      if (!isV3Correct) { inputV3.classList.add('is-error'); inputV3.classList.remove('is-correct'); } else { inputV3.classList.add('is-correct'); inputV3.classList.remove('is-error'); }
-
-      feedback.className = 'irreg-feedback-msg is-error';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `
-        Неверно.<br>
-        Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>
-      `;
-
-      // Re-queue the verb for reinforcement at end of session
-      trainerQueue.push(verb);
-      trainerScore.total = trainerQueue.length;
-
-      if (checkBtn) {
-        checkBtn.textContent = 'Далее';
-        checkBtn.onclick = () => {
-          trainerCurrentIndex++;
-          renderTrainerStep();
-        };
-      }
-    }
-  }
-
-  /**
-   * Skip input and show answer
-   * @param {any} verb
-   * @param {boolean} isCorrect
-   */
-  function showInputAnswerAndAdvance(verb, isCorrect) {
-    const inputV1 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV1'));
-    const inputV2 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV2'));
-    const inputV3 = /** @type {HTMLInputElement} */ (document.getElementById('irregInputV3'));
-    const feedback = document.getElementById('irregFeedbackMsg');
-    const checkBtn = document.getElementById('irregCheckBtn');
-
-    if (inputV1) inputV1.value = verb.v1;
-    if (inputV2) inputV2.value = verb.v2;
-    if (inputV3) inputV3.value = verb.v3;
-
-    if (feedback) {
-      feedback.className = 'irreg-feedback-msg is-info';
-      feedback.style.display = 'block';
-      feedback.innerHTML = `Ответ: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
-    }
-
-    speakForms(verb.v1, verb.v2, verb.v3);
-
-    // Re-queue for reinforcement
-    trainerQueue.push(verb);
-    trainerScore.total = trainerQueue.length;
-
-    if (checkBtn) {
-      checkBtn.textContent = 'Далее';
-      checkBtn.onclick = () => {
-        trainerCurrentIndex++;
-        renderTrainerStep();
-      };
-      checkBtn.focus();
-    }
-  }
-
-  /**
-   * Render Mode 2: 3D Flashcards
-   * @param {any} verb
-   */
   function renderFlashcardTrainerCard(verb) {
     const cardEl = document.getElementById('irregTrainerCardContainer');
     if (!cardEl) return;
@@ -1168,9 +1179,10 @@
           trainerScore.total = trainerQueue.length;
         }
 
-        setTimeout(() => {
-          trainerCurrentIndex++;
-          renderTrainerStep();
+        clearTrainerTimer();
+        trainerAutoAdvanceTimer = setTimeout(() => {
+          trainerAutoAdvanceTimer = null;
+          advanceToNextTrainerStep();
         }, isCorrect ? 1200 : 2000);
       });
     });
