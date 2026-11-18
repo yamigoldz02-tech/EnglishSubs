@@ -10,6 +10,11 @@
  */
 
 (function() {
+  // Immediate global fallback to prevent any premature call errors
+  window.openIrregularVerbsModal = function(tab) {
+    if (typeof openModal === 'function') openModal(tab);
+  };
+
   // State variables
   let activeTab = 'catalog'; // 'catalog' or 'trainer'
   let catalogFilter = 'all'; // 'top30', 'top60', 'all', 'in_dict'
@@ -639,16 +644,8 @@
     if (trainerScope === 'my_verbs') {
       pool = all.filter(v => !!getDictEntry(v.v1));
       if (pool.length === 0) {
-        // Fallback to top30 with notice
-        pool = all.filter(v => v.group === 'top30');
-        if (typeof window.showToast === 'function') {
-          window.showToast('В словаре пока нет неправильных глаголов. Запущена тренировка Топ-30.');
-        }
+        pool = [...all];
       }
-    } else if (trainerScope === 'top30') {
-      pool = all.filter(v => v.group === 'top30');
-    } else if (trainerScope === 'top60') {
-      pool = all.filter(v => v.group === 'top30' || v.group === 'top60');
     } else {
       pool = [...all];
     }
@@ -745,6 +742,7 @@
     if (!cardEl) return;
 
     let isChecked = false;
+    let canAdvance = false;
 
     cardEl.innerHTML = `
       <div class="irreg-exercise-box">
@@ -806,6 +804,7 @@
     if (inputV3) inputV3.addEventListener('input', () => convertLayout(inputV3, 'cyrToLat'));
 
     const handleAdvance = () => {
+      if (!canAdvance) return;
       advanceToNextTrainerStep();
     };
 
@@ -854,6 +853,14 @@
         }
       };
     }
+
+    // Card-level Enter key handler when checked (so user can press Enter from anywhere on card)
+    cardEl.onkeydown = (e) => {
+      if (e.key === 'Enter' && isChecked) {
+        e.preventDefault();
+        handleAdvance();
+      }
+    };
 
     function doCheck() {
       if (isChecked) return;
@@ -905,17 +912,16 @@
 
         if (checkBtn) {
           checkBtn.textContent = 'Следующий (Enter)';
-          checkBtn.focus();
         }
 
-        // Auto-advance only once with clearable timer
+        // NO auto-advance timer! User advances strictly on Enter or click.
         clearTrainerTimer();
-        trainerAutoAdvanceTimer = setTimeout(() => {
-          trainerAutoAdvanceTimer = null;
-          if (trainerCurrentIndex < trainerQueue.length) {
-            advanceToNextTrainerStep();
-          }
-        }, 1600);
+
+        // Enable advance after current Enter keydown event has completely finished
+        setTimeout(() => {
+          canAdvance = true;
+          if (checkBtn) checkBtn.focus();
+        }, 120);
 
       } else {
         // Incorrect
@@ -930,6 +936,9 @@
           Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>
         `;
 
+        // Pronounce correct forms so the user hears how they sound
+        speakForms(verb.v1, verb.v2, verb.v3);
+
         // Re-queue the verb for reinforcement at end of session
         trainerQueue.push(verb);
         trainerScore.total = trainerQueue.length;
@@ -937,8 +946,12 @@
         clearTrainerTimer();
         if (checkBtn) {
           checkBtn.textContent = 'Далее (Enter)';
-          checkBtn.focus();
         }
+
+        setTimeout(() => {
+          canAdvance = true;
+          if (checkBtn) checkBtn.focus();
+        }, 120);
       }
     }
 
@@ -976,26 +989,39 @@
 
         speakForms(verb.v1, verb.v2, verb.v3);
 
+        // Re-queue for reinforcement
         trainerQueue.push(verb);
         trainerScore.total = trainerQueue.length;
 
         clearTrainerTimer();
         if (checkBtn) {
           checkBtn.textContent = 'Далее (Enter)';
-          checkBtn.focus();
         }
+
+        setTimeout(() => {
+          canAdvance = true;
+          if (checkBtn) checkBtn.focus();
+        }, 120);
       });
     }
   }
 
   /**
-   * Normalize verb form string to compare with user inputs
+   * Normalize verb form string to compare with user inputs (accepts both single form and combined variants)
    * @param {string} val
    * @returns {Array<string>}
    */
   function parseAcceptedVariants(val) {
     if (!val) return [];
-    return val.toLowerCase().split(/\s*\/\s*/).map(s => s.trim()).filter(Boolean);
+    const raw = val.toLowerCase().trim();
+    const parts = raw.split(/\s*[\/,]\s*/).map(s => s.trim()).filter(Boolean);
+    const set = new Set(parts);
+    set.add(raw);
+    set.add(parts.join(' / '));
+    set.add(parts.join('/'));
+    set.add(parts.join(', '));
+    set.add(parts.join(' '));
+    return Array.from(set);
   }
 
   function renderFlashcardTrainerCard(verb) {
@@ -1230,7 +1256,15 @@
    * Open Irregular Verbs Hub Modal
    * @param {'catalog'|'trainer'} [tab]
    */
+  let lastModalOpenTime = 0;
   function openModal(tab = 'catalog') {
+    const now = Date.now();
+    if (now - lastModalOpenTime < 250) {
+      switchTab(tab);
+      return;
+    }
+    lastModalOpenTime = now;
+
     const modal = ensureModalExists();
     if (!modal) {
       console.error('[IrregularVerbs] irregularVerbsModal element not found or created.');
@@ -1481,10 +1515,10 @@
         if (exInp) exInp.value = '';
         hideCustomForm();
 
-        // Switch to custom filter to see the new verb
-        catalogFilter = 'custom';
+        // Switch to 'all' filter and highlight 'all'
+        catalogFilter = 'all';
         filterPills.forEach(p => {
-          if (/** @type {HTMLElement} */ (p).dataset.filter === 'custom') {
+          if (/** @type {HTMLElement} */ (p).dataset.filter === 'all') {
             p.classList.add('active');
           } else {
             p.classList.remove('active');
