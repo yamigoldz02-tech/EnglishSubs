@@ -4,7 +4,7 @@
  * Automatically caches HTML, CSS, JavaScript, and datasets for instant offline playback.
  */
 
-const CACHE_NAME = 'ai-lyric-trainer-v3.7.1';
+const CACHE_NAME = 'ai-lyric-trainer-v3.7.5';
 
 const PRECACHE_ASSETS = [
   './',
@@ -37,10 +37,12 @@ const PRECACHE_ASSETS = [
   './css/spotify-widget.css',
   './css/phrase-builder.css',
   './css/animations.css',
+  './css/irregular-verbs.css',
   
   // Datasets
   './data/playlist_db.js',
   './data/essentialWords.js',
+  './data/irregular-verbs-data.js',
   
   // Application Modules
   './modules/types.js',
@@ -68,6 +70,7 @@ const PRECACHE_ASSETS = [
   './modules/dict-flashcard-3d.js',
   './modules/dict-session-manager.js',
   './modules/dictionary-trainer.js',
+  './modules/irregular-verbs.js',
   './modules/spotify-controller.js',
   './modules/grammar-rules.js',
   './modules/notebook-module.js',

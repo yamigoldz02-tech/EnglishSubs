@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="css/app-core.css?v=3.7.1">
   <link rel="stylesheet" href="css/theme-overrides.css?v=3.7.1">
   <link rel="stylesheet" href="css/sparks.css">
-  <link rel="stylesheet" href="css/irregular-verbs.css?v=3.7.4">
+  <link rel="stylesheet" href="css/irregular-verbs.css?v=3.7.5">
   <link rel="stylesheet" href="css/mobile-compact.css?v=3.7.1">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
@@ -285,7 +285,7 @@
                 </div>
               </button>
 
-              <button id="openIrregularNavBtn" class="nav-dropdown-item" onclick="window.closeHeaderNav(); if(window.openIrregularVerbsModal) window.openIrregularVerbsModal('catalog');">
+              <button id="openIrregularNavBtn" class="nav-dropdown-item" onclick="if(window.closeHeaderNav) window.closeHeaderNav(); if(window.openIrregularVerbsModal) window.openIrregularVerbsModal('catalog');">
                 <div class="nav-dropdown-item-left">
                   <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 13-2 2 2 2"/><path d="m14 17 2-2-2-2"/></svg>
                   <span>Неправильные глаголы</span>
@@ -657,7 +657,7 @@
   </div>
 
   <script type="module" src="modules/types.js"></script>
-  <script type="module" src="modules/modal-templates.js?v=3.7.4"></script>
+  <script type="module" src="modules/modal-templates.js?v=3.7.5"></script>
   <script type="module" src="modules/ui-dialogs.js"></script>
   <script type="module" src="data/playlist_db.js?v=2.5.1"></script>
   <script type="module" src="modules/songs-data.js"></script>
@@ -684,7 +684,7 @@
   <script defer src="modules/dict-flashcard-3d.js?v=3.7.1"></script>
   <script defer src="modules/dict-session-manager.js?v=3.7.1"></script>
   <script defer src="modules/dictionary-trainer.js?v=3.7.1"></script>
-  <script defer src="modules/irregular-verbs.js?v=3.7.4"></script>
+  <script defer src="modules/irregular-verbs.js?v=3.7.5"></script>
   <script type="module" src="modules/spotify-controller.js?v=3.7.1"></script>
   <script type="module" src="modules/grammar-rules.js?v=3.7.1"></script>
   <script defer src="modules/notebook-module.js?v=3.7.1"></script>

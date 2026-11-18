@@ -56,6 +56,151 @@
   /**
    * Load user-defined custom irregular verbs from localStorage
    */
+    let listenersBound = false;
+
+  const IRREGULAR_VERBS_MODAL_HTML = `
+<div class="modal-overlay" id="irregularVerbsModal" style="display: none; z-index: 200050;">
+    <div class="modal-card" style="width: 700px; max-width: 95%; height: 82vh; display: flex; flex-direction: column;">
+      <div class="mobile-drag-handle"></div>
+
+      <div class="modal-header" style="flex-shrink: 0;">
+        <h3 style="display: flex; align-items: center; gap: 8px;">
+          <svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 13-2 2 2 2"/><path d="m14 17 2-2-2-2"/></svg>
+          <span>Неправильные глаголы</span>
+        </h3>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="irregTotalCountBadge" style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;"></span>
+          <span id="irregInDictCountBadge" style="font-size: 0.72rem; color: var(--accent-spotify); font-weight: 700;"></span>
+          <button class="modal-close-btn" id="closeIrregularVerbsBtn" title="Закрыть">✕</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="dict-tabs">
+        <button class="dict-tab active" id="irregTabCatalog">Каталог</button>
+        <button class="dict-tab" id="irregTabTrainer">Тренировка</button>
+      </div>
+
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 0.5rem; overflow: hidden; padding: 1rem 1.5rem; flex-grow: 1; min-height: 0; box-sizing: border-box;">
+
+        <!-- ════════════ CATALOG VIEW ════════════ -->
+        <div id="irregCatalogView" style="display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1; min-height: 0; overflow: hidden;">
+
+          <!-- Search & Filter Row -->
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0;">
+            <div class="premium-search-box" style="flex-grow: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity: 0.5; color: var(--text-main); flex-shrink: 0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="irregSearchInput" placeholder="Поиск по формам или переводу..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.85rem; outline: none; width: 100%;">
+            </div>
+          </div>
+
+          <!-- Filter Pills -->
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;">
+            <button class="irreg-filter-pill active" data-filter="all">Все глаголы</button>
+            <button class="irreg-filter-pill" data-filter="in_dict">В моём словаре</button>
+          </div>
+
+          <!-- Action row -->
+          <div style="display: flex; gap: 8px; flex-shrink: 0; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            <button id="irregAddCustomVerbBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 14px; border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+              <span>+ Добавить свой глагол</span>
+            </button>
+            <button id="irregLaunchTrainFromCatBtn" class="modal-btn primary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 16px; border-radius: 10px;">
+              <span>Начать тренировку</span>
+            </button>
+          </div>
+
+          <!-- Form to add custom verb (collapsible) -->
+          <div id="irregAddCustomForm" style="display: none; flex-direction: column; gap: 10px; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 14px; flex-shrink: 0; animation: fadeIn 0.2s ease;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">Новый неправильный глагол</span>
+              <button id="irregCloseCustomFormBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; line-height: 1;">✕</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+              <input type="text" id="irregCustomV1" class="irreg-text-input" placeholder="V1 (Infinitive), напр: go" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV2" class="irreg-text-input" placeholder="V2 (Past Simple), напр: went" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV3" class="irreg-text-input" placeholder="V3 (Participle), напр: gone" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <input type="text" id="irregCustomTrans" class="irreg-text-input" placeholder="Перевод (русский), напр: идти" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomExample" class="irreg-text-input" placeholder="Пример предложения (опционально)" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 8px;">
+              <button id="irregCancelCustomBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 14px; border-radius: 10px;">Отмена</button>
+              <button id="irregSaveCustomBtn" class="modal-btn primary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 16px; border-radius: 10px;">Сохранить глагол</button>
+            </div>
+          </div>
+
+          <!-- Verbs List (Scrollable) -->
+          <div id="irregCatalogList" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px; min-height: 0;">
+            <!-- Dynamically injected verb cards -->
+          </div>
+        </div>
+
+        <!-- ════════════ TRAINER VIEW ════════════ -->
+        <div id="irregTrainerView" style="display: none; flex-direction: column; gap: 0.75rem; flex-grow: 1; min-height: 0; overflow: hidden;">
+
+          <!-- Trainer Settings Row -->
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0;">
+            <select id="irregTrainerModeSelect" class="premium-select-filter" style="flex: 1; min-width: 130px;">
+              <option value="input">Ввод 3 форм</option>
+              <option value="flashcard">Карточки</option>
+              <option value="quiz">Тест</option>
+            </select>
+            <select id="irregTrainerScopeSelect" class="premium-select-filter" style="flex: 1; min-width: 130px;">
+              <option value="all">Все мои глаголы</option>
+              <option value="my_verbs">Из словаря</option>
+            </select>
+          </div>
+
+          <!-- Progress Bar -->
+          <div style="flex-shrink: 0; display: flex; align-items: center; gap: 10px;">
+            <div style="flex-grow: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
+              <div id="irregTrainerProgressBar" style="height: 100%; width: 0%; background: var(--accent-spotify); border-radius: 3px; transition: width 0.3s ease;"></div>
+            </div>
+            <span id="irregTrainerProgressText" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); white-space: nowrap;">0 / 0</span>
+          </div>
+
+          <!-- Card Container (Active Training) -->
+          <div id="irregTrainerCardContainer" style="flex-grow: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;">
+            <!-- Dynamically rendered by JS -->
+          </div>
+
+          <!-- Completion View -->
+          <div id="irregTrainerCompleteView" style="display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; flex-grow: 1; min-height: 0; text-align: center; padding: 20px;">
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Тренировка завершена</div>
+            <div id="irregCompleteStatsText" style="font-size: 0.9rem; color: var(--text-sub);"></div>
+            <div id="irregCompleteXPReward" style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);"></div>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+              <button id="irregTrainerRestartBtn" class="modal-btn primary-btn" style="font-size: 0.8rem; padding: 7px 18px; border-radius: 10px;">Повторить</button>
+              <button id="irregTrainerReturnCatBtn" class="modal-btn secondary-btn" style="font-size: 0.8rem; padding: 7px 18px; border-radius: 10px;">Каталог</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+`;
+
+  /**
+   * Ensure irregularVerbsModal is injected in DOM
+   * @returns {HTMLElement|null}
+   */
+  function ensureModalExists() {
+    let modal = document.getElementById('irregularVerbsModal');
+    if (modal) return modal;
+
+    const container = document.getElementById('modalsContainer') || document.body;
+    if (!container) return null;
+
+    const temp = document.createElement('div');
+    temp.innerHTML = IRREGULAR_VERBS_MODAL_HTML.trim();
+    modal = /** @type {HTMLElement} */ (temp.firstElementChild);
+    if (modal) {
+      container.appendChild(modal);
+    }
+    return modal;
+  }
+
   function loadCustomVerbs() {
     try {
       const saved = localStorage.getItem('custom_irregular_verbs');
@@ -64,7 +209,8 @@
         if (Array.isArray(customs)) {
           if (!window.irregularVerbsData) window.irregularVerbsData = [];
           customs.forEach(c => {
-            const exists = window.irregularVerbsData.some(v => v.v1.toLowerCase() === c.v1.toLowerCase());
+            if (!c || !c.v1) return;
+            const exists = window.irregularVerbsData.some(v => v && v.v1 && v.v1.toLowerCase() === c.v1.toLowerCase());
             if (!exists) {
               window.irregularVerbsData.unshift({
                 v1: c.v1,
@@ -1008,15 +1154,9 @@
    * @param {'catalog'|'trainer'} [tab]
    */
   function openModal(tab = 'catalog') {
-    let modal = document.getElementById('irregularVerbsModal');
+    const modal = ensureModalExists();
     if (!modal) {
-      if (typeof window.injectModalTemplates === 'function') {
-        window.injectModalTemplates();
-      }
-      modal = document.getElementById('irregularVerbsModal');
-    }
-    if (!modal) {
-      console.error('[IrregularVerbs] irregularVerbsModal element not found in DOM.');
+      console.error('[IrregularVerbs] irregularVerbsModal element not found or created.');
       return;
     }
 
@@ -1026,6 +1166,10 @@
     if (typeof window.openModalEl === 'function') {
       window.openModalEl(modal);
     } else {
+      modal.classList.remove('modal-animate-out');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
+      modal.classList.add('modal-animate-in');
       modal.style.display = 'flex';
     }
     switchTab(tab);
@@ -1075,16 +1219,19 @@
    * Initialize event listeners
    */
   function initListeners() {
+    if (listenersBound) return;
+    const modal = document.getElementById('irregularVerbsModal');
+    if (!modal) return;
+    listenersBound = true;
+
     // Modal Close
     const closeBtn = document.getElementById('closeIrregularVerbsBtn');
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    const modal = document.getElementById('irregularVerbsModal');
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-    }
+    // Modal backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
 
     // Tab buttons
     const tabCatBtn = document.getElementById('irregTabCatalog');
@@ -1292,10 +1439,12 @@
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
+        ensureModalExists();
         loadCustomVerbs();
         initListeners();
       });
     } else {
+      ensureModalExists();
       loadCustomVerbs();
       initListeners();
     }
