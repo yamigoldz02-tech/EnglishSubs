@@ -12,12 +12,12 @@
 (function() {
   // State variables
   let activeTab = 'catalog'; // 'catalog' or 'trainer'
-  let catalogFilter = 'top30'; // 'top30', 'top60', 'all', 'in_dict'
+  let catalogFilter = 'all'; // 'top30', 'top60', 'all', 'in_dict'
   let catalogSearch = '';
   
   // Trainer State
   let trainerMode = 'input'; // 'input', 'flashcard', 'quiz'
-  let trainerScope = 'top30'; // 'top30', 'top60', 'all', 'my_verbs'
+  let trainerScope = 'all'; // 'top30', 'top60', 'all', 'my_verbs'
   let trainerQueue = [];
   let trainerCurrentIndex = 0;
   let trainerScore = { correct: 0, total: 0 };
@@ -173,7 +173,7 @@
       if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
       if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
       if (typeof window.showToast === 'function') {
-        window.showToast(`⚡ ${verbObj.v1} (${verbObj.v2}, ${verbObj.v3}) добавлен в словарь!`);
+        window.showToast(`Глагол ${verbObj.v1} (${verbObj.v2}, ${verbObj.v3}) добавлен в словарь`);
       }
     }
 
@@ -312,8 +312,8 @@
     if (filtered.length === 0) {
       listEl.innerHTML = `
         <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem;">
-          <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
-          Ничего не найдено по вашему запросу.
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Список пуст</div>
+          <div style="font-size: 0.82rem;">${query ? 'Ничего не найдено по вашему запросу.' : 'У вас пока нет добавленных неправильных глаголов. Нажмите «+ Добавить свой глагол», чтобы добавить слова.'}</div>
         </div>
       `;
       return;
@@ -363,7 +363,7 @@
             <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <button class="irreg-btn-dict ${inDict ? 'active' : ''}" title="${inDict ? 'В вашем словаре' : 'Добавить в личный словарь'}">
-            ${inDict ? `✓ В словаре ${level > 0 ? `(Lvl ${level})` : ''}` : '+ В словарь'}
+            ${inDict ? `В словаре ${level > 0 ? `(Lvl ${level})` : ''}` : '+ В словарь'}
           </button>
         </div>
       `;
@@ -442,6 +442,29 @@
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
+    if (shuffled.length === 0) {
+      trainerQueue = [];
+      trainerCurrentIndex = 0;
+      trainerScore = { correct: 0, total: 0 };
+      const cardEl = document.getElementById('irregTrainerCardContainer');
+      const completeView = document.getElementById('irregTrainerCompleteView');
+      const progressText = document.getElementById('irregTrainerProgressText');
+      const progressBar = document.getElementById('irregTrainerProgressBar');
+      if (progressText) progressText.textContent = '0 / 0';
+      if (progressBar) progressBar.style.width = '0%';
+      if (completeView) completeView.style.display = 'none';
+      if (cardEl) {
+        cardEl.style.display = 'block';
+        cardEl.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem;">
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Нет глаголов для тренировки</div>
+            <div style="font-size: 0.82rem;">Сначала добавьте свои неправильные глаголы во вкладке «Каталог».</div>
+          </div>
+        `;
+      }
+      return;
+    }
+
     trainerQueue = shuffled.slice(0, Math.min(25, shuffled.length));
     trainerCurrentIndex = 0;
     trainerScore = { correct: 0, total: trainerQueue.length };
@@ -505,12 +528,12 @@
     cardEl.innerHTML = `
       <div class="irreg-exercise-box">
         <div class="irreg-ex-header">
-          <span class="irreg-ex-type-badge">✏️ Напишите все 3 формы</span>
+          <span class="irreg-ex-type-badge">Напишите все 3 формы</span>
         </div>
 
         <div class="irreg-ex-prompt" style="text-align: center; margin: 12px 0;">
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 6px;">Перевод глагола:</div>
-          <div class="irreg-ex-translation" style="font-size: 1.45rem; font-weight: 800; color: #60a5fa;">«${escapeHTML(verb.translation)}»</div>
+          <div class="irreg-ex-translation" style="font-size: 1.45rem; font-weight: 800; color: var(--text-main);">«${escapeHTML(verb.translation)}»</div>
           ${verb.example ? `<div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-top: 6px;">Контекст: «${escapeHTML(verb.example)}»</div>` : ''}
         </div>
 
@@ -533,13 +556,13 @@
 
         <div class="irreg-ex-controls">
           <button id="irregHintBtn" class="irreg-btn-secondary">
-            💡 Подсказка
+            Подсказка
           </button>
           <button id="irregSkipBtn" class="irreg-btn-secondary">
             Показать ответ
           </button>
           <button id="irregCheckBtn" class="irreg-btn-primary">
-            Проверить (Enter) ➔
+            Проверить (Enter)
           </button>
         </div>
       </div>
@@ -662,7 +685,7 @@
 
       feedback.className = 'irreg-feedback-msg is-success';
       feedback.style.display = 'block';
-      feedback.innerHTML = `🎉 Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
+      feedback.innerHTML = `Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
 
       if (!hasUsedHint) trainerScore.correct++;
 
@@ -670,7 +693,7 @@
       speakForms(verb.v1, verb.v2, verb.v3);
 
       if (checkBtn) {
-        checkBtn.textContent = 'Следующий ➔';
+        checkBtn.textContent = 'Следующий';
         checkBtn.onclick = () => {
           trainerCurrentIndex++;
           renderTrainerStep();
@@ -693,8 +716,8 @@
       feedback.className = 'irreg-feedback-msg is-error';
       feedback.style.display = 'block';
       feedback.innerHTML = `
-        ❌ Не совсем точно.<br>
-        Правильно: <strong style="color:#60a5fa;">${escapeHTML(verb.v1)}</strong> → <strong style="color:#eab308;">${escapeHTML(verb.v2)}</strong> → <strong style="color:#22c55e;">${escapeHTML(verb.v3)}</strong>
+        Неверно.<br>
+        Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>
       `;
 
       // Re-queue the verb for reinforcement at end of session
@@ -702,7 +725,7 @@
       trainerScore.total = trainerQueue.length;
 
       if (checkBtn) {
-        checkBtn.textContent = 'Далее ➔';
+        checkBtn.textContent = 'Далее';
         checkBtn.onclick = () => {
           trainerCurrentIndex++;
           renderTrainerStep();
@@ -730,7 +753,7 @@
     if (feedback) {
       feedback.className = 'irreg-feedback-msg is-info';
       feedback.style.display = 'block';
-      feedback.innerHTML = `💡 Ответ: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
+      feedback.innerHTML = `Ответ: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
     }
 
     speakForms(verb.v1, verb.v2, verb.v3);
@@ -740,7 +763,7 @@
     trainerScore.total = trainerQueue.length;
 
     if (checkBtn) {
-      checkBtn.textContent = 'Далее ➔';
+      checkBtn.textContent = 'Далее';
       checkBtn.onclick = () => {
         trainerCurrentIndex++;
         renderTrainerStep();
@@ -762,18 +785,17 @@
         <div class="irreg-flashcard" id="irregFlashcard">
           <!-- FRONT -->
           <div class="irreg-card-face irreg-card-front">
-            <span class="irreg-card-badge">Инфинитив (V1)</span>
-            <div class="irreg-front-translation">${escapeHTML(verb.translation)}</div>
-            <div class="irreg-front-word">${escapeHTML(verb.v1)}</div>
-            <div class="irreg-card-hint">Кликните или нажмите Пробел, чтобы увидеть V2 и V3</div>
+            <span class="irreg-card-badge">Перевод</span>
+            <div class="irreg-front-word">${escapeHTML(verb.translation)}</div>
+            <div class="irreg-card-hint">Вспомните все 3 формы (V1, V2, V3)</div>
           </div>
           <!-- BACK -->
           <div class="irreg-card-face irreg-card-back">
             <span class="irreg-card-badge">3 Формы глагола</span>
             <div class="irreg-back-forms">
-              <div><strong>V1:</strong> ${escapeHTML(verb.v1)}</div>
-              <div><strong>V2:</strong> <span style="color:#eab308;">${escapeHTML(verb.v2)}</span></div>
-              <div><strong>V3:</strong> <span style="color:#22c55e;">${escapeHTML(verb.v3)}</span></div>
+              <div><strong>V1:</strong> <span>${escapeHTML(verb.v1)}</span></div>
+              <div><strong>V2:</strong> <span>${escapeHTML(verb.v2)}</span></div>
+              <div><strong>V3:</strong> <span>${escapeHTML(verb.v3)}</span></div>
             </div>
             <div class="irreg-back-translation">${escapeHTML(verb.translation)}</div>
             ${verb.example ? `<div class="irreg-back-example">«${escapeHTML(verb.example)}»</div>` : ''}
@@ -782,15 +804,15 @@
 
         <!-- Rating controls (shown when flipped) -->
         <div class="irreg-rating-bar" id="irregRatingBar" style="display: none;">
-          <button class="irreg-rate-btn rate-again" id="irregRateAgain">❌ Забыл (Снова)</button>
-          <button class="irreg-rate-btn rate-hard" id="irregRateHard">⚠️ Трудно</button>
-          <button class="irreg-rate-btn rate-good" id="irregRateGood">✅ Помню</button>
-          <button class="irreg-rate-btn rate-easy" id="irregRateEasy">⚡ Легко (+XP)</button>
+          <button class="irreg-rate-btn rate-again" id="irregRateAgain">Снова</button>
+          <button class="irreg-rate-btn rate-hard" id="irregRateHard">Трудно</button>
+          <button class="irreg-rate-btn rate-good" id="irregRateGood">Хорошо</button>
+          <button class="irreg-rate-btn rate-easy" id="irregRateEasy">Легко</button>
         </div>
 
         <div class="irreg-flip-trigger-row" id="irregFlipTriggerRow">
           <button class="irreg-btn-primary" id="irregFlipBtn" style="width: 100%;">
-            Показать формы (V2 & V3) ➔
+            Показать формы (V2 и V3)
           </button>
         </div>
       </div>
@@ -876,7 +898,7 @@
     cardEl.innerHTML = `
       <div class="irreg-exercise-box">
         <div class="irreg-ex-header">
-          <span class="irreg-ex-type-badge">⚡ Блиц-тест</span>
+          <span class="irreg-ex-type-badge">Тест</span>
         </div>
 
         <div class="irreg-ex-prompt">
@@ -915,7 +937,7 @@
           if (feedback) {
             feedback.className = 'irreg-feedback-msg is-success';
             feedback.style.display = 'block';
-            feedback.innerHTML = `🎉 Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
+            feedback.innerHTML = `Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
           }
           speakForms(verb.v1, verb.v2, verb.v3);
         } else {
@@ -929,7 +951,7 @@
           if (feedback) {
             feedback.className = 'irreg-feedback-msg is-error';
             feedback.style.display = 'block';
-            feedback.innerHTML = `❌ Правильный ответ: <strong style="color:#eab308;">${escapeHTML(correctAnswer)}</strong>`;
+            feedback.innerHTML = `Правильный ответ: <strong>${escapeHTML(correctAnswer)}</strong>`;
           }
           trainerQueue.push(verb);
           trainerScore.total = trainerQueue.length;
@@ -962,7 +984,7 @@
           Правильно: <strong>${trainerScore.correct}</strong> из <strong>${trainerScore.total}</strong> (${accuracy}%)
         </div>
         <div style="font-size: 0.85rem; color: var(--text-muted);">
-          ${accuracy >= 80 ? '🔥 Отличный результат! Формы надёжно закреплены.' : '💪 Хорошая практика! Повторите ещё раз для автоматизма.'}
+          ${accuracy >= 80 ? 'Отличный результат! Формы закреплены.' : 'Хорошая практика! Повторите ещё раз для автоматизма.'}
         </div>
       `;
     }
@@ -1229,7 +1251,7 @@
         renderCatalog();
         updateHeaderStats();
         if (typeof window.showToast === 'function') {
-          window.showToast(`⚡ Свой глагол ${v1} успешно добавлен!`);
+          window.showToast(`Глагол ${v1} успешно добавлен`);
         }
       });
     }

@@ -79,9 +79,7 @@
   font-weight: 700;
   color: var(--text-main);
 }
-.irreg-form-item.v1 .irreg-form-val { color: #60a5fa; }
-.irreg-form-item.v2 .irreg-form-val { color: #eab308; }
-.irreg-form-item.v3 .irreg-form-val { color: #22c55e; }
+
 
 .irreg-arrow {
   color: var(--text-muted);
@@ -261,11 +259,7 @@
   font-size: 0.75rem;
   color: var(--text-muted);
 }
-.irreg-v1-word {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #60a5fa;
-}
+.irreg-v1-word { font-size: 1.3rem; font-weight: 800; color: var(--text-main); }
 
 /* ── Input Grid ── */
 .irreg-ex-inputs-grid {
@@ -327,7 +321,7 @@
 .irreg-feedback-msg.is-success {
   background: rgba(34, 197, 94, 0.08);
   border: 1px solid rgba(34, 197, 94, 0.25);
-  color: #22c55e;
+  color: var(--accent-spotify);
 }
 .irreg-feedback-msg.is-error {
   background: rgba(239, 68, 68, 0.06);
@@ -337,7 +331,7 @@
 .irreg-feedback-msg.is-info {
   background: rgba(96, 165, 250, 0.06);
   border: 1px solid rgba(96, 165, 250, 0.2);
-  color: #60a5fa;
+  color: var(--text-main);
 }
 
 /* ── Exercise Controls ── */
@@ -407,11 +401,7 @@
   background: rgba(255, 255, 255, 0.04);
   border-radius: 8px;
 }
-.irreg-front-word {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #60a5fa;
-}
+.irreg-front-word { font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
 .irreg-front-translation {
   font-size: 0.85rem;
   color: var(--text-sub);
@@ -462,10 +452,10 @@
   outline: none;
 }
 .irreg-rate-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
-.irreg-rate-btn.rate-again:hover { border-color: rgba(239, 68, 68, 0.4); color: #ef4444; }
-.irreg-rate-btn.rate-hard:hover { border-color: rgba(234, 179, 8, 0.4); color: #eab308; }
-.irreg-rate-btn.rate-good:hover { border-color: rgba(34, 197, 94, 0.4); color: #22c55e; }
-.irreg-rate-btn.rate-easy:hover { border-color: rgba(96, 165, 250, 0.4); color: #60a5fa; }
+.irreg-rate-btn.rate-again:hover { border-color: var(--border-glass-hover); color: var(--text-main); }
+.irreg-rate-btn.rate-hard:hover { border-color: var(--border-glass-hover); color: var(--text-main); }
+.irreg-rate-btn.rate-good:hover { border-color: var(--border-glass-hover); color: var(--text-main); }
+.irreg-rate-btn.rate-easy:hover { border-color: var(--border-glass-hover); color: var(--text-main); }
 
 .irreg-flip-trigger-row {
   width: 100%;
@@ -479,12 +469,7 @@
   font-size: 0.85rem;
   color: var(--text-sub);
 }
-.irreg-quiz-target-word {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #60a5fa;
-  margin: 4px 0;
-}
+.irreg-quiz-target-word { font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin: 4px 0; }
 .irreg-quiz-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -509,7 +494,7 @@
 .irreg-quiz-btn.is-correct {
   background: rgba(34, 197, 94, 0.15) !important;
   border-color: rgba(34, 197, 94, 0.5) !important;
-  color: #22c55e !important;
+  color: var(--accent-spotify) !important;
 }
 .irreg-quiz-btn.is-error {
   background: rgba(239, 68, 68, 0.1) !important;
@@ -535,9 +520,199 @@
   .irreg-form-item { min-width: 50px; }
   .irreg-quiz-grid { grid-template-columns: 1fr; }
   .irreg-flashcard { height: 220px; }
-  .irreg-front-word { font-size: 1.4rem; }
+  .irreg-front-word { font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
   .irreg-ex-inputs-grid { flex-direction: column; }
   .irreg-ex-controls { justify-content: center; }
   .irreg-rating-bar { gap: 4px; }
   .irreg-rate-btn { padding: 6px 10px; font-size: 0.7rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THEME ADAPTATION: WARM THEME (COFFEE / PAPER) & LIGHT THEME
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Warm Theme (body.warm-theme) ── */
+body.warm-theme .irreg-verb-card {
+  background: #FFFDF9 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+  box-shadow: 0 1px 3px rgba(62, 39, 35, 0.04) !important;
+}
+body.warm-theme .irreg-verb-card:hover {
+  background: #F4EEDB !important;
+}
+body.warm-theme .irreg-verb-card.in-dict {
+  border-color: rgba(244, 162, 97, 0.3) !important;
+  background: rgba(244, 162, 97, 0.06) !important;
+}
+body.warm-theme .irreg-filter-pill {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #5C4B4B !important;
+}
+body.warm-theme .irreg-filter-pill:hover {
+  background: #F4EEDB !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-filter-pill.active {
+  background: rgba(244, 162, 97, 0.18) !important;
+  border-color: #F4A261 !important;
+  color: #3E2723 !important;
+  font-weight: 700 !important;
+}
+body.warm-theme .irreg-btn-speak {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #5C4B4B !important;
+}
+body.warm-theme .irreg-btn-speak:hover {
+  background: #F4EEDB !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-btn-dict {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #5C4B4B !important;
+}
+body.warm-theme .irreg-btn-dict:hover {
+  background: #F4EEDB !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-btn-dict.active {
+  background: rgba(244, 162, 97, 0.15) !important;
+  border-color: #F4A261 !important;
+  color: #B45309 !important;
+}
+body.warm-theme .irreg-exercise-box,
+body.warm-theme #irregAddCustomForm {
+  background: #FFFDF9 !important;
+  border: 1px solid rgba(62, 39, 35, 0.08) !important;
+}
+body.warm-theme .irreg-text-input {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.14) !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-text-input:focus {
+  border-color: #F4A261 !important;
+  box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.15) !important;
+}
+body.warm-theme .irreg-card-face {
+  background: #FFFDF9 !important;
+  border: 1px solid rgba(62, 39, 35, 0.1) !important;
+  color: #2D2424 !important;
+  box-shadow: 0 4px 20px rgba(62, 39, 35, 0.06) !important;
+}
+body.warm-theme .irreg-card-badge {
+  background: rgba(62, 39, 35, 0.06) !important;
+  color: #8D7B7B !important;
+}
+body.warm-theme .irreg-rate-btn {
+  background: #FAF6ED !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #5C4B4B !important;
+}
+body.warm-theme .irreg-rate-btn:hover {
+  background: #F4EEDB !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-quiz-btn {
+  background: #FFFDF9 !important;
+  border: 1px solid rgba(62, 39, 35, 0.12) !important;
+  color: #2D2424 !important;
+}
+body.warm-theme .irreg-quiz-btn:hover:not(:disabled) {
+  background: #F4EEDB !important;
+}
+
+/* ── Light Theme (body.light-theme) ── */
+body.light-theme .irreg-verb-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+body.light-theme .irreg-verb-card:hover {
+  background: #F9FAFB !important;
+}
+body.light-theme .irreg-verb-card.in-dict {
+  border-color: rgba(34, 197, 94, 0.25) !important;
+  background: rgba(34, 197, 94, 0.04) !important;
+}
+body.light-theme .irreg-filter-pill {
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #4B5563 !important;
+}
+body.light-theme .irreg-filter-pill:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-filter-pill.active {
+  background: #E5E7EB !important;
+  border-color: #9CA3AF !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+body.light-theme .irreg-btn-speak {
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #4B5563 !important;
+}
+body.light-theme .irreg-btn-speak:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-btn-dict {
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #4B5563 !important;
+}
+body.light-theme .irreg-btn-dict:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-btn-dict.active {
+  background: rgba(34, 197, 94, 0.12) !important;
+  border-color: rgba(34, 197, 94, 0.4) !important;
+  color: #15803D !important;
+}
+body.light-theme .irreg-exercise-box,
+body.light-theme #irregAddCustomForm {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+body.light-theme .irreg-text-input {
+  background: #F9FAFB !important;
+  border: 1px solid #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-text-input:focus {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+}
+body.light-theme .irreg-card-face {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #111827 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+body.light-theme .irreg-card-badge {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #6B7280 !important;
+}
+body.light-theme .irreg-rate-btn {
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #4B5563 !important;
+}
+body.light-theme .irreg-rate-btn:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-quiz-btn {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  color: #111827 !important;
+}
+body.light-theme .irreg-quiz-btn:hover:not(:disabled) {
+  background: #F3F4F6 !important;
 }

@@ -1416,8 +1416,8 @@ export const ALL_MODALS_HTML = `
 
       <!-- Tabs -->
       <div class="dict-tabs">
-        <button class="dict-tab active" id="irregTabCatalog">📖 Каталог</button>
-        <button class="dict-tab" id="irregTabTrainer">🎯 Тренировка</button>
+        <button class="dict-tab active" id="irregTabCatalog">Каталог</button>
+        <button class="dict-tab" id="irregTabTrainer">Тренировка</button>
       </div>
 
       <div class="modal-body" style="display: flex; flex-direction: column; gap: 0.5rem; overflow: hidden; padding: 1rem 1.5rem; flex-grow: 1; min-height: 0; box-sizing: border-box;">
@@ -1429,52 +1429,44 @@ export const ALL_MODALS_HTML = `
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0;">
             <div class="premium-search-box" style="flex-grow: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity: 0.5; color: var(--text-main); flex-shrink: 0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-              <input type="text" id="irregSearchInput" placeholder="Поиск глагола..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.85rem; outline: none; width: 100%;">
+              <input type="text" id="irregSearchInput" placeholder="Поиск по формам или переводу..." style="background: transparent; border: none; color: var(--text-main); font-size: 0.85rem; outline: none; width: 100%;">
             </div>
           </div>
 
           <!-- Filter Pills -->
           <div style="display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;">
-            <button class="irreg-filter-pill active" data-filter="top30">🔥 Топ-30</button>
-            <button class="irreg-filter-pill" data-filter="top60">📘 Топ-60</button>
-            <button class="irreg-filter-pill" data-filter="all">📚 Все (134)</button>
-            <button class="irreg-filter-pill" data-filter="in_dict">✅ В моём словаре</button>
-            <button class="irreg-filter-pill" data-filter="custom">⭐ Свои глаголы</button>
+            <button class="irreg-filter-pill active" data-filter="all">Все глаголы</button>
+            <button class="irreg-filter-pill" data-filter="in_dict">В моём словаре</button>
           </div>
 
           <!-- Action row -->
           <div style="display: flex; gap: 8px; flex-shrink: 0; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-              <button id="irregAddCustomVerbBtn" class="irreg-btn-secondary" style="font-size: 0.75rem;">
-                ➕ Добавить свой глагол
-              </button>
-              <button id="irregBulkAddTop30Btn" class="irreg-btn-secondary" style="font-size: 0.75rem;">
-                + Топ-30 в словарь
-              </button>
-            </div>
-            <button id="irregLaunchTrainFromCatBtn" class="irreg-btn-primary" style="font-size: 0.75rem;">
-              🎯 Начать тренировку
+            <button id="irregAddCustomVerbBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 14px; border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+              <span>+ Добавить свой глагол</span>
+            </button>
+            <button id="irregLaunchTrainFromCatBtn" class="modal-btn primary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 16px; border-radius: 10px;">
+              <span>Начать тренировку</span>
             </button>
           </div>
 
           <!-- Form to add custom verb (collapsible) -->
           <div id="irregAddCustomForm" style="display: none; flex-direction: column; gap: 10px; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 14px; flex-shrink: 0; animation: fadeIn 0.2s ease;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">➕ Добавление своего неправильного глагола</span>
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">Новый неправильный глагол</span>
               <button id="irregCloseCustomFormBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; line-height: 1;">✕</button>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-              <input type="text" id="irregCustomV1" class="irreg-text-input" placeholder="V1 (Infinitive), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
-              <input type="text" id="irregCustomV2" class="irreg-text-input" placeholder="V2 (Past Simple), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
-              <input type="text" id="irregCustomV3" class="irreg-text-input" placeholder="V3 (Participle), напр: cast" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV1" class="irreg-text-input" placeholder="V1 (Infinitive), напр: go" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV2" class="irreg-text-input" placeholder="V2 (Past Simple), напр: went" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomV3" class="irreg-text-input" placeholder="V3 (Participle), напр: gone" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-              <input type="text" id="irregCustomTrans" class="irreg-text-input" placeholder="Перевод (русский), напр: бросать" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
+              <input type="text" id="irregCustomTrans" class="irreg-text-input" placeholder="Перевод (русский), напр: идти" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
               <input type="text" id="irregCustomExample" class="irreg-text-input" placeholder="Пример предложения (опционально)" style="padding: 7px 10px; font-size: 0.82rem;" autocomplete="off">
             </div>
             <div style="display: flex; justify-content: flex-end; gap: 8px;">
-              <button id="irregCancelCustomBtn" class="irreg-btn-secondary" style="font-size: 0.75rem; padding: 6px 14px;">Отмена</button>
-              <button id="irregSaveCustomBtn" class="irreg-btn-primary" style="font-size: 0.75rem; padding: 6px 14px;">Сохранить глагол</button>
+              <button id="irregCancelCustomBtn" class="modal-btn secondary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 14px; border-radius: 10px;">Отмена</button>
+              <button id="irregSaveCustomBtn" class="modal-btn primary-btn" style="font-size: 0.75rem; margin: 0; padding: 6px 16px; border-radius: 10px;">Сохранить глагол</button>
             </div>
           </div>
 
@@ -1490,22 +1482,20 @@ export const ALL_MODALS_HTML = `
           <!-- Trainer Settings Row -->
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; flex-shrink: 0;">
             <select id="irregTrainerModeSelect" class="premium-select-filter" style="flex: 1; min-width: 130px;">
-              <option value="input">✏️ Ввод форм</option>
-              <option value="flashcard">🃏 Флеш-карточки</option>
-              <option value="quiz">⚡ Блиц-тест</option>
+              <option value="input">Ввод 3 форм</option>
+              <option value="flashcard">Карточки</option>
+              <option value="quiz">Тест</option>
             </select>
             <select id="irregTrainerScopeSelect" class="premium-select-filter" style="flex: 1; min-width: 130px;">
-              <option value="top30">Топ-30</option>
-              <option value="top60">Топ-60</option>
-              <option value="all">Все (134)</option>
-              <option value="my_verbs">Из моего словаря</option>
+              <option value="all">Все мои глаголы</option>
+              <option value="my_verbs">Из словаря</option>
             </select>
           </div>
 
           <!-- Progress Bar -->
           <div style="flex-shrink: 0; display: flex; align-items: center; gap: 10px;">
             <div style="flex-grow: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden;">
-              <div id="irregTrainerProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-spotify), #34d399); border-radius: 3px; transition: width 0.3s ease;"></div>
+              <div id="irregTrainerProgressBar" style="height: 100%; width: 0%; background: var(--accent-spotify); border-radius: 3px; transition: width 0.3s ease;"></div>
             </div>
             <span id="irregTrainerProgressText" style="font-size: 0.75rem; font-weight: 700; color: var(--text-sub); white-space: nowrap;">0 / 0</span>
           </div>
@@ -1517,13 +1507,12 @@ export const ALL_MODALS_HTML = `
 
           <!-- Completion View -->
           <div id="irregTrainerCompleteView" style="display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; flex-grow: 1; min-height: 0; text-align: center; padding: 20px;">
-            <div style="font-size: 3rem;">🏆</div>
-            <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Тренировка завершена!</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Тренировка завершена</div>
             <div id="irregCompleteStatsText" style="font-size: 0.9rem; color: var(--text-sub);"></div>
-            <div id="irregCompleteXPReward" style="font-size: 1.3rem; font-weight: 800; color: #60a5fa;"></div>
+            <div id="irregCompleteXPReward" style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);"></div>
             <div style="display: flex; gap: 10px; margin-top: 10px;">
-              <button id="irregTrainerRestartBtn" class="irreg-btn-primary">🔄 Ещё раз</button>
-              <button id="irregTrainerReturnCatBtn" class="irreg-btn-secondary">📖 Каталог</button>
+              <button id="irregTrainerRestartBtn" class="modal-btn primary-btn" style="font-size: 0.8rem; padding: 7px 18px; border-radius: 10px;">Повторить</button>
+              <button id="irregTrainerReturnCatBtn" class="modal-btn secondary-btn" style="font-size: 0.8rem; padding: 7px 18px; border-radius: 10px;">Каталог</button>
             </div>
           </div>
         </div>
