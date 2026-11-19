@@ -305,6 +305,13 @@
                 </div>
               </button>
 
+              <button id="linkDeviceBtn" class="nav-dropdown-item" style="display: flex !important; width: 100% !important; justify-content: flex-start !important; align-items: center !important; text-align: left !important; box-sizing: border-box !important; border-radius: 12px !important; padding: 9px 12px !important; height: auto !important; min-height: 40px !important;" onclick="window.closeHeaderNav()">
+                <div class="nav-dropdown-item-left">
+                  <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/><path d="M2 10h2"/><path d="M20 10h2"/><path d="M2 14h2"/><path d="M20 14h2"/></svg>
+                  <span>Связать устройство</span>
+                </div>
+              </button>
+
               <button id="apiSettingsBtn" class="nav-dropdown-item" style="display: flex !important; width: 100% !important; justify-content: flex-start !important; align-items: center !important; text-align: left !important; box-sizing: border-box !important; border-radius: 12px !important; padding: 9px 12px !important; height: auto !important; min-height: 40px !important;" onclick="window.closeHeaderNav()">
                 <div class="nav-dropdown-item-left">
                   <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -714,7 +721,240 @@
           }
         });
       }
+
+      // ── Link Device Modal Logic ──
+      const linkDeviceBtn = document.getElementById('linkDeviceBtn');
+      if (linkDeviceBtn) {
+        linkDeviceBtn.addEventListener('click', () => {
+          openLinkDeviceModal();
+        });
+      }
     });
+
+    function openLinkDeviceModal() {
+      let modal = document.getElementById('linkDeviceModal');
+      if (modal) modal.remove();
+
+      const user = window.SyncManager ? window.SyncManager.getCurrentUser() : null;
+      const uid = user ? user.uid : null;
+      const overrideUid = localStorage.getItem('sync_manager_override_uid');
+
+      let bodyHTML = '';
+
+      if (uid && !user.isOverride) {
+        // Logged in via Google — show code for sharing
+        bodyHTML = `
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
+              Вы вошли через Google как <strong style="color: var(--text-main);">${user.displayName || 'Пользователь'}</strong>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">
+              Скопируйте код ниже и введите его на другом устройстве, чтобы связать аккаунты.
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" id="linkDeviceCodeOutput" value="${uid}" readonly
+              style="flex: 1; padding: 10px 12px; font-size: 0.82rem; border-radius: 10px;
+              background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+              color: var(--text-main); font-family: monospace; outline: none; cursor: text;"
+            >
+            <button id="linkDeviceCopyBtn" class="modal-btn primary-btn"
+              style="font-size: 0.78rem; margin: 0; padding: 8px 16px; border-radius: 10px; white-space: nowrap;">
+              Копировать
+            </button>
+          </div>
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-glass);">
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px;">
+              Или введите код с другого устройства, чтобы подключиться к нему:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="linkDeviceCodeInput" placeholder="Вставьте код..."
+                style="flex: 1; padding: 10px 12px; font-size: 0.82rem; border-radius: 10px;
+                background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+                color: var(--text-main); font-family: monospace; outline: none;"
+                autocomplete="off" autocorrect="off" spellcheck="false"
+              >
+              <button id="linkDeviceLinkBtn" class="modal-btn secondary-btn"
+                style="font-size: 0.78rem; margin: 0; padding: 8px 16px; border-radius: 10px; white-space: nowrap;">
+                Связать
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (overrideUid) {
+        // Linked via code
+        bodyHTML = `
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 0.82rem; color: var(--accent-spotify); font-weight: 700; margin-bottom: 8px;">
+              Устройство связано по коду
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">
+              Данные синхронизируются с привязанным аккаунтом.
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" value="${overrideUid}" readonly
+              style="flex: 1; padding: 10px 12px; font-size: 0.75rem; border-radius: 10px;
+              background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+              color: var(--text-muted); font-family: monospace; outline: none; cursor: text;"
+            >
+            <button id="linkDeviceUnlinkBtn" class="modal-btn secondary-btn"
+              style="font-size: 0.78rem; margin: 0; padding: 8px 16px; border-radius: 10px; white-space: nowrap; color: #ef4444; border-color: rgba(239,68,68,0.3);">
+              Отвязать
+            </button>
+          </div>
+        `;
+      } else {
+        // Not logged in at all
+        bodyHTML = `
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+              Войдите через Google, чтобы получить код синхронизации,<br>
+              или введите код с другого устройства.
+            </div>
+            <button id="linkDeviceGoogleBtn" class="modal-btn primary-btn"
+              style="font-size: 0.82rem; margin: 0 auto 16px; padding: 10px 24px; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Войти через Google
+            </button>
+          </div>
+          <div style="padding-top: 16px; border-top: 1px solid var(--border-glass);">
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px;">
+              Введите код с другого устройства:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="linkDeviceCodeInputNew" placeholder="Вставьте код синхронизации..."
+                style="flex: 1; padding: 10px 12px; font-size: 0.82rem; border-radius: 10px;
+                background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
+                color: var(--text-main); font-family: monospace; outline: none;"
+                autocomplete="off" autocorrect="off" spellcheck="false"
+              >
+              <button id="linkDeviceLinkBtnNew" class="modal-btn primary-btn"
+                style="font-size: 0.78rem; margin: 0; padding: 8px 16px; border-radius: 10px; white-space: nowrap;">
+                Связать
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      const wrapper = document.createElement('div');
+      wrapper.id = 'linkDeviceModal';
+      wrapper.className = 'modal-overlay';
+      wrapper.style.cssText = 'display: flex; z-index: 200100;';
+      wrapper.innerHTML = `
+        <div class="modal-card" style="width: 480px; max-width: 92%;">
+          <div class="mobile-drag-handle"></div>
+          <div class="modal-header">
+            <h3 style="display: flex; align-items: center; gap: 8px;">
+              <svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/><path d="M2 10h2"/><path d="M20 10h2"/><path d="M2 14h2"/><path d="M20 14h2"/></svg>
+              <span>Связать устройство</span>
+            </h3>
+            <button class="modal-close-btn" id="linkDeviceCloseBtn" title="Закрыть">✕</button>
+          </div>
+          <div class="modal-body" style="padding: 1rem 1.5rem;">
+            ${bodyHTML}
+          </div>
+        </div>
+      `;
+
+      const container = document.getElementById('modalsContainer') || document.body;
+      container.appendChild(wrapper);
+
+      if (typeof window.openModalEl === 'function') {
+        window.openModalEl(wrapper);
+      }
+
+      // Close
+      const closeBtn = document.getElementById('linkDeviceCloseBtn');
+      if (closeBtn) closeBtn.addEventListener('click', () => closeLinkDeviceModal());
+      wrapper.addEventListener('click', (e) => { if (e.target === wrapper) closeLinkDeviceModal(); });
+
+      // Copy
+      const copyBtn = document.getElementById('linkDeviceCopyBtn');
+      const codeOutput = document.getElementById('linkDeviceCodeOutput');
+      if (copyBtn && codeOutput) {
+        copyBtn.addEventListener('click', () => {
+          codeOutput.select();
+          codeOutput.setSelectionRange(0, 99999);
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(codeOutput.value);
+            } else {
+              document.execCommand('copy');
+            }
+            copyBtn.textContent = 'Скопировано!';
+            setTimeout(() => { copyBtn.textContent = 'Копировать'; }, 2000);
+          } catch(e) {
+            if (typeof window.showToast === 'function') window.showToast('Не удалось скопировать');
+          }
+        });
+      }
+
+      // Link
+      const linkBtn = document.getElementById('linkDeviceLinkBtn') || document.getElementById('linkDeviceLinkBtnNew');
+      const codeInput = document.getElementById('linkDeviceCodeInput') || document.getElementById('linkDeviceCodeInputNew');
+      if (linkBtn && codeInput) {
+        linkBtn.addEventListener('click', async () => {
+          const code = codeInput.value.trim();
+          if (!code || code.length < 5) {
+            if (typeof window.showToast === 'function') window.showToast('Введите корректный код!');
+            return;
+          }
+          if (window.SyncManager && window.SyncManager.linkWithCode) {
+            linkBtn.textContent = 'Связываю...';
+            linkBtn.disabled = true;
+            try {
+              await window.SyncManager.linkWithCode(code);
+            } catch(e) {
+              if (typeof window.showToast === 'function') window.showToast('Ошибка привязки: ' + e.message);
+              linkBtn.textContent = 'Связать';
+              linkBtn.disabled = false;
+            }
+          }
+        });
+      }
+
+      // Google sign in
+      const googleBtn = document.getElementById('linkDeviceGoogleBtn');
+      if (googleBtn) {
+        googleBtn.addEventListener('click', async () => {
+          if (window.SyncManager && window.SyncManager.signIn) {
+            googleBtn.textContent = 'Вхожу...';
+            googleBtn.disabled = true;
+            try {
+              await window.SyncManager.signIn();
+              closeLinkDeviceModal();
+              setTimeout(() => openLinkDeviceModal(), 300);
+            } catch(e) {
+              googleBtn.textContent = 'Войти через Google';
+              googleBtn.disabled = false;
+            }
+          }
+        });
+      }
+
+      // Unlink
+      const unlinkBtn = document.getElementById('linkDeviceUnlinkBtn');
+      if (unlinkBtn) {
+        unlinkBtn.addEventListener('click', () => {
+          localStorage.removeItem('sync_manager_override_uid');
+          if (typeof window.showToast === 'function') window.showToast('Устройство отвязано.');
+          closeLinkDeviceModal();
+          setTimeout(() => openLinkDeviceModal(), 300);
+        });
+      }
+    }
+
+    function closeLinkDeviceModal() {
+      const modal = document.getElementById('linkDeviceModal');
+      if (!modal) return;
+      if (typeof window.closeModalEl === 'function') {
+        window.closeModalEl(modal);
+      } else {
+        modal.remove();
+      }
+    }
   </script>
 
   <!-- Spotify Now Playing Widget -->

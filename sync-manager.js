@@ -542,14 +542,14 @@ window.SyncManager = {
     // Mobile/Cross-browser Code Sync Links
     async linkWithCode(code) {
         if (!code || code.trim().length < 5) {
-            alert('Неверный код переноса!');
+            showSyncNotice('Неверный код переноса!', true);
             return;
         }
         originalSetItem.call(localStorage, 'sync_manager_override_uid', code.trim());
         const mockUser = getSyncUser();
         if (mockUser) {
             await pullCloudToLocal(mockUser);
-            alert('Устройство успешно связано по коду!');
+            showSyncNotice('Устройство успешно связано по коду!');
             window.location.reload();
         }
     }
