@@ -1499,7 +1499,13 @@
 
     // Modal backdrop click
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      if (e.target === modal) {
+        // If user is actively in a trainer session, do NOT close on accidental backdrop tap
+        if (activeTab === 'trainer' && trainerQueue.length > 0 && trainerCurrentIndex < trainerQueue.length) {
+          return;
+        }
+        closeModal();
+      }
     });
 
     // Tab buttons
@@ -1723,6 +1729,8 @@
   window.speakIrregularForms = speakForms;
   window.toggleIrregularVerbInDict = toggleVerbInDict;
   window.convertKeyboardLayout = convertLayout;
+  window.loadCustomVerbs = loadCustomVerbs;
+  window.updateIrregularStats = updateHeaderStats;
 
   // Auto-init on DOM ready
   if (typeof document !== 'undefined') {

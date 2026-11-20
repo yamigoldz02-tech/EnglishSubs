@@ -901,7 +901,9 @@
   #syncModalCard, 
   #editWordModalCard, 
   #addWordModalCard, 
-  #addPhraseModalCard {
+  #addPhraseModalCard,
+  #irregularVerbsModal .modal-card,
+  #linkDeviceModal .modal-card {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;

@@ -87,6 +87,26 @@ function shouldExclude(key) {
     return false;
 }
 
+function applyUpdatesLocallyWithoutReload() {
+    console.log('[SyncManager] Applying cloud updates in-memory without page reload...');
+    try {
+        const savedDict = localStorage.getItem('personal_dictionary');
+        if (savedDict && typeof window.personalDictionary !== 'undefined') {
+            window.personalDictionary = JSON.parse(savedDict);
+            if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
+        }
+        if (typeof window.loadCustomVerbs === 'function') {
+            window.loadCustomVerbs();
+        }
+        if (typeof window.updateIrregularStats === 'function') {
+            window.updateIrregularStats();
+        }
+        window.dispatchEvent(new CustomEvent('cloud-sync-applied'));
+    } catch (e) {
+        console.warn('[SyncManager] Error updating in-memory state:', e);
+    }
+}
+
 // Transparently Intercept LocalStorage Operations
 const originalSetItem = localStorage.setItem;
 const originalRemoveItem = localStorage.removeItem;
@@ -359,10 +379,9 @@ async function pullCloudToLocal(user) {
                     console.log('[SyncManager] Pushing merged data back to Cloud...');
                     await pushLocalToCloud();
                     
-                    console.log('[SyncManager] Initial merge and sync complete! Reloading page to apply updates...');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 800);
+                    console.log('[SyncManager] Initial merge and sync complete! Applying updates...');
+                    applyUpdatesLocallyWithoutReload();
+                    showSyncNotice('Данные синхронизированы с облаком');
                 } else {
                     // No local dictionary, safe to blindly write cloud payload
                     console.log('[SyncManager] Local dictionary is empty. Applying cloud data directly...');
@@ -374,10 +393,9 @@ async function pullCloudToLocal(user) {
                     originalSetItem.call(localStorage, 'last_sync_payload_' + projectName, JSON.stringify(cloudPayload));
                     isApplyingCloudData = false;
                     
-                    console.log('[SyncManager] Initial sync complete! Reloading page to apply updates...');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 800);
+                    console.log('[SyncManager] Initial sync complete! Applying updates...');
+                    applyUpdatesLocallyWithoutReload();
+                    showSyncNotice('Данные синхронизированы с облаком');
                 }
             } else if (new Date(cloudTimestamp) > new Date(localTimestamp)) {
                 // Cloud is newer than local
@@ -422,10 +440,9 @@ async function pullCloudToLocal(user) {
                     isApplyingCloudData = false;
                 }
                 
-                console.log('[SyncManager] Sync complete! Reloading page to apply updates...');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 800);
+                console.log('[SyncManager] Sync complete! Applying updates...');
+                applyUpdatesLocallyWithoutReload();
+                showSyncNotice('Данные обновлены из облака');
             } else if (new Date(localTimestamp) > new Date(cloudTimestamp)) {
                 // Local is newer! Push to cloud
                 console.log('[SyncManager] Local storage has newer updates than cloud. Backing up to Cloud...');
