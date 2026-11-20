@@ -716,3 +716,111 @@ body.light-theme .irreg-quiz-btn {
 body.light-theme .irreg-quiz-btn:hover:not(:disabled) {
   background: #F3F4F6 !important;
 }
+
+/* ── Mastery Tracking Badges ──────────────────────────────────────────────── */
+.irreg-mastery-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.irreg-mastery-progress {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(234, 179, 8, 0.1);
+  color: #eab308;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  padding: 0 6px;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.irreg-verb-card.is-learned {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.irreg-verb-card.is-learned:hover {
+  opacity: 1;
+}
+
+body.light-theme .irreg-mastery-badge {
+  background: rgba(34, 197, 94, 0.08) !important;
+}
+
+body.light-theme .irreg-mastery-progress {
+  background: rgba(234, 179, 8, 0.08) !important;
+}
+
+/* ── Interactive Mastery Toggle Button ────────────────────────────────────── */
+.irreg-btn-mastery {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.15));
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.irreg-btn-mastery:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.irreg-btn-mastery.is-learned {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.irreg-btn-mastery.is-learned:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+body.light-theme .irreg-btn-mastery {
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #4B5563 !important;
+}
+
+body.light-theme .irreg-btn-mastery:hover {
+  background: #E5E7EB !important;
+  color: #111827 !important;
+}
+
+body.light-theme .irreg-btn-mastery.is-learned {
+  background: rgba(34, 197, 94, 0.1) !important;
+  color: #16a34a !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+body.light-theme .irreg-btn-mastery.is-learned:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #dc2626 !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}

@@ -22,7 +22,7 @@
   
   // Trainer State
   let trainerMode = 'input'; // 'input', 'flashcard', 'quiz'
-  let trainerScope = 'all'; // 'top30', 'top60', 'all', 'my_verbs'
+  let trainerScope = 'not_learned'; // 'not_learned', 'all', 'my_verbs'
   let trainerQueue = [];
   let trainerCurrentIndex = 0;
   let trainerScore = { correct: 0, total: 0 };
@@ -105,7 +105,87 @@
     }
   }
 
-  function escapeHTML(str) {
+  // ── Mastery Tracking System ─────────────────────────────────────────────
+  // Tracks consecutive correct answers per verb. 3+ correct in a row = "learned".
+  const MASTERY_KEY = 'irreg_verb_mastery';
+  const MASTERY_THRESHOLD = 3;
+
+  function loadMastery() {
+    try {
+      const saved = localStorage.getItem(MASTERY_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch(e) { return {}; }
+  }
+
+  function saveMastery(data) {
+    try {
+      localStorage.setItem(MASTERY_KEY, JSON.stringify(data));
+    } catch(e) {}
+  }
+
+  /**
+   * Record a correct answer for a verb (increment streak).
+   * @param {string} v1
+   */
+  function recordCorrect(v1) {
+    if (!v1) return;
+    const m = loadMastery();
+    const key = v1.toLowerCase();
+    if (!m[key]) m[key] = { streak: 0, lastCorrect: 0 };
+    m[key].streak++;
+    m[key].lastCorrect = Date.now();
+    saveMastery(m);
+  }
+
+  /**
+   * Record an incorrect answer for a verb (reset streak).
+   * @param {string} v1
+   */
+  function recordIncorrect(v1) {
+    if (!v1) return;
+    const m = loadMastery();
+    const key = v1.toLowerCase();
+    if (!m[key]) m[key] = { streak: 0, lastCorrect: 0 };
+    m[key].streak = 0;
+    saveMastery(m);
+  }
+
+  /**
+   * Check if a verb is considered "learned" (streak >= threshold).
+   * @param {string} v1
+   * @returns {boolean}
+   */
+  function isVerbLearned(v1) {
+    if (!v1) return false;
+    const m = loadMastery();
+    const entry = m[v1.toLowerCase()];
+    return entry ? entry.streak >= MASTERY_THRESHOLD : false;
+  }
+
+  /**
+   * Get mastery streak count for a verb.
+   * @param {string} v1
+   * @returns {number}
+   */
+  function getVerbStreak(v1) {
+    if (!v1) return 0;
+    const m = loadMastery();
+    const entry = m[v1.toLowerCase()];
+    return entry ? entry.streak : 0;
+  }
+
+  /**
+   * Reset mastery for a verb (mark as "not learned").
+   * @param {string} v1
+   */
+  function resetVerbMastery(v1) {
+    if (!v1) return;
+    const m = loadMastery();
+    delete m[v1.toLowerCase()];
+    saveMastery(m);
+  }
+
+    function escapeHTML(str) {
     if (!str) return '';
     return str
       .replace(/&/g, '&amp;')
@@ -173,6 +253,7 @@
           <!-- Filter Pills -->
           <div style="display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;">
             <button class="irreg-filter-pill active" data-filter="all">Все глаголы</button>
+            <button class="irreg-filter-pill" data-filter="not_learned">Неизученные</button>
             <button class="irreg-filter-pill" data-filter="in_dict">В моём словаре</button>
           </div>
 
@@ -224,7 +305,8 @@
               <option value="quiz">Тест</option>
             </select>
             <select id="irregTrainerScopeSelect" class="premium-select-filter" style="flex: 1; min-width: 130px;">
-              <option value="all">Все мои глаголы</option>
+              <option value="not_learned">Неизученные</option>
+              <option value="all">Все глаголы</option>
               <option value="my_verbs">Из словаря</option>
             </select>
           </div>
@@ -492,13 +574,18 @@
     const totalCountEl = document.getElementById('irregTotalCountBadge');
     const inDictCountEl = document.getElementById('irregInDictCountBadge');
     
-    if (totalCountEl) totalCountEl.textContent = `${all.length} глаголов`;
+    let learnedCount = 0;
+    let dictCount = 0;
+    all.forEach(v => {
+      if (isVerbLearned(v.v1)) learnedCount++;
+      if (getDictEntry(v.v1)) dictCount++;
+    });
+
+    if (totalCountEl) {
+      totalCountEl.textContent = `${all.length} глаголов • ${learnedCount} выучено`;
+    }
     if (inDictCountEl) {
-      let count = 0;
-      all.forEach(v => {
-        if (getDictEntry(v.v1)) count++;
-      });
-      inDictCountEl.textContent = `${count} в словаре`;
+      inDictCountEl.textContent = `${dictCount} в словаре`;
     }
   }
 
@@ -514,8 +601,7 @@
 
     // Filter by group / category
     let filtered = all.filter(item => {
-      if (catalogFilter === 'top30') return item.group === 'top30';
-      if (catalogFilter === 'top60') return item.group === 'top30' || item.group === 'top60';
+      if (catalogFilter === 'not_learned') return !isVerbLearned(item.v1);
       if (catalogFilter === 'in_dict') return !!getDictEntry(item.v1);
       if (catalogFilter === 'custom') return !!item.isCustom;
       return true; // 'all'
@@ -548,8 +634,11 @@
       const inDict = !!dictEntry;
       const level = inDict ? (dictEntry.level || 0) : null;
 
+      const streak = getVerbStreak(item.v1);
+      const learned = streak >= MASTERY_THRESHOLD;
+
       const card = document.createElement('div');
-      card.className = 'irreg-verb-card' + (inDict ? ' in-dict' : '');
+      card.className = 'irreg-verb-card' + (inDict ? ' in-dict' : '') + (learned ? ' is-learned' : '');
 
       card.innerHTML = `
         <div class="irreg-card-main">
@@ -587,6 +676,9 @@
           <button class="irreg-btn-dict ${inDict ? 'active' : ''}" title="${inDict ? 'В вашем словаре' : 'Добавить в личный словарь'}">
             ${inDict ? `В словаре ${level > 0 ? `(Lvl ${level})` : ''}` : '+ В словарь'}
           </button>
+          <button class="irreg-btn-mastery ${learned ? 'is-learned' : ''}" title="${learned ? 'Выучено (нажмите, чтобы вернуть в тренировку)' : (streak > 0 ? `Серия: ${streak}/${MASTERY_THRESHOLD} (нажмите, чтобы отметить выученным)` : 'Нажмите, чтобы отметить выученным')}">
+            ${learned ? '✓ Выучено' : (streak > 0 ? `✓ ${streak}/${MASTERY_THRESHOLD}` : 'Выучить')}
+          </button>
         </div>
       `;
 
@@ -617,6 +709,29 @@
         });
       }
 
+      const masteryBtn = card.querySelector('.irreg-btn-mastery');
+      if (masteryBtn) {
+        masteryBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (learned) {
+            resetVerbMastery(item.v1);
+            if (typeof window.showToast === 'function') {
+              window.showToast(`Глагол ${item.v1} возвращён в тренировку`);
+            }
+          } else {
+            const m = loadMastery();
+            const key = item.v1.toLowerCase();
+            m[key] = { streak: MASTERY_THRESHOLD, lastCorrect: Date.now() };
+            saveMastery(m);
+            if (typeof window.showToast === 'function') {
+              window.showToast(`Глагол ${item.v1} отмечен как выученный`);
+            }
+          }
+          renderCatalog();
+          updateHeaderStats();
+        });
+      }
+
       fragment.appendChild(card);
     });
 
@@ -638,10 +753,41 @@
     if (scope) trainerScope = scope;
     if (mode) trainerMode = mode;
 
+    const scopeSelect = /** @type {HTMLSelectElement|null} */ (document.getElementById('irregTrainerScopeSelect'));
+    if (scopeSelect && scopeSelect.value !== trainerScope) {
+      scopeSelect.value = trainerScope;
+    }
+
     const all = window.irregularVerbsData || [];
     let pool = [];
 
-    if (trainerScope === 'my_verbs') {
+    if (trainerScope === 'not_learned') {
+      pool = all.filter(v => !isVerbLearned(v.v1));
+      if (pool.length === 0) {
+        // All verbs are learned! Show congratulatory message instead.
+        trainerQueue = [];
+        trainerCurrentIndex = 0;
+        trainerScore = { correct: 0, total: 0 };
+        const cardEl = document.getElementById('irregTrainerCardContainer');
+        const completeView = document.getElementById('irregTrainerCompleteView');
+        const progressText = document.getElementById('irregTrainerProgressText');
+        const progressBar = document.getElementById('irregTrainerProgressBar');
+        if (progressText) progressText.textContent = '0 / 0';
+        if (progressBar) progressBar.style.width = '100%';
+        if (completeView) completeView.style.display = 'none';
+        if (cardEl) {
+          cardEl.style.display = 'block';
+          cardEl.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.9rem;">
+              <div style="font-size: 1.2rem; font-weight: 800; color: var(--accent-spotify); margin-bottom: 10px;">Все глаголы выучены!</div>
+              <div style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 8px;">Вы правильно ответили минимум ${MASTERY_THRESHOLD} раза подряд на каждый глагол.</div>
+              <div style="font-size: 0.82rem;">Добавьте новые глаголы в каталоге или выберите «Все глаголы» для повторения.</div>
+            </div>
+          `;
+        }
+        return;
+      }
+    } else if (trainerScope === 'my_verbs') {
       pool = all.filter(v => !!getDictEntry(v.v1));
       if (pool.length === 0) {
         pool = [...all];
@@ -905,7 +1051,10 @@
         feedback.style.display = 'block';
         feedback.innerHTML = `Верно! <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>`;
 
-        if (!hasUsedHint) trainerScore.correct++;
+        if (!hasUsedHint) {
+          trainerScore.correct++;
+          recordCorrect(verb.v1);
+        }
 
         // Pronounce
         speakForms(verb.v1, verb.v2, verb.v3);
@@ -935,6 +1084,9 @@
           Неверно.<br>
           Правильно: <strong>${escapeHTML(verb.v1)}</strong> → <strong>${escapeHTML(verb.v2)}</strong> → <strong>${escapeHTML(verb.v3)}</strong>
         `;
+
+        // Reset mastery streak on error
+        recordIncorrect(verb.v1);
 
         // Pronounce correct forms so the user hears how they sound
         speakForms(verb.v1, verb.v2, verb.v3);
@@ -988,6 +1140,9 @@
         }
 
         speakForms(verb.v1, verb.v2, verb.v3);
+
+        // Reset mastery on skip
+        recordIncorrect(verb.v1);
 
         // Re-queue for reinforcement
         trainerQueue.push(verb);
@@ -1092,6 +1247,7 @@
     const advanceWithScore = (isGood) => {
       if (isGood) {
         trainerScore.correct++;
+        recordCorrect(verb.v1);
         // If verb is in personal dictionary, update Leitner level
         const entry = getDictEntry(verb.v1);
         if (entry && typeof entry.level === 'number') {
@@ -1101,6 +1257,7 @@
           if (typeof window.saveDictionaryToStorage === 'function') window.saveDictionaryToStorage();
         }
       } else {
+        recordIncorrect(verb.v1);
         trainerQueue.push(verb);
         trainerScore.total = trainerQueue.length;
       }
@@ -1203,6 +1360,7 @@
           }
           trainerQueue.push(verb);
           trainerScore.total = trainerQueue.length;
+          recordIncorrect(verb.v1);
         }
 
         clearTrainerTimer();
