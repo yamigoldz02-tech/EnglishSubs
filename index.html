@@ -36,11 +36,11 @@
   <link rel="stylesheet" href="css/spotify-widget.css">
   <link rel="stylesheet" href="css/lyrics-board.css">
   <link rel="stylesheet" href="css/animations.css?v=3.7.1">
-  <link rel="stylesheet" href="css/app-core.css?v=3.7.1">
+  <link rel="stylesheet" href="css/app-core.css?v=3.7.9">
   <link rel="stylesheet" href="css/theme-overrides.css?v=3.7.1">
   <link rel="stylesheet" href="css/sparks.css">
   <link rel="stylesheet" href="css/irregular-verbs.css?v=3.7.8">
-  <link rel="stylesheet" href="css/mobile-compact.css?v=3.7.1">
+  <link rel="stylesheet" href="css/mobile-compact.css?v=3.7.9">
   <script defer src="app-back-button.js"></script>
   <script type="module" src="sync-manager.js"></script>
 </head>
@@ -171,6 +171,8 @@
               if (menu) { menu.style.display = 'flex'; menu.style.flexDirection = 'column'; }
               if (bd) bd.style.display = 'block';
               if (btn) btn.classList.add('active');
+              document.documentElement.classList.add('modal-open');
+              document.body.classList.add('modal-open');
             };
             window.closeHeaderNav = function() {
               var menu = document.getElementById('headerNavMenu');
@@ -179,6 +181,13 @@
               if (menu) menu.style.display = 'none';
               if (bd) bd.style.display = 'none';
               if (btn) btn.classList.remove('active');
+              var anyModalOpen = Array.from(document.querySelectorAll('.modal-overlay')).some(function(m) {
+                return m.style.display && m.style.display !== 'none';
+              });
+              if (!anyModalOpen) {
+                document.documentElement.classList.remove('modal-open');
+                document.body.classList.remove('modal-open');
+              }
             };
             window.toggleHeaderNav = function(e) {
               if (e) { e.stopPropagation(); e.preventDefault(); }
@@ -720,6 +729,14 @@
             window.showToast('Менеджер синхронизации загружается...', 'info');
           }
         });
+      }
+
+      // ── Prevent background touch scrolling on header nav backdrop ──
+      const navBd = document.getElementById('headerNavBackdrop');
+      if (navBd) {
+        navBd.addEventListener('touchmove', (e) => {
+          e.preventDefault();
+        }, { passive: false });
       }
 
       // ── Link Device Modal Logic ──

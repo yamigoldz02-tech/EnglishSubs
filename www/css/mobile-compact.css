@@ -310,12 +310,14 @@
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
+    height: 100dvh !important;
     background: rgba(0, 0, 0, 0.5) !important;
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
     z-index: 1045 !important;
     pointer-events: auto !important;
-    touch-action: manipulation !important;
+    touch-action: none !important;
+    overscroll-behavior: none !important;
   }
 
   body.light-theme .header-nav-backdrop {
@@ -328,6 +330,12 @@
     right: 10px !important;
     left: 10px !important;
     width: auto !important;
+    max-height: calc(100vh - 80px) !important;
+    max-height: calc(100dvh - 80px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y !important;
     border-radius: 20px !important;
     padding: 12px 14px !important;
     background: var(--bg-surface) !important;
@@ -822,6 +830,23 @@
   }
 
   /* ── 6. Fullscreen Standalone Window Modals on Mobile ────────────────── */
+  body.modal-open {
+    overflow: hidden !important;
+    height: 100% !important;
+    max-height: 100vh !important;
+    max-height: 100dvh !important;
+    touch-action: none !important;
+    overscroll-behavior: none !important;
+  }
+
+  body.modal-open .main-layout,
+  body.modal-open .lyrics-section,
+  body.modal-open .welcome-dashboard,
+  body.modal-open .navbar {
+    pointer-events: none !important;
+    user-select: none !important;
+  }
+
   .modal-overlay,
   .notebook-modal-overlay {
     position: fixed !important;

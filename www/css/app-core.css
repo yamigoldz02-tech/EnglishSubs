@@ -1336,6 +1336,11 @@ body.light-theme .header-nav-backdrop {
   top: calc(100% + 8px);
   right: 0;
   width: 290px;
+  max-height: calc(100vh - 80px);
+  max-height: calc(100dvh - 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: #18181b;
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
