@@ -14,10 +14,11 @@ import {
     getFirestore, 
     doc, 
     setDoc, 
-    getDoc 
+    getDoc,
+    onSnapshot 
 } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
 
-// Reusing your exact credentials from bestdog for project bestdog-fb34c
+// Reusing exact credentials from bestdog for project bestdog-fb34c
 const firebaseConfig = {
   apiKey: "AIzaSyARiuqiPVzKWuCQFqushFjj30gWwk02VFc",
   authDomain: "bestdog-fb34c.firebaseapp.com",
@@ -39,6 +40,11 @@ const authListeners = [];
 let currentUser = null;
 let syncTimeout = null;
 let isApplyingCloudData = false;
+let isSyncingToCloud = false;
+let pendingCloudSync = false;
+let unsubscribeSnapshot = null;
+let lastCloudWriteTime = 0;
+const MIN_CLOUD_SYNC_INTERVAL_MS = 3000; // Responsive throttle: max 1 cloud push per 3s
 
 // Exclusion list for large/temporary keys we do NOT want to sync to the database
 const EXCLUDED_KEYS = [
@@ -91,12 +97,23 @@ function applyUpdatesLocallyWithoutReload() {
     console.log('[SyncManager] Applying cloud updates in-memory without page reload...');
     try {
         const savedDict = localStorage.getItem('personal_dictionary');
-        if (savedDict && typeof window.personalDictionary !== 'undefined') {
-            window.personalDictionary = JSON.parse(savedDict);
+        if (savedDict) {
+            try {
+                window.personalDictionary = JSON.parse(savedDict);
+            } catch (e) {}
+        }
+        if (typeof window.initDictionary === 'function') {
+            window.initDictionary();
+        } else {
+            if (typeof window.updateSavedWordsCount === 'function') window.updateSavedWordsCount();
             if (typeof window.renderDictWordsList === 'function') window.renderDictWordsList();
+            if (typeof window.populateCategorySelectors === 'function') window.populateCategorySelectors();
         }
         if (typeof window.loadCustomVerbs === 'function') {
             window.loadCustomVerbs();
+        }
+        if (typeof window.renderIrregularCatalog === 'function') {
+            window.renderIrregularCatalog();
         }
         if (typeof window.updateIrregularStats === 'function') {
             window.updateIrregularStats();
@@ -114,14 +131,14 @@ const originalRemoveItem = localStorage.removeItem;
 localStorage.setItem = function(key, value) {
     originalSetItem.apply(this, arguments);
     if (!isApplyingCloudData && !shouldExclude(key)) {
-        scheduleCloudSync();
+        scheduleCloudSync(2000);
     }
 };
 
 localStorage.removeItem = function(key) {
     originalRemoveItem.apply(this, arguments);
     if (!isApplyingCloudData && !shouldExclude(key)) {
-        scheduleCloudSync();
+        scheduleCloudSync(2000);
     }
 };
 
@@ -165,15 +182,12 @@ function showSyncNotice(msg, isError = false) {
         setTimeout(() => {
             toast.style.opacity = '0';
             setTimeout(() => toast.remove(), 500);
-        }, 4000);
+        }, 3500);
     } catch (e) { /* ignore DOM errors */ }
 }
 
-let lastCloudWriteTime = 0;
-const MIN_CLOUD_SYNC_INTERVAL_MS = 15000; // Throttle to max 1 write per 15s to prevent Firestore queue exhaustion
-
 // Schedule cloud write with debounce
-function scheduleCloudSync(delayMs = 10000) {
+function scheduleCloudSync(delayMs = 2000) {
     const user = getSyncUser();
     if (!user) return;
     clearTimeout(syncTimeout);
@@ -182,9 +196,6 @@ function scheduleCloudSync(delayMs = 10000) {
         await pushLocalToCloud();
     }, delayMs);
 }
-
-let isSyncingToCloud = false;
-let pendingCloudSync = false;
 
 // Push local storage payload to Cloud Firestore
 async function pushLocalToCloud() {
@@ -196,7 +207,7 @@ async function pushLocalToCloud() {
     const user = getSyncUser();
     if (!user) return;
     
-    // Throttle writes: if last write was less than 15 seconds ago, reschedule
+    // Throttle writes: if last write was less than interval ago, reschedule
     const now = Date.now();
     const timeSinceLastWrite = now - lastCloudWriteTime;
     if (timeSinceLastWrite < MIN_CLOUD_SYNC_INTERVAL_MS) {
@@ -240,98 +251,242 @@ async function pushLocalToCloud() {
         isSyncingToCloud = false;
         if (pendingCloudSync) {
             pendingCloudSync = false;
-            scheduleCloudSync(5000);
+            scheduleCloudSync(1500);
         }
     }
 }
 
 // Smart merge function for JSON array data (specifically dictionaries)
 function mergeDictionaries(localArr, cloudArr) {
+    if (!Array.isArray(localArr)) localArr = [];
+    if (!Array.isArray(cloudArr)) return [...localArr];
+
     const merged = [...localArr];
     cloudArr.forEach(cloudWord => {
-        if (!cloudWord || typeof cloudWord.word !== 'string') return; // Safe check
-        const localIndex = merged.findIndex(w => w && typeof w.word === 'string' && w.word.toLowerCase() === cloudWord.word.toLowerCase());
+        if (!cloudWord || typeof cloudWord.word !== 'string') return;
+        const cloudClean = cloudWord.word.trim().toLowerCase();
+        const localIndex = merged.findIndex(w => w && typeof w.word === 'string' && w.word.trim().toLowerCase() === cloudClean);
         if (localIndex === -1) {
             merged.push(cloudWord);
         } else {
-            // Keep the one with the higher learning level or more progress
             const localWord = merged[localIndex];
             const localLevel = localWord.level || 0;
             const cloudLevel = cloudWord.level || 0;
             if (cloudLevel > localLevel) {
-                merged[localIndex] = cloudWord;
+                merged[localIndex] = { ...localWord, ...cloudWord };
+            } else if (cloudLevel === localLevel) {
+                // Merge categories and keep highest progress
+                const mergedCategories = Array.from(new Set([...(localWord.categories || []), ...(cloudWord.categories || [])]));
+                const mergedCustomCategories = Array.from(new Set([...(localWord.customCategories || []), ...(cloudWord.customCategories || [])]));
+                merged[localIndex] = {
+                    ...localWord,
+                    categories: mergedCategories.length > 0 ? mergedCategories : localWord.categories,
+                    customCategories: mergedCustomCategories.length > 0 ? mergedCustomCategories : localWord.customCategories,
+                    interval: Math.max(localWord.interval || 0, cloudWord.interval || 0),
+                    nextReview: Math.max(localWord.nextReview || 0, cloudWord.nextReview || 0)
+                };
             }
         }
     });
     return merged;
 }
 
-// Smart merge for simple ID arrays (e.g. watched videos) — takes the UNION of both
-function mergeIdArrays(localArr, cloudArr) {
+// Smart merge for custom irregular verbs
+function mergeCustomVerbs(localArr, cloudArr) {
+    if (!Array.isArray(localArr)) localArr = [];
+    if (!Array.isArray(cloudArr)) return [...localArr];
+
     const merged = [...localArr];
-    cloudArr.forEach(id => {
-        if (typeof id === 'string' && !merged.includes(id)) {
-            merged.push(id);
+    cloudArr.forEach(cloudVerb => {
+        if (!cloudVerb || typeof cloudVerb.v1 !== 'string') return;
+        const v1Clean = cloudVerb.v1.trim().toLowerCase();
+        const exists = merged.some(v => v && typeof v.v1 === 'string' && v.v1.trim().toLowerCase() === v1Clean);
+        if (!exists) {
+            merged.push(cloudVerb);
         }
     });
     return merged;
 }
 
-// Keys containing JSON arrays of IDs that must be merged as a UNION (never overwritten)
-const UNION_ARRAY_KEYS = ['galaxy_watched_videos'];
+// Smart merge for irregular verb mastery
+function mergeVerbMastery(localObj, cloudObj) {
+    const merged = (localObj && typeof localObj === 'object') ? { ...localObj } : {};
+    if (!cloudObj || typeof cloudObj !== 'object') return merged;
+    for (const [v1, cloudData] of Object.entries(cloudObj)) {
+        if (!merged[v1]) {
+            merged[v1] = cloudData;
+        } else {
+            const localData = merged[v1];
+            const localStreak = localData?.streak || 0;
+            const cloudStreak = cloudData?.streak || 0;
+            if (cloudStreak > localStreak) {
+                merged[v1] = cloudData;
+            } else if (cloudStreak === localStreak) {
+                const localTime = localData?.lastCorrect || 0;
+                const cloudTime = cloudData?.lastCorrect || 0;
+                if (cloudTime > localTime) {
+                    merged[v1] = cloudData;
+                }
+            }
+        }
+    }
+    return merged;
+}
+
+// Smart merge for simple ID / string arrays — takes the UNION of both
+function mergeIdArrays(localArr, cloudArr) {
+    const merged = Array.isArray(localArr) ? [...localArr] : [];
+    if (!Array.isArray(cloudArr)) return merged;
+    cloudArr.forEach(item => {
+        if ((typeof item === 'string' || typeof item === 'number') && !merged.includes(item)) {
+            merged.push(item);
+        }
+    });
+    return merged;
+}
+
+// Keys containing JSON arrays of IDs / categories that must be merged as a UNION (never overwritten)
+const UNION_ARRAY_KEYS = ['galaxy_watched_videos', 'personal_categories', 'personal_custom_categories'];
 
 // Keys containing text/notes that must keep the longest version to avoid data loss
 const TEXT_MERGE_KEYS = ['user_notebook_text', 'galaxy_lesson_notes', 'galaxy_custom_note_folders'];
 
-// Smart merge of local and cloud storage payloads (used on first sync)
+// Smart merge of local and cloud storage payloads
 function mergePayloads(localPayload, cloudPayload) {
     const merged = { ...localPayload };
     for (const [key, cloudVal] of Object.entries(cloudPayload)) {
         if (merged[key] === undefined) {
             // Key doesn't exist locally, take from cloud
             merged[key] = cloudVal;
-        } else if (key === 'personal_dictionary') {
-            // Merge word objects with smart level-aware logic
+        } else if (key === 'personal_dictionary' || key === 'my_personal_dictionary') {
             try {
                 const localArr = JSON.parse(merged[key]);
                 const cloudArr = JSON.parse(cloudVal);
                 if (Array.isArray(localArr) && Array.isArray(cloudArr)) {
                     merged[key] = JSON.stringify(mergeDictionaries(localArr, cloudArr));
                 } else {
-                    merged[key] = cloudVal; // fallback
+                    merged[key] = cloudVal;
                 }
-            } catch(e) {
-                merged[key] = cloudVal; // fallback
+            } catch (e) {
+                merged[key] = cloudVal;
+            }
+        } else if (key === 'custom_irregular_verbs') {
+            try {
+                const localArr = JSON.parse(merged[key]);
+                const cloudArr = JSON.parse(cloudVal);
+                if (Array.isArray(localArr) && Array.isArray(cloudArr)) {
+                    merged[key] = JSON.stringify(mergeCustomVerbs(localArr, cloudArr));
+                } else {
+                    merged[key] = cloudVal;
+                }
+            } catch (e) {
+                merged[key] = cloudVal;
+            }
+        } else if (key === 'irreg_verb_mastery') {
+            try {
+                const localObj = JSON.parse(merged[key]);
+                const cloudObj = JSON.parse(cloudVal);
+                if (localObj && cloudObj) {
+                    merged[key] = JSON.stringify(mergeVerbMastery(localObj, cloudObj));
+                } else {
+                    merged[key] = cloudVal;
+                }
+            } catch (e) {
+                merged[key] = cloudVal;
             }
         } else if (UNION_ARRAY_KEYS.includes(key)) {
-            // Merge ID arrays as UNION — local progress is NEVER lost
             try {
                 const localArr = JSON.parse(merged[key]);
                 const cloudArr = JSON.parse(cloudVal);
                 if (Array.isArray(localArr) && Array.isArray(cloudArr)) {
                     merged[key] = JSON.stringify(mergeIdArrays(localArr, cloudArr));
-                    console.log(`[SyncManager] Merged '${key}': local=${localArr.length}, cloud=${cloudArr.length}, result=${JSON.parse(merged[key]).length}`);
                 } else {
-                    // Keep whichever is longer to avoid data loss
                     merged[key] = (merged[key] || '').length >= (cloudVal || '').length ? merged[key] : cloudVal;
                 }
-            } catch(e) {
-                // On parse error keep local value (safer)
+            } catch (e) {
                 console.warn(`[SyncManager] Could not merge '${key}', keeping local value:`, e);
             }
         } else if (TEXT_MERGE_KEYS.includes(key)) {
-            // Keep whichever string is longer to avoid losing typed notes
             merged[key] = (merged[key] || '').length >= (cloudVal || '').length ? merged[key] : cloudVal;
         } else {
-            // For simple keys (like configs/theme preferences), let cloud win by default
+            // For simple preference keys, let cloud win
             merged[key] = cloudVal;
         }
     }
+
+    // Keep personal_dictionary and my_personal_dictionary in sync
+    if (merged['personal_dictionary'] && !merged['my_personal_dictionary']) {
+        merged['my_personal_dictionary'] = merged['personal_dictionary'];
+    } else if (merged['my_personal_dictionary'] && !merged['personal_dictionary']) {
+        merged['personal_dictionary'] = merged['my_personal_dictionary'];
+    }
+
     return merged;
 }
 
+// Safely process incoming cloud data and merge into localStorage
+async function handleIncomingCloudData(cloudTimestamp, cloudPayload, currentLocalPayload = null, projName = null) {
+    const projectName = projName || getProjectName();
+    const localPayload = currentLocalPayload || {};
+    if (!currentLocalPayload) {
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (!shouldExclude(key)) {
+                localPayload[key] = localStorage.getItem(key);
+            }
+        }
+    }
+
+    isApplyingCloudData = true;
+    let needsPushBack = false;
+
+    try {
+        const safeMergedPayload = mergePayloads(localPayload, cloudPayload);
+
+        // Remove keys deleted from cloud if tracked in last sync
+        const lastSyncPayloadStr = localStorage.getItem('last_sync_payload_' + projectName);
+        let lastSyncPayload = {};
+        if (lastSyncPayloadStr) {
+            try { lastSyncPayload = JSON.parse(lastSyncPayloadStr); } catch (e) {}
+        }
+
+        const keysToRemove = [];
+        for (const key of Object.keys(lastSyncPayload)) {
+            if (!(key in cloudPayload) && localPayload[key] === lastSyncPayload[key]) {
+                keysToRemove.push(key);
+            }
+        }
+        keysToRemove.forEach(k => originalRemoveItem.call(localStorage, k));
+
+        // Write merged items
+        for (const [key, value] of Object.entries(safeMergedPayload)) {
+            originalSetItem.call(localStorage, key, value);
+        }
+
+        // Check if local had words/data that the cloud didn't have (union added new data)
+        if (safeMergedPayload['personal_dictionary'] !== cloudPayload['personal_dictionary'] ||
+            safeMergedPayload['custom_irregular_verbs'] !== cloudPayload['custom_irregular_verbs']) {
+            needsPushBack = true;
+        }
+
+        originalSetItem.call(localStorage, 'last_sync_timestamp_' + projectName, cloudTimestamp);
+        originalSetItem.call(localStorage, 'last_sync_payload_' + projectName, JSON.stringify(safeMergedPayload));
+    } finally {
+        isApplyingCloudData = false;
+    }
+
+    console.log('[SyncManager] Cloud data applied locally. Refreshing in-memory state & UI...');
+    applyUpdatesLocallyWithoutReload();
+    showSyncNotice('Данные обновлены из облака');
+
+    if (needsPushBack) {
+        console.log('[SyncManager] Local words preserved in merge, backing up unified dataset to cloud...');
+        await pushLocalToCloud();
+    }
+}
+
 // Pull cloud payload and apply to local storage
-async function pullCloudToLocal(user) {
+async function pullCloudToLocal(user, force = false) {
     try {
         const projectName = getProjectName();
         const userDocRef = doc(db, 'users', user.uid, 'sync_' + projectName, 'localStorage');
@@ -344,7 +499,7 @@ async function pullCloudToLocal(user) {
             
             const localTimestamp = localStorage.getItem('last_sync_timestamp_' + projectName) || '';
             
-            // Compile local payload for possible merge or push
+            // Compile local payload
             const localPayload = {};
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
@@ -353,100 +508,12 @@ async function pullCloudToLocal(user) {
                 }
             }
 
-            if (!localTimestamp) {
-                // First sync ever on this device!
-                console.log('[SyncManager] Initializing first sync on this device...');
-                let hasLocalData = false;
-                try {
-                    const localDictStr = localStorage.getItem('personal_dictionary');
-                    hasLocalData = localDictStr && JSON.parse(localDictStr).length > 0;
-                } catch(err) {}
-                
-                if (hasLocalData) {
-                    // We have important unsynced local data! Merge it with cloud payload to prevent loss
-                    console.log('[SyncManager] Merging offline local dictionary with cloud backup...');
-                    const mergedPayload = mergePayloads(localPayload, cloudPayload);
-                    
-                    isApplyingCloudData = true;
-                    // Clear and apply merged payload
-                    // Avoid wiping all localStorage! Only remove what we know we should
-                    for (const [key, value] of Object.entries(mergedPayload)) {
-                        originalSetItem.call(localStorage, key, value);
-                    }
-                    isApplyingCloudData = false;
-                    
-                    // Immediately push the merged data back to the cloud
-                    console.log('[SyncManager] Pushing merged data back to Cloud...');
-                    await pushLocalToCloud();
-                    
-                    console.log('[SyncManager] Initial merge and sync complete! Applying updates...');
-                    applyUpdatesLocallyWithoutReload();
-                    showSyncNotice('Данные синхронизированы с облаком');
-                } else {
-                    // No local dictionary, safe to blindly write cloud payload
-                    console.log('[SyncManager] Local dictionary is empty. Applying cloud data directly...');
-                    isApplyingCloudData = true;
-                    for (const [key, value] of Object.entries(cloudPayload)) {
-                        originalSetItem.call(localStorage, key, value);
-                    }
-                    originalSetItem.call(localStorage, 'last_sync_timestamp_' + projectName, cloudTimestamp);
-                    originalSetItem.call(localStorage, 'last_sync_payload_' + projectName, JSON.stringify(cloudPayload));
-                    isApplyingCloudData = false;
-                    
-                    console.log('[SyncManager] Initial sync complete! Applying updates...');
-                    applyUpdatesLocallyWithoutReload();
-                    showSyncNotice('Данные синхронизированы с облаком');
-                }
-            } else if (new Date(cloudTimestamp) > new Date(localTimestamp)) {
-                // Cloud is newer than local
-                console.log('[SyncManager] Newer cloud backup found! Applying changes to local storage...', cloudTimestamp);
-                
-                isApplyingCloudData = true;
-                
-                try {
-                    // Safely merge local and cloud payloads to prevent accidental loss of offline-added words
-                    const safeMergedPayload = mergePayloads(localPayload, cloudPayload);
-                    
-                    // Only clear out items that were deleted from the cloud since last sync
-                    const lastSyncPayloadStr = localStorage.getItem('last_sync_payload_' + projectName);
-                    let lastSyncPayload = {};
-                    if (lastSyncPayloadStr) {
-                        try { lastSyncPayload = JSON.parse(lastSyncPayloadStr); } catch(e) {}
-                    }
-                    
-                    const keysToRemove = [];
-                    for (const key of Object.keys(lastSyncPayload)) {
-                        if (!(key in cloudPayload) && localPayload[key] === lastSyncPayload[key]) {
-                            keysToRemove.push(key);
-                        }
-                    }
-                    keysToRemove.forEach(k => originalRemoveItem.call(localStorage, k));
-                    
-                    // Write merged items
-                    for (const [key, value] of Object.entries(safeMergedPayload)) {
-                        originalSetItem.call(localStorage, key, value);
-                    }
-                    
-                    // Write timestamps and payloads
-                    originalSetItem.call(localStorage, 'last_sync_timestamp_' + projectName, cloudTimestamp);
-                    originalSetItem.call(localStorage, 'last_sync_payload_' + projectName, JSON.stringify(safeMergedPayload));
-                    
-                    // Push back to cloud if the merge actually saved some local unsynced words
-                    if (safeMergedPayload['personal_dictionary'] !== cloudPayload['personal_dictionary']) {
-                        console.log('[SyncManager] Local words were safely merged with newer cloud data. Backing up...');
-                        await pushLocalToCloud();
-                    }
-                } finally {
-                    isApplyingCloudData = false;
-                }
-                
-                console.log('[SyncManager] Sync complete! Applying updates...');
-                applyUpdatesLocallyWithoutReload();
-                showSyncNotice('Данные обновлены из облака');
-            } else if (new Date(localTimestamp) > new Date(cloudTimestamp)) {
-                // Local is newer! Push to cloud
-                console.log('[SyncManager] Local storage has newer updates than cloud. Backing up to Cloud...');
-                await pushLocalToCloud();
+            const isCloudNewer = !localTimestamp || (new Date(cloudTimestamp) > new Date(localTimestamp));
+            const shouldMerge = force || isCloudNewer || (cloudTimestamp !== localTimestamp);
+
+            if (shouldMerge) {
+                console.log('[SyncManager] Processing cloud data update...', cloudTimestamp);
+                await handleIncomingCloudData(cloudTimestamp, cloudPayload, localPayload, projectName);
             } else {
                 console.log('[SyncManager] Local storage is up to date.');
             }
@@ -457,6 +524,41 @@ async function pullCloudToLocal(user) {
     } catch (e) {
         console.error('[SyncManager] Sync pulling failed:', e);
         showSyncNotice('Не удалось получить данные из облака: ' + (e.message || e), true);
+    }
+}
+
+// Realtime Firestore snapshot listener for instant cross-device updates
+function setupRealtimeListener(user) {
+    if (unsubscribeSnapshot) {
+        unsubscribeSnapshot();
+        unsubscribeSnapshot = null;
+    }
+    if (!user || !user.uid) return;
+
+    const projectName = getProjectName();
+    const userDocRef = doc(db, 'users', user.uid, 'sync_' + projectName, 'localStorage');
+
+    try {
+        console.log('[SyncManager] Attaching real-time Firestore listener for user:', user.uid);
+        unsubscribeSnapshot = onSnapshot(userDocRef, (docSnap) => {
+            if (isSyncingToCloud) return; // Ignore snapshot events triggered while actively pushing
+            if (!docSnap.exists()) return;
+
+            const cloudData = docSnap.data();
+            const cloudTimestamp = cloudData.updatedAt;
+            const cloudPayload = cloudData.payload || {};
+            const localTimestamp = localStorage.getItem('last_sync_timestamp_' + projectName) || '';
+
+            // If timestamp matches local, this device originated the write — skip
+            if (cloudTimestamp && cloudTimestamp === localTimestamp) return;
+
+            console.log('[SyncManager] Real-time cloud push received from another device!', cloudTimestamp);
+            handleIncomingCloudData(cloudTimestamp, cloudPayload);
+        }, (error) => {
+            console.warn('[SyncManager] Real-time snapshot listener notice:', error.message || error);
+        });
+    } catch (e) {
+        console.warn('[SyncManager] Could not initialize real-time listener:', e);
     }
 }
 
@@ -479,9 +581,14 @@ onAuthStateChanged(auth, async (user) => {
     const activeUser = getSyncUser();
     if (activeUser) {
         console.log('[SyncManager] User active:', activeUser.uid);
+        setupRealtimeListener(activeUser);
         await pullCloudToLocal(activeUser);
     } else {
         console.log('[SyncManager] No user logged in.');
+        if (unsubscribeSnapshot) {
+            unsubscribeSnapshot();
+            unsubscribeSnapshot = null;
+        }
     }
     
     notifyListeners();
@@ -498,9 +605,9 @@ window.SyncManager = {
         } catch (error) {
             console.error('[SyncManager] Login failed:', error);
             if (error.code === 'auth/operation-not-supported-in-this-environment') {
-                alert('Вход Google не поддерживается в мобильном приложении. Пожалуйста, используйте функцию "Связать по коду".');
+                showSyncNotice('Вход Google не поддерживается в мобильном приложении. Пожалуйста, используйте функцию "Связать устройство".', true);
             } else {
-                alert('Не удалось войти: ' + error.message);
+                showSyncNotice('Не удалось войти: ' + error.message, true);
             }
             throw error;
         }
@@ -508,6 +615,10 @@ window.SyncManager = {
 
     async logout() {
         try {
+            if (unsubscribeSnapshot) {
+                unsubscribeSnapshot();
+                unsubscribeSnapshot = null;
+            }
             await signOut(auth);
             // Clear sync tokens and override UIDs
             originalRemoveItem.call(localStorage, 'sync_manager_override_uid');
@@ -538,20 +649,20 @@ window.SyncManager = {
         if (user) {
             console.log('[SyncManager] Forcing manual cloud sync...');
             try {
-                await pullCloudToLocal(user);
+                await pullCloudToLocal(user, true);
                 await pushLocalToCloud();
                 if (!silent) {
-                    alert('Синхронизация завершена успешно!');
+                    showSyncNotice('Синхронизация завершена успешно!');
                 }
             } catch (err) {
                 console.error('[SyncManager] Force sync failed:', err);
                 if (!silent) {
-                    alert('Ошибка при синхронизации: ' + err.message);
+                    showSyncNotice('Ошибка при синхронизации: ' + err.message, true);
                 }
             }
         } else {
             if (!silent) {
-                alert('Вы не вошли в аккаунт.');
+                showSyncNotice('Вы не вошли в аккаунт.', true);
             }
         }
     },
@@ -562,12 +673,29 @@ window.SyncManager = {
             showSyncNotice('Неверный код переноса!', true);
             return;
         }
-        originalSetItem.call(localStorage, 'sync_manager_override_uid', code.trim());
+        const cleanCode = code.trim();
+        const currentOverride = localStorage.getItem('sync_manager_override_uid');
+        if (currentOverride !== cleanCode) {
+            // New linked account: clear previous timestamps so we cleanly adopt cloud data
+            const projectName = getProjectName();
+            originalRemoveItem.call(localStorage, 'last_sync_timestamp_' + projectName);
+            originalRemoveItem.call(localStorage, 'last_sync_payload_' + projectName);
+        }
+        originalSetItem.call(localStorage, 'sync_manager_override_uid', cleanCode);
         const mockUser = getSyncUser();
         if (mockUser) {
-            await pullCloudToLocal(mockUser);
+            setupRealtimeListener(mockUser);
+            await pullCloudToLocal(mockUser, true);
             showSyncNotice('Устройство успешно связано по коду!');
             window.location.reload();
+        }
+    },
+
+    // Check remote updates on demand (e.g. when opening modals)
+    async checkRemoteUpdates() {
+        const user = getSyncUser();
+        if (user) {
+            await pullCloudToLocal(user);
         }
     }
 };
@@ -582,11 +710,12 @@ if (initialOverrideUid) {
             displayName: "Linked Account",
             isOverride: true
         };
+        setupRealtimeListener(mockUser);
         await pullCloudToLocal(mockUser);
     }, 500);
 }
 
-// Mobile application lifecycle triggers
+// Mobile application lifecycle & visibility triggers
 function forceSyncOnLifecycle() {
     if (syncTimeout) {
         console.log('[SyncManager] App lifecycle trigger: clearing debounce and forcing immediate cloud backup...');
@@ -596,8 +725,40 @@ function forceSyncOnLifecycle() {
     }
 }
 
+// Foreground / Focus triggers: pull newest data from Cloud when user switches back to the app/tab
+let lastForegroundPull = 0;
+function pullOnForeground() {
+    const user = getSyncUser();
+    const now = Date.now();
+    if (user && (now - lastForegroundPull > 5000)) {
+        lastForegroundPull = now;
+        console.log('[SyncManager] App foregrounded, checking cloud updates...');
+        pullCloudToLocal(user);
+    }
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        pullOnForeground();
+    } else {
+        forceSyncOnLifecycle();
+    }
+});
+
+window.addEventListener('focus', pullOnForeground);
+
+// Periodic polling fallback (every 45s while tab is visible)
+setInterval(() => {
+    if (document.visibilityState === 'visible') {
+        const user = getSyncUser();
+        if (user) {
+            pullCloudToLocal(user);
+        }
+    }
+}, 45000);
+
 // Listen to pause (Capacitor/Cordova backgrounding) and beforeunload (tab closed) events
 document.addEventListener('pause', forceSyncOnLifecycle);
 window.addEventListener('beforeunload', forceSyncOnLifecycle);
 
-console.log('[SyncManager] Transparent Sync active.');
+console.log('[SyncManager] Real-time Transparent Sync active.');

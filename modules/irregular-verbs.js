@@ -366,20 +366,19 @@
         const customs = JSON.parse(saved);
         if (Array.isArray(customs)) {
           if (!window.irregularVerbsData) window.irregularVerbsData = [];
+          // Remove old custom entries to avoid stale data or duplication
+          window.irregularVerbsData = window.irregularVerbsData.filter(v => !v.isCustom);
           customs.forEach(c => {
             if (!c || !c.v1) return;
-            const exists = window.irregularVerbsData.some(v => v && v.v1 && v.v1.toLowerCase() === c.v1.toLowerCase());
-            if (!exists) {
-              window.irregularVerbsData.unshift({
-                v1: c.v1,
-                v2: c.v2,
-                v3: c.v3,
-                translation: c.translation,
-                example: c.example || '',
-                group: 'custom',
-                isCustom: true
-              });
-            }
+            window.irregularVerbsData.unshift({
+              v1: c.v1,
+              v2: c.v2,
+              v3: c.v3,
+              translation: c.translation,
+              example: c.example || '',
+              group: 'custom',
+              isCustom: true
+            });
           });
         }
       }
@@ -1730,6 +1729,7 @@
   window.toggleIrregularVerbInDict = toggleVerbInDict;
   window.convertKeyboardLayout = convertLayout;
   window.loadCustomVerbs = loadCustomVerbs;
+  window.renderIrregularCatalog = renderCatalog;
   window.updateIrregularStats = updateHeaderStats;
 
   // Auto-init on DOM ready

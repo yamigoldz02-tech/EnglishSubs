@@ -3244,4 +3244,5 @@ window.updateSavedWordsCount = updateSavedWordsCount;
 window.formatDictionaryWord = formatDictionaryWord;
 window.getFilteredDictionaryWords = getFilteredDictionaryWords;
 window.startStudySession = startStudySession;
+window.initDictionary = initDictionary;
 
