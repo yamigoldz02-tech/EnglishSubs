@@ -284,7 +284,9 @@ console.log(`[Test 10/${TOTAL_TESTS}] Checking index.html and modal templates fo
 try {
   const htmlContent = fs.existsSync(htmlPath) ? fs.readFileSync(htmlPath, 'utf8') : '';
   const modalTplPath = path.join(__dirname, 'modules', 'modal-templates.js');
-  const modalContent = fs.existsSync(modalTplPath) ? fs.readFileSync(modalTplPath, 'utf8') : '';
+  const modalDictPath = path.join(__dirname, 'modules', 'modal-templates-dict.js');
+  const modalContent = (fs.existsSync(modalTplPath) ? fs.readFileSync(modalTplPath, 'utf8') : '') +
+                       (fs.existsSync(modalDictPath) ? fs.readFileSync(modalDictPath, 'utf8') : '');
   
   const idRegex = /\bid="([^"]+)"/g;
   const ids = [];

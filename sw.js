@@ -46,6 +46,7 @@ const PRECACHE_ASSETS = [
   
   // Application Modules
   './modules/types.js',
+  './modules/modal-templates-dict.js',
   './modules/modal-templates.js',
   './modules/ui-dialogs.js',
   './modules/songs-data.js',
