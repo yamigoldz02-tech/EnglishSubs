@@ -73,6 +73,7 @@ const PRECACHE_ASSETS = [
   './modules/dict-list-view.js',
   './modules/dictionary-trainer.js',
   './modules/irregular-verbs.js',
+  './modules/irregular-verbs-trainer.js',
   './modules/spotify-controller.js',
   './modules/grammar-rules.js',
   './modules/notebook-module.js',
