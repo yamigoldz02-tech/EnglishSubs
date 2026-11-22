@@ -272,14 +272,32 @@ function mergeDictionaries(localArr, cloudArr) {
             const localWord = merged[localIndex];
             const localLevel = localWord.level || 0;
             const cloudLevel = cloudWord.level || 0;
+            const isIrregular = !!(localWord.isIrregular || cloudWord.isIrregular);
+            const v1 = localWord.v1 || cloudWord.v1;
+            const v2 = localWord.v2 || cloudWord.v2;
+            const v3 = localWord.v3 || cloudWord.v3;
+            const mergedCategories = Array.from(new Set([...(localWord.categories || []), ...(cloudWord.categories || [])]));
+            const mergedCustomCategories = Array.from(new Set([...(localWord.customCategories || []), ...(cloudWord.customCategories || [])]));
+
             if (cloudLevel > localLevel) {
-                merged[localIndex] = { ...localWord, ...cloudWord };
-            } else if (cloudLevel === localLevel) {
-                // Merge categories and keep highest progress
-                const mergedCategories = Array.from(new Set([...(localWord.categories || []), ...(cloudWord.categories || [])]));
-                const mergedCustomCategories = Array.from(new Set([...(localWord.customCategories || []), ...(cloudWord.customCategories || [])]));
                 merged[localIndex] = {
                     ...localWord,
+                    ...cloudWord,
+                    isIrregular,
+                    v1: v1 || cloudWord.v1,
+                    v2: v2 || cloudWord.v2,
+                    v3: v3 || cloudWord.v3,
+                    categories: mergedCategories.length > 0 ? mergedCategories : cloudWord.categories,
+                    customCategories: mergedCustomCategories.length > 0 ? mergedCustomCategories : cloudWord.customCategories
+                };
+            } else {
+                merged[localIndex] = {
+                    ...cloudWord,
+                    ...localWord,
+                    isIrregular,
+                    v1: v1 || localWord.v1,
+                    v2: v2 || localWord.v2,
+                    v3: v3 || localWord.v3,
                     categories: mergedCategories.length > 0 ? mergedCategories : localWord.categories,
                     customCategories: mergedCustomCategories.length > 0 ? mergedCustomCategories : localWord.customCategories,
                     interval: Math.max(localWord.interval || 0, cloudWord.interval || 0),
@@ -450,8 +468,20 @@ async function handleIncomingCloudData(cloudTimestamp, cloudPayload, currentLoca
             try { lastSyncPayload = JSON.parse(lastSyncPayloadStr); } catch (e) {}
         }
 
+        const PROTECTED_KEYS = [
+            'personal_dictionary',
+            'my_personal_dictionary',
+            'custom_irregular_verbs',
+            'irreg_verb_mastery',
+            'personal_categories',
+            'personal_custom_categories',
+            'user_notebook_text',
+            'galaxy_watched_videos'
+        ];
+
         const keysToRemove = [];
         for (const key of Object.keys(lastSyncPayload)) {
+            if (PROTECTED_KEYS.includes(key)) continue; // Never delete critical vocabulary/verbs/notes
             if (!(key in cloudPayload) && localPayload[key] === lastSyncPayload[key]) {
                 keysToRemove.push(key);
             }
