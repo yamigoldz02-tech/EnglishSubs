@@ -809,7 +809,7 @@
               Данные синхронизируются с привязанным аккаунтом.
             </div>
           </div>
-          <div style="display: flex; gap: 8px; align-items: center;">
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 14px;">
             <input type="text" value="${overrideUid}" readonly
               style="flex: 1; padding: 10px 12px; font-size: 0.75rem; border-radius: 10px;
               background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass);
@@ -820,6 +820,11 @@
               Отвязать
             </button>
           </div>
+          <button id="linkDeviceForcePullBtn" class="modal-btn primary-btn"
+            style="width: 100%; font-size: 0.82rem; margin: 0; padding: 12px 16px; border-radius: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Загрузить всё из облака прямо сейчас</span>
+          </button>
         `;
       } else {
         // Not logged in at all
@@ -959,6 +964,25 @@
           if (typeof window.showToast === 'function') window.showToast('Устройство отвязано.');
           closeLinkDeviceModal();
           setTimeout(() => openLinkDeviceModal(), 300);
+        });
+      }
+
+      // Force Pull Button
+      const forcePullBtn = document.getElementById('linkDeviceForcePullBtn');
+      if (forcePullBtn) {
+        forcePullBtn.addEventListener('click', async () => {
+          forcePullBtn.textContent = 'Загружаю...';
+          forcePullBtn.disabled = true;
+          try {
+            if (window.SyncManager && window.SyncManager.forceSync) {
+              await window.SyncManager.forceSync();
+            }
+            forcePullBtn.textContent = '✅ Загружено!';
+            setTimeout(() => closeLinkDeviceModal(), 1200);
+          } catch(e) {
+            forcePullBtn.textContent = 'Ошибка загрузки';
+            forcePullBtn.disabled = false;
+          }
         });
       }
     }

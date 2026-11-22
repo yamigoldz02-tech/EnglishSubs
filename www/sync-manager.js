@@ -679,10 +679,26 @@ window.SyncManager = {
         if (user) {
             console.log('[SyncManager] Forcing manual cloud sync...');
             try {
+                // Remove local timestamp so it unconditionally adopts all remote data
+                const projectName = getProjectName();
+                originalRemoveItem.call(localStorage, 'last_sync_timestamp_' + projectName);
+
                 await pullCloudToLocal(user, true);
                 await pushLocalToCloud();
+
+                let dictCount = 0;
+                let verbsCount = 0;
+                try {
+                    const dictStr = localStorage.getItem('personal_dictionary');
+                    dictCount = dictStr ? JSON.parse(dictStr).length : 0;
+                } catch(e) {}
+                try {
+                    const verbsStr = localStorage.getItem('custom_irregular_verbs');
+                    verbsCount = verbsStr ? JSON.parse(verbsStr).length : 0;
+                } catch(e) {}
+
                 if (!silent) {
-                    showSyncNotice('Синхронизация завершена успешно!');
+                    showSyncNotice(`Синхронизировано: ${dictCount} слов и ${verbsCount} глаголов!`);
                 }
             } catch (err) {
                 console.error('[SyncManager] Force sync failed:', err);
@@ -692,7 +708,7 @@ window.SyncManager = {
             }
         } else {
             if (!silent) {
-                showSyncNotice('Вы не вошли в аккаунт.', true);
+                showSyncNotice('Вы не вошли в аккаунт! Откройте «Связать устройство» и введите код.', true);
             }
         }
     },
@@ -704,20 +720,31 @@ window.SyncManager = {
             return;
         }
         const cleanCode = code.trim();
-        const currentOverride = localStorage.getItem('sync_manager_override_uid');
-        if (currentOverride !== cleanCode) {
-            // New linked account: clear previous timestamps so we cleanly adopt cloud data
-            const projectName = getProjectName();
-            originalRemoveItem.call(localStorage, 'last_sync_timestamp_' + projectName);
-            originalRemoveItem.call(localStorage, 'last_sync_payload_' + projectName);
-        }
+        const projectName = getProjectName();
+        // Clear previous local sync timestamps to force a clean, complete pull from the linked UID
+        originalRemoveItem.call(localStorage, 'last_sync_timestamp_' + projectName);
+        originalRemoveItem.call(localStorage, 'last_sync_payload_' + projectName);
         originalSetItem.call(localStorage, 'sync_manager_override_uid', cleanCode);
+
         const mockUser = getSyncUser();
         if (mockUser) {
             setupRealtimeListener(mockUser);
             await pullCloudToLocal(mockUser, true);
-            showSyncNotice('Устройство успешно связано по коду!');
-            window.location.reload();
+            let dictCount = 0;
+            let verbsCount = 0;
+            try {
+                const dictStr = localStorage.getItem('personal_dictionary');
+                dictCount = dictStr ? JSON.parse(dictStr).length : 0;
+            } catch(e) {}
+            try {
+                const verbsStr = localStorage.getItem('custom_irregular_verbs');
+                verbsCount = verbsStr ? JSON.parse(verbsStr).length : 0;
+            } catch(e) {}
+
+            showSyncNotice(`Устройство связано! Загружено ${dictCount} слов и ${verbsCount} глаголов.`);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1200);
         }
     },
 
