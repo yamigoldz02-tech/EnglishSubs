@@ -363,7 +363,7 @@
     try {
       const customsMap = new Map();
 
-      // 1. Load from localStorage 'custom_irregular_verbs'
+      // 1. Direct saved 'custom_irregular_verbs'
       const saved = localStorage.getItem('custom_irregular_verbs');
       if (saved) {
         try {
@@ -384,89 +384,188 @@
               }
             });
           }
-        } catch(err) {}
+        } catch(e) {}
       }
 
-      // 2. ALSO restore any irregular verbs found in personalDictionary
+      // 2. Recovery from last sync payloads in localStorage
+      try {
+        const lastSyncKey = Object.keys(localStorage).find(k => k.startsWith('last_sync_payload_'));
+        if (lastSyncKey) {
+          const lastSyncStr = localStorage.getItem(lastSyncKey);
+          if (lastSyncStr) {
+            const lastSync = JSON.parse(lastSyncStr);
+            if (lastSync && lastSync['custom_irregular_verbs']) {
+              const prevCustoms = JSON.parse(lastSync['custom_irregular_verbs']);
+              if (Array.isArray(prevCustoms)) {
+                prevCustoms.forEach(c => {
+                  if (c && c.v1) {
+                    const key = c.v1.trim().toLowerCase();
+                    if (!customsMap.has(key)) {
+                      customsMap.set(key, {
+                        v1: c.v1.trim(),
+                        v2: c.v2 ? c.v2.trim() : '',
+                        v3: c.v3 ? c.v3.trim() : '',
+                        translation: c.translation ? c.translation.trim() : '',
+                        example: c.example ? c.example.trim() : '',
+                        group: 'custom',
+                        isCustom: true
+                      });
+                    }
+                  }
+                });
+              }
+            }
+          }
+        }
+      } catch(e) {}
+
+      // 3. Recovery from 'irreg_verb_mastery' (all verbs user trained on)
+      try {
+        const masteryStr = localStorage.getItem('irreg_verb_mastery');
+        if (masteryStr) {
+          const mastery = JSON.parse(masteryStr);
+          if (mastery && typeof mastery === 'object') {
+            Object.keys(mastery).forEach(vKey => {
+              const clean = vKey.trim().toLowerCase();
+              if (clean && !customsMap.has(clean)) {
+                const ref = typeof window.findIrregularVerb === 'function' ? window.findIrregularVerb(clean) : null;
+                if (ref) {
+                  customsMap.set(clean, {
+                    v1: ref.v1,
+                    v2: ref.v2,
+                    v3: ref.v3,
+                    translation: ref.translation,
+                    example: ref.example || '',
+                    group: 'custom',
+                    isCustom: true
+                  });
+                }
+              }
+            });
+          }
+        }
+      } catch(e) {}
+
+      // 4. FULL RECOVERY FROM PERSONAL DICTIONARY
       let dict = [];
-      if (typeof window.personalDictionary !== 'undefined' && Array.isArray(window.personalDictionary)) {
+      if (typeof window.personalDictionary !== 'undefined' && Array.isArray(window.personalDictionary) && window.personalDictionary.length > 0) {
         dict = window.personalDictionary;
       } else {
         const savedDict = localStorage.getItem('personal_dictionary') || localStorage.getItem('my_personal_dictionary');
         if (savedDict) {
-          try { dict = JSON.parse(savedDict); } catch(err) {}
+          try { dict = JSON.parse(savedDict); } catch(e) {}
         }
       }
 
-      if (Array.isArray(dict)) {
+      if (Array.isArray(dict) && dict.length > 0) {
         let dictUpdated = false;
+
         dict.forEach(w => {
           if (!w) return;
-          const isIrreg = w.isIrregular ||
-            (w.category === 'Неправильные глаголы') ||
-            (Array.isArray(w.categories) && w.categories.includes('Неправильные глаголы')) ||
-            (w.v1 && w.v2 && w.v3);
+          const rawWord = (w.v1 || w.word || '').trim();
+          if (!rawWord) return;
 
-          if (isIrreg) {
-            let v1 = (w.v1 || w.word || '').trim();
-            let v2 = (w.v2 || '').trim();
-            let v3 = (w.v3 || '').trim();
-            let translation = (w.translation || '').trim();
-            let example = (w.example || '').trim();
+          let v1 = '';
+          let v2 = '';
+          let v3 = '';
+          let translation = (w.translation || '').trim();
+          let example = (w.example || '').trim();
 
-            // If v2 or v3 is missing, check reference irregular verbs or split string
-            if ((!v2 || !v3) && v1) {
-              const parts = v1.split(/[-–—/,]/).map(s => s.trim()).filter(Boolean);
-              if (parts.length >= 3) {
-                v1 = parts[0];
-                v2 = parts[1];
-                v3 = parts[2];
-              } else if (typeof window.findIrregularVerb === 'function') {
+          // Case A: Entry already has explicit v1, v2, v3
+          if (w.v1 && w.v2 && w.v3) {
+            v1 = w.v1.trim();
+            v2 = w.v2.trim();
+            v3 = w.v3.trim();
+          }
+
+          // Case B: Word string has 3 forms separated by delimiter
+          // e.g. "go, went, gone" or "go - went - gone" or "go / went / gone" or "go went gone"
+          if (!v1) {
+            const parts = rawWord.split(/[\s,/\-–—]+/).map(s => s.trim()).filter(Boolean);
+            if (parts.length === 3) {
+              v1 = parts[0];
+              v2 = parts[1];
+              v3 = parts[2];
+            }
+          }
+
+          // Case C: Check if rawWord matches ANY known irregular verb in reference dataset
+          if (!v1 && typeof window.findIrregularVerb === 'function') {
+            const ref = window.findIrregularVerb(rawWord);
+            if (ref) {
+              v1 = ref.v1;
+              v2 = ref.v2;
+              v3 = ref.v3;
+              if (!translation) translation = ref.translation;
+              if (!example) example = ref.example || '';
+            }
+          }
+
+          // Case D: Explicit irregular flags or categories
+          if (!v1) {
+            const isFlagged = w.isIrregular ||
+              w.category === 'Неправильные глаголы' ||
+              w.category === 'Базовые глаголы' ||
+              w.customCategory === 'Глаголы' ||
+              (Array.isArray(w.categories) && w.categories.includes('Неправильные глаголы'));
+            
+            if (isFlagged) {
+              v1 = rawWord;
+              if (w.v2) v2 = w.v2.trim();
+              if (w.v3) v3 = w.v3.trim();
+              if ((!v2 || !v3) && typeof window.findIrregularVerb === 'function') {
                 const ref = window.findIrregularVerb(v1);
                 if (ref) {
                   v1 = ref.v1;
                   v2 = ref.v2;
                   v3 = ref.v3;
                   if (!translation) translation = ref.translation;
-                  if (!example) example = ref.example || '';
                 }
               }
             }
+          }
 
-            if (v1) {
-              const key = v1.toLowerCase();
-              if (!customsMap.has(key)) {
-                customsMap.set(key, {
-                  v1: v1,
-                  v2: v2,
-                  v3: v3,
-                  translation: translation,
-                  example: example,
-                  group: 'custom',
-                  isCustom: true
-                });
-              } else {
-                const existing = customsMap.get(key);
-                if (!existing.v2 && v2) existing.v2 = v2;
-                if (!existing.v3 && v3) existing.v3 = v3;
-                if (!existing.translation && translation) existing.translation = translation;
-              }
+          // If identified as irregular verb:
+          if (v1) {
+            const key = v1.toLowerCase();
+            if (!customsMap.has(key)) {
+              customsMap.set(key, {
+                v1: v1,
+                v2: v2 || v1,
+                v3: v3 || v1,
+                translation: translation,
+                example: example,
+                group: 'custom',
+                isCustom: true
+              });
+            } else {
+              const existing = customsMap.get(key);
+              if (!existing.v2 && v2) existing.v2 = v2;
+              if (!existing.v3 && v3) existing.v3 = v3;
+              if (!existing.translation && translation) existing.translation = translation;
+            }
 
-              // Ensure the word in personalDictionary also has the 3 forms populated
-              if (!w.v1 || !w.v2 || !w.v3 || !w.isIrregular) {
-                w.isIrregular = true;
-                w.v1 = v1;
-                w.v2 = v2;
-                w.v3 = v3;
-                if (!w.translation && translation) w.translation = translation;
-                dictUpdated = true;
-              }
+            // Sync enriched forms back to personalDictionary entry
+            if (!w.isIrregular || !w.v1 || !w.v2 || !w.v3) {
+              w.isIrregular = true;
+              w.v1 = v1;
+              w.v2 = v2 || v1;
+              w.v3 = v3 || v1;
+              if (!w.translation && translation) w.translation = translation;
+              dictUpdated = true;
             }
           }
         });
 
-        if (dictUpdated && typeof window.saveDictionaryToStorage === 'function') {
-          window.saveDictionaryToStorage();
+        if (dictUpdated) {
+          if (typeof window.saveDictionaryToStorage === 'function') {
+            window.saveDictionaryToStorage();
+          } else {
+            try {
+              localStorage.setItem('personal_dictionary', JSON.stringify(dict));
+              localStorage.setItem('my_personal_dictionary', JSON.stringify(dict));
+            } catch(e) {}
+          }
         }
       }
 
@@ -483,6 +582,8 @@
       allCustoms.forEach(c => {
         window.irregularVerbsData.unshift(c);
       });
+
+      console.log(`[IrregularVerbs] Loaded ${allCustoms.length} irregular verbs.`);
 
       // Update catalog and stats if DOM is ready
       renderCatalog();

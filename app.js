@@ -455,6 +455,9 @@ window.selectRecommended = (songId) => {
 document.addEventListener('DOMContentLoaded', () => {
   initAnalysisCache(); // Load all persistent localStorage entries into analysisCache
   initDictionary(); // Load the premium personal vocabulary dictionary and trainers
+  if (typeof window.loadCustomVerbs === 'function') {
+    window.loadCustomVerbs();
+  }
   initVideoCourse(); // Initialize the video course lesson tracker
   initNotebook(); // Initialize the global notebook and per-lesson notes
   initGrammarRules(); // Initialize personal grammar rules handbook
